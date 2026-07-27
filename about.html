@@ -359,15 +359,13 @@
     var nav = document.querySelector('nav ul');
     var hamburger = document.querySelector('.hamburger');
     if (!nav || !hamburger) return;
-    function toggle(e) {
-      e.stopPropagation();
+    hamburger.addEventListener('click', function(){
       nav.classList.toggle('open');
-    }
-    hamburger.addEventListener('click', toggle);
-    hamburger.addEventListener('touchstart', toggle);
+    });
     nav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ nav.classList.remove('open'); });
-      a.addEventListener('touchstart', function(){ nav.classList.remove('open'); });
+      a.addEventListener('click', function(){
+        nav.classList.remove('open');
+      });
     });
   })();
 </script>
