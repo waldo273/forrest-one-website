@@ -20,16 +20,15 @@
     a:focus { outline: 3px solid #00e5ff; outline-offset: 2px; }
     img { max-width: 100%; height: auto; }
 
-    body::before {
-      content: '';
+    /* ─── Matrix Rain Canvas ─── */
+    #matrix-canvas {
       position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(rgba(102, 184, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(102, 184, 255, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
       z-index: 0;
+      opacity: 0.35;
     }
 
     /* ─── Container ─── */
@@ -298,6 +297,8 @@
 </head>
 <body>
 
+<canvas id="matrix-canvas"></canvas>
+
 <nav>
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
@@ -339,6 +340,47 @@
     <p>&copy; 2026 William Forrest — Training.Forrest.One. All rights reserved.</p>
   </div>
 </footer>
+
+<!-- ─── Matrix Rain ─── -->
+<script>
+  (function(){
+    var canvas = document.getElementById('matrix-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, cols, drops;
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      cols = Math.floor(W / 14);
+      drops = Array(cols).fill(1);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]|&^%$#@!';
+
+    function draw() {
+      ctx.fillStyle = 'rgba(10, 10, 15, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff41';
+      ctx.font = '14px monospace';
+
+      for (var i = 0; i < drops.length; i++) {
+        var text = chars.charAt(Math.floor(Math.random() * chars.length));
+        var x = i * 14;
+        var y = drops[i] * 14;
+        ctx.fillText(text, x, y);
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 50);
+  })();
+</script>
 
 <script>
   (function(){
