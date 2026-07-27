@@ -28,7 +28,7 @@
       height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.5;
+      opacity: 0.8;
     }
 
     /* ─── Container ─── */
@@ -352,7 +352,7 @@
     function resize() {
       W = canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      cols = Math.floor(W / 14);
+      cols = Math.floor(W / 16);
       drops = Array(cols).fill(1);
     }
     resize();
@@ -361,18 +361,35 @@
     var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]|&^%$#@!';
 
     function draw() {
-      ctx.fillStyle = 'rgba(10, 10, 15, 0.08)';
+      ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = '#00ff41';
-      ctx.font = '14px monospace';
+      ctx.font = '16px monospace';
+      ctx.shadowColor = '#00ff41';
+      ctx.shadowBlur = 4;
 
       for (var i = 0; i < drops.length; i++) {
         var text = chars.charAt(Math.floor(Math.random() * chars.length));
-        var x = i * 14;
-        var y = drops[i] * 14;
+        var x = i * 16;
+        var y = drops[i] * 16;
+
+        // Bright leading character
+        ctx.fillStyle = '#bfffbf';
+        ctx.shadowBlur = 8;
         ctx.fillText(text, x, y);
-        if (y > canvas.height && Math.random() > 0.975) {
+
+        // Trail
+        ctx.fillStyle = '#00ff41';
+        ctx.shadowBlur = 4;
+        for (var j = 1; j < 8; j++) {
+          var trailText = chars.charAt(Math.floor(Math.random() * chars.length));
+          ctx.globalAlpha = 1 - (j / 8);
+          ctx.fillText(trailText, x, y - j * 16);
+        }
+        ctx.globalAlpha = 1;
+
+        if (y > canvas.height + 120 && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
