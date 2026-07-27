@@ -297,8 +297,6 @@
 </head>
 <body>
 
-<canvas id="matrix-canvas"></canvas>
-
 <nav>
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
@@ -344,8 +342,10 @@
 <!-- ─── Matrix Rain ─── -->
 <script data-cfasync="false">
   (function(){
-    var canvas = document.getElementById('matrix-canvas');
-    if (!canvas) return;
+    var canvas = document.createElement('canvas');
+    canvas.id = 'matrix-canvas';
+    document.body.insertBefore(canvas, document.body.firstChild);
+
     var ctx = canvas.getContext('2d');
     var W, cols, drops;
 
