@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — William Forrest</title>
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e8e8f0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: #66b8ff; text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: #a8d8ff; }
+    a:focus { outline: 3px solid #66b8ff; outline-offset: 2px; }
+    img { max-width: 100%; height: auto; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(102, 184, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102, 184, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Container ─── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* ─── Skip Link ─── */
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem;
+      background: #66b8ff; color: #0a0a0f; padding: 0.8rem 1.5rem;
+      border-radius: 0 0 8px 8px; z-index: 200;
+      font-weight: 600; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(10, 10, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(102, 184, 255, 0.15);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    nav .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo {
+      font-size: 1.2rem; font-weight: 700;
+      color: #66b8ff;
+    }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a {
+      font-size: 0.9rem; color: #b0b0c0; transition: color 0.2s;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      text-decoration: none; font-weight: 600;
+    }
+    nav a:hover, nav a.active { color: #66b8ff; text-decoration: underline; }
+    nav a:focus { outline: 3px solid #66b8ff; outline-offset: 2px; }
+
+    /* ─── Hamburger ─── */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 8px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 3px;
+      background: #b0b0c0; border-radius: 2px; transition: all 0.3s;
+    }
+    .hamburger:focus { outline: 3px solid #66b8ff; outline-offset: 2px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .highlight { color: #66b8ff; }
+    .hero .subtitle {
+      font-size: 1.3rem; color: #b0b0c0; margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1rem; color: #808090; max-width: 600px; margin: 1rem auto 2rem;
+    }
+    .hero .bear-img {
+      width: 260px; height: 260px; object-fit: contain;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 30px rgba(102, 184, 255, 0.15));
+    }
+    .btn {
+      display: inline-block; padding: 0.9rem 2.5rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.95rem; text-transform: uppercase;
+      letter-spacing: 0.05em; transition: all 0.2s; border: none; cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:focus { outline: 3px solid #66b8ff; outline-offset: 3px; }
+    .btn-primary {
+      background: #66b8ff; color: #0a0a0f;
+    }
+    .btn-primary:hover { background: #88ccff; }
+    .btn-secondary {
+      background: transparent; color: #66b8ff;
+      border: 2px solid #66b8ff; margin-left: 1rem;
+    }
+    .btn-secondary:hover { background: rgba(102, 184, 255, 0.1); }
+
+    /* ─── Sections ─── */
+    section { padding: 5rem 0; }
+    section h2 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 2.5rem;
+      text-align: center; color: #e8e8f0;
+    }
+    section h2 .highlight { color: #66b8ff; }
+
+    /* ─── About ─── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-grid img { border-radius: 16px; border: 1px solid rgba(102, 184, 255, 0.12); }
+    .about-text p { margin-bottom: 1rem; color: #d0d0da; font-size: 1.05rem; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .stat { text-align: center; background: rgba(255,255,255,0.04); border-radius: 12px; padding: 1.5rem 1rem; border: 1px solid rgba(102, 184, 255, 0.1); }
+    .stat-number {
+      font-size: 2.5rem; font-weight: 800;
+      color: #66b8ff;
+    }
+    .stat-label { font-size: 0.85rem; color: #9090a0; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    /* ─── Services ─── */
+    section.bg-alt { background: rgba(255,255,255,0.02); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(102, 184, 255, 0.1);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      transition: all 0.2s;
+    }
+    .service-card:hover { border-color: rgba(102, 184, 255, 0.35); }
+    .service-card:focus-within { border-color: #66b8ff; box-shadow: 0 0 0 3px rgba(102,184,255,0.15); }
+    .service-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; color: #66b8ff; }
+    .service-card p { color: #b0b0c0; font-size: 0.95rem; }
+
+    /* ─── Courses ─── */
+    section.bg-alt-2 { background: rgba(108, 52, 131, 0.04); }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .course-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(108, 52, 131, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .course-card:hover { border-color: rgba(108, 52, 131, 0.4); }
+    .course-card:focus-within { border-color: #6c3483; box-shadow: 0 0 0 3px rgba(108,52,131,0.2); }
+    .course-card img {
+      width: 100%; height: 200px; object-fit: cover;
+      border-bottom: 1px solid rgba(108, 52, 131, 0.1);
+    }
+    .course-card .card-body { padding: 1.5rem; }
+    .course-card h4 { color: #b388d4; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .course-card p { color: #b0b0c0; font-size: 0.9rem; }
+
+    /* ─── MTB ─── */
+    .mtb-hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(180deg, #0a0a0f 0%, #0f1a0f 50%, #0a0a0f 100%);
+    }
+    .mtb-hero .bear-img {
+      width: 380px; height: auto; object-fit: contain;
+      margin-bottom: 2rem; border-radius: 16px;
+      border: 1px solid rgba(50, 200, 100, 0.15);
+      box-shadow: 0 0 40px rgba(50, 200, 100, 0.1);
+    }
+    .mtb-hero h1 .highlight { color: #32c864; }
+    .mtb-hero .subtitle { font-size: 1.3rem; color: #b0b0c0; margin-bottom: 0.5rem; }
+    .mtb-hero .tagline { font-size: 1rem; color: #808090; max-width: 600px; margin: 1rem auto 2rem; }
+    .mtb-content { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; }
+    .mtb-content p { color: #d0d0da; margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8; }
+    .mtb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+    .mtb-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(50, 200, 100, 0.12);
+      border-radius: 12px; padding: 2rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .mtb-card:hover { border-color: rgba(50, 200, 100, 0.35); }
+    .mtb-card .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .mtb-card h3 { color: #32c864; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .mtb-card p { color: #b0b0c0; font-size: 0.9rem; }
+
+    .page-section { padding: 7rem 0 4rem; min-height: 80vh; }
+    .page-section .content { max-width: 800px; margin: 0 auto; }
+    .page-section .content p { color: #d0d0da; margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8; }
+    .page-section .content ul { color: #d0d0da; margin-bottom: 1.2rem; padding-left: 1.5rem; }
+    .page-section .content ul li { margin-bottom: 0.5rem; }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid rgba(102, 184, 255, 0.08);
+      color: #606070; font-size: 0.85rem;
+    }
+    footer .socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    footer .socials a {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(102, 184, 255, 0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.2s;
+      text-decoration: none;
+    }
+    footer .socials a:hover { border-color: #66b8ff; background: rgba(102,184,255,0.1); }
+    footer .socials a:focus { outline: 3px solid #66b8ff; outline-offset: 2px; }
+    footer .socials a:hover svg { fill: #66b8ff; }
+
+    /* ─── prefers-reduced-motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul {
+        display: none; position: fixed; top: 60px; left: 0; right: 0;
+        background: rgba(10, 10, 15, 0.97); backdrop-filter: blur(12px);
+        flex-direction: column; gap: 0; padding: 1rem 0;
+        border-bottom: 1px solid rgba(102, 184, 255, 0.15);
+      }
+      nav ul.open { display: flex; }
+      nav ul li { text-align: center; }
+      nav ul li a { display: block; padding: 1rem 2rem; font-size: 1rem; }
+
+      .hero { padding: 6rem 1rem 3rem; min-height: 90vh; }
+      .hero .bear-img { width: 160px; height: 160px; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero .subtitle { font-size: 1.1rem; }
+      .hero .tagline { font-size: 0.9rem; }
+      .btn { padding: 0.8rem 1.8rem; font-size: 0.85rem; }
+      .btn-secondary { margin-left: 0; margin-top: 0.8rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .stat-number { font-size: 2rem; }
+      .about-text p { font-size: 0.95rem; }
+
+      section { padding: 3.5rem 0; }
+      section h2 { font-size: 1.6rem; margin-bottom: 2rem; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 1.8rem 1.5rem; }
+
+      .course-grid { grid-template-columns: 1fr; }
+      .course-card img { height: 160px; }
+
+      .mtb-hero { padding: 6rem 1rem 3rem; min-height: 90vh; }
+      .mtb-hero .bear-img { width: 240px; }
+      .mtb-hero h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+      .mtb-content { padding: 2rem 1rem; }
+      .mtb-content p { font-size: 0.95rem; }
+      .mtb-grid { grid-template-columns: 1fr; }
+      .mtb-card { padding: 1.5rem; }
+
+      .page-section { padding: 5rem 1rem 3rem; }
+
+      footer { padding: 3rem 1rem; }
+      footer .socials { gap: 1rem; }
+    }
+  </style>
+
+
+
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">◈ training.forrest.one</div>
+    <button class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="mtb.html">MTB</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-section">
+  <div class="container">
+    <h2><span class="highlight">About</span> Me</h2>
+    <div class="about-grid" style="margin-top:0">
+      <img src="cyber-bear.png" alt="William Forrest">
+      <div class="about-text">
+        <p>I'm a multi-discipline technical trainer and telecommunications professional with over 30 years of experience delivering high-impact learning across Cisco networking (CCNA/CCNP-aligned), cybersecurity fundamentals, and enterprise IT support, primarily within the Ministry of Defence.</p>
+        <p>I translate complex concepts into practical, hands-on training — building engaging labs, assessments, and real-world scenarios that take learners from theory to certification and operational competence.</p>
+        <p>Beyond the classroom, I'm an accredited mountain bike instructor, combining a passion for technical precision with outdoor coaching and trail leadership.</p>
+        <p>Currently completing an <strong>MSc Computing (Networking)</strong> with the Open University (modules spanning security, networks, information security, and an AI-in-education project).</p>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Trained</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">MSc</div>
+            <div class="stat-label">Computing (Networking)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/billy-forrest-msc-393a65b0/" target="_blank" title="LinkedIn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#b0b0b8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+  </a>
+      <a href="https://github.com/waldo273" target="_blank" title="GitHub">💻</a>
+      <a href="mailto:training@forrest.one" title="Email">✉️</a>
+    </div>
+    <p>&copy; 2026 William Forrest — training.forrest.one. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var nav = document.querySelector('nav ul');
+    var hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.addEventListener('click', function(){ nav.classList.toggle('open'); });
+    }
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('open'); });
+    });
+  })();
+</script>
+</body>
+</html>
