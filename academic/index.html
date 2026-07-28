@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Academic — Training.Forrest.One</title>
   <style>
-    /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -19,7 +18,6 @@
     a:hover { color: #ecc878; }
     a:focus { outline: 3px solid #d4a843; outline-offset: 2px; }
     img { max-width: 100%; height: auto; }
-
     body::before {
       content: '';
       position: fixed;
@@ -31,11 +29,7 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* ─── Container ─── */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-
-    /* ─── Skip Link ─── */
     .skip-link {
       position: absolute; top: -100px; left: 1rem;
       background: #d4a843; color: #0a0a12; padding: 0.8rem 1.5rem;
@@ -43,8 +37,6 @@
       font-weight: 600; text-decoration: none;
     }
     .skip-link:focus { top: 0; }
-
-    /* ─── Navigation ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       background: rgba(10, 10, 18, 0.92);
@@ -57,10 +49,7 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
     }
-    nav .logo {
-      font-size: 1.2rem; font-weight: 700;
-      color: #d4a843;
-    }
+    nav .logo { font-size: 1.2rem; font-weight: 700; color: #d4a843; }
     nav ul { display: flex; gap: 2rem; list-style: none; }
     nav a {
       font-size: 0.9rem; color: #b0b0bc; transition: color 0.2s;
@@ -69,8 +58,6 @@
     }
     nav a:hover, nav a.active { color: #d4a843; }
     nav a:focus { outline: 3px solid #d4a843; outline-offset: 2px; }
-
-    /* ─── Hamburger ─── */
     .hamburger {
       display: none; flex-direction: column; gap: 5px; cursor: pointer;
       background: none; border: none; padding: 8px;
@@ -80,8 +67,6 @@
       background: #b0b0bc; border-radius: 2px; transition: all 0.3s;
     }
     .hamburger:focus { outline: 3px solid #d4a843; outline-offset: 2px; }
-
-    /* ─── Academic Hero ─── */
     .academic-hero {
       min-height: 70vh;
       display: flex; align-items: center; justify-content: center;
@@ -91,139 +76,80 @@
         radial-gradient(ellipse at 50% 0%, rgba(212, 168, 67, 0.06) 0%, transparent 60%),
         linear-gradient(180deg, #0a0a12 0%, #0d0b18 100%);
     }
-    .academic-hero .crest {
-      font-size: 3.5rem; margin-bottom: 1.5rem; display: block;
-      opacity: 0.6; letter-spacing: 0.3em;
-    }
+    .academic-hero .crest { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; opacity: 0.6; letter-spacing: 0.3em; }
     .academic-hero h1 {
       font-family: Georgia, 'Times New Roman', Times, serif;
       font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: #f0ece4;
-      margin-bottom: 0.5rem;
+      font-weight: 700; line-height: 1.2; color: #f0ece4; margin-bottom: 0.5rem;
     }
     .academic-hero h1 .highlight { color: #d4a843; }
     .academic-hero .subtitle {
       font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 1.15rem; color: #a09888;
-      font-style: italic;
-      margin-bottom: 0.3rem;
+      font-size: 1.15rem; color: #a09888; font-style: italic; margin-bottom: 0.3rem;
     }
     .academic-hero .conferral {
       font-size: 0.9rem; color: #706858;
-      text-transform: uppercase; letter-spacing: 0.15em;
-      margin-top: 1.5rem;
+      text-transform: uppercase; letter-spacing: 0.15em; margin-top: 1.5rem;
     }
     .academic-hero .ruled-line {
       width: 80px; height: 2px;
       background: linear-gradient(90deg, transparent, #d4a843, transparent);
       margin: 1.5rem auto;
     }
-
-    /* ─── Page Sections ─── */
-    .page-section {
-      padding: 5rem 0;
-      border-bottom: 1px solid rgba(212, 168, 67, 0.06);
-    }
+    .page-section { padding: 5rem 0; border-bottom: 1px solid rgba(212, 168, 67, 0.06); }
     .page-section:last-of-type { border-bottom: none; }
     .page-section .content { max-width: 860px; margin: 0 auto; }
     .page-section h2 {
       font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 1.8rem; font-weight: 700;
-      color: #d4a843;
-      margin-bottom: 0.5rem;
+      font-size: 1.8rem; font-weight: 700; color: #d4a843; margin-bottom: 0.5rem;
     }
-    .page-section .section-line {
-      width: 50px; height: 2px;
-      background: #d4a843;
-      margin-bottom: 2rem;
-    }
-    .page-section .content p {
-      color: #c8c4bc;
-      margin-bottom: 1.2rem;
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-    .page-section .content ul {
-      color: #c8c4bc;
-      margin-bottom: 1.2rem;
-      padding-left: 1.5rem;
-    }
+    .page-section .section-line { width: 50px; height: 2px; background: #d4a843; margin-bottom: 2rem; }
+    .page-section .content p { color: #c8c4bc; margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8; }
+    .page-section .content ul { color: #c8c4bc; margin-bottom: 1.2rem; padding-left: 1.5rem; }
     .page-section .content ul li { margin-bottom: 0.5rem; }
-
-    /* ─── Empty Section Placeholder ─── */
-    .section-placeholder {
-      text-align: center;
-      padding: 3rem 2rem;
-      border: 1px dashed rgba(212, 168, 67, 0.2);
-      border-radius: 12px;
-      background: rgba(212, 168, 67, 0.02);
-    }
-    .section-placeholder p {
-      color: #706858;
-      font-style: italic;
-      font-size: 0.95rem;
-      margin-bottom: 0;
-    }
-
-    /* ─── Qualification Cards ─── */
-    .qual-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
+    .qual-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem; }
     .qual-card {
       background: rgba(212, 168, 67, 0.03);
       border: 1px solid rgba(212, 168, 67, 0.1);
       border-left: 3px solid #d4a843;
-      border-radius: 8px;
-      padding: 1.5rem 2rem;
-      transition: all 0.2s;
+      border-radius: 8px; padding: 1.5rem 2rem; transition: all 0.2s;
     }
-    .qual-card:hover {
-      border-color: rgba(212, 168, 67, 0.25);
-      background: rgba(212, 168, 67, 0.05);
-    }
+    .qual-card:hover { border-color: rgba(212, 168, 67, 0.25); background: rgba(212, 168, 67, 0.05); }
     .qual-card h3 {
       font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 1.15rem;
-      color: #f0ece4;
-      margin-bottom: 0.3rem;
+      font-size: 1.15rem; color: #f0ece4; margin-bottom: 0.3rem;
     }
-    .qual-card .institution {
-      color: #d4a843;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .qual-card .institution { color: #d4a843; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .qual-card .year { color: #706858; font-size: 0.85rem; }
+    .qual-card .result { color: #a0d4a0; font-size: 0.85rem; font-weight: 600; }
+    .qual-card p { color: #a8a49c; font-size: 0.95rem; margin-top: 0.5rem; margin-bottom: 0; }
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .module-card {
+      background: rgba(212, 168, 67, 0.03);
+      border: 1px solid rgba(212, 168, 67, 0.1);
+      border-radius: 10px; padding: 1.5rem; transition: all 0.2s;
     }
-    .qual-card .year {
-      color: #706858;
-      font-size: 0.85rem;
+    .module-card:hover { border-color: rgba(212, 168, 67, 0.25); }
+    .module-card h3 { font-size: 1.1rem; color: #d4a843; margin-bottom: 0.3rem; }
+    .module-card .code { font-size: 0.8rem; color: #606060; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+    .module-card .outcome { margin-top: 0.5rem; font-size: 0.85rem; color: #a0d4a0; }
+    .module-card p { color: #a8a49c; font-size: 0.9rem; margin-top: 0.4rem; }
+    .module-card ul { margin-top: 0.4rem; padding-left: 1.2rem; font-size: 0.85rem; color: #a8a49c; }
+    .module-card ul li { margin-bottom: 0.2rem; }
+    .badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .badge {
+      background: rgba(212, 168, 67, 0.03);
+      border: 1px solid rgba(212, 168, 67, 0.08);
+      border-radius: 8px; padding: 1rem; text-align: center; transition: all 0.2s;
+      font-size: 0.85rem; color: #b0b0a8;
     }
-    .qual-card p {
-      color: #a8a49c;
-      font-size: 0.95rem;
-      margin-top: 0.5rem;
-      margin-bottom: 0;
-    }
-
-    /* ─── Placeholder Grid ─── */
-    .placeholder-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    /* ─── Footer ─── */
+    .badge:hover { border-color: rgba(212, 168, 67, 0.2); }
+    .badge .icon { font-size: 1.5rem; margin-bottom: 0.3rem; display: block; }
+    .badge .title { font-weight: 600; color: #d4a843; font-size: 0.9rem; display: block; margin-bottom: 0.2rem; }
     footer {
       text-align: center; padding: 4rem 2rem;
       border-top: 1px solid rgba(212, 168, 67, 0.08);
-      color: #606060;
-      font-size: 0.85rem;
+      color: #606060; font-size: 0.85rem;
     }
     footer .socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
     footer .socials a {
@@ -231,20 +157,15 @@
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(212, 168, 67, 0.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; transition: all 0.2s;
-      text-decoration: none;
+      font-size: 1.2rem; transition: all 0.2s; text-decoration: none;
     }
     footer .socials a:hover { border-color: #d4a843; background: rgba(212,168,67,0.1); }
     footer .socials a:focus { outline: 3px solid #d4a843; outline-offset: 2px; }
     footer .socials a:hover svg { fill: #d4a843; }
-
-    /* ─── prefers-reduced-motion ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
     }
-
-    /* ─── Responsive ─── */
     @media (max-width: 768px) {
       .hamburger { display: flex; }
       nav ul {
@@ -256,20 +177,16 @@
       nav ul.open { display: flex; }
       nav ul li { text-align: center; }
       nav ul li a { display: block; padding: 1rem 2rem; font-size: 1rem; }
-
       .academic-hero { padding: 7rem 1rem 3rem; min-height: 60vh; }
       .academic-hero h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
       .academic-hero .subtitle { font-size: 1rem; }
       .academic-hero .crest { font-size: 2.5rem; }
-
       .page-section { padding: 3.5rem 1rem; }
       .page-section h2 { font-size: 1.5rem; }
       .page-section .content p { font-size: 0.95rem; }
-
       .qual-card { padding: 1.2rem 1.5rem; }
-
-      .placeholder-grid { grid-template-columns: 1fr; }
-
+      .module-grid { grid-template-columns: 1fr; }
+      .badge-grid { grid-template-columns: repeat(2, 1fr); }
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
     }
@@ -299,9 +216,9 @@
     <span class="crest">◈ ◈ ◈</span>
     <h1><span class="highlight">Academic</span> Portfolio</h1>
     <div class="ruled-line"></div>
-    <p class="subtitle">MSc Computing (Networking) — Open University</p>
-    <p class="subtitle">Research, Publications &amp; Scholarly Activity</p>
-    <p class="conferral">◈  Modules ·  Research ·  Publications ·  Teaching  ◈</p>
+    <p class="subtitle">MSc Computing (Networking) — The Open University</p>
+    <p class="subtitle">Cert Ed (Post Compulsory Education) — University of Wolverhampton</p>
+    <p class="conferral">◈  Information Security  ·  Network Security  ·  System Security  ·  AI in Education  ·  Teaching  ◈</p>
   </div>
 </section>
 
@@ -315,26 +232,21 @@
           <h3>MSc Computing (Networking)</h3>
           <span class="institution">The Open University</span>
           <span class="year">— 2025</span>
-          <p>Dissertation: AI in education. Modules spanning security, networks, information security, and software engineering.</p>
+          <p>Postgraduate degree spanning information security, network security, system security, and advanced networking (CCNP Enterprise). Dissertation exploring the impact of artificial intelligence on student engagement in higher education.</p>
         </div>
         <div class="qual-card">
-          <h3>BCS Certificate in IT</h3>
-          <span class="institution">BCS, The Chartered Institute for IT</span>
-          <span class="year">— 2020</span>
-          <p>Foundation-level computing qualification covering software development, hardware, and systems analysis.</p>
+          <h3>Certificate in Education (Post Compulsory Education)</h3>
+          <span class="institution">University of Wolverhampton</span>
+          <span class="year">— 2022</span>
+          <span class="result">Level 5 · 120 Credits · Pass</span>
+          <p>Professional teaching qualification delivered at RAF Cosford. Modules covered professional development, curriculum policy and practice, and subject specialism with e-learning. Includes 60 credits of prior learning assessed at Level 4.</p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="page-section" aria-labelledby="research-heading">
-  <div class="container">
-    <div class="content">
-      <h2 id="research-heading">Research &amp; Publications</h2>
-      <div class="section-line"></div>
-      <div class="section-placeholder">
-        <p>Research interests, publications, and white papers will appear here.</p>
+        <div class="qual-card">
+          <h3>Education and Training (QCF) Level 4</h3>
+          <span class="institution">Awarded via ARRTIC</span>
+          <span class="year">— 2021</span>
+          <p>Recognised teaching and training qualification at Level 4, complemented by internal quality assurance and management of productivity certifications.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -343,10 +255,81 @@
 <section class="page-section" aria-labelledby="modules-heading">
   <div class="container">
     <div class="content">
-      <h2 id="modules-heading">Relevant Modules</h2>
+      <h2 id="modules-heading">Postgraduate Modules</h2>
       <div class="section-line"></div>
-      <div class="section-placeholder">
-        <p>Postgraduate modules, thesis work, and continuing professional development will be listed here.</p>
+      <p>Completed as part of the MSc Computing (Networking) programme at The Open University.</p>
+      <div class="module-grid">
+        <div class="module-card">
+          <h3>Information Security</h3>
+          <span class="code">M811</span>
+          <div class="outcome">EMA: Integration of AI in Workplace Environments — MoD College Considerations</div>
+          <p>Comprehensive examination of information security management frameworks, risk assessment methodologies, and security controls. The end-of-module assessment investigated the challenges and opportunities of integrating artificial intelligence within Ministry of Defence training environments, addressing AI-specific vulnerabilities, data confidentiality concerns, and accountability in automated decision-making.</p>
+          <ul>
+            <li>Risk management frameworks (ISO 27001)</li>
+            <li>Security controls and statement of applicability</li>
+            <li>AI-specific threats and vulnerability analysis</li>
+            <li>Vulnerability assessment using Nessus</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <h3>System Security</h3>
+          <span class="code">M817</span>
+          <div class="outcome">TMAs completed — Turnitin originality checked</div>
+          <p>Explored the security of computer systems from hardware through to application layer. Covered operating system security, access control models, malware analysis, and secure system design principles.</p>
+          <ul>
+            <li>Operating system hardening and access controls</li>
+            <li>Malware analysis and defence strategies</li>
+            <li>Secure system architecture</li>
+            <li>Network penetration testing methodologies</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <h3>Network Security</h3>
+          <span class="code">T828</span>
+          <div class="outcome">Cisco NetSec &amp; CyberOps aligned</div>
+          <p>Practical network security module aligned to Cisco's Network Security (NetSec) and Cyber Security Operations (CyberOps) certifications. Covered threat analysis, security infrastructure deployment, and operational security monitoring in enterprise environments.</p>
+          <ul>
+            <li>Cisco network security infrastructure</li>
+            <li>CyberOps security operations centre procedures</li>
+            <li>Threat detection and incident response</li>
+            <li>VPNs, firewalls, and IDS/IPS deployment</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <h3>Advanced Networking (CCNP Enterprise)</h3>
+          <span class="code">T829</span>
+          <div class="outcome">Pass — Exam 64% · Coursework 97%</div>
+          <p>Advanced networking module aligned to the Cisco CCNP Enterprise certification. Covered complex routing protocols, multi-protocol label switching (MPLS), network virtualisation, and enterprise network design. Achieved a distinction-level continuous assessment score of 97%.</p>
+          <ul>
+            <li>Advanced routing (OSPF, EIGRP, BGP)</li>
+            <li>MPLS and VPN technologies</li>
+            <li>Network virtualisation and software-defined networking</li>
+            <li>Enterprise network architecture and design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" aria-labelledby="project-heading">
+  <div class="container">
+    <div class="content">
+      <h2 id="project-heading">MSc Project</h2>
+      <div class="section-line"></div>
+      <div class="qual-card" style="border-left-color: #d4a843; margin-top: 0;">
+        <h3>Does Artificial Intelligence Enhance Student Engagement?</h3>
+        <span class="institution">T803 — MSc Computing Project</span>
+        <div class="year">The Open University, 2025</div>
+        <p>A comprehensive research project investigating the impact of artificial intelligence tools on student engagement in higher education. The study examined how AI-powered active learning generates significantly higher engagement compared with traditional passive learning methods, with students in AI-enhanced programmes achieving markedly improved outcomes.</p>
+        <p>The project included a systematic literature review, analysis of current research metrics, and a SWOT analysis of AI adoption for student engagement. It explored the pedagogical implications of tools such as ChatGPT and adaptive learning platforms within defence and higher education contexts.</p>
+        <p><strong>Key areas:</strong></p>
+        <ul>
+          <li>AI-powered active learning vs. traditional pedagogy</li>
+          <li>Student engagement metrics and measurement frameworks</li>
+          <li>Implementation challenges in military and defence education</li>
+          <li>Ethical considerations and AI governance in educational settings</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -355,10 +338,110 @@
 <section class="page-section" aria-labelledby="teaching-heading">
   <div class="container">
     <div class="content">
-      <h2 id="teaching-heading">Teaching &amp; Supervision</h2>
+      <h2 id="teaching-heading">Teaching Qualification</h2>
       <div class="section-line"></div>
-      <div class="section-placeholder">
-        <p>Curriculum design, guest lectures, and supervision activity will be documented here.</p>
+      <p>Certificate in Education (Post Compulsory Education) awarded by the University of Wolverhampton, delivered at RAF Cosford. The programme provided formal pedagogical training for educators working in further and higher education contexts.</p>
+      <div class="module-grid">
+        <div class="module-card">
+          <h3>Professional Development</h3>
+          <span class="code">5PC004</span>
+          <div class="outcome">Grade: Pass (P50) · 20 Credits</div>
+          <p>Reflective practice, professional standards in teaching, and continuous professional development planning for educators in the post-compulsory sector.</p>
+        </div>
+        <div class="module-card">
+          <h3>Curriculum, Policy and Practice</h3>
+          <span class="code">5PC006</span>
+          <div class="outcome">Grade: Pass (P50) · 20 Credits</div>
+          <p>Curriculum design principles, education policy frameworks, and practical implementation strategies for delivering effective learning programmes.</p>
+        </div>
+        <div class="module-card">
+          <h3>Subject Specialism &amp; E-Learning</h3>
+          <span class="code">5PC012</span>
+          <div class="outcome">Grade: Pass (P50) · 20 Credits</div>
+          <p>Subject-specific pedagogy and the integration of e-learning technologies, including Cisco Packet Tracer as a virtual learning environment for networking education.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" aria-labelledby="additional-heading">
+  <div class="container">
+    <div class="content">
+      <h2 id="additional-heading">Additional Qualifications</h2>
+      <div class="section-line"></div>
+      <p>Professional and vocational certifications complementing the academic portfolio.</p>
+      <div class="badge-grid">
+        <div class="badge">
+          <span class="icon">&#x1F393;</span>
+          <span class="title">Education &amp; Training L4</span>
+          Recognised teaching qualification
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F4CA;</span>
+          <span class="title">Internal Quality Assurance L4</span>
+          Assessment processes and practice
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F3AF;</span>
+          <span class="title">Plan &amp; Manage a Project L4</span>
+          Project management principles
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F3DB;&#xFE0F;</span>
+          <span class="title">Management of Productivity L4</span>
+          Productivity and operations
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F30D;</span>
+          <span class="title">Logistics Ops L5</span>
+          Supply chain and logistics
+        </div>
+        <div class="badge">
+          <span class="icon">&#x2699;&#xFE0F;</span>
+          <span class="title">Multinational Logistics L6</span>
+          Operational planning
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F468;&#x200D;&#x1F3EB;</span>
+          <span class="title">Train the Trainer</span>
+          Trainer development
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F3C6;</span>
+          <span class="title">HR Level 3</span>
+          Human resources
+        </div>
+        <div class="badge">
+          <span class="icon">&#x26A0;&#xFE0F;</span>
+          <span class="title">Security in the Workplace L2</span>
+          Workplace safety
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F91D;</span>
+          <span class="title">Equality &amp; Diversity L2</span>
+          Inclusive practice
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F331;</span>
+          <span class="title">Personal &amp; Social Ed L2</span>
+          Pastoral education
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F44D;</span>
+          <span class="title">Positive Behaviour L3</span>
+          Behaviour management
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F9E8;</span>
+          <span class="title">Substance Misuse L2</span>
+          Substance awareness
+        </div>
+        <div class="badge">
+          <span class="icon">&#x1F3D4;&#xFE0F;</span>
+          <span class="title">Working in the Outdoors L3</span>
+          Outdoor leadership
+        </div>
       </div>
     </div>
   </div>
