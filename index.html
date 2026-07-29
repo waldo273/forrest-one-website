@@ -237,39 +237,43 @@
     /* ─── Visitor Counter ─── */
     .visitor-counter {
       position: fixed;
-      bottom: 1rem;
+      bottom: 1.2rem;
       left: 1rem;
       z-index: 200;
-      font-size: 0.75rem;
-      color: #606070;
-      background: rgba(10, 10, 15, 0.75);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(102, 184, 255, 0.08);
+      font-size: 0.85rem;
+      color: #c0c0d0;
+      background: rgba(10, 10, 15, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 229, 255, 0.2);
       border-radius: 8px;
-      padding: 0.4rem 0.75rem;
+      padding: 0.5rem 0.9rem;
       line-height: 1.5;
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
       transition: opacity 0.3s;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.06);
+    }
+    .visitor-counter .icon {
+      margin-right: 0.35rem;
     }
     .visitor-counter .num {
-      color: #808090;
-      font-weight: 600;
+      color: #00e5ff;
+      font-weight: 700;
     }
     .visitor-counter .sep {
-      color: #404050;
+      color: #606080;
       margin: 0 0.35rem;
     }
     .visitor-counter .daily-num {
-      color: #808090;
-      font-weight: 600;
+      color: #00e5ff;
+      font-weight: 700;
     }
     .visitor-counter .daily-label {
-      color: #505060;
+      color: #8080a0;
     }
     .visitor-counter .loading {
-      color: #404050;
+      color: #606080;
       animation: pulse 1.5s ease-in-out infinite;
     }
     @keyframes pulse {
@@ -278,9 +282,9 @@
     }
     @media (max-width: 480px) {
       .visitor-counter {
-        font-size: 0.65rem;
-        padding: 0.3rem 0.6rem;
-        bottom: 0.6rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
+        bottom: 0.7rem;
         left: 0.6rem;
       }
     }
@@ -475,6 +479,7 @@
 
     function setCounts(allVal, dailyVal) {
       el.innerHTML =
+        '<span class="icon">👁</span>' +
         '<span class="num">' + fmt(allVal) + '</span>' +
         ' <span class="daily-label">all</span>' +
         '<span class="sep">·</span>' +
