@@ -465,16 +465,16 @@
     var el = document.getElementById('visitorCounter');
     if (!el) return;
 
-    var namespace = 'forrestone';
-    var allTimeKey = 'visitors';
+    var apiBase = 'https://countapi.mileshilliard.com/api/v1';
+    var allTimeKey = 'forrestone_visitors';
     var today = new Date();
-    var ymd = today.getFullYear() + '-' +
-              String(today.getMonth() + 1).padStart(2, '0') + '-' +
+    var ymd = today.getFullYear() + '' +
+              String(today.getMonth() + 1).padStart(2, '0') + '' +
               String(today.getDate()).padStart(2, '0');
-    var dailyKey = 'visitors-' + ymd;
+    var dailyKey = 'forrestone_visitors_' + ymd;
 
     function fmt(n) {
-      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return Number(n).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
     }
 
     function setCounts(allVal, dailyVal) {
@@ -488,19 +488,17 @@
     }
 
     function setError() {
-      el.innerHTML = '<span style="color:#404050;">◈ —</span>';
+      el.innerHTML = '<span style="color:#606080;">👁 —</span>';
     }
 
-    var apiBase = 'https://api.countapi.xyz';
-
     // Hit all-time counter (increment)
-    var hitAll = fetch(apiBase + '/hit/' + namespace + '/' + allTimeKey)
+    var hitAll = fetch(apiBase + '/hit/' + allTimeKey)
       .then(function(r){ return r.json(); })
       .then(function(d){ return d.value; })
       .catch(function(){ return null; });
 
     // Hit daily counter (increment)
-    var hitDaily = fetch(apiBase + '/hit/' + namespace + '/' + dailyKey)
+    var hitDaily = fetch(apiBase + '/hit/' + dailyKey)
       .then(function(r){ return r.json(); })
       .then(function(d){ return d.value; })
       .catch(function(){ return null; });
@@ -510,12 +508,12 @@
         setCounts(vals[0], vals[1]);
       } else {
         // Fallback: try just getting values without hitting
-        fetch(apiBase + '/get/' + namespace + '/' + allTimeKey)
+        fetch(apiBase + '/get/' + allTimeKey)
           .then(function(r){ return r.json(); })
           .then(function(d){ return d.value; })
           .catch(function(){ return null; })
           .then(function(allV){
-            fetch(apiBase + '/get/' + namespace + '/' + dailyKey)
+            fetch(apiBase + '/get/' + dailyKey)
               .then(function(r){ return r.json(); })
               .then(function(d){ return d.value; })
               .catch(function(){ return null; })
