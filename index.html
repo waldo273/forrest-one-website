@@ -234,6 +234,57 @@
     footer .socials a:focus { outline: 3px solid #00e5ff; outline-offset: 2px; }
     footer .socials a:hover svg { fill: #00e5ff; }
 
+    /* ─── Visitor Counter ─── */
+    .visitor-counter {
+      position: fixed;
+      bottom: 1rem;
+      left: 1rem;
+      z-index: 200;
+      font-size: 0.75rem;
+      color: #606070;
+      background: rgba(10, 10, 15, 0.75);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(102, 184, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      line-height: 1.5;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.3s;
+    }
+    .visitor-counter .num {
+      color: #808090;
+      font-weight: 600;
+    }
+    .visitor-counter .sep {
+      color: #404050;
+      margin: 0 0.35rem;
+    }
+    .visitor-counter .daily-num {
+      color: #808090;
+      font-weight: 600;
+    }
+    .visitor-counter .daily-label {
+      color: #505060;
+    }
+    .visitor-counter .loading {
+      color: #404050;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    @media (max-width: 480px) {
+      .visitor-counter {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.6rem;
+        bottom: 0.6rem;
+        left: 0.6rem;
+      }
+    }
+
     /* ─── prefers-reduced-motion ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -327,6 +378,11 @@
   </div>
 </section>
 
+<!-- ─── Visitor Counter ─── -->
+<div class="visitor-counter" id="visitorCounter" role="status" aria-live="polite" aria-label="Visitor counter">
+  <span class="loading">◈ loading…</span>
+</div>
+
 <footer>
   <div class="container">
     <div class="socials">
@@ -398,5 +454,78 @@
     });
   })();
 </script>
+
+<!-- ─── Visitor Counter Logic ─── -->
+<script data-cfasync="false">
+  (function(){
+    var el = document.getElementById('visitorCounter');
+    if (!el) return;
+
+    var namespace = 'forrestone';
+    var allTimeKey = 'visitors';
+    var today = new Date();
+    var ymd = today.getFullYear() + '-' +
+              String(today.getMonth() + 1).padStart(2, '0') + '-' +
+              String(today.getDate()).padStart(2, '0');
+    var dailyKey = 'visitors-' + ymd;
+
+    function fmt(n) {
+      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function setCounts(allVal, dailyVal) {
+      el.innerHTML =
+        '<span class="num">' + fmt(allVal) + '</span>' +
+        ' <span class="daily-label">all</span>' +
+        '<span class="sep">·</span>' +
+        '<span class="daily-num">' + fmt(dailyVal) + '</span>' +
+        ' <span class="daily-label">today</span>';
+    }
+
+    function setError() {
+      el.innerHTML = '<span style="color:#404050;">◈ —</span>';
+    }
+
+    var apiBase = 'https://api.countapi.xyz';
+
+    // Hit all-time counter (increment)
+    var hitAll = fetch(apiBase + '/hit/' + namespace + '/' + allTimeKey)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ return d.value; })
+      .catch(function(){ return null; });
+
+    // Hit daily counter (increment)
+    var hitDaily = fetch(apiBase + '/hit/' + namespace + '/' + dailyKey)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ return d.value; })
+      .catch(function(){ return null; });
+
+    Promise.all([hitAll, hitDaily]).then(function(vals) {
+      if (vals[0] !== null && vals[1] !== null) {
+        setCounts(vals[0], vals[1]);
+      } else {
+        // Fallback: try just getting values without hitting
+        fetch(apiBase + '/get/' + namespace + '/' + allTimeKey)
+          .then(function(r){ return r.json(); })
+          .then(function(d){ return d.value; })
+          .catch(function(){ return null; })
+          .then(function(allV){
+            fetch(apiBase + '/get/' + namespace + '/' + dailyKey)
+              .then(function(r){ return r.json(); })
+              .then(function(d){ return d.value; })
+              .catch(function(){ return null; })
+              .then(function(dailyV){
+                if (allV !== null && dailyV !== null) {
+                  setCounts(allV, dailyV);
+                } else {
+                  setError();
+                }
+              });
+          });
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
