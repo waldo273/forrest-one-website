@@ -7,18 +7,19 @@
 <style>
 /* ─── Site Navigation ─── */
 :root{--space-bg:#050510;--space-mid:#0a0a1a;--accent:#00e5ff;--accent2:#8860ff;--text:#e8e8f0;--text-dim:#b0b0c0}
-.site-nav{position:fixed;top:0;left:0;width:100%;z-index:10000;background:rgba(5,5,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:56px;font-family:'Segoe UI',system-ui,sans-serif}
-.site-nav .container{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 1.5rem;max-width:1200px;margin:0 auto}
-.site-nav .logo{font-size:1rem;font-weight:700;background:linear-gradient(135deg,#00e5ff,#8860ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
-.site-nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0}
-.site-nav a{color:#b0b0c0;text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
-.site-nav a:hover,.site-nav a.active{color:#00e5ff;text-decoration:underline}
-.site-nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px}
-.site-nav .hamburger span{display:block;width:22px;height:2px;background:#b0b0c0;margin:4px 0}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
+nav .logo{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,#00e5ff,#8860ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
+nav a{font-size:0.9rem;color:#b0b0c0;text-decoration:none;transition:color 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+nav a:hover,nav a.active{color:#00e5ff;text-decoration:underline;text-underline-offset:4px}
+nav a:focus{outline:3px solid #00e5ff;outline-offset:2px}
+nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+nav .hamburger span{display:block;width:24px;height:2px;background:#b0b0c0;margin:5px 0}
 @media(max-width:768px){
-  .site-nav ul{display:none;flex-direction:column;position:absolute;top:56px;left:0;width:100%;background:rgba(5,5,16,0.98);padding:1rem;border-bottom:1px solid rgba(255,255,255,0.06)}
-  .site-nav ul.open{display:flex}
-  .site-nav .hamburger{display:block}
+  nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(5,5,16,0.98);padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+  nav ul.open{display:flex}
+  nav .hamburger{display:block}
 }
 .site-footer{text-align:center;padding:2rem;border-top:1px solid rgba(255,255,255,0.06);color:#707090;font-size:.8rem;background:#0a0a12;font-family:'Segoe UI',system-ui,sans-serif}
 
@@ -119,7 +120,7 @@ body{padding-top:0;min-height:auto}
 </head>
 <body>
 <!-- Site navigation -->
-<nav class="site-nav">
+<nav>
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
     <button class="hamburger"><span></span><span></span><span></span></button>
@@ -711,8 +712,8 @@ updateUI();
 
 <script>
 (function(){
-  var nav = document.querySelector('.site-nav ul');
-  var btn = document.querySelector('.site-nav .hamburger');
+  var nav = document.querySelector('nav ul');
+  var btn = document.querySelector('nav .hamburger');
   if(nav && btn){
     btn.addEventListener('click', function(){ nav.classList.toggle('open'); });
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); }); });
