@@ -204,10 +204,10 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
     <p id="scenarioText">Loading...</p>
     
     <table class="hosts-table">
-      <tr><th>Subnet</th><th>Hosts Required</th><th>Bits Needed</th><th>Usable Hosts (2<sup>h</sup> - 2)</th></tr>
-      <tr><td id="siteAName">Site A</td><td id="siteAReq">—</td><td id="siteABits">—</td><td id="siteAUsable">—</td></tr>
-      <tr><td id="siteBName">Site B</td><td id="siteBReq">—</td><td id="siteBBits">—</td><td id="siteBUsable">—</td></tr>
-      <tr><td id="siteCName">WAN</td><td id="siteCReq">—</td><td id="siteCBits">—</td><td id="siteCUsable">—</td></tr>
+      <tr><th>Subnet</th><th>Hosts Required</th><th>Usable Hosts (2<sup>h</sup> - 2)</th></tr>
+      <tr><td id="siteAName">Site A</td><td id="siteAReq">—</td><td id="siteAUsable">—</td></tr>
+      <tr><td id="siteBName">Site B</td><td id="siteBReq">—</td><td id="siteBUsable">—</td></tr>
+      <tr><td id="siteCName">WAN</td><td id="siteCReq">—</td><td id="siteCUsable">—</td></tr>
     </table>
     
     <div class="example-box">
@@ -406,18 +406,15 @@ function setupChallenge() {
   for (var i = 0; i < 5; i++) {
     var nameEl = document.getElementById('site' + prefixes[i] + 'Name');
     var reqEl = document.getElementById('site' + prefixes[i] + 'Req');
-    var bitsEl = document.getElementById('site' + prefixes[i] + 'Bits');
     var usEl = document.getElementById('site' + prefixes[i] + 'Usable');
     if (i < c.subnets.length) {
       var s = c.subnets[i];
       if (nameEl) nameEl.textContent = s.name;
       if (reqEl) reqEl.textContent = s.hosts;
-      if (bitsEl) bitsEl.textContent = s.hostBits + ' (2\\u00B9' + s.hostBits + ' = ' + (s.usable + 2) + ')';
       if (usEl) usEl.textContent = s.usable;
     } else {
       if (nameEl) nameEl.textContent = '—';
       if (reqEl) reqEl.textContent = '—';
-      if (bitsEl) bitsEl.textContent = '—';
       if (usEl) usEl.textContent = '—';
     }
   }
