@@ -5,107 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VLSM Subnetting Game</title>
 <style>
+:root{--bg:#fdf6ee;--bg-card:#ffffff;--accent:#1e40af;--accent2:#3b82f6;--text:#1a1a3e;--text-dim:#4a4a6a;--text-muted:#8a8aaa;--border:#e0d4c4}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh}
-.skip-link{position:absolute;top:-100px;left:8px;background:#58a6ff;color:#fff;padding:8px 16px;border-radius:0 0 4px 4px;z-index:1000;font-size:.85rem;text-decoration:none;transition:top .15s}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;min-height:100vh}
+.skip-link{position:absolute;top:-100px;left:8px;background:var(--accent2);color:#fff;padding:8px 16px;border-radius:0 0 4px 4px;z-index:1000;font-size:.85rem;text-decoration:none;transition:top .15s}
 .skip-link:focus{top:0;outline:3px solid #ffd700}
 :focus-visible{outline:2px solid #ffd700;outline-offset:2px}
-.top-bar{background:#0d1117;border-bottom:2px solid #1a3a5c;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.top-bar h1{font-size:1.2rem;font-weight:700;color:#58a6ff}
-.level-badge{background:#1a3a5c;color:#58a6ff;padding:4px 12px;border-radius:4px;font-size:.85rem;font-weight:600}
-.progress-bar{flex:1;max-width:300px;height:8px;background:#161b22;border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;background:#58a6ff;border-radius:4px;transition:width .3s}
-.main-area{max-width:1100px;margin:0 auto;padding:20px}
-.intro-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px;margin-bottom:20px}
-.intro-card h2{color:#58a6ff;font-size:1.1rem;margin-bottom:8px}
-.intro-card p{font-size:.9rem;color:#8b949e;line-height:1.6}
+/* ─── Site Nav ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(253,246,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
+nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent);white-space:nowrap}
+nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
+nav a{font-size:0.9rem;color:var(--text-dim);text-decoration:none;transition:color 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+nav a:hover,nav a.active{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+nav a:focus{outline:3px solid var(--accent);outline-offset:2px}
+nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-dim);margin:5px 0}
+@media(max-width:768px){
+  nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:var(--bg);padding:1rem 2rem;border-bottom:1px solid var(--border)}
+  nav ul.open{display:flex}
+  nav .hamburger{display:block}
+}
+/* ─── Game ─── */
+.top-bar{background:var(--bg-card);border-bottom:2px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top-bar h1{font-size:1.2rem;font-weight:700;color:var(--accent2)}
+.level-badge{background:#e8eef9;color:var(--accent2);padding:4px 12px;border-radius:4px;font-size:.85rem;font-weight:600}
+.progress-bar{flex:1;max-width:300px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent2);border-radius:4px;transition:width .3s}
+.top-bar{margin-top:60px}
+.main-area{max-width:1100px;margin:60px auto 0;padding:20px}
+.intro-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:20px}
+.intro-card h2{color:var(--accent2);font-size:1.1rem;margin-bottom:8px}
+.intro-card p{font-size:.9rem;color:var(--text-muted);line-height:1.6}
 .hosts-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem}
-.hosts-table th{background:#1a3a5c;color:#58a6ff;padding:8px 12px;text-align:left;border:1px solid #30363d}
-.hosts-table td{padding:8px 12px;border:1px solid #30363d;color:#e0e0e0}
-.hosts-table tr:nth-child(even){background:#0d1117}
-.example-box{margin-top:12px;padding:12px;background:#0d1117;border:1px solid #30363d;border-radius:6px;font-size:.8rem;color:#8b949e}
-.example-box code{color:#58a6ff;background:#1a1a2e;padding:1px 5px;border-radius:3px}
+.hosts-table th{background:#e8eef9;color:var(--accent2);padding:8px 12px;text-align:left;border:1px solid var(--border)}
+.hosts-table td{padding:8px 12px;border:1px solid var(--border);color:var(--text)}
+.hosts-table tr:nth-child(even){background:var(--bg)}
+.example-box{margin-top:12px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--text-muted)}
+.example-box code{color:var(--accent2);background:var(--bg);padding:1px 5px;border-radius:3px}
 .subnet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.subnet-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px}
-.subnet-card h3{color:#58a6ff;font-size:.9rem;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #30363d}
+.subnet-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px}
+.subnet-card h3{color:var(--accent2);font-size:.9rem;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 .field-row{margin-bottom:8px}
-.field-row label{display:block;font-size:.75rem;color:#8b949e;margin-bottom:2px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.field-row input{width:100%;padding:7px 10px;background:#0d1117;border:1px solid #30363d;border-radius:4px;color:#e0e0e0;font-size:.85rem;font-family:'Courier New',monospace;outline:none;transition:border-color .15s}
-.field-row input:focus{border-color:#58a6ff}
-.field-row input.correct{border-color:#00ff00;background:#0a1a0a}
-.field-row input.wrong{border-color:#ff4444;background:#1a0a0a}
+.field-row label{display:block;font-size:.75rem;color:var(--text-muted);margin-bottom:2px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.field-row input{width:100%;padding:7px 10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:.85rem;font-family:'Courier New',monospace;outline:none;transition:border-color .15s}
+.field-row input:focus{border-color:var(--accent2)}
+.field-row input.correct{border-color:#00cc00;background:#e8fae8}
+.field-row input.wrong{border-color:#ff4444;background:#fce8e8}
 .btn-row{text-align:center;margin:24px 0}
 .splash-screen{max-width:700px;margin:0 auto;padding:40px 20px;text-align:center;display:block}
-.splash-screen h1{font-size:2.2rem;color:#58a6ff;margin-bottom:8px}
-.splash-screen .subtitle{font-size:1.1rem;color:#8b949e;margin-bottom:30px}
-.splash-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px;margin:16px 0;text-align:left}
-.splash-card h3{color:#58a6ff;font-size:1rem;margin-bottom:12px}
-.splash-card p,.splash-card li{font-size:.85rem;color:#8b949e;line-height:1.7}
+.splash-screen h1{font-size:2.2rem;color:var(--accent2);margin-bottom:8px}
+.splash-screen .subtitle{font-size:1.1rem;color:var(--text-muted);margin-bottom:30px}
+.splash-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:16px 0;text-align:left}
+.splash-card h3{color:var(--accent2);font-size:1rem;margin-bottom:12px}
+.splash-card p,.splash-card li{font-size:.85rem;color:var(--text-muted);line-height:1.7}
 .splash-card ul{padding-left:20px}
 .splash-card li{margin-bottom:4px}
-.splash-card .highlight{color:#ffd700}
-.splash-card .code{color:#58a6ff;font-family:'Courier New',monospace}
+.splash-card .highlight{color:#cc9900}
+.splash-card .code{color:var(--accent2);font-family:'Courier New',monospace}
 .level-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
-.level-box{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:14px;text-align:center}
-.level-box .lv{font-size:1.2rem;font-weight:700;color:#58a6ff}
-.level-box .net{font-size:.7rem;color:#8b949e;margin:4px 0}
-.level-box .sub{font-size:.75rem;color:#ffd700;font-weight:600}
-.play-btn{background:#2d6a2d;color:#fff;border:none;border-radius:8px;padding:16px 60px;font-size:1.2rem;font-weight:700;cursor:pointer;margin:24px 0;transition:background .15s}
-.play-btn:hover{background:#3d8a3d}
-.credit-line{font-size:.8rem;color:#4a5a6a;margin-top:20px}
-.validate-btn{background:#1a5a8c;color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;font-weight:600;transition:background .15s}
-.validate-btn:hover{background:#2a7abc}
-.check-btn{background:#2d6a2d;color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;font-weight:600;margin-left:12px;transition:background .15s}
-.check-btn:hover{background:#3d8a3d}
+.level-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.level-box .lv{font-size:1.2rem;font-weight:700;color:var(--accent2)}
+.level-box .net{font-size:.7rem;color:var(--text-muted);margin:4px 0}
+.level-box .sub{font-size:.75rem;color:#cc9900;font-weight:600}
+.play-btn{background:var(--accent2);color:#fff;border:none;border-radius:8px;padding:16px 60px;font-size:1.2rem;font-weight:700;cursor:pointer;margin:24px 0;transition:background .15s}
+.play-btn:hover{background:var(--accent)}
+.credit-line{font-size:.8rem;color:var(--text-muted);margin-top:20px}
+.validate-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;font-weight:600;transition:background .15s}
+.validate-btn:hover{background:#162d6e}
+.check-btn{background:var(--accent2);color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;font-weight:600;margin-left:12px;transition:background .15s}
+.check-btn:hover{background:var(--accent)}
 .feedback-box{margin:16px auto;padding:14px 18px;border-radius:6px;display:none;font-size:.9rem;line-height:1.6;max-width:800px}
-.feedback-box.error{display:block;background:#2d1b1b;border:1px solid #ff4444;color:#ff8888}
-.feedback-box.success{display:block;background:#1b2d1b;border:1px solid #00ff00;color:#88ff88}
-.feedback-box.info{display:block;background:#1a2a3a;border:1px solid #58a6ff;color:#8bc4ff}
-.hint-box{margin:12px auto;padding:12px 16px;background:#1a2a3a;border:1px solid #58a6ff;border-radius:6px;font-size:.85rem;display:none;color:#8bc4ff;max-width:800px}
-.bottom-bar{background:#0d1117;border-top:2px solid #1a3a5c;padding:10px 20px;display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
-.score-display{font-weight:700;color:#58a6ff;font-size:1rem}
-.stars{color:#ffd700;font-size:1.2rem;margin-left:6px}
-.hint-btn{background:#1a3a5c;color:#fff;border:none;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
-.hint-btn:hover{background:#1a5a8c}
-.leaderboard-btn{background:#3a3a1a;color:#ffd700;border:1px solid #665500;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
-.leaderboard-btn:hover{background:#5a5a2a}
-.new-game-btn{background:#3a5a3a;color:#fff;border:none;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
-.new-game-btn:hover{background:#5a7a5a}
-.reset-btn{background:transparent;color:#8b949e;border:1px solid #30363d;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
-.reset-btn:hover{color:#fff}
-.clear-btn{background:transparent;color:#ff8888;border:1px solid #ff4444;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer;margin-left:8px}
-.clear-btn:hover{background:#2d1b1b}
+.feedback-box.error{display:block;background:#fce8e8;border:1px solid #ff4444;color:#cc3333}
+.feedback-box.success{display:block;background:#e8fae8;border:1px solid #00cc00;color:#1a8a1a}
+.feedback-box.info{display:block;background:var(--bg);border:1px solid var(--accent2);color:var(--text-dim)}
+.hint-box{margin:12px auto;padding:12px 16px;background:var(--bg);border:1px solid var(--accent2);border-radius:6px;font-size:.85rem;display:none;color:var(--text-dim);max-width:800px}
+.top-bar{margin-top:60px}
+.bottom-bar{background:var(--bg-card);border-top:2px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.score-display{font-weight:700;color:var(--accent2);font-size:1rem}
+.stars{color:#cc9900;font-size:1.2rem;margin-left:6px}
+.hint-btn{background:var(--accent2);color:#fff;border:none;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
+.hint-btn:hover{background:var(--accent)}
+.leaderboard-btn{background:#e8eef9;color:var(--accent2);border:1px solid var(--accent2);border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
+.leaderboard-btn:hover{background:#d0ddf2}
+.new-game-btn{background:var(--accent2);color:#fff;border:none;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
+.new-game-btn:hover{background:var(--accent)}
+.reset-btn{background:transparent;color:var(--text-muted);border:1px solid var(--border);border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer}
+.reset-btn:hover{color:var(--text)}
+.clear-btn{background:transparent;color:#cc3333;border:1px solid #ff4444;border-radius:4px;padding:6px 16px;font-size:.85rem;cursor:pointer;margin-left:8px}
+.clear-btn:hover{background:#fce8e8}
 .results-panel{text-align:center;padding:40px 20px;display:none}
-.results-panel h2{font-size:1.8rem;color:#58a6ff;margin-bottom:16px}
+.results-panel h2{font-size:1.8rem;color:var(--accent2);margin-bottom:16px}
 .results-panel .big-score{font-size:4rem;font-weight:700;margin:16px 0}
-.results-panel .star{font-size:3rem;color:#30363d;margin:0 8px}
-.results-panel .star.filled{color:#ffd700}
+.results-panel .star{font-size:3rem;color:var(--border);margin:0 8px}
+.results-panel .star.filled{color:#cc9900}
 .results-panel .rating{font-size:1.2rem;font-weight:600;margin:12px 0}
-.results-panel .restart-btn{background:#1a5a8c;color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;margin-top:20px}
-.leaderboard-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;z-index:1000;justify-content:center;align-items:center}
-.leaderboard-panel{background:#161b22;border:2px solid #1a3a5c;border-radius:12px;padding:30px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
-.leaderboard-panel h2{color:#58a6ff;text-align:center;margin-bottom:16px}
-.lb-row{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #30363d;font-size:.85rem}
-.lb-row.header{color:#58a6ff;font-weight:700;border-bottom:2px solid #1a3a5c}
-.lb-row .rank{width:40px;color:#8b949e}
+.results-panel .restart-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px 40px;font-size:1rem;cursor:pointer;margin-top:20px}
+.leaderboard-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);display:none;z-index:1000;justify-content:center;align-items:center}
+.leaderboard-panel{background:var(--bg-card);border:2px solid var(--accent);border-radius:12px;padding:30px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+.leaderboard-panel h2{color:var(--accent2);text-align:center;margin-bottom:16px}
+.lb-row{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);font-size:.85rem}
+.lb-row.header{color:var(--accent2);font-weight:700;border-bottom:2px solid var(--accent)}
+.lb-row .rank{width:40px;color:var(--text-muted)}
 .lb-row .name{flex:1}
-.lb-row .lvl{width:60px;text-align:center;color:#8b949e}
-.lb-row .scr{width:80px;text-align:right;color:#ffd700}
-.lb-row.current{background:#1a2a3a;border-color:#58a6ff}
-.lb-close{display:block;margin:16px auto 0;background:#1a3a5c;color:#fff;border:none;border-radius:6px;padding:8px 30px;font-size:.9rem;cursor:pointer}
+.lb-row .lvl{width:60px;text-align:center;color:var(--text-muted)}
+.lb-row .scr{width:80px;text-align:right;color:#cc9900}
+.lb-row.current{background:var(--bg);border-color:var(--accent2)}
+.lb-close{display:block;margin:16px auto 0;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 30px;font-size:.9rem;cursor:pointer}
+.copyright-bar{display:none;text-align:center;padding:8px 20px;font-size:.7rem;color:var(--text-muted);border-top:1px solid var(--border);background:var(--bg)}
 @media(max-width:800px){.subnet-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Site Nav -->
+<nav>
+  <div class="container">
+    <div class="logo">&#9674; Training.Forrest.One</div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/courses/">Courses</a></li>
+      <li><a href="/academic/">Academic</a></li>
+      <li><a href="/game-arena/" class="active">Game Arena</a></li>
+      <li><a href="/mtb/">MTB</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="top-bar" style="display:none">
   <h1>VLSM Subnetting Game</h1>
   <span class="level-badge" id="levelBadge">Level 1</span>
   <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-  <span id="progressLabel" style="font-size:.75rem;color:#8b949e">0/5</span>
+  <span id="progressLabel" style="font-size:.75rem;color:var(--text-muted)">0/5</span>
 </div>
 
-<div class="splash-screen" id="splashScreen">
+<div class="splash-screen" id="splashScreen" style="padding-top:100px">
   <h1>VLSM Subnetting Game</h1>
   <div class="subtitle">Master Variable Length Subnet Masking — CCNA 1</div>
 
@@ -121,22 +159,22 @@ body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;mi
         <div class="lv">Level 1</div>
         <div class="net">192.168.x.0/24</div>
         <div class="sub">3 subnets</div>
-        <div style="font-size:.7rem;color:#8b949e;margin-top:4px">40–100 hosts</div>
+        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">40–100 hosts</div>
       </div>
       <div class="level-box">
         <div class="lv">Level 2</div>
         <div class="net">172.16.x.0/16</div>
         <div class="sub">5 subnets</div>
-        <div style="font-size:.7rem;color:#8b949e;margin-top:4px">2–500 hosts</div>
+        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">2–500 hosts</div>
       </div>
       <div class="level-box">
         <div class="lv">Level 3</div>
         <div class="net">10.x.x.0/8</div>
         <div class="sub">7 subnets</div>
-        <div style="font-size:.7rem;color:#8b949e;margin-top:4px">2–5,000 hosts</div>
+        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">2–5,000 hosts</div>
       </div>
     </div>
-    <p style="font-size:.8rem;color:#8b949e">Complete <strong style="color:#ffd700">5 challenges in a row</strong> at each level to unlock the next.</p>
+    <p style="font-size:.8rem;color:var(--text-muted)">Complete <strong style="color:#cc9900">5 challenges in a row</strong> at each level to unlock the next.</p>
   </div>
 
   <div class="splash-card">
@@ -149,7 +187,7 @@ body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;mi
       <li><span class="highlight">-25</span> points for first hint, <span class="highlight">-75</span> for subsequent hints</li>
       <li>Score carries over across all levels and is saved to your browser</li>
     </ul>
-    <p style="margin-top:8px;font-size:.8rem;color:#8b949e">
+    <p style="margin-top:8px;font-size:.8rem;color:var(--text-muted)">
       <span class="highlight">&#9733;&#9733;&#9733;</span> 900+ = VLSM Master &nbsp;|&nbsp;
       <span class="highlight">&#9733;&#9733;</span> 700–899 = Subnetting Specialist &nbsp;|&nbsp;
       <span class="highlight">&#9733;</span> 500–699 = Networking Junior
@@ -173,7 +211,7 @@ body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;mi
     </table>
     
     <div class="example-box">
-      <strong style="color:#58a6ff">Example Input Format:</strong><br>
+      <strong style="color:var(--accent2)">Example Input Format:</strong><br>
       Subnet Mask: <code>255.255.255.0</code> &nbsp;|&nbsp; CIDR: <code>/24</code> &nbsp;|&nbsp; Network ID: <code>192.168.1.0</code><br>
       First Usable IP: <code>192.168.1.1</code> &nbsp;|&nbsp; Last Usable IP: <code>192.168.1.254</code> &nbsp;|&nbsp; Broadcast IP: <code>192.168.1.255</code>
     </div>
@@ -194,14 +232,14 @@ body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;mi
 
 <div class="bottom-bar" style="display:none">
   <div class="score-display">Score: <span id="scoreDisplay">0</span> <span class="stars" id="starsDisplay"></span></div>
-  <span id="streakDisplay" style="font-size:.8rem;color:#8b949e">Streak: 0</span>
+  <span id="streakDisplay" style="font-size:.8rem;color:var(--text-muted)">Streak: 0</span>
   <button class="hint-btn" id="hintBtn">Hint (-25 pts)</button>
   <button class="leaderboard-btn" id="lbBtn">Scoreboard</button>
   <button class="new-game-btn" id="newGameBtn">New Challenge</button>
   <button class="reset-btn" id="resetBtn">Reset</button>
 </div>
 
-<div class="copyright-bar" style="display:none;text-align:center;padding:8px 20px;font-size:.7rem;color:#8b949e;border-top:1px solid #1a2a3a;background:#0a0a12">
+<div class="copyright-bar" style="display:none;text-align:center;padding:8px 20px;font-size:.7rem;color:var(--text-muted);border-top:1px solid var(--border);background:var(--bg)">
   Code by Hermes &middot; Designed by Billy Forrest &copy; 2026
 </div>
 
@@ -374,7 +412,7 @@ function setupChallenge() {
       var s = c.subnets[i];
       if (nameEl) nameEl.textContent = s.name;
       if (reqEl) reqEl.textContent = s.hosts;
-      if (bitsEl) bitsEl.textContent = s.hostBits + ' (2\u00B9' + s.hostBits + ' = ' + (s.usable + 2) + ')';
+      if (bitsEl) bitsEl.textContent = s.hostBits + ' (2\\u00B9' + s.hostBits + ' = ' + (s.usable + 2) + ')';
       if (usEl) usEl.textContent = s.usable;
     } else {
       if (nameEl) nameEl.textContent = '—';
@@ -449,7 +487,7 @@ function validateAll() {
       } else {
         inp.classList.add('wrong');
         allCorrect = false;
-        if (!firstWrong) firstWrong = SITE_NAMES[s] + ': ' + FIELD_LABELS[f] + ' \u2014 expected "' + correct + '", got "' + (val || 'empty') + '"';
+        if (!firstWrong) firstWrong = SITE_NAMES[s] + ': ' + FIELD_LABELS[f] + ' \\u2014 expected \"' + correct + '\", got \"' + (val || 'empty') + '\"';
       }
     });
   });
@@ -549,7 +587,7 @@ function checkOneField() {
   } else {
     currentScore = Math.max(0, currentScore - 5);
     fb.className = 'feedback-box error';
-    fb.innerHTML = '<strong>Incorrect.</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' \u2014 expected "' + correct + '" (-5 pts)';
+    fb.innerHTML = '<strong>Incorrect.</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' \\u2014 expected \"' + correct + '\" (-5 pts)';
   }
   updateUI();
 }
@@ -583,7 +621,7 @@ function updateUI() {
   document.getElementById('streakDisplay').textContent = 'Streak: ' + sb.streak + ' | Best: ' + sb.bestStreak;
   var n = currentScore >= 900 ? 3 : (currentScore >= 700 ? 2 : (currentScore >= 500 ? 1 : 0));
   var s = '';
-  for (var i = 0; i < 3; i++) s += i < n ? '\u2605' : '\u2606';
+  for (var i = 0; i < 3; i++) s += i < n ? '\\u2605' : '\\u2606';
   document.getElementById('starsDisplay').textContent = s;
   var progress = Math.min(sb.streak / 5 * 100, 100);
   document.getElementById('progressFill').style.width = progress + '%';
@@ -622,7 +660,7 @@ function showLeaderboard() {
   var html = '<div class="lb-row header"><span class="rank">#</span><span class="name">Round</span><span class="lvl">Lv</span><span class="scr">Score</span></div>';
   var rounds = sb.rounds || [];
   if (rounds.length === 0) {
-    html += '<div style="text-align:center;padding:20px;color:#8b949e">No rounds completed yet. Complete a challenge to see your scoreboard.</div>';
+    html += '<div style="text-align:center;padding:20px;color:var(--text-muted)">No rounds completed yet. Complete a challenge to see your scoreboard.</div>';
   } else {
     var total = 0;
     for (var i = Math.max(0, rounds.length - 20); i < rounds.length; i++) {
@@ -631,9 +669,9 @@ function showLeaderboard() {
       var cls = i === rounds.length - 1 ? ' lb-row current' : '';
       html += '<div class="lb-row' + cls + '"><span class="rank">' + (i+1) + '</span><span class="name">' + r.network + (r.hint > 0 ? ' (' + r.hint + 'h)' : '') + '</span><span class="lvl">' + r.level + '</span><span class="scr">+' + r.score + '</span></div>';
     }
-    html += '<div class="lb-row" style="font-weight:700;border-top:2px solid #1a3a5c"><span class="rank"></span><span class="name">Total</span><span class="lvl"></span><span class="scr">' + sb.totalScore + '</span></div>';
+    html += '<div class="lb-row" style="font-weight:700;border-top:2px solid var(--accent)"><span class="rank"></span><span class="name">Total</span><span class="lvl"></span><span class="scr">' + sb.totalScore + '</span></div>';
   }
-  html += '<div style="text-align:center;margin-top:12px;font-size:.8rem;color:#8b949e">Best streak: ' + sb.bestStreak + ' | Level: ' + sb.level + ' | Rounds: ' + rounds.length + '</div>';
+  html += '<div style="text-align:center;margin-top:12px;font-size:.8rem;color:var(--text-muted)">Best streak: ' + sb.bestStreak + ' | Level: ' + sb.level + ' | Rounds: ' + rounds.length + '</div>';
   document.getElementById('lbContent').innerHTML = html;
   document.getElementById('lbOverlay').style.display = 'flex';
 }
