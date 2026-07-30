@@ -621,7 +621,7 @@ function updateUI() {
   document.getElementById('streakDisplay').textContent = 'Streak: ' + sb.streak + ' | Best: ' + sb.bestStreak;
   var n = currentScore >= 900 ? 3 : (currentScore >= 700 ? 2 : (currentScore >= 500 ? 1 : 0));
   var s = '';
-  for (var i = 0; i < 3; i++) s += i < n ? '\\u2605' : '\\u2606';
+  for (var i = 0; i < 3; i++) s += i < n ? '\u2605' : '\u2606';
   document.getElementById('starsDisplay').textContent = s;
   var progress = Math.min(sb.streak / 5 * 100, 100);
   document.getElementById('progressFill').style.width = progress + '%';
