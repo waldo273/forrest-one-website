@@ -582,12 +582,16 @@ function checkOneField() {
   
   if (isCorrect) {
     currentScore += 5;
+    sb.totalScore += 5;
     fb.className = 'feedback-box success';
     fb.innerHTML = '<strong>Correct!</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' = ' + val + ' (+5 pts)';
+    saveScoreboard(sb);
   } else {
     currentScore = Math.max(0, currentScore - 5);
+    sb.totalScore = Math.max(0, sb.totalScore - 5);
     fb.className = 'feedback-box error';
-    fb.innerHTML = '<strong>Incorrect.</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' \\u2014 expected \"' + correct + '\" (-5 pts)';
+    fb.innerHTML = '<strong>Incorrect.</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' \u2014 expected "' + correct + '" (-5 pts)';
+    saveScoreboard(sb);
   }
   updateUI();
 }
@@ -607,6 +611,8 @@ function showHint() {
   hintsUsed++;
   var cost = hintsUsed === 1 ? 25 : 75;
   currentScore = Math.max(0, currentScore - cost);
+  sb.totalScore = Math.max(0, sb.totalScore - cost);
+  saveScoreboard(sb);
   var hints = getHints();
   var idx = Math.min(hintsUsed - 1, hints.length - 1);
   var hb = document.getElementById('hintBox');
@@ -619,7 +625,7 @@ function showHint() {
 function updateUI() {
   document.getElementById('scoreDisplay').textContent = currentScore;
   document.getElementById('streakDisplay').textContent = 'Streak: ' + sb.streak + ' | Best: ' + sb.bestStreak;
-  var n = currentScore >= 900 ? 3 : (currentScore >= 700 ? 2 : (currentScore >= 500 ? 1 : 0));
+  var n = currentScore >= 500 ? 3 : (currentScore >= 250 ? 2 : (currentScore >= 100 ? 1 : 0));
   var s = '';
   for (var i = 0; i < 3; i++) s += i < n ? '\u2605' : '\u2606';
   document.getElementById('starsDisplay').textContent = s;
