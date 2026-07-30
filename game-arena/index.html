@@ -6,23 +6,23 @@
 <title>Game Arena — Training.Forrest.One</title>
 <style>
 /* ─── Site Navigation ─── */
-:root{--space-bg:#050510;--space-mid:#0a0a1a;--accent:#00e5ff;--accent2:#8860ff;--text:#e8e8f0;--text-dim:#b0b0c0;--text-muted:#707090}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0a12;color:var(--text);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(5,5,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:60px}
-nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
-nav .logo{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
-nav ul{display:flex;gap:2rem;list-style:none}
-nav a{color:var(--text-dim);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
-nav a:hover,nav a.active{color:var(--accent);text-decoration:underline}
-nav a:focus{outline:3px solid var(--accent);outline-offset:2px}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
-.hamburger span{display:block;width:24px;height:2px;background:var(--text-dim);margin:5px 0;transition:.3s}
-.game-hero{padding:80px 20px 20px;text-align:center;background:#0a0a12;border-bottom:1px solid #1a2a3a}
-.game-hero h1{font-size:1.8rem;color:#58a6ff;margin-bottom:4px}
-.game-hero p{font-size:.9rem;color:#8b949e}
-/* ─── Game Styles ─── */
+:root{--space-bg:#050510;--space-mid:#0a0a1a;--accent:#00e5ff;--accent2:#8860ff;--text:#e8e8f0;--text-dim:#b0b0c0}
+.site-nav{position:fixed;top:0;left:0;width:100%;z-index:10000;background:rgba(5,5,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:56px;font-family:'Segoe UI',system-ui,sans-serif}
+.site-nav .container{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 1.5rem;max-width:1200px;margin:0 auto}
+.site-nav .logo{font-size:1rem;font-weight:700;background:linear-gradient(135deg,#00e5ff,#8860ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.site-nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0}
+.site-nav a{color:#b0b0c0;text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+.site-nav a:hover,.site-nav a.active{color:#00e5ff;text-decoration:underline}
+.site-nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.site-nav .hamburger span{display:block;width:22px;height:2px;background:#b0b0c0;margin:4px 0}
+@media(max-width:768px){
+  .site-nav ul{display:none;flex-direction:column;position:absolute;top:56px;left:0;width:100%;background:rgba(5,5,16,0.98);padding:1rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .site-nav ul.open{display:flex}
+  .site-nav .hamburger{display:block}
+}
+.site-footer{text-align:center;padding:2rem;border-top:1px solid rgba(255,255,255,0.06);color:#707090;font-size:.8rem;background:#0a0a12;font-family:'Segoe UI',system-ui,sans-serif}
 
+/* ─── Game Styles ─── */
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh}
 .skip-link{position:absolute;top:-100px;left:8px;background:#58a6ff;color:#fff;padding:8px 16px;border-radius:0 0 4px 4px;z-index:1000;font-size:.85rem;text-decoration:none;transition:top .15s}
@@ -113,13 +113,13 @@ body{background:#0a0a12;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;mi
 .lb-close{display:block;margin:16px auto 0;background:#1a3a5c;color:#fff;border:none;border-radius:6px;padding:8px 30px;font-size:.9rem;cursor:pointer}
 @media(max-width:800px){.subnet-grid{grid-template-columns:1fr}}
 
-body{min-height:auto;padding-top:60px}
-.splash-screen{padding-top:20px}
+body{padding-top:0;min-height:auto}
 
 </style>
 </head>
 <body>
-<nav>
+<!-- Site navigation -->
+<nav class="site-nav">
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
     <button class="hamburger"><span></span><span></span><span></span></button>
@@ -135,11 +135,7 @@ body{min-height:auto;padding-top:60px}
   </div>
 </nav>
 
-<section class="game-hero">
-  <h1>VLSM Subnetting Game</h1>
-  <p>Master Variable Length Subnet Masking — CCNA 1</p>
-</section>
-
+<div style="padding-top:56px;background:#0a0a12;min-height:calc(100vh - 56px)">
   <span id="progressLabel" style="font-size:.75rem;color:#8b949e">0/5</span>
 </div>
 
@@ -709,473 +705,16 @@ updateUI();
 })();
 </script>
 
-<footer style="text-align:center;padding:2rem;border-top:1px solid rgba(255,255,255,0.06);color:#707090;font-size:.85rem;background:#0a0a12">
-  <p>&copy; 2026 William Forrest — Training.Forrest.One. All rights reserved.</p>
-</footer>
-<script>
-(function() {
-// ===================== PERSISTENT SCOREBOARD =====================
-var STORAGE_KEY = 'vlsm_game_scoreboard';
+</div>
 
-function getScoreboard() {
-  try {
-    var data = localStorage.getItem(STORAGE_KEY);
-    if (data) return JSON.parse(data);
-  } catch(e) {}
-  return {totalScore:0, totalCorrect:0, level:1, streak:0, bestStreak:0, rounds:[]};
-}
-
-function saveScoreboard(sb) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(sb)); } catch(e) {}
-}
-
-var sb = getScoreboard();
-
-// ===================== IP UTILITIES =====================
-function ipToNum(ip) {
-  var parts = ip.split('.');
-  return ((+parts[0]) << 24) + ((+parts[1]) << 16) + ((+parts[2]) << 8) + (+parts[3]);
-}
-function numToIp(n) {
-  return [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join('.');
-}
-function netMask(cidr) {
-  var n = 0xFFFFFFFF << (32 - cidr);
-  return numToIp(n >>> 0);
-}
-function netId(ipNum, cidr) {
-  var mask = 0xFFFFFFFF << (32 - cidr);
-  return numToIp((ipNum & mask) >>> 0);
-}
-function broadcast(ipNum, cidr) {
-  var mask = 0xFFFFFFFF << (32 - cidr);
-  return numToIp((ipNum | ~mask) >>> 0);
-}
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// ===================== GENERATE CHALLENGE =====================
-function generateChallenge() {
-  var level = sb.level;
-  var baseCidr, baseIp, ranges, count;
-  
-  if (level === 1) {
-    // Level 1: /24 networks
-    var third = randomInt(0, 255);
-    baseIp = '192.168.' + third + '.0';
-    baseCidr = 24;
-    ranges = [
-      {name: 'Site A LAN', min: 40, max: 100},
-      {name: 'Site B LAN', min: 15, max: 50},
-      {name: 'WAN Link', min: 2, max: 6}
-    ];
-  } else if (level === 2) {
-    // Level 2: /16 networks (172.16.0.0/16 range)
-    var second = randomInt(0, 255);
-    baseIp = '172.16.' + second + '.0';
-    baseCidr = 16;
-    ranges = [
-      {name: 'Campus A', min: 200, max: 500},
-      {name: 'Campus B', min: 100, max: 250},
-      {name: 'Branch Office', min: 30, max: 80},
-      {name: 'WAN Link 1', min: 2, max: 6},
-      {name: 'WAN Link 2', min: 2, max: 4}
-    ];
-  } else {
-    // Level 3: /8 networks (10.0.0.0/8 range)
-    var second3 = randomInt(0, 255);
-    var third3 = randomInt(0, 255);
-    baseIp = '10.' + second3 + '.' + third3 + '.0';
-    baseCidr = 8;
-    ranges = [
-      {name: 'Data Center A', min: 2000, max: 5000},
-      {name: 'Data Center B', min: 1000, max: 3000},
-      {name: 'Regional HQ', min: 500, max: 1500},
-      {name: 'Branch Office', min: 100, max: 300},
-      {name: 'Remote Site', min: 30, max: 80},
-      {name: 'WAN Link 1', min: 2, max: 6},
-      {name: 'WAN Link 2', min: 2, max: 4}
-    ];
-  }
-
-  var needs = ranges.map(function(r) {
-    return {name: r.name, hosts: randomInt(r.min, r.max)};
-  });
-  
-  // Sort descending by host count
-  needs.sort(function(a, b) { return b.hosts - a.hosts; });
-  
-  var currentNum = ipToNum(baseIp);
-  var subnets = [];
-  
-  needs.forEach(function(n) {
-    var hostBits = Math.ceil(Math.log2(n.hosts + 2));
-    var cidr = 32 - hostBits;
-    if (cidr < baseCidr) cidr = baseCidr;
-    
-    // Ensure this subnet fits within the remaining address space
-    var usable = Math.pow(2, 32 - cidr) - 2;
-    var net = netId(currentNum, cidr);
-    var bcast = broadcast(currentNum, cidr);
-    
-    // Check if this subnet exceeds the base network boundary
-    var baseNetNum = ipToNum(netId(ipToNum(baseIp), baseCidr));
-    var bcastNum = ipToNum(bcast);
-    var baseBcastNum = ipToNum(broadcast(ipToNum(baseIp), baseCidr));
-    
-    if (bcastNum > baseBcastNum) {
-      // Subnet doesn't fit - skip it
-      return;
-    }
-    
-    var first = numToIp(ipToNum(net) + 1);
-    var last = numToIp(bcastNum - 1);
-    
-    subnets.push({
-      name: n.name, hosts: n.hosts, cidr: cidr,
-      mask: netMask(cidr), net: net, bcast: bcast,
-      first: first, last: last, usable: usable, hostBits: hostBits
-    });
-    
-    currentNum = bcastNum + 1;
-  });
-  
-  return {baseIp: baseIp, baseCidr: baseCidr, subnets: subnets};
-}
-
-// ===================== CURRENT CHALLENGE =====================
-var challenge = generateChallenge();
-var ANSWERS = {};
-var SITE_NAMES = {};
-var FIELD_ORDER = ['mask','cidr','net','first','last','bcast'];
-var FIELD_LABELS = {mask:'Subnet Mask', cidr:'CIDR', net:'Network ID', first:'First Usable IP', last:'Last Usable IP', bcast:'Broadcast IP'};
-
-function setupChallenge() {
-  var c = challenge;
-  var level = sb.level;
-  var levelName = level === 1 ? 'Level 1: /24 Networks' : (level === 2 ? 'Level 2: /16 Networks' : 'Level 3: /8 Networks');
-  
-  document.getElementById('levelBadge').textContent = 'Lv' + level + ' ' + c.baseIp + '/' + c.baseCidr;
-  document.getElementById('challengeTitle').textContent = level === 1 ? 'Level 1: VLSM Subnetting (/24)' : (level === 2 ? 'Level 2: VLSM Subnetting (/16)' : 'Level 3: VLSM Subnetting (/8)');
-  document.getElementById('scenarioText').innerHTML =
-    'Your organisation has been allocated the network <strong>' + c.baseIp + '/' + c.baseCidr + '</strong>. ' +
-    'Using VLSM, create an addressing scheme for the following ' + c.subnets.length + ' subnets.';
-  
-  // Update host table
-  var prefixes = ['A','B','C','D','E'];
-  for (var i = 0; i < 5; i++) {
-    var nameEl = document.getElementById('site' + prefixes[i] + 'Name');
-    var reqEl = document.getElementById('site' + prefixes[i] + 'Req');
-    var bitsEl = document.getElementById('site' + prefixes[i] + 'Bits');
-    var usEl = document.getElementById('site' + prefixes[i] + 'Usable');
-    if (i < c.subnets.length) {
-      var s = c.subnets[i];
-      if (nameEl) nameEl.textContent = s.name;
-      if (reqEl) reqEl.textContent = s.hosts;
-      if (bitsEl) bitsEl.textContent = s.hostBits + ' (2\u00B9' + s.hostBits + ' = ' + (s.usable + 2) + ')';
-      if (usEl) usEl.textContent = s.usable;
-    } else {
-      if (nameEl) nameEl.textContent = '—';
-      if (reqEl) reqEl.textContent = '—';
-      if (bitsEl) bitsEl.textContent = '—';
-      if (usEl) usEl.textContent = '—';
-    }
-  }
-  
-  // Build ANSWERS
-  ANSWERS = {};
-  SITE_NAMES = {};
-  c.subnets.forEach(function(s, i) {
-    var key = 'sub' + i;
-    ANSWERS[key] = {
-      mask: s.mask, cidr: '/' + s.cidr, net: s.net,
-      first: s.first, last: s.last, bcast: s.bcast
-    };
-    SITE_NAMES[key] = s.name;
-  });
-  
-  // Update progress
-  var progress = Math.min(sb.streak / 5 * 100, 100);
-  document.getElementById('progressFill').style.width = progress + '%';
-  document.getElementById('progressLabel').textContent = sb.streak + '/5';
-}
-
-// ===================== BUILD FORM =====================
-function buildForm() {
-  var html = '';
-  challenge.subnets.forEach(function(s, i) {
-    html += '<div class="subnet-card">';
-    html += '<h3>' + s.name + ' (' + s.hosts + ' hosts)</h3>';
-    FIELD_ORDER.forEach(function(f) {
-      html += '<div class="field-row">';
-      html += '<label for="f_sub' + i + '_' + f + '">' + FIELD_LABELS[f] + '</label>';
-      html += '<input type="text" id="f_sub' + i + '_' + f + '" data-site="sub' + i + '" data-field="' + f + '" placeholder="" autocomplete="off" spellcheck="false">';
-      html += '</div>';
-    });
-    html += '</div>';
-  });
-  document.getElementById('subnetGrid').innerHTML = html;
-}
-
-// ===================== STATE =====================
-var currentScore = 0;
-var hintsUsed = 0;
-var levelComplete = false;
-var checkedFields = {};
-var SITE_KEYS = [];
-
-function getSiteKeys() {
-  return challenge.subnets.map(function(_, i) { return 'sub' + i; });
-}
-
-// ===================== VALIDATION =====================
-function validateAll() {
-  var allCorrect = true;
-  var firstWrong = '';
-  var fb = document.getElementById('feedbackBox');
-  SITE_KEYS = getSiteKeys();
-
-  SITE_KEYS.forEach(function(s) {
-    FIELD_ORDER.forEach(function(f) {
-      var inp = document.getElementById('f_' + s + '_' + f);
-      if (!inp) return;
-      var val = inp.value.trim();
-      var correct = ANSWERS[s][f];
-      inp.classList.remove('correct', 'wrong');
-      if (val.toLowerCase() === correct.toLowerCase()) {
-        inp.classList.add('correct');
-      } else {
-        inp.classList.add('wrong');
-        allCorrect = false;
-        if (!firstWrong) firstWrong = SITE_NAMES[s] + ': ' + FIELD_LABELS[f] + ' \u2014 expected "' + correct + '", got "' + (val || 'empty') + '"';
-      }
-    });
-  });
-
-  if (allCorrect) {
-    var bonus = challenge.subnets.length >= 7 ? 500 : (challenge.subnets.length >= 5 ? 200 : 100);
-    var roundScore = bonus + Math.max(0, 10 - hintsUsed) * 10;
-    currentScore += roundScore;
-    sb.totalScore += roundScore;
-    sb.totalCorrect++;
-    sb.streak++;
-    if (sb.streak > sb.bestStreak) sb.bestStreak = sb.streak;
-    
-    sb.rounds.push({level:sb.level, network:challenge.baseIp+'/'+challenge.baseCidr, score:roundScore, hint:hintsUsed});
-    
-    fb.className = 'feedback-box success';
-    fb.innerHTML = '<strong>Excellent!</strong> All subnet calculations are correct! +' + roundScore + ' points';
-    levelComplete = true;
-    document.getElementById('hintBtn').disabled = true;
-    
-    // Check if streak hits 5
-    if (sb.streak >= 5) {
-      if (sb.level === 1) {
-        sb.level = 2;
-        sb.streak = 0;
-        fb.innerHTML += '<br><br><strong>Level 2 Unlocked!</strong> You now face /16 networks (172.16.0.0/16).';
-      } else if (sb.level === 2) {
-        sb.level = 3;
-        sb.streak = 0;
-        fb.innerHTML += '<br><br><strong>Level 3 Unlocked!</strong> You now face /8 networks (10.0.0.0/8).';
-      }
-    }
-    
-    updateUI();
-    saveScoreboard(sb);
-    setTimeout(function() {
-      fb.innerHTML += '<br><br><em>Starting next challenge...</em>';
-      setTimeout(newChallenge, 1500);
-    }, 1000);
-  } else {
-    sb.streak = 0;
-    saveScoreboard(sb);
-    updateUI();
-    
-    fb.className = 'feedback-box error';
-    fb.innerHTML = '<strong>Not quite.</strong> Some values are incorrect.<br>' + firstWrong;
-    
-    var usedNets = {};
-    var hasOverlap = false;
-    SITE_KEYS.forEach(function(s) {
-      var inp = document.getElementById('f_' + s + '_net');
-      if (inp && inp.value.trim()) {
-        if (usedNets[inp.value.trim()]) hasOverlap = true;
-        usedNets[inp.value.trim()] = true;
-      }
-    });
-    if (hasOverlap) fb.innerHTML += '<br><br>[GUIDE]: Subnet overlap detected!';
-    
-    fb.innerHTML += '<br><br>[GUIDE]: Check your host bits. Usable = 2<sup>h</sup> - 2.';
-  }
-}
-
-function checkOneField() {
-  var fb = document.getElementById('feedbackBox');
-  SITE_KEYS = getSiteKeys();
-  var unchecked = [];
-  
-  SITE_KEYS.forEach(function(s) {
-    FIELD_ORDER.forEach(function(f) {
-      var key = s + '_' + f;
-      if (!checkedFields[key]) {
-        var inp = document.getElementById('f_' + s + '_' + f);
-        if (inp && inp.value.trim()) unchecked.push({site:s, field:f, input:inp, key:key});
-      }
-    });
-  });
-  
-  if (unchecked.length === 0) {
-    fb.className = 'feedback-box info';
-    fb.innerHTML = 'All answered fields checked. Click <strong>Validate Scheme</strong>.';
-    return;
-  }
-  
-  var target = unchecked[0];
-  var val = target.input.value.trim();
-  var correct = ANSWERS[target.site][target.field];
-  var isCorrect = val.toLowerCase() === correct.toLowerCase();
-  checkedFields[target.key] = true;
-  
-  target.input.classList.remove('correct', 'wrong');
-  target.input.classList.add(isCorrect ? 'correct' : 'wrong');
-  
-  if (isCorrect) {
-    currentScore += 5;
-    fb.className = 'feedback-box success';
-    fb.innerHTML = '<strong>Correct!</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' = ' + val + ' (+5 pts)';
-  } else {
-    currentScore = Math.max(0, currentScore - 5);
-    fb.className = 'feedback-box error';
-    fb.innerHTML = '<strong>Incorrect.</strong> ' + SITE_NAMES[target.site] + ' ' + FIELD_LABELS[target.field] + ' \u2014 expected "' + correct + '" (-5 pts)';
-  }
-  updateUI();
-}
-
-// ===================== HINTS =====================
-function getHints() {
-  var c = challenge;
-  var h = [];
-  h.push('Base network: ' + c.baseIp + '/' + c.baseCidr + '. Start with the largest subnet. 2^' + c.subnets[0].hostBits + ' = ' + (c.subnets[0].usable + 2) + ' hosts, CIDR = /' + c.subnets[0].cidr + '.');
-  c.subnets.forEach(function(s, i) {
-    h.push(s.name + ' (' + s.hosts + ' hosts): /' + s.cidr + ', Network ID = ' + s.net + ', Broadcast = ' + s.bcast + ', Range: ' + s.first + ' - ' + s.last);
-  });
-  return h;
-}
-
-function showHint() {
-  hintsUsed++;
-  var cost = hintsUsed === 1 ? 25 : 75;
-  currentScore = Math.max(0, currentScore - cost);
-  var hints = getHints();
-  var idx = Math.min(hintsUsed - 1, hints.length - 1);
-  var hb = document.getElementById('hintBox');
-  hb.style.display = 'block';
-  hb.innerHTML = '[Hint -' + cost + ' pts]: ' + hints[idx];
-  updateUI();
-}
-
-// ===================== UI UPDATES =====================
-function updateUI() {
-  document.getElementById('scoreDisplay').textContent = currentScore;
-  document.getElementById('streakDisplay').textContent = 'Streak: ' + sb.streak + ' | Best: ' + sb.bestStreak;
-  var n = currentScore >= 900 ? 3 : (currentScore >= 700 ? 2 : (currentScore >= 500 ? 1 : 0));
-  var s = '';
-  for (var i = 0; i < 3; i++) s += i < n ? '\u2605' : '\u2606';
-  document.getElementById('starsDisplay').textContent = s;
-  var progress = Math.min(sb.streak / 5 * 100, 100);
-  document.getElementById('progressFill').style.width = progress + '%';
-  document.getElementById('progressLabel').textContent = sb.streak + '/5';
-}
-
-// ===================== NEW CHALLENGE =====================
-function newChallenge() {
-  challenge = generateChallenge();
-  setupChallenge();
-  hintsUsed = 0;
-  levelComplete = false;
-  checkedFields = {};
-  document.getElementById('hintBtn').disabled = false;
-  document.getElementById('feedbackBox').className = 'feedback-box';
-  document.getElementById('feedbackBox').innerHTML = '';
-  document.getElementById('hintBox').style.display = 'none';
-  buildForm();
-  updateUI();
-}
-
-// ===================== RESET =====================
-function resetAll() {
-  if (!confirm('Reset all progress, scoreboard, and start fresh?')) return;
-  sb = {totalScore:0, totalCorrect:0, level:1, streak:0, bestStreak:0, rounds:[]};
-  currentScore = 0;
-  hintsUsed = 0;
-  levelComplete = false;
-  checkedFields = {};
-  saveScoreboard(sb);
-  newChallenge();
-}
-
-// ===================== SCOREBOARD =====================
-function showLeaderboard() {
-  var html = '<div class="lb-row header"><span class="rank">#</span><span class="name">Round</span><span class="lvl">Lv</span><span class="scr">Score</span></div>';
-  var rounds = sb.rounds || [];
-  if (rounds.length === 0) {
-    html += '<div style="text-align:center;padding:20px;color:#8b949e">No rounds completed yet. Complete a challenge to see your scoreboard.</div>';
-  } else {
-    var total = 0;
-    for (var i = Math.max(0, rounds.length - 20); i < rounds.length; i++) {
-      var r = rounds[i];
-      total += r.score;
-      var cls = i === rounds.length - 1 ? ' lb-row current' : '';
-      html += '<div class="lb-row' + cls + '"><span class="rank">' + (i+1) + '</span><span class="name">' + r.network + (r.hint > 0 ? ' (' + r.hint + 'h)' : '') + '</span><span class="lvl">' + r.level + '</span><span class="scr">+' + r.score + '</span></div>';
-    }
-    html += '<div class="lb-row" style="font-weight:700;border-top:2px solid #1a3a5c"><span class="rank"></span><span class="name">Total</span><span class="lvl"></span><span class="scr">' + sb.totalScore + '</span></div>';
-  }
-  html += '<div style="text-align:center;margin-top:12px;font-size:.8rem;color:#8b949e">Best streak: ' + sb.bestStreak + ' | Level: ' + sb.level + ' | Rounds: ' + rounds.length + '</div>';
-  document.getElementById('lbContent').innerHTML = html;
-  document.getElementById('lbOverlay').style.display = 'flex';
-}
-
-// ===================== EVENT BINDING =====================
-document.getElementById('playBtn').addEventListener('click', function() {
-  document.getElementById('splashScreen').style.display = 'none';
-  document.getElementById('main').style.display = 'block';
-  document.querySelector('.top-bar').style.display = 'flex';
-  document.querySelector('.bottom-bar').style.display = 'flex';
-  document.querySelector('.copyright-bar').style.display = 'block';
-  newChallenge();
-});
-
-document.getElementById('validateBtn').addEventListener('click', validateAll);
-document.getElementById('checkBtn').addEventListener('click', checkOneField);
-document.getElementById('hintBtn').addEventListener('click', showHint);
-document.getElementById('resetBtn').addEventListener('click', resetAll);
-document.getElementById('newGameBtn').addEventListener('click', newChallenge);
-document.getElementById('lbBtn').addEventListener('click', showLeaderboard);
-document.getElementById('lbClose').addEventListener('click', function() { document.getElementById('lbOverlay').style.display = 'none'; });
-document.getElementById('lbOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && e.ctrlKey) validateAll();
-});
-
-// ===================== INIT =====================
-challenge = generateChallenge();
-setupChallenge();
-buildForm();
-currentScore = sb.totalScore;
-updateUI();
-
-})();
-</script>
+<footer class="site-footer">&copy; 2026 William Forrest — Training.Forrest.One. All rights reserved.</footer>
 
 <script>
 (function(){
-  var nav = document.querySelector('nav ul');
-  var hamburger = document.querySelector('.hamburger');
-  if(nav && hamburger){
-    hamburger.addEventListener('click', function(){ nav.classList.toggle('open'); });
+  var nav = document.querySelector('.site-nav ul');
+  var btn = document.querySelector('.site-nav .hamburger');
+  if(nav && btn){
+    btn.addEventListener('click', function(){ nav.classList.toggle('open'); });
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); }); });
   }
 })();
