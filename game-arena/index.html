@@ -6,15 +6,15 @@
 <title>Game Arena — Training.Forrest.One</title>
 <style>
 /* ─── Site Navigation ─── */
-:root{--bg:#fdf6ee;--bg-card:#ffffff;--accent:#1e40af;--accent2:#3b82f6;--text:#1a1a3e;--text-dim:#4a4a6a;--text-muted:#8a8aaa;--border:#e0d4c4}
+:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7}
-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(253,246,238,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(20,20,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
 nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
-nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent);white-space:nowrap}
+nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
 nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
 nav a{font-size:0.9rem;color:var(--text-dim);text-decoration:none;transition:color 0.2s;text-transform:uppercase;letter-spacing:0.5px}
-nav a:hover,nav a.active{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+nav a:hover,nav a.active{color:var(--accent-text);text-decoration:underline;text-underline-offset:4px}
 nav a:focus{outline:3px solid var(--accent);outline-offset:2px}
 nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
 nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-dim);margin:5px 0}
@@ -29,29 +29,29 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
 /* ─── Hero ─── */
 .hero{min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
 .hero h1{font-size:2.5rem;margin-bottom:.5rem}
-.hero h1 .highlight{color:var(--accent);font-weight:700}
+.hero h1 .highlight{color:var(--accent-text);font-weight:700}
 .hero .subtitle{font-size:1.1rem;color:var(--text-dim);max-width:600px;margin:0 auto}
 
 /* ─── Game Tiles ─── */
 .game-grid{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
 .game-tile{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.game-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(30,64,175,0.15)}
+.game-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(168,28,28,0.30)}
 .game-tile:focus{outline:3px solid var(--accent2);outline-offset:2px}
 .game-tile .icon{font-size:2.5rem;margin-bottom:1rem}
 .game-tile h3{color:var(--accent2);font-size:1.1rem;margin-bottom:.5rem}
 .game-tile .desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;flex:1}
 .game-tile .tags{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
-.game-tile .tag{background:#e8eef9;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.game-tile .tag{background:#2c313a;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
 .game-tile .play-badge{display:inline-block;margin-top:.8rem;color:var(--accent2);font-size:.8rem;font-weight:600}
-.game-tile:hover .play-badge{color:var(--accent)}
+.game-tile:hover .play-badge{color:var(--accent-text)}
 .coming-soon{opacity:.5;pointer-events:none}
-.coming-soon .tag{background:#fce8e8;color:#dc3545}
+.coming-soon .tag{background:rgba(168,28,28,0.18);color:#e3503a}
 
 /* ─── Footer ─── */
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.85rem;background:var(--bg)}
 footer .socials{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem}
 footer .socials a{color:var(--text-muted);text-decoration:none;font-size:1.2rem;transition:color .2s}
-footer .socials a:hover{color:var(--accent)}
+footer .socials a:hover{color:var(--accent-text)}
 
 @media(max-width:768px){
   .hero{padding:6rem 1.5rem 2rem}
