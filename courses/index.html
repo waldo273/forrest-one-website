@@ -245,6 +245,18 @@
     .page-section .content ul { color: var(--text-dim); margin-bottom: 1.2rem; padding-left: 1.5rem; }
     .page-section .content ul li { margin-bottom: 0.5rem; }
 
+    /* ─── UKAIF Accreditation ─── */
+    .accreditation { background: var(--bg-alt); padding: 4rem 0; }
+    .accreditation-inner {
+      display: flex; align-items: center; gap: 3rem;
+      max-width: 900px; margin: 0 auto;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem;
+    }
+    .accreditation-badge { width: 180px; height: 180px; object-fit: contain; flex-shrink: 0; border-radius: 12px; }
+    .accreditation-text h2 { font-size: 1.6rem; font-weight: 700; text-align: left; margin-bottom: 0.8rem; }
+    .accreditation-text p { color: var(--text-dim); font-size: 1.05rem; line-height: 1.8; }
+
     /* ─── Footer ─── */
     footer {
       text-align: center; padding: 4rem 2rem;
@@ -316,6 +328,10 @@
       .mtb-card { padding: 1.5rem; }
 
       .page-section { padding: 5rem 1rem 2.5rem; }
+
+      .accreditation-inner { flex-direction: column; text-align: center; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .accreditation-badge { width: 140px; height: 140px; }
+      .accreditation-text h2 { text-align: center; }
 
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
@@ -398,6 +414,19 @@
           <h4>CCNP ENARSI</h4>
           <p>Advanced routing and services — EIGRP, OSPF, BGP, route redistribution, VPN technologies, and infrastructure security. For network engineers operating at CCNP level and above.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── UKAIF Certified AI Trainer ─── -->
+<section class="accreditation" aria-labelledby="accreditation-heading">
+  <div class="container">
+    <div class="accreditation-inner">
+      <img class="accreditation-badge" src="/ukaif-certified-trainer.png" alt="UK AI Council Certified Trainer badge from UKAIF">
+      <div class="accreditation-text">
+        <h2 id="accreditation-heading">Delivered by a Certified <span class="highlight">AI Trainer</span></h2>
+        <p>This course catalogue is delivered by a <strong>UK AI Council (UKAIF) Certified Trainer</strong>. All AI-focussed pathways, including the UK AI Foundation (UKAIF) syllabus, are taught with a practical, hands-on approach covering generative AI, prompt engineering, responsible AI, and AI security.</p>
       </div>
     </div>
   </div>

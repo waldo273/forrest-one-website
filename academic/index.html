@@ -147,6 +147,20 @@
     .project-card .institution { color: #e3503a; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
     .project-card p { color: #9aa3af; font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.7; }
 
+    /* ─── UKAIF Accreditation ─── */
+    .accreditation-inner {
+      display: flex; align-items: center; gap: 2.5rem;
+      background: rgba(168, 28, 28, 0.03);
+      border: 1px solid rgba(168, 28, 28, 0.1);
+      border-left: 3px solid #A81C1C;
+      border-radius: 12px; padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .accreditation-badge { width: 160px; height: 160px; object-fit: contain; flex-shrink: 0; border-radius: 12px; }
+    .accreditation-text h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3rem; color: #e8eaed; margin-bottom: 0.3rem; }
+    .accreditation-text .institution { color: #e3503a; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem; }
+    .accreditation-text p { color: #9aa3af; font-size: 0.95rem; line-height: 1.7; margin-bottom: 0; }
+
     .badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     .badge {
       background: rgba(168, 28, 28, 0.03);
@@ -210,6 +224,8 @@
       .module-grid { grid-template-columns: 1fr; }
       .research-grid { grid-template-columns: 1fr; }
       .badge-grid { grid-template-columns: repeat(2, 1fr); }
+      .accreditation-inner { flex-direction: column; text-align: center; gap: 1.5rem; padding: 1.5rem; }
+      .accreditation-badge { width: 130px; height: 130px; }
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
     }
@@ -244,6 +260,23 @@
     <p class="subtitle">MSc Computing (Networking) — The Open University</p>
     <p class="subtitle">Cert Ed (Post Compulsory Education) — University of Wolverhampton</p>
     <p class="conferral">◈  Information Security  ·  Network Security  ·  System Security  ·  AI in Education  ·  Teaching  ◈</p>
+  </div>
+</section>
+
+<section class="page-section accreditation" aria-labelledby="accreditation-heading">
+  <div class="container">
+    <div class="content">
+      <h2 id="accreditation-heading">Professional Accreditation</h2>
+      <div class="section-line"></div>
+      <div class="accreditation-inner">
+        <img class="accreditation-badge" src="/ukaif-certified-trainer.png" alt="UK AI Council Certified Trainer badge from UKAIF">
+        <div class="accreditation-text">
+          <h3>UK AI Council — Certified AI Trainer</h3>
+          <span class="institution">UKAIF · UK AI Forum</span>
+          <p>Accredited by the UK AI Council (UKAIF) as a <strong>Certified AI Trainer</strong>, complementing the academic portfolio with professional, practical AI education. The credential recognises expertise in delivering the UK AI Foundation syllabus, spanning generative AI, prompt engineering, responsible AI, AI security, and the effective adoption of AI in learning and workplace environments.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -245,6 +245,18 @@
     .page-section .content ul { color: var(--text-dim); margin-bottom: 1.2rem; padding-left: 1.5rem; }
     .page-section .content ul li { margin-bottom: 0.5rem; }
 
+    /* ─── UKAIF Accreditation ─── */
+    .accreditation { background: var(--bg-alt); padding: 4rem 0; }
+    .accreditation-inner {
+      display: flex; align-items: center; gap: 3rem;
+      max-width: 900px; margin: 0 auto;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem;
+    }
+    .accreditation-badge { width: 180px; height: 180px; object-fit: contain; flex-shrink: 0; border-radius: 12px; }
+    .accreditation-text h2 { font-size: 1.6rem; font-weight: 700; text-align: left; margin-bottom: 0.8rem; }
+    .accreditation-text p { color: var(--text-dim); font-size: 1.05rem; line-height: 1.8; }
+
     /* ─── Footer ─── */
     footer {
       text-align: center; padding: 4rem 2rem;
@@ -317,6 +329,10 @@
 
       .page-section { padding: 5rem 1rem 2.5rem; }
 
+      .accreditation-inner { flex-direction: column; text-align: center; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .accreditation-badge { width: 140px; height: 140px; }
+      .accreditation-text h2 { text-align: center; }
+
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
     }
@@ -379,6 +395,19 @@
         <div class="icon">🎓</div>
         <h3>Curriculum Design &amp; Assessment</h3>
         <p>End-to-end course development: lesson plans, slide decks, student handouts, practical labs, and locked-answer assessments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── UKAIF Certified AI Trainer ─── -->
+<section class="accreditation" aria-labelledby="accreditation-heading">
+  <div class="container">
+    <div class="accreditation-inner">
+      <img class="accreditation-badge" src="/ukaif-certified-trainer.png" alt="UK AI Council Certified Trainer badge from UKAIF">
+      <div class="accreditation-text">
+        <h2 id="accreditation-heading">Certified <span class="highlight">AI Trainer</span></h2>
+        <p>Accredited by the UK AI Council (UKAIF) as a <strong>Certified AI Trainer</strong>, delivering professional AI training grounded in practical, hands-on application. Training covers generative AI, prompt engineering, responsible AI, AI security, and day-to-day workplace adoption — aligned to the UK AI Foundation syllabus.</p>
       </div>
     </div>
   </div>
