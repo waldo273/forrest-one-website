@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labs — Training.Forrest.One</title>
+  <style>
+    /* ─── CPIA Dark Red Theme ─── */
+    :root {
+      --bg: #141414;
+      --bg-alt: #1b1e24;
+      --bg-card: #20242c;
+      --accent: #A81C1C;
+      --accent-text: #e3503a;
+      --accent2: #e3503a;
+      --accent3: #c82323;
+      --text: #e8eaed;
+      --text-dim: #b8bec6;
+      --text-muted: #9aa3af;
+      --border: #2c313a;
+      --border-hover: #3d434d;
+      --nav-bg: rgba(20, 20, 20, 0.95);
+      --nav-bg-solid: rgba(20, 20, 20, 0.97);
+    }
+
+    /* ─── Light Theme ─── */
+    [data-theme="light"] {
+      --bg: #f4f5f7;
+      --bg-alt: #e9ebee;
+      --bg-card: #ffffff;
+      --accent: #A81C1C;
+      --accent-text: #a3201b;
+      --accent2: #8f1a16;
+      --accent3: #b3271f;
+      --text: #1f2328;
+      --text-dim: #41474f;
+      --text-muted: #6b7280;
+      --border: #d5d9de;
+      --border-hover: #c2c7cd;
+      --nav-bg: rgba(244, 245, 247, 0.92);
+      --nav-bg-solid: rgba(244, 245, 247, 0.97);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--accent2); }
+    a:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+    img { max-width: 100%; height: auto; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem;
+      background: #A81C1C; color: #ffffff; padding: 0.8rem 1.5rem;
+      border-radius: 0 0 8px 8px; z-index: 200;
+      font-weight: 600; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    nav .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo { font-size: 1.2rem; font-weight: 700; color: var(--accent-text); }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a {
+      font-size: 0.9rem; color: var(--text-dim); transition: color 0.2s;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      text-decoration: none; font-weight: 600;
+    }
+    nav a:hover, nav a.active { color: var(--accent-text); text-decoration: underline; text-underline-offset: 4px; }
+    nav a:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 8px;
+    }
+    .hamburger span { display: block; width: 26px; height: 3px; background: var(--text-dim); border-radius: 2px; transition: all 0.3s; }
+    .hamburger:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* ─── Theme Toggle ─── */
+    .theme-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--bg-card); color: var(--text-dim);
+      border: 1px solid var(--border); cursor: pointer; font-size: 1.1rem;
+      transition: all 0.2s; flex-shrink: 0; margin-right: 0.75rem;
+    }
+    .theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+    .theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* ─── Page Hero ─── */
+    .page-hero {
+      min-height: 60vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 9rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(168, 28, 28, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    }
+    .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    .page-hero h1 .highlight { color: var(--accent-text); }
+    .page-hero .subtitle { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .page-hero .tagline { font-size: 1rem; color: var(--text-muted); max-width: 640px; margin: 1rem auto 2.5rem; }
+    .page-hero .ruled-line { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 1.5rem auto; }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-block; padding: 0.9rem 2.5rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.95rem; text-transform: uppercase;
+      letter-spacing: 0.05em; transition: all 0.2s; border: none; cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:focus { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .btn-primary {
+      background: var(--accent); color: #ffffff;
+      box-shadow: 0 2px 8px rgba(168, 28, 28, 0.15);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      box-shadow: 0 4px 12px rgba(168, 28, 28, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent; color: var(--accent-text);
+      border: 2px solid var(--accent); margin-left: 1rem;
+    }
+    .btn-secondary:hover { background: rgba(168, 28, 28, 0.06); transform: translateY(-1px); }
+
+    /* ─── Sections ─── */
+    section { padding: 5rem 0; }
+    section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 2rem; text-align: center; color: var(--text); }
+    section h2 .highlight { color: var(--accent-text); }
+    section.bg-alt { background: var(--bg-alt); }
+
+    /* ─── Lab Cards ─── */
+    .lab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .lab-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem 2rem; text-align: center;
+      transition: all 0.2s;
+    }
+    .lab-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+    .lab-card:focus-within { border-color: var(--accent-text); box-shadow: 0 0 0 3px rgba(168, 28, 28, 0.25); }
+    .lab-card .icon { font-size: 2.6rem; margin-bottom: 1rem; display: block; }
+    .lab-card h3 { color: var(--accent-text); font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .lab-card p { color: var(--text-dim); font-size: 0.95rem; }
+    .lab-card .pillar-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--accent-text); border: 1px solid var(--accent-text);
+      border-radius: 999px; padding: 0.25rem 0.8rem; margin-bottom: 1rem;
+    }
+
+    /* ─── Access note ─── */
+    .access-note {
+      max-width: 760px; margin: 2rem auto 0; text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem;
+    }
+    .access-note h3 { color: var(--accent-text); font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .access-note p { color: var(--text-dim); font-size: 1rem; margin-bottom: 1.2rem; }
+    .access-note .lab-url {
+      font-family: 'Courier New', monospace; font-size: 1.1rem;
+      color: var(--text); background: var(--bg-alt);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.8rem 1.2rem; display: inline-block; margin: 0.5rem 0 1rem;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 0.3rem 0.9rem; border-radius: 999px; margin-bottom: 1rem;
+      border: 1px solid var(--border); color: var(--text-muted);
+    }
+    .status-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-hover); }
+    .status-pill.on { color: var(--ok, #4ade80); border-color: rgba(74, 222, 128, 0.4); }
+    .status-pill.on .dot { background: #4ade80; }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.85rem;
+    }
+    footer .socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    footer .socials a {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.2s; text-decoration: none;
+    }
+    footer .socials a:hover { border-color: var(--accent-text); background: rgba(168, 28, 28, 0.15); }
+    footer .socials a:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+    footer .socials a:hover svg { fill: var(--accent); }
+
+    /* ─── prefers-reduced-motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul {
+        display: none; position: fixed; top: 60px; left: 0; right: 0;
+        background: var(--nav-bg-solid); backdrop-filter: blur(12px);
+        flex-direction: column; gap: 0; padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      nav ul.open { display: flex; }
+      nav ul li { text-align: center; }
+      nav ul li a { display: block; padding: 1rem 2rem; font-size: 1rem; }
+
+      .page-hero { padding: 7rem 1rem 3rem; min-height: 55vh; }
+      .page-hero h1 { font-size: clamp(1.9rem, 7vw, 2.7rem); }
+      .btn { padding: 0.8rem 1.8rem; font-size: 0.85rem; }
+      .btn-secondary { margin-left: 0; margin-top: 0.8rem; }
+
+      section { padding: 3.5rem 0; }
+      section h2 { font-size: 1.6rem; margin-bottom: 2rem; }
+      .lab-grid { grid-template-columns: 1fr; }
+      .lab-card { padding: 1.8rem 1.5rem; }
+
+      .access-note { padding: 1.8rem 1.5rem; }
+      .access-note .lab-url { font-size: 0.95rem; }
+
+      footer { padding: 3rem 1rem; }
+      footer .socials { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="container">
+    <div class="logo">◈ Training.Forrest.One</div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
+    <button class="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/courses/">Courses</a></li>
+      <li><a href="/academic/">Academic</a></li>
+      <li><a href="/game-arena/">Game Arena</a></li>
+      <li><a href="/labs/" class="active">Labs</a></li>
+      <li><a href="/mtb/">MTB</a></li>
+      <li><a href="/forensics/">Forensics</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero" id="main-content">
+  <div class="container">
+    <h1><span class="highlight">CREST</span> Practice Labs</h1>
+    <div class="ruled-line"></div>
+    <p class="subtitle">Hands-on labs for the CREST Practitioner certifications</p>
+    <p class="tagline">A self-contained Docker environment for the CREST Practitioner Intrusion Analyst (CPIA) and CREST Practitioner Security Analyst (CPSA) certification domains. Bring up the console on your own machine and work the exercises.</p>
+    <div>
+      <a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener">Open Lab Console</a>
+      <a href="#labs" class="btn btn-secondary">Explore the ranges</a>
+    </div>
+  </div>
+</section>
+
+<section id="labs">
+  <div class="container">
+    <h2>The <span class="highlight">Lab Ranges</span></h2>
+    <div class="lab-grid">
+      <div class="lab-card">
+        <span class="pillar-tag">Intrusion Analysis</span>
+        <span class="icon">&#x1F50E;</span>
+        <h3>CPIA — Practitioner Intrusion Analyst</h3>
+        <p>Forensic analysis and incident response. Packet capture triage, Windows Event Log timelines, memory forensics with Volatility 3, live incident reconstruction, and static malware triage.</p>
+      </div>
+      <div class="lab-card">
+        <span class="pillar-tag">Security Assessment</span>
+        <span class="icon">&#x1F6E1;&#xFE0F;</span>
+        <h3>CPSA — Practitioner Security Analyst</h3>
+        <p>Security assessment of a deliberately weak network-services host. Host discovery, service enumeration, credential testing, NFS &amp; RPC enumeration, SMTP user enumeration, and web application testing.</p>
+      </div>
+      <div class="lab-card">
+        <span class="pillar-tag">Evidence-Based</span>
+        <span class="icon">&#x1F4C4;</span>
+        <h3>Findings &amp; Reports</h3>
+        <p>Every lab is designed around the core certification skill: evidence-based assessment. Record your findings, correlate scanners with manual probes, and produce a professional report.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-alt">
+  <div class="container">
+    <h2>Open the <span class="highlight">Lab Console</span></h2>
+    <div class="access-note">
+      <span class="status-pill" id="labStatus"><span class="dot"></span>Checking lab console…</span>
+      <h3>Run the labs on your machine</h3>
+      <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
+      <span class="lab-url">http://172.16.0.100:8020</span>
+      <p>The console has two dashboards — <strong>/cpia</strong> for intrusion analysis and <strong>/cpsa</strong> for security assessment — plus an in-browser terminal for each lab exercise.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website — the button opens the console on your network.</p>
+      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Launch the Console</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/billy-forrest-msc-393a65b0/" target="_blank" rel="noopener" title="LinkedIn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#9aa3af"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://github.com/waldo273" target="_blank" rel="noopener" title="GitHub">&#x1F4BB;</a>
+      <a href="mailto:training@forrest.one" title="Email">&#x2709;&#xFE0F;</a>
+    </div>
+    <p>&copy; 2026 Billy Forrest — Training.Forrest.One. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ─── Hamburger Menu ─── -->
+<script data-cfasync="false">
+  (function(){
+    var nav = document.querySelector('nav ul');
+    var hamburger = document.querySelector('.hamburger');
+    if (!nav || !hamburger) return;
+    hamburger.addEventListener('click', function(){
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        nav.classList.remove('open');
+      });
+    });
+  })();
+</script>
+
+<!-- ─── Theme Toggle Logic ─── -->
+<script data-cfasync="false">
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
+</script>
+
+<!-- ─── Lab Console Status Check ─── -->
+<script data-cfasync="false">
+  (function () {
+    var pill = document.getElementById('labStatus');
+    if (!pill) return;
+    var img = new Image();
+    img.onload = function () {
+      pill.className = 'status-pill on';
+      pill.innerHTML = '<span class="dot"></span> Lab console online';
+    };
+    img.onerror = function () {
+      pill.className = 'status-pill';
+      pill.innerHTML = '<span class="dot"></span> Lab console offline (start the lab)';
+    };
+    // A lightweight reachability probe to the console host (no cross-origin read).
+    img.src = 'http://172.16.0.100:8020/favicon.ico?' + Date.now();
+  })();
+</script>
+
+</body>
+</html>
