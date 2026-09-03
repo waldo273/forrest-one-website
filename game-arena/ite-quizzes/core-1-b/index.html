@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITE8 Core 1 Practice Paper B</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITE8 Core 1 Practice Paper B</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:2,t:"ESD threshold",q:"Roughly how much static electricity must build up on a person before they can actually feel the discharge?",o:["About 100 volts","About 3,000 volts","About 30,000 volts","About 100,000 volts"],c:1,e:"At least 3,000 volts of static electricity must build up before a person can feel ESD. This is significant because components can be damaged by far lower voltages that the technician never feels."},
+  {id:5,t:"Power supplies",q:"A technician needs a power supply for a new high-end gaming desktop build. Which form factor is the most common power supply type on the market today?",o:["AT (Advanced Technology)","EPS12V","ATX12V","AT Extended (ATX)"],c:2,e:"ATX12V is described as the most common power supply on the market today. EPS12V was originally designed for network servers, while AT and ATX are older legacy designs."},
+  {id:8,t:"CPU sockets",q:"A technician is selecting a CPU and notices the processor package has pins on its underside that plug into the motherboard socket. Which socket architecture does this describe?",o:["Land Grid Array (LGA)","Pin Grid Array (PGA)","Ball Grid Array (BGA)","Zero Insertion Force (ZIF)"],c:1,e:"In a PGA architecture the pins are on the underside of the processor package and insert into the motherboard socket. In LGA the pins are in the socket instead of on the processor."},
+  {id:11,t:"RAM limits",q:"A technician wants to upgrade a computer with 16 GB of RAM to 32 GB. What factor ultimately limits the maximum amount of RAM that can be installed?",o:["The size of the case","The motherboard","The power supply wattage","The operating system version"],c:1,e:"Adding more RAM enhances system performance, but the maximum amount of RAM that can be installed is limited by the motherboard, which determines the memory slots and supported capacities."},
+  {id:14,t:"Expansion slots",q:"Which expansion slot standard provides the highest bandwidth and is the most widely used for modern adapter cards such as video and NVMe devices?",o:["PCI","AGP","PCI-X","PCIe"],c:3,e:"PCI Express (PCIe) is the modern high-bandwidth serial expansion slot standard used for video cards, NVMe drives and many other adapters. PCI, PCI-X and AGP are older parallel technologies."},
+  {id:17,t:"NVMe",q:"Which specification was developed specifically to let SSDs attach to the PCIe bus and take greater advantage of SSD features without requiring special drivers?",o:["SATA 3","eSATA","NVMe","PATA"],c:2,e:"The Non-Volatile Memory Express (NVMe) specification provides a standard interface between SSDs, the PCIe bus and operating systems, allowing compliant SSD drives to attach to the PCIe bus without special drivers."},
+  {id:20,t:"AR vs VR",q:"A user wants a headset that superimposes digital images and audio over their real surroundings while still allowing them to see the environment around them. Which technology fits this requirement?",o:["Virtual Reality (VR)","Augmented Reality (AR)","A digital projector","A KVM switch"],c:1,e:"Augmented Reality (AR) superimposes images and audio over the real world in real time and its headset usually does not close off ambient light, letting the user see their real surroundings. VR fully encases the face and blocks out ambient light."},
+  {id:23,t:"Power supply sizing",q:"A technician is choosing a power supply for a new build and wants to avoid replacing it after future upgrades. What is the best approach?",o:["Buy the cheapest supply that powers only the current components and allows no room for adding extra drives or cards later","Choose a supply with enough power for installed components plus allowance for components added later","Select a supply rated for exactly the wattage the CPU uses","Use any AT power supply regardless of rating"],c:1,e:"The power supply must provide enough power for the installed components and allow for components that may be added later. If you buy one that only powers current components, you may need to replace it after upgrades."},
+  {id:26,t:"Front-side bus",q:"In a traditional motherboard design, which component does the front-side bus (FSB) connect the CPU to?",o:["The Southbridge","The Northbridge","The BIOS chip","The CMOS battery"],c:1,e:"The front-side bus is the path between the CPU and the Northbridge, and it is used to connect various components such as the chipset, expansion cards and RAM."},
+  {id:29,t:"RAM testing",q:"A computer displays frequent error messages and an application locks up. What is the recommended first step to determine whether the RAM is the problem?",o:["Replace the CPU immediately","Execute the RAM test in the BIOS","Reinstall the operating system and then reinstall all of the user applications","Add an extra hard drive"],c:1,e:"When new RAM may be needed because an application locks up or the computer shows frequent error messages, execute the RAM test in the BIOS to determine if the problem is the RAM. New RAM speed must be supported by the chipset."},
+  {id:32,t:"SATA vs eSATA",q:"A technician notices a case has both internal SATA and external eSATA ports and wonders if the cables can be swapped between them. What is correct?",o:["SATA and eSATA cables are identical and fully interchangeable","SATA and eSATA cables are similar but not interchangeable","eSATA cables can always replace internal SATA cables","Only USB cables can connect to eSATA ports"],c:1,e:"SATA and eSATA cables are similar but they are not interchangeable, so a technician should use the correct cable for each interface rather than swapping them."},
+  {id:35,t:"Screw tightening",q:"Why is it recommended to slightly hand-tighten all the screws before tightening any of them fully when installing a drive?",o:["To prevent static discharge","To make it easier to tighten the last two screws","To reduce the drive temperature","To avoid using a screwdriver at all during the whole installation process"],c:1,e:"Slightly hand-tightening all screws before tightening any of them with a screwdriver makes it easier to tighten the last two screws, because the drive is already aligned and held in place."},
+  {id:38,t:"External storage",q:"A customer needs to back up and transfer large amounts of data to an external device. Which choice is most appropriate?",o:["A USB flash drive carried loose in a coat pocket","An external hard drive","A microSD card","A KVM switch"],c:1,e:"If the customer needs to back up or transfer large amounts of data, an external hard drive is the better choice. A small USB flash drive is better suited to transferring a small amount of data such as a single presentation."},
+  {id:41,t:"POST",q:"A technician wants to confirm the power-on self-test (POST) is working properly on a new build. Which safe test can be performed?",o:["Remove all the RAM modules and power the computer on, expecting a no-RAM beep code","Remove the CPU fan and check for heat and feel the metal fins for any obvious overheating","Unplug the power supply from the wall","Install two video cards at once"],c:0,e:"Removing all the RAM modules and powering on should make the computer emit the beep code for a system with no RAM installed, which confirms POST is working and will not harm the computer."},
+  {id:44,t:"UEFI secure boot",q:"Which UEFI feature ensures a computer only boots an operating system trusted by the motherboard manufacturer, helping to prevent rootkits from taking over the system?",o:["LoJack","Secure Boot","Drive encryption","TPM"],c:1,e:"Secure Boot is a UEFI security standard that ensures a computer only boots an OS trusted by the motherboard manufacturer, which helps prevent rootkits from taking over the system. TPM, LoJack and drive encryption are separate features."},
+  {id:47,t:"Power formula",q:"Which equation correctly expresses electrical power in a circuit?",o:["P = V / I","P = V x I","P = I / R","P = R x V"],c:1,e:"In an electrical system, power is equal to voltage multiplied by current, expressed as P = VI. This is distinct from Ohm's Law, which relates voltage, current and resistance as V = IR."},
+  {id:50,t:"UPS vs SPS",q:"A technician needs protection for a server that must keep running through brief power interruptions with no gap in supply. Why is a UPS preferred over a standby power supply (SPS)?",o:["The SPS is more expensive","The SPS has a switch-over delay to its battery, making it less reliable than a UPS","The UPS cannot provide consistent power during brownouts or short blackouts at any time","The SPS always uses a generator"],c:1,e:"An SPS provides a backup battery that is on standby during normal operation, and it is not as reliable as a UPS because of the time it takes to switch over to the battery. A UPS provides consistent quality of power during brownouts and blackouts."},
+  {id:53,t:"Overclocking",q:"Why is overclocking a processor generally not recommended as a way to improve computer performance?",o:["It always voids the software licence","It can result in damage to the CPU","It is illegal in most countries","It reduces the amount of RAM available"],c:1,e:"Overclocking makes a processor work faster than its original specification and can result in damage to the CPU, so it is not a recommended way to improve performance. The opposite technique, CPU throttling, runs the processor below rated speed to conserve power and reduce heat."},
+  {id:56,t:"RAID mirroring",q:"Which RAID term describes storing duplicate data on one or more other drives so that the failure of a single drive does not cause loss of data?",o:["Striping","Mirroring","Parity","Double parity"],c:1,e:"Mirroring stores duplicate data on one or more other drives and provides redundancy so the failure of a drive does not cause loss of data. Striping distributes data across drives for performance but loses all data if one drive fails."},
+  {id:59,t:"Refresh rate",q:"Which monitor term is measured in Hertz and describes how many times per second the monitor redraws the screen?",o:["Dot pitch","Response time","Refresh rate","Contrast ratio"],c:2,e:"Refresh rate is the number of seconds for the monitor to redraw the screen, measured in Hertz (Hz). Dot pitch is the distance between pixels, response time is the time for a pixel to change properties, and contrast ratio measures how white and how black a monitor can get."},
+  {id:62,t:"Dust removal",q:"Which combination of tools is recommended for removing dust from the inside of a computer case?",o:["A wet sponge and paper towels that can drip water down into open components and leave lint behind","Compressed air, a low-air-flow ESD vacuum cleaner, and a small lint-free cloth","A standard household vacuum and a metal brush","Water spray and a hair dryer"],c:1,e:"Dust inside a computer should be removed using a combination of compressed air, a low-air-flow ESD vacuum cleaner and a small lint-free cloth. Ordinary vacuums and wet cleaning methods risk static discharge or component damage."},
+  {id:65,t:"Software maintenance",q:"Which task should be included in a software maintenance schedule?",o:["Reviewing and installing appropriate security, software and driver updates","Physically polishing the CPU heat sink using a fine metal polish compound","Replacing the CMOS battery weekly","Increasing the screen refresh rate"],c:0,e:"A software maintenance schedule includes reviewing and installing security, software and driver updates, updating virus definition files, scanning for viruses and spyware, removing unwanted programs, and scanning hard drives for errors and defragmenting them."},
+  {id:68,t:"Troubleshooting final step",q:"Which is the final step a technician should perform after resolving a computer problem?",o:["Establish a theory of probable cause","Document findings, actions and outcomes","Test the theory to determine the cause of the fault that is being reported","Replace the power supply"],c:1,e:"The last step of the six-step troubleshooting process is to document findings, actions and outcomes, so the work is recorded for future reference. Identifying the problem and testing a theory come much earlier in the process."},
+  {id:71,t:"CPU/memory problems",q:"Which group of causes is most commonly responsible for processor and memory problems?",o:["Faulty installations, incorrect BIOS settings, inadequate cooling and ventilation, and compatibility issues","Incorrect printer paper orientation in the input tray of the printer","Outdated anti-virus signatures","A dirty optical disc"],c:0,e:"Processor and memory problems are often caused by faulty installations, incorrect BIOS settings, inadequate cooling and ventilation, and compatibility issues. These differ from the causes listed for storage, power or display problems."},
+  {id:74,t:"Repair journal",q:"What should a technician record in a journal kept as a personal reference tool?",o:["Descriptions of the problem, solutions tried, steps taken, configuration changes and replacement parts used","Only the total time spent on each repair and the hourly rate that was charged for the work","The customer's home address","The make of the office furniture"],c:0,e:"A repair journal should include descriptions of the problem, possible solutions tried, steps taken to repair the problem, any configuration changes made, and any replacement parts used. Notes and repair history are also valuable personal reference tools."},
+  {id:77,t:"Multimeter use",q:"A technician suspects a power supply is failing and wants to check its voltage outputs. Which tool is most appropriate for this test?",o:["A multimeter or power supply tester","A cable tester used to verify the wiring of network cabling","A toner probe","An oscilloscope for audio"],c:0,e:"A multimeter or a power supply tester is used to measure the voltage outputs of a power supply and determine whether it is supplying correct voltages. A cable tester checks cabling, and a toner probe traces network cables."},
+  {id:80,t:"Theory of cause",q:"After establishing a theory of probable cause for a PC problem, the technician tests that theory and it turns out to be incorrect. What should the technician do next?",o:["Stop working and ask the customer to replace the computer","Establish a new theory of probable cause and test again","Skip straight to documenting the solution","Reinstall the operating system immediately"],c:1,e:"The troubleshooting process is iterative: if testing a theory does not determine the cause, the technician should establish a new theory of probable cause and test it until the actual cause is found before implementing a solution."},
+  {id:83,t:"VLAN routing",q:"Two hosts on different VLANs in the same switched network need to communicate with each other. Which device is required to allow this inter-VLAN communication?",o:["A hub","A router","A repeater","A network tap"],c:1,e:"VLANs are isolated broadcast domains, so if a host wants to send to a host on a different VLAN, the services of a router are required to route between the VLANs."},
+  {id:86,t:"TCP reliability",q:"Which three basic operations does TCP use to provide reliable data delivery?",o:["Numbering and tracking data segments, acknowledging received data, and retransmitting unacknowledged data","Sending data at maximum speed with no checking or error recovery of any kind during the transfer","Broadcasting every segment to all hosts","Using only best-effort delivery"],c:0,e:"TCP provides reliability through three basic operations: numbering and tracking of data segments, acknowledgment of received data, and retransmitting any unacknowledged data after a period of time. UDP, by contrast, has very little overhead and no acknowledgment."},
+  {id:89,t:"RFID tags",q:"A warehouse needs to track items with tags that broadcast their ID up to 100 metres without needing to be activated by a reader. Which type of RFID tag is appropriate?",o:["A passive tag","An active tag","An NFC tag","A Bluetooth beacon only"],c:1,e:"Active RFID tags have a battery and can broadcast their ID up to 100 metres. Passive tags rely on the RFID reader to activate and read them, so they do not broadcast on their own."},
+  {id:92,t:"DHCP lease",q:"Why does DHCP use a lease mechanism for IP addresses?",o:["To ensure moved or power-off clients do not keep addresses they no longer need","To permanently bind every address to a MAC address on the local area network","To reduce network cable length","To increase the DNS cache"],c:0,e:"The DHCP lease mechanism ensures that moved or power-off clients do not keep addresses they no longer need. When a lease expires, the DHCP server returns the address to the pool where it can be reallocated."},
+  {id:95,t:"Email protocols",q:"Which protocol is used to send email, and which two protocols are used to retrieve email?",o:["SMTP to send; POP and IMAP to retrieve","IMAP to send; SMTP and POP to retrieve","HTTP to send; FTP and TFTP to retrieve","POP to send; SMTP and IMAP to retrieve"],c:0,e:"Simple Mail Transfer Protocol (SMTP) is the protocol used to send email, while Post Office Protocol (POP) and Internet Message Access Protocol (IMAP) are the protocols used to retrieve email from a mail server."},
+  {id:98,t:"Switch operation",q:"An Ethernet switch needs to send data only to a specific connected device rather than to all ports. What information does the switch use to accomplish this?",o:["The MAC address table recorded for each device","The IP address of the DHCP server on the local network segment","The subnet mask of the network","The DNS server address"],c:0,e:"Ethernet switches record MAC addresses for each device connected to the switch, and data is sent to a specific device if the MAC address of that device is in the MAC address table."},
+  {id:101,t:"Binary conversion",q:"What is the denary (decimal) value of the binary number 01010111?",o:["67","77","87","97"],c:2,e:"The binary 01010111 represents 64 + 16 + 4 + 2 + 1, using the place values 128, 64, 32, 16, 8, 4, 2 and 1, which totals 87."},
+  {id:104,t:"Subnet mask",q:"An IPv4 address has two parts: a network part and a host part. What determines which part of the address is the network part?",o:["The subnet mask","The MAC address","The DNS server","The default gateway"],c:0,e:"The subnet mask determines which part of an IPv4 address is the network part and which is the host part. Without the subnet mask the division cannot be determined."},
+  {id:107,t:"APIPA",q:"A Windows computer cannot contact a DHCP server and automatically receives an address in the 169.254.0.0 to 169.254.255.255 range. What is this address called?",o:["A public IP address that is assigned by the internet service provider","An APIPA link-local address","A multicast address","A DNS address"],c:1,e:"When Windows cannot communicate with a DHCP server to obtain an IPv4 address, it automatically assigns an Automatic Private IP Addressing (APIPA) link-local address in the range 169.254.0.0 to 169.254.255.255."},
+  {id:110,t:"IP addressing default",q:"After physically connecting a Windows computer to a network, what is the default method by which it obtains its IPv4 addressing information?",o:["Static configuration entered by a technician entered manually by a network technician","It sends a request to the DHCP server automatically","It uses the DNS server to assign an address","It borrows the MAC address from the router"],c:1,e:"IP addressing is dynamic by default. After physically connecting to the network, the Windows computer automatically sends out a request for IPv4 addressing to the DHCP server and, if one is available, receives all its IPv4 addressing information."},
+  {id:113,t:"Wireless settings",q:"When configuring the basic wireless settings on a router, which items should be set for the WLAN?",o:["Network mode, SSID, channel, security mode and passphrase","MAC address and IP address only configuration for the router itself","DNS server and subnet mask only","WAN IP and NAT type only"],c:0,e:"Basic wireless settings include viewing WLAN defaults, changing the network mode, configuring the SSID, configuring the channel, configuring the security mode and configuring the passphrase."},
+  {id:116,t:"QoS",q:"A home user wants to give video streaming traffic priority over general web browsing on the network. Which router feature allows prioritisation of specific traffic types?",o:["Quality of Service (QoS)","NAT (NAT)","DHCP","Port forwarding"],c:0,e:"Quality of Service (QoS) configuration allows the prioritisation of specific traffic types, so a user can give streaming or VoIP traffic priority over other traffic."},
+  {id:119,t:"Port triggering",q:"A gamer needs the firewall to temporarily open specific inbound ports or a port range for a game application only while it is in use. Which feature provides this temporary opening?",o:["Port triggering","MAC address filtering","Whitelisting","NAT"],c:0,e:"Port triggering allows a temporary opening in the firewall to allow data to specific inbound ports or a port range for an application or game. Port forwarding instead allows traffic to specific ports on a permanent basis."},
+  {id:122,t:"Laptop RAM",q:"Which type of memory module is used in most laptops because of its smaller profile?",o:["DIMM (Dual In-line Memory Module)","SODIMM","RIMM","SIMM"],c:1,e:"Most desktop computers use memory that fits into a DIMM slot, while most laptops use the smaller profile module called SODIMM. SODIMMs are further classified by DDR version and different laptop models require different types."},
+  {id:125,t:"Docking vs port replicator",q:"What is the main difference between a proprietary docking station and a port replicator?",o:["A port replicator usually connects via USB or Thunderbolt, while a docking station uses proprietary connectors","A docking station connects via USB and a port replicator uses proprietary connectors on the underside of the laptop case","A port replicator always includes an optical drive","A docking station cannot connect external monitors"],c:0,e:"A docking station uses proprietary connectors to turn a laptop into a desktop system, whereas a port replicator usually connects to the laptop via USB or Thunderbolt and can provide some or all of the docking station's functionality."},
+  {id:128,t:"Wi-Fi antennas",q:"Where are Wi-Fi antennas typically located in a laptop?",o:["Above the screen","Beneath the keyboard","Inside the battery","In the hard drive bay"],c:0,e:"Wi-Fi antennas in laptops are typically located above the screen, and they are connected to the wireless card by an antenna wire and antenna leads fastened by wire guides on the sides of the screen."},
+  {id:131,t:"Bluetooth pairing",q:"What happens the first time a Bluetooth device connects to another Bluetooth device?",o:["The device is authenticated using a PIN in a process called pairing","The devices immediately exchange all stored files and contacts between the two devices","A cellular data plan is required","The devices must be within 100 metres"],c:0,e:"The first time a Bluetooth device connects, the device is authenticated using a PIN, a process known as pairing. Bluetooth supports both 128-bit encryption and PIN authentication."},
+  {id:134,t:"CRU vs FRU",q:"Which laptop component is typically classified as a customer-replaceable unit (CRU) that a customer can replace themselves?",o:["The battery and RAM","The motherboard of the laptop itself","The LCD display","The keyboard"],c:0,e:"CRUs include components such as the laptop battery and RAM. FRUs, which should not be replaced by the customer, include the motherboard, LCD display and keyboard."},
+  {id:137,t:"Wi-Fi vs cellular",q:"Why is Wi-Fi usually preferred over a cellular connection on a mobile device?",o:["It is usually free and Wi-Fi radios use less battery power than cellular radios","It always provides faster data transfer speeds than Wi-Fi can provide","It does not require any settings","It uses the cellular tower network"],c:0,e:"Wi-Fi is usually preferred over a cellular connection because it is usually free and Wi-Fi radios use less battery power than cellular radios. Cellular connections are provided for a fee using cellular data."},
+  {id:140,t:"Laptop maintenance",q:"When cleaning a laptop as part of routine maintenance, which materials and cleaners should be used?",o:["Nonabrasive materials including compressed air, mild cleaning solutions, cotton swabs and a soft lint-free cloth","Harsh cleaners and solutions containing ammonia or other strong solvents","A steel wool pad and bleach","A household vacuum cleaner on high power"],c:0,e:"When cleaning a laptop, never use harsh cleaners or solutions that contain ammonia. Use nonabrasive materials including compressed air, mild cleaning solutions, cotton swabs and a soft, lint-free cloth. Routine maintenance includes monthly cleaning of the exterior, vents, display, keyboard and touchpad."},
+  {id:143,t:"Total cost of ownership",q:"Which factors are included in the total cost of ownership (TCO) of a printer?",o:["Initial purchase price, cost of consumables, price per page, pages per month, maintenance and warranty costs","Only the initial purchase price of the printer itself and nothing else","Only the price of toner","Screen size and resolution"],c:0,e:"Total cost of ownership (TCO) includes the initial purchase price, cost of consumable supplies, price per page, pages per month, maintenance costs and warranty costs. Reliability also involves warranty, scheduled servicing and MTBF."},
+  {id:146,t:"Inkjet characteristics",q:"Which is a disadvantage of inkjet printers?",o:["Some nozzles are prone to clogging","They cannot print in colour","They have very high initial cost","Print comes out dry immediately with no drying time"],c:0,e:"Inkjet printer disadvantages include some nozzles being prone to clogging, cartridges being expensive, and ink being wet for a few seconds after printing. Their advantages are low cost and high resolution."},
+  {id:149,t:"Laser transfer step",q:"In the laser printing process, in which step is the toner image transferred to the paper due to a charge applied to the paper?",o:["Transferring","Developing the image","Exposing","Cleaning"],c:0,e:"During the transferring step, as the paper rolls through, the image is transferred to the paper due to a charge applied to the paper. Developing applies toner to the image on the drum, and exposing writes the image with the laser."},
+  {id:152,t:"Virtual printers",q:"Which of the following is an example of printing to a virtual printer?",o:["Print to PDF","Printing a carbon copy","Printing with a daisy wheel","Printing with a fuser assembly"],c:0,e:"Virtual printers include print to file, print to PDF, print to XPS (XML Paper Specification) and print to image such as JPG or TIF. These create electronic output rather than a physical paper copy."},
+  {id:155,t:"Printer calibration",q:"What is the purpose of calibrating a printer using the printer driver software?",o:["To ensure the print heads are aligned and can print on different kinds of media","To increase the printer's network speed and the overall throughput of the device","To replace the toner cartridge","To reduce the printer's power consumption"],c:0,e:"Printers are calibrated using the printer driver software, and calibration makes sure the print heads are aligned and can print on different kinds of media such as cardstock, photographic paper and optical discs."},
+  {id:158,t:"Wireless printer modes",q:"In wireless ad-hoc mode, how do client devices connect to a Wi-Fi printer?",o:["Client devices connect directly to the printer without a wireless access point","Clients must connect through a wired switch network switch to reach the printer","Clients connect through a separate wireless router only","Clients use a USB cable to the printer"],c:0,e:"In wireless ad-hoc mode, client devices connect directly to the printer. This differs from infrastructure mode where clients connect through a wireless access point or router."},
+  {id:161,t:"Virtualization definition",q:"What does virtualization enable a single physical computer to do?",o:["Host multiple independent virtual computers called virtual machines that share the host hardware","Replace all its physical components with cloud storage and cloud services instead of local components","Run only one operating system at a time","Eliminate the need for a hard drive"],c:0,e:"Virtualization enables a single computer to host multiple independent virtual computers called virtual machines (VMs) that share the host computer hardware. Virtualization software separates the physical hardware from the VM instances."},
+  {id:164,t:"Hypervisor",q:"In server virtualization, which program is used to manage the computer resources and the various virtual machines?",o:["The hypervisor","The DNS server","The print server","The DHCP server"],c:0,e:"A program called the hypervisor is used to manage the computer resources and the various VMs. It provides VMs access to the hardware in the physical machine such as CPUs, memory, disk controllers and NICs."},
+  {id:167,t:"Type 2 hypervisor",q:"Which hypervisor is commonly used for client-side virtualization and works with the host computer's operating system to create and use multiple VMs?",o:["Type 2 (hosted) hypervisor such as VMware Workstation","Type 1 hypervisor such as VMware ESXi running directly on the bare metal hardware","A dedicated print server","A network switch"],c:0,e:"Type 2 (hosted) hypervisors, such as VMware Workstation and Oracle VirtualBox, are commonly used with client-side virtualization and work with the host OS to create and use multiple VMs. Type 1 hypervisors run directly on hardware."},
+  {id:170,t:"Cloud service models",q:"Which three service models are commonly provided by cloud service providers?",o:["SaaS, PaaS and IaaS","SaaS, DaaS and NAS storage devices","PaaS, WAN and LAN","IaaS, VPN and DHCP"],c:0,e:"Cloud service providers can provide Software as a Service (SaaS), Platform as a Service (PaaS) and Infrastructure as a Service (IaaS), and have extended the IaaS model to also provide IT as a service (ITaaS)."},
+  {id:173,t:"SDN controller",q:"In software-defined networking, where is the SDN controller located and what does it control?",o:["It is in the centre and controls the application and infrastructure layers","It is at the top and only controls applications and the application layer software","It is at the bottom and only controls physical devices","It is a separate device not part of the SDN model"],c:0,e:"The SDN controller is in the centre of the three-layer model and controls the application and infrastructure layers. The infrastructure layer contains the physical and virtual devices that perform routing and switching of traffic."},
+  {id:176,t:"Server virtualization benefit",q:"Which is an advantage of server virtualisation?",o:["Better use of resources, less space and energy, reduced cost and faster provisioning","Increased hardware purchases for every workload hardware that is needed for every single workload","A single point of failure for all services","Wasted idle resources"],c:0,e:"Advantages of server virtualization include better use of resources, less space required, less energy consumed, reduced cost, faster server provisioning, maximised server uptime, improved disaster recovery and support for legacy systems."},
+  {id:179,t:"SD-WAN benefit",q:"What is one benefit that SD-WAN technology provides to an organisation's network architecture?",o:["It simplifies the network into a single orchestrated layer and can reduce costs","It requires many separate physical solutions to be connected manually and managed manually by the network team","It only works on local wired networks","It removes the need for security features"],c:0,e:"SD-WAN technologies simplify an organisation's network architecture, reducing it to a single orchestrated layer rather than a mixture of connected physical solutions. SD-WAN solutions include built-in firewalls, AI-based security, encryption, sandboxing and IPS, and can help reduce costs."}
+];
+
+var NS = 'ite8c1_b_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed ITE8 Core 1 Practice Paper B.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

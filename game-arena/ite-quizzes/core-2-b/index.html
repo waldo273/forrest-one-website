@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITE8 Core 2 Practice Paper B</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITE8 Core 2 Practice Paper B</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:2,t:"Multithreading",q:"A program is written so that different parts of it can be loaded and executed at the same time by the operating system. Which OS feature does this rely on?",o:["Multiprocessing","Multi-user","Multithreading","Multitasking"],c:2,e:"Multithreading allows different parts of a single program to be run at the same time. Multiprocessing refers to support for multiple CPUs rather than parts of one program."},
+  {id:5,t:"Windows 11",q:"Which statement about Windows 11 is correct?",o:["It installs on both 32-bit and 64-bit computers","It is available in a 32-bit edition","All versions of Windows 11 are 64-bit only","It does not include a settings application"],c:2,e:"All versions of Windows 11 are 64-bit only, so it will not install on older 32-bit computers. Its taskbar icons are smaller and centred, and the settings app was redesigned."},
+  {id:8,t:"Customised apps",q:"A customer runs a bespoke application written specifically for their business. Who typically dictates which operating system that application requires?",o:["The application programmer","The hardware vendor","The Windows Update service","The storage device manufacturer"],c:0,e:"When an application is custom-programmed for a customer, the programmer of that application specifies which OS to use."},
+  {id:11,t:"Upgrade paths",q:"A customer runs Windows XP and wants Windows 10. Which statement applies?",o:["Windows XP has no upgrade path and needs a clean install","Windows XP upgrades directly using the Update Assistant for the majority of systems","Windows XP converts to 64-bit before upgrading","Windows XP can use USMT as its upgrade tool"],c:0,e:"Computers running Windows XP or Windows Vista do not have an upgrade path to Windows 10 and require a clean installation. Windows 7 and Windows 8 can be upgraded."},
+  {id:14,t:"Windows Easy Transfer",q:"A customer is moving from an old computer to a new one and wants a simple way to transfer files. Which tool is designed for this scenario?",o:["Windows Easy Transfer","Sysprep under the default Windows settings","Disk Management","Windows Update"],c:0,e:"Windows Easy Transfer is used when switching from an old computer to a new one. PCmover Express transfers selected files and applications to a Windows 10 PC."},
+  {id:17,t:"GPT",q:"Which partition scheme standard is most commonly associated with computers that use UEFI firmware?",o:["MBR","GPT","CDFS","exFAT"],c:1,e:"The GUID Partition Table (GPT) is a partition table scheme that expands on MBR and is commonly used with UEFI firmware, while MBR is used with BIOS-based firmware."},
+  {id:20,t:"Dynamic disk",q:"Which disk type allows volumes to span across more than one physical disk?",o:["A basic disk","A dynamic disk","An active disk","A recovery disk"],c:1,e:"A dynamic disk can create volumes that span across more than one disk. A basic disk (the default) contains partitions and logical drives formatted for storage."},
+  {id:23,t:"NTFS",q:"Which file system incorporates file system security features and extended attributes and supports partition sizes up to 16 exabytes in theory?",o:["NTFS","FAT32","CDFS","NFS"],c:0,e:"NTFS (New Technology File System) incorporates file system security features and extended attributes and supports partitions up to 16 exabytes in theory."},
+  {id:26,t:"SSO",q:"A user logs in once and can then access all system resources without re-entering credentials. Which Windows authentication concept is this?",o:["Multifactor authentication","Single Sign-On","Two-step verification","Local authentication"],c:1,e:"Windows uses Single Sign-On (SSO) authentication, which allows users to log in once to access all system resources."},
+  {id:29,t:"Device Manager",q:"After a Windows installation, which utility is used to locate device problems and install the correct or updated drivers?",o:["Device Manager","Windows Easy Transfer","System Image Manager","Disk Management"],c:0,e:"The Device Manager is used to locate device problems and install the correct or updated drivers in Windows after installation."},
+  {id:32,t:"PXE",q:"A client with no OS must boot, connect to the network and communicate with a server to begin installation. Which environment enables this?",o:["Preboot eXecution Environment","Windows Recovery Environment","Safe Mode","Last Known Good Configuration"],c:0,e:"The Preboot eXecution Environment (PXE) is the special environment used to boot a computer with no OS, connect to the network, and communicate with the server to begin installation."},
+  {id:35,t:"Boot sequence",q:"After POST, the BIOS reads configuration settings from CMOS and boots the computer using the first drive with a valid boot sector. What does that boot sector contain?",o:["The MBR","The registry","The page file","The answer file"],c:0,e:"The first drive with a valid boot sector contains the Master Boot Record (MBR), which identifies the Volume Boot Record that loads the boot manager, bootmgr.exe for Windows."},
+  {id:38,t:"Action Center",q:"In Windows 10, what replaced the Charms bar that was used in earlier versions of the OS?",o:["The Action Center with notifications and quick settings","The Start Menu tiles during the standard install process","The Control Panel","The This PC view"],c:0,e:"Charms were replaced with the Windows Action Center, which provides notifications and quick settings. The Start Menu, Control Panel and This PC were not the replacements."},
+  {id:41,t:"Task Manager Startup",q:"Which Task Manager tab shows the processes that automatically begin during Windows startup?",o:["Startup","Users","Details","Services"],c:0,e:"The Startup tab shows the processes that automatically begin during Windows startup. The Services tab shows all available services and their status."},
+  {id:44,t:"Libraries",q:"Which statement about Windows Libraries is correct?",o:["They are hidden by default in Windows 10 and 8.1","They physically move files between folders when the device is online","There is only one default library","They are stored only on removable media"],c:0,e:"Windows Libraries are virtual folders presenting content from different locations without moving files. In Windows 10 and 8.1 they are hidden by default, and each user has six default libraries."},
+  {id:47,t:"File naming",q:"Which statement about the Windows file naming convention is correct?",o:["Filenames are case sensitive for the majority of systems","A maximum of 255 characters is allowed","The backslash character is not allowed in filenames","File extensions are always visible by default"],c:2,e:"Under the Windows naming convention characters such as a slash or backslash are not allowed, filenames are not case sensitive, and by default file extensions are hidden."},
+  {id:50,t:"UAC default",q:"What is the default User Account Control setting for the primary account in Windows 7 through 10?",o:["Notify me only when programs try to make changes to my computer","Never notify me for most end-user systems","Always notify me before every action with the appropriate drivers","Notify me when I change settings only"],c:0,e:"The default UAC setting for the primary account is Notify me only when programs try to make changes to my computer. UAC monitors programs and warns users of potential threats."},
+  {id:53,t:"Network profiles",q:"Which Windows feature changes basic sharing settings depending on whether a network is private or public, keeping sharing inactive on insecure networks?",o:["Network profiles","HomeGroup","Administrative shares","Network discovery"],c:0,e:"Network profiles enable basic sharing settings to change depending on whether the network is private or public, keeping sharing inactive on a public network but active on a private one."},
+  {id:56,t:"ReadyBoost",q:"A computer has a small amount of RAM. Which Windows feature uses an external flash device as another form of virtual memory to enhance performance?",o:["Windows ReadyBoost","Disk Defragmenter depending on the hardware in use","Storage Spaces","System Restore"],c:0,e:"Windows ReadyBoost uses an external flash device as a form of virtual memory to enhance system performance. A paging file on the hard drive is the other virtual memory form."},
+  {id:59,t:"Local Users and Groups",q:"In the Local Users and Groups snap-in, which account type gets a temporary profile created at logon and deleted at logoff, and is disabled by default?",o:["Guest","Administrator","User","Power User"],c:0,e:"Guest accounts access the computer through a temporary profile created at logon and deleted at logoff, and are disabled by default. User accounts persist on the system."},
+  {id:62,t:"System Information",q:"Which command opens the System Information utility from the command prompt?",o:["msinfo32","msconfig","regedit","dxdiag"],c:0,e:"System Information can be opened from the command prompt by typing msinfo32. msconfig opens System Configuration, and regedit opens the Registry Editor."},
+  {id:65,t:"MMC",q:"A technician wants to build a custom management console by adding utilities and tools. Which application allows this?",o:["Microsoft Management Console","System Configuration in a properly maintained environment","Event Viewer","Performance Monitor"],c:0,e:"MMC allows the creation of custom management consoles, starting empty, to which snap-ins (utilities and tools) can be added and the console saved for reuse."},
+  {id:68,t:"Wildcards",q:"At the Windows command line, which wildcard character stands for any single character rather than a group of characters?",o:["?","*","$","#"],c:0,e:"The question mark (?) stands for any single character, while the asterisk (*) matches groups of characters, including entire filenames and extensions."},
+  {id:71,t:"Domain vs workgroup",q:"Which statement correctly distinguishes a domain from a workgroup in Windows networking?",o:["A domain is administered centrally by a domain controller, while each workstation controls its own accounts in a workgroup","A workgroup uses a domain controller to centralise security in a properly maintained environment","A domain requires each computer to control its own security across supported hardware platforms","A workgroup centralises security administration"],c:0,e:"In a domain a domain controller manages all security-related aspects centrally, whereas in a workgroup each individual workstation controls its own accounts and security information."},
+  {id:74,t:"Android developer",q:"Which company develops the Android operating system?",o:["Apple","Google","Microsoft","Linux Foundation"],c:1,e:"Android is developed by Google, while iOS is developed by Apple. Microsoft develops Windows and the Linux Foundation is not the developer of Android."},
+  {id:77,t:"Android system bar",q:"Which Android navigation elements are contained in the system bar?",o:["Back, Home, Recent Apps and Menu","Home, Settings, Power and Search","Back, Forward, Refresh and Menu","Home, Siri, Spotlight and Menu"],c:0,e:"The Android system bar contains the Back, Home, Recent Apps and Menu buttons for navigating apps and screens."},
+  {id:80,t:"iOS home button",q:"Which function is NOT typically performed by the iOS home button?",o:["Wake the device","Return to the home screen","Start Siri or voice control","Toggle Airplane mode"],c:3,e:"The home button wakes the device, returns to the home screen and starts Siri or voice control. Airplane mode is toggled from the commonly used settings screen, not the home button."},
+  {id:83,t:"Gyroscope",q:"A driving game uses the mobile device itself as a steering wheel. Which sensor makes this control mechanism possible?",o:["Gyroscope","Light sensor","NFC chip","GPS receiver"],c:0,e:"Gyroscopes provide more accurate movement readings and allow a device to be used as a control mechanism, such as a steering wheel in driving games."},
+  {id:86,t:"IPS",q:"Which technology determines a device location by triangulating its proximity to other radio signals such as Wi-Fi access points?",o:["Indoor Positioning Systems","GPS on a typical workstation","NFC","Bluetooth pairing"],c:0,e:"Indoor Positioning Systems (IPS) determine device location by triangulating its proximity to other radio signals such as Wi-Fi access points."},
+  {id:89,t:"Direct mobile billing",q:"Which mobile payment method uses two-factor authentication during check-out and adds the charge to the mobile service bill?",o:["Direct mobile billing","Premium SMS when the device is online","Contactless NFC","Mobile web payments"],c:0,e:"Direct mobile billing lets a user identify themselves, usually through two-factor authentication, and allows the charge to be added to the mobile service bill."},
+  {id:92,t:"Android failed login",q:"On Android, after a passcode has failed several times the device locks. How can it be unlocked?",o:["By entering the Gmail account information used to set up the device","By pressing the reset button in a properly maintained environment","By connecting to iTunes when configured correctly","By using the locator app only"],c:0,e:"After an Android device locks due to failed passcode attempts, it can be unlocked by entering the Gmail account information used to set up the device."},
+  {id:95,t:"Sandbox",q:"Mobile device apps run in a sandbox. What is a sandbox?",o:["A location of the OS that keeps code isolated from other resources and code","A type of antivirus signature file under the default Windows settings","A cloud storage location for most end-user systems","A hardware security module"],c:0,e:"A sandbox is a location of the OS that keeps code isolated from other resources and other code. It makes it difficult for malicious programs to infect a mobile device."},
+  {id:98,t:"PRL",q:"Which type of mobile radio firmware update provides configuration information a cellular phone needs to communicate on networks other than its own?",o:["Preferred Roaming List (PRL)","Primary Rate ISDN (PRI) in the default configuration","APK","OTA patch"],c:0,e:"The Preferred Roaming List (PRL) is configuration information a cellular phone needs to communicate on networks other than its own so a call can be made outside the carrier network."},
+  {id:101,t:"macOS NetBoot",q:"Which feature allows macOS to support remote network installation?",o:["NetBoot","Time Machine","Finder","Mission Control"],c:0,e:"macOS supports a remote network installation feature called NetBoot. Time Machine is the backup tool, Finder navigates the file system, and Mission Control organises apps."},
+  {id:104,t:"cron",q:"In Linux and macOS, which service is responsible for scheduled tasks, executing them in the background at specific dates and times?",o:["cron","launchd only","Task Scheduler","Systemd only"],c:0,e:"The cron service is responsible for scheduled tasks in Linux and macOS. It runs in the background and executes tasks at specific dates and times using a schedule table edited with crontab."},
+  {id:107,t:"Disk Utility",q:"Which macOS troubleshooting step, supported by Disk Utility, is common and checks the file system permissions?",o:["Repair Disk Permissions","Partition management depending on the hardware in use","S.M.A.R.T. query","Mount a partition"],c:0,e:"Repair Disk Permission is a common troubleshooting step in macOS and is supported by Disk Utility. S.M.A.R.T. query checks disk health and partition management resizes partitions."},
+  {id:110,t:"Ransomware",q:"A user finds their files encrypted and a message demanding payment for the decryption key. Which type of malware is this?",o:["Ransomware","Spyware across supported hardware platforms","Rootkit","Worm"],c:0,e:"Ransomware typically denies a user access to their files by encrypting them and then demanding a ransom for the decryption key. Spyware gathers user information and sends it to cybercriminals."},
+  {id:113,t:"Anti-malware",q:"Anti-malware programs continuously look for known patterns against a database of known malware signatures. Which additional technique detects specific malware behaviour?",o:["Heuristic malware identification","Mirror download if the hardware supports it","Sandboxing only","Signature compilation"],c:0,e:"Anti-malware programs also use heuristic malware identification techniques, which detect specific behaviour associated with some types of malware, alongside signature matching."},
+  {id:116,t:"DoS",q:"An attacker overwhelms a target device with false requests, creating a denial of service for legitimate users. Which attack is this?",o:["Denial of Service","Spoofing under the default Windows settings","Replay","DNS Poisoning"],c:0,e:"Denial of Service (DoS) completely overwhelms a target device with false requests. Spoofing forges an IP address, replay alters and resends an authenticated packet, and DNS Poisoning uses false DNS records."},
+  {id:119,t:"Zero-day",q:"What does the term zero-day refer to in security?",o:["The day an unknown vulnerability has been discovered by the vendor","The moment an exploit is discovered under the default Windows settings","A type of firewall rule","A malware signature file"],c:0,e:"Zero-day is the day an unknown vulnerability has been discovered by the vendor, referencing the amount of time the vendor has had to address it. Zero-hour is the moment the exploit is discovered."},
+  {id:122,t:"Spear phishing",q:"An attacker creates a targeted phishing attack aimed at a specific individual or organisation. Which technique is this?",o:["Spear phishing","Spam","Something for something","Shoulder surfing"],c:0,e:"Spear phishing is a targeted phishing attack for a specific individual or organisation. Spam is unsolicited email, and shoulder surfing looks over a shoulder to steal information."},
+  {id:125,t:"Security policy",q:"Which statement correctly describes a security policy?",o:["It is a constantly evolving document usually created by a committee of management and IT staff","It is a fixed, unchanging document written only by management under the default Windows settings","It is a software tool that encrypts data","It is a firewall configuration file"],c:0,e:"A security policy is a constantly evolving document based on changes in technology, business and employee requirements, usually created by a committee of management and IT staff."},
+  {id:128,t:"Mantrap",q:"What is the primary purpose of a mantrap in a high-security environment?",o:["To limit access to restricted areas and prevent tailgating","To store backup tapes under the default Windows settings","To cool networking equipment for the majority of systems","To shield cables from tampering"],c:0,e:"A mantrap is a small room with two doors, one of which must be closed before the other opens, used to limit access to restricted areas and prevent tailgating."},
+  {id:131,t:"EFS",q:"Which Windows feature encrypts data and is directly linked to a specific user account, so only that user can access the data after encryption?",o:["Encrypting File System (EFS)","BitLocker To Go on a typical workstation","Hashing","Active Directory"],c:0,e:"EFS is a Windows feature that encrypts data and is directly linked to a specific user account; only the user that encrypted the data can access it afterwards."},
+  {id:134,t:"Printer data",q:"Besides computers and mobile devices, which device may store cached printed or scanned documents on an internal hard drive and require wiping?",o:["Printers and multifunction devices","Monitors when the device is online","Keyboards","Power supplies"],c:0,e:"Printers and multifunction devices may contain a hard drive that caches printed or scanned documents. This caching can be turned off or the device wiped regularly."},
+  {id:137,t:"Dynamic lock",q:"Which Windows 10 sign-in feature locks the computer when a pre-paired device such as a cell phone goes out of range?",o:["Dynamic lock","Windows Hello","Picture password","PIN lock"],c:0,e:"Dynamic lock makes Windows lock when a pre-paired device such as a cell phone goes out of range of the PC. Windows Hello uses facial recognition or fingerprint."},
+  {id:140,t:"Export policy",q:"An administrator exports a Local Security Policy to replicate it on other stand-alone computers. What is the exported file called?",o:["workstation.inf","workstation.msc","secpol.pol","policy.reg"],c:0,e:"Use the Action Export List feature to save the policy with a name such as workstation.inf, then import it to other stand-alone computers."},
+  {id:143,t:"WPA2",q:"Which wireless security mode uses the Advanced Encryption Standard (AES) and is now the industry standard for securing WLANs?",o:["WPA2","WEP","Open","WPS"],c:0,e:"WPA2 uses AES for encryption and is the industry standard for securing WLANs. WEP is easily cracked and WPS is vulnerable to brute-force attack."},
+  {id:146,t:"Fresh start",q:"Which rule should a technician follow when moving from one customer call to the next?",o:["Treat each new customer call as a fresh start and never carry frustration forward","Compare the current customer to the previous one across supported hardware platforms","Keep discussing the previous call","Take out frustration during the next call"],c:0,e:"A good rule is that a new customer call means a fresh start. Successful technicians control their reactions and emotions from one customer call to the next, never carrying frustration over."},
+  {id:149,t:"Closed questions",q:"Follow-up questions after the customer explains the problem should be which type?",o:["Targeted, closed-ended questions based on information already gathered","Open-ended questions about unrelated topics under the default Windows settings","Rhetorical questions","Leading questions about other customers"],c:0,e:"Follow-up questions should be targeted, closed-ended questions based on the information already gathered. Closed-ended questions focus on obtaining specific information such as a yes or no answer."},
+  {id:152,t:"Documentation purpose",q:"Which is a valid purpose of documentation in an IT organisation?",o:["Standardising procedures so they can be repeated accurately in the future","Hiding system configuration from employees across supported hardware platforms","Increasing downtime","Replacing the need for training"],c:0,e:"Documentation standardises procedures and practices so they can be repeated accurately, reduces confusion and mistakes, and helps train new employees. It is also used to comply with regulations."},
+  {id:155,t:"SOP",q:"Step-by-step instructions guiding employees on how to use computers and networked services efficiently, securely and with expected responsibilities are called what?",o:["Standard operating procedures (SOP)","After-action reports across supported hardware platforms","Knowledge base articles","Licence agreements"],c:0,e:"Standard operating procedures (SOP) are step-by-step instructions whose main goals are uniformity, consistent high-quality work, and reduced miscommunication."},
+  {id:158,t:"Knowledge base",q:"What is a knowledge base?",o:["A centralised repository of articles and documents for sharing knowledge across the organisation","A database of hardware serial numbers only with the appropriate drivers","A backup storage location when configured correctly","A firewall rule set"],c:0,e:"A knowledge base is a centralised repository of articles and documents that allow users to create, share and manage knowledge, including FAQs, troubleshooting scenarios and training documents."},
+  {id:161,t:"Shared assets",q:"Which assets are typically managed as shared assets by individuals or security groups within a department?",o:["Servers, routers, switches and access points","Laptops and mobile devices during the standard install process","Software licences for individuals","Workstations"],c:0,e:"Shared assets managed by individuals or security groups include servers, routers, switches and access points. Workstations, laptops and mobile devices are typically assigned to individual accounts."},
+  {id:164,t:"Customer permission",q:"Before accessing a customer computer account, including the administrator account, what must a technician do?",o:["Get the permission of the customer","Inform a colleague only across supported hardware platforms","Proceed without asking","Disable the account first"],c:0,e:"Before accessing computer accounts, including the administrator account, get the permission of the customer. Respect for the customer and their property is fundamental."},
+  {id:167,t:"PCI",q:"The PCI Security Standards Council was formed in 2005 to protect which types of information?",o:["Account numbers, expiration dates, and magnetic strip and chip data for transactions","Employee salaries for the majority of systems","Network IP addresses across supported hardware platforms","Source code"],c:0,e:"The PCI Security Standards Council was formed by the five major credit card companies to protect account numbers, expiration dates, and magnetic strip and chip data for transactions."},
+  {id:170,t:"DRM",q:"Software designed to prevent illegal access to digital content and devices is called what?",o:["Digital rights management (DRM)","An enterprise license in a standard corporate deployment","A EULA","An asset tag"],c:0,e:"Digital rights management (DRM) is software designed to prevent illegal access to digital content and devices. It is distinct from licensing agreements."},
+  {id:173,t:"Chain of custody",q:"What is the purpose of chain of custody documentation procedures?",o:["To track collected evidence and prevent tampering so its integrity is ensured","To delete evidence quickly for most end-user systems","To replace the disaster recovery plan in a properly maintained environment","To assign software licenses"],c:0,e:"Chain of custody procedures track the collected evidence and prevent tampering so the integrity of the evidence is ensured, helping it remain admissible in court."},
+  {id:176,t:"SLA",q:"The level of support a technician must supply to a customer is outlined in which document?",o:["Service Level Agreement (SLA)","End User License Agreement under the default Windows settings","Standard operating procedure","Incident report"],c:0,e:"The technician must supply the level of support outlined in the customer Service Level Agreement (SLA). The other documents serve different purposes."},
+  {id:179,t:"Support software",q:"Which function can call center support software perform for technicians?",o:["Log and track incidents","Print invoices only","Replace the operating system","Encrypt all customer data automatically"],c:0,e:"Call center support software helps technicians log and track incidents, record contact information, research product information, run diagnostic utilities, research a knowledge base, and collect feedback."}
+];
+
+var NS = 'ite8c2_b_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed ITE8 Core 2 Practice Paper B.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

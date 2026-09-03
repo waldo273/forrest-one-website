@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITE8 Core 2 Practice Paper A</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITE8 Core 2 Practice Paper A</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:1,t:"Multitasking",q:"A technician explains to a customer that their new computer can run several applications at the same time. Which operating system feature is being described?",o:["Multithreading","Multitasking","Multiprocessing","Multi-user"],c:1,e:"Multitasking means the computer can operate multiple applications at the same time. Multithreading runs parts of one program concurrently, multiprocessing supports multiple CPUs, and multi-user lets multiple users work concurrently."},
+  {id:4,t:"OS basic functions",q:"Which statement correctly describes a basic function of an operating system?",o:["It physically connects peripherals to the motherboard","It locates an application and loads it into RAM","It manufactures the file system hardware","It performs POST before any OS code runs"],c:1,e:"One basic function of the OS is to locate an application and load it into RAM. POST is performed by firmware, not the OS, and the OS manages rather than physically connects hardware."},
+  {id:7,t:"Off-the-shelf apps",q:"A customer wants to run a retail application. Where should a technician look to confirm the operating systems the application will support?",o:["The Windows registry","The application package","The BIOS setup","The Disk Management utility"],c:1,e:"Off-the-shelf applications specify a list of compatible operating systems on the application package. Custom applications would have their OS specified by the programmer."},
+  {id:10,t:"32 to 64-bit",q:"A user asks a technician to upgrade their 32-bit Windows installation to a 64-bit version. What is the correct response?",o:["This is supported by running setup.exe twice","A 32-bit OS cannot be upgraded to a 64-bit OS","Convert the disk to GPT and retry the upgrade","Use USMT to copy the 32-bit files across"],c:1,e:"A 32-bit operating system cannot be upgraded to a 64-bit operating system. Such a change requires a clean installation."},
+  {id:13,t:"USMT",q:"Which tool is a command-line utility that simplifies migrating user state from an old OS to a new one?",o:["USMT","PCmover Express","Device Manager","System Restore"],c:0,e:"The User State Migration Tool (USMT) is a command-line utility used to simplify user state migration during OS replacement."},
+  {id:16,t:"MBR",q:"Which statement about the Master Boot Record (MBR) is correct?",o:["It is commonly used with UEFI firmware on a typical workstation","It is 512 bytes long and contains the boot loader","It is an open network file system standard","It can support files larger than 4GB"],c:1,e:"The MBR is 512 bytes long, contains information on how partitions are organised, and holds the boot loader. It is commonly used with BIOS-based firmware."},
+  {id:19,t:"Extended partition",q:"If more than four partitions are needed on an MBR disk, what can a technician create?",o:["A dynamic volume in a standard corporate deployment","An extended partition","A GUID partition","A recovery partition"],c:1,e:"If more than four partitions are needed on an MBR disk, one partition can be designated as an extended partition to allow additional logical drives."},
+  {id:22,t:"exFAT",q:"Which file system was created to address limitations of FAT, FAT32 and NTFS when formatting USB flash drives, especially its ability to support files larger than 4 GB?",o:["CDFS when the device is online","NTFS","exFAT","NFS"],c:2,e:"exFAT (FAT 64) was created for USB flash drives and one primary advantage is that it can support files larger than 4 GB."},
+  {id:25,t:"NFS",q:"A technician needs a file system that allows file access over a network and is an open standard anyone can implement. Which should be selected?",o:["CDFS","NFS","FAT32","exFAT"],c:1,e:"NFS (Network File System) is a network-based file system that allows file access over the network and is an open standard anyone can implement."},
+  {id:28,t:"Administrator",q:"Which account type has complete control over a computer, allowing global settings changes and program installation?",o:["Standard user","Administrator","Restricted user","Standard guest"],c:1,e:"Administrator accounts have complete control over a computer, allowing users to change settings globally and install programs. Standard users cannot install programs."},
+  {id:31,t:"Sysprep",q:"Before creating a final disk image, which Microsoft tool can remove an undesirable setting accidentally included during the base installation?",o:["Sysprep","PCmover Express","USMT","Windows Easy Transfer"],c:0,e:"The System Preparation (Sysprep) tool can remove undesirable settings included during the base installation before the final image is created."},
+  {id:34,t:"In-place upgrade",q:"A technician upgrades Windows 7 to Windows 10 and wants all data, settings, applications and drivers preserved automatically. Which method does this?",o:["In-place upgrade","Clean install","Recovery restore","Disk clone"],c:0,e:"When upgrading Windows 7 or Windows 8 to Windows 10, Setup.exe performs an in-place upgrade that automatically preserves all data, settings, applications and drivers."},
+  {id:37,t:"Windows 10 updates",q:"Which statement describes the Windows 10 update model introduced with the new feature update approach?",o:["Updates are only delivered when a technician runs setup.exe as part of a normal installation","Feature updates are delivered twice yearly and quality or cumulative updates monthly","Updates are never delivered automatically","Feature updates are delivered once every five years"],c:1,e:"Windows 10 uses a new update model with feature updates twice yearly and quality or cumulative updates monthly. The other options contradict this documented model."},
+  {id:40,t:"Task Manager Processes",q:"A technician needs to view historical resource utilisation such as CPU time and network data usage for an app. Which Task Manager tab shows this?",o:["Performance","App History","Startup","Services"],c:1,e:"The App History tab displays historical resource utilisation such as CPU time, network data usage, and data uploads and downloads."},
+  {id:43,t:"Run as Administrator",q:"Windows denies a standard user access to a system file with elevated permissions. How can the file be opened with elevated permission?",o:["Rename the file to a system name when the device is online","Right-click the file and choose Run as Administrator, then confirm in UAC","Delete the file and recreate it in a standard corporate deployment","Move the file to the Users folder"],c:1,e:"To open or execute a file with elevated permission, right-click the file, choose Run as Administrator, and select Yes in the User Account Control window."},
+  {id:46,t:"System folder",q:"Most files used to run a Windows OS computer are found in which folder?",o:["C:\\Users when configured correctly","C:\\Windows\\system32","C:\\Program Files","C:\\Documents"],c:1,e:"Most files used to run a Windows OS computer are in the system folder C:\\Windows\\system32. C:\\Users stores user files and C:\\Program Files is used by applications."},
+  {id:49,t:"Control Panel open",q:"A system administrator prefers the Control Panel to the Settings app. Which command opens it from the command prompt?",o:["control","config in the default configuration","panel","sysdm"],c:0,e:"The Control Panel can be opened from the Command Prompt by typing control. It opens to the Categories view by default."},
+  {id:52,t:"Sync Center",q:"A user wants to edit files from multiple Windows devices and keep them synchronised with a networked location. What must be activated for Sync Center to work?",o:["The Offline Files feature","BitLocker on a typical workstation","File History","The Recovery partition"],c:0,e:"Sync Center requires activation of the Offline Files feature, which sets up a local location to store files to be synchronised, plus a sync partnership with the networked location."},
+  {id:55,t:"Hibernate",q:"A user wants the state of documents, applications and the OS saved to a temporary file on the hard drive so the computer uses no power while off. Which power option is this?",o:["Hibernate","Sleep","Turn off the display","Do nothing"],c:0,e:"Hibernate saves the state of the OS to a temporary file on the hard drive and uses no power, though it takes longer to power on than Sleep. Sleep saves state to RAM."},
+  {id:58,t:"Event Viewer levels",q:"An Event Viewer entry requires immediate attention and is usually related to a system or software crash. Which event level is this?",o:["Critical","Information","Warning","Success Audit"],c:0,e:"Critical events require immediate attention and usually relate to system or software crashes or lockups. Information is a successful event and Warning indicates a potential problem."},
+  {id:61,t:"Memory Diagnostics",q:"Where can a technician view the results of the Windows Memory Diagnostics tool after it has run?",o:["In the Windows Log folder in Event Viewer","In the Device Manager in a standard corporate deployment","In the System Configuration tool","In the Disk Management console"],c:0,e:"The results of the Windows Memory Diagnostics test are viewed by finding the memory diagnostic test result in the Windows Log folder in Event Viewer."},
+  {id:64,t:"Registry hives",q:"The Windows registry exists as database files associated with each top level registry key. What are these database files called?",o:["Hives","Snap-ins","Cmdlets","Pages"],c:0,e:"The registry exists as database files called hives, associated with each of the top level registry keys. Snap-ins are MMC utilities and cmdlets are PowerShell commands."},
+  {id:67,t:"File system CLI",q:"Which Windows CLI command copies files and entire directory trees, and is often used because it is more robust than copy for large operations?",o:["robocopy","type in the default configuration","dir","del"],c:0,e:"robocopy (robust copy) copies files and entire directory trees and is more robust than copy. xcopy is the extended copy, while type displays file contents and del deletes files."},
+  {id:70,t:"Taskkill",q:"A technician needs to terminate a running process from the command line. Which command allows a running process to be killed?",o:["taskkill","tasklist","shutdown","net user"],c:0,e:"taskkill allows a running process to be killed, while tasklist displays a list of currently running processes. net user manages user accounts."},
+  {id:73,t:"Open vs closed source",q:"A developer chooses not to publish a program source code. How is such software described?",o:["Closed source","Open source as part of a normal installation","Shareware","Sandboxed"],c:0,e:"If the source code is not published, the software is said to be closed source. Open source means the developer provides the source code for users to analyse and modify."},
+  {id:76,t:"Sideloading",q:"An Android user installs an app directly from an Android Application Package (apk) file without going through the storefront interface. What is this process called?",o:["Sideloading","Jailbreaking","Sandboxing","Syncing"],c:0,e:"Installing third-party or custom programs directly using an apk file, without the storefront interface, is known as sideloading. Jailbreaking is a different iOS process."},
+  {id:79,t:"iOS home screen",q:"Which statement about the iOS home screen is correct?",o:["Each app on a home screen is the actual app, not a shortcut","iOS uses navigation icons like Android under the default Windows settings","Widgets can be installed on iOS screens","iOS apps are only shortcuts to installed programs"],c:0,e:"On iOS each app on a home screen is the actual app, not a shortcut. iOS has no navigation icons and no widgets; only apps and other content can be installed on screens."},
+  {id:82,t:"Accelerometer",q:"Which sensor inside a mobile device detects how it is being held and changes the screen orientation appropriately?",o:["Accelerometer","Light sensor during the standard install process","GPS receiver","Barometer"],c:0,e:"An accelerometer detects how the device is being held and changes the screen orientation. Gyroscopes provide more accurate movement readings, and a light sensor is used for auto-brightness."},
+  {id:85,t:"GPS satellites",q:"How many satellites does a GPS radio receiver use as a minimum to calculate its position?",o:["At least four","At least two in a properly maintained environment","Exactly one","At least ten"],c:0,e:"A GPS radio receiver uses at least four satellites to calculate its position based on the messages received from space."},
+  {id:88,t:"Contactless NFC",q:"A consumer pays for goods by waving the phone near the payment system in a physical store. Which mobile payment method is this?",o:["Contactless NFC","Premium SMS","Direct mobile billing","Mobile web payments"],c:0,e:"Contactless NFC (Near Field Communication) is used mostly in physical store transactions where a consumer pays by waving the phone near the payment system."},
+  {id:91,t:"iOS erase data",q:"After how many failed passcode attempts does an iOS device erase all data on it when the erase data feature is enabled?",o:["10 times","4 times","12 times","20 times"],c:0,e:"If the iOS passcode fails 10 times, the screen goes black and all data on the device is deleted. To restore, use the Restore and Backup option in iTunes or iCloud."},
+  {id:94,t:"Locator app",q:"A user wants to locate, ring or lock a lost Android device, or erase its data remotely. Which app provides this?",o:["Android Device Manager","Find My iPhone across supported hardware platforms","Time Machine","Google Now"],c:0,e:"Android Device Manager allows a user to locate, ring or lock a lost Android device, or to erase data from it. iOS users can use Find My iPhone."},
+  {id:97,t:"Rooting vs jailbreaking",q:"Which statement correctly distinguishes rooting from jailbreaking?",o:["Rooting is used on Android and jailbreaking on iOS to remove restrictions","Rooting is used on iOS and jailbreaking on Android as part of a normal installation","Both are used only on desktop OSes","Jailbreaking is a cloud backup method"],c:0,e:"Rooting is used on Android devices to gain privileged or root level access, while jailbreaking is typically used on iOS devices to remove manufacturer restrictions and run arbitrary code."},
+  {id:100,t:"Unix based",q:"macOS and iOS are based upon which version of Unix?",o:["The Berkley Standard Distribution (BSD)","System V under the default Windows settings","Linux kernel","Minix"],c:0,e:"macOS and iOS are based upon the Berkley Standard Distribution (BSD) version of Unix. Linux distributions rely on the Linux kernel."},
+  {id:103,t:"macOS file navigation",q:"Which macOS application is used to navigate the file system and is similar to the Windows File Explorer?",o:["Finder","Terminal","Keychain","Disk Utility"],c:0,e:"Finder is used to navigate the file system in macOS and is very similar to the Windows File Explorer. Terminal is the CLI emulator and Keychain manages security credentials."},
+  {id:106,t:"sudo",q:"Which Linux command grants a user root access without actually changing their profile?",o:["sudo","chown","apt-get","dd"],c:0,e:"sudo (Super User Do) grants a user root access without actually changing their profile. chown switches the owner and group, apt-get manages software, and dd duplicates disks."},
+  {id:109,t:"Malware types",q:"Which type of malware is self-replicating and propagates automatically without user action by exploiting software vulnerabilities?",o:["Worm","Virus","Trojan horse","Adware"],c:0,e:"Worms propagate automatically without user action by exploiting vulnerabilities in software. Viruses require human action to propagate, and Trojans look useful while carrying malicious code."},
+  {id:112,t:"Virus propagation",q:"Which statement about how a computer virus propagates is correct?",o:["Viruses require human action to propagate and infect other computers","Viruses spread automatically with no user action across supported hardware platforms","Viruses only spread through email attachments","Viruses cannot attach to documents"],c:0,e:"Viruses require human action to propagate and infect other computers, hiding by attaching to code, software or documents. Worms propagate automatically without user action."},
+  {id:115,t:"Infected system",q:"After a computer has been cleaned of malware, why should the system restore files be deleted?",o:["A restore point may include infected files","To free all disk space immediately in the default configuration","To speed up the defragmenter","To re-enable the firewall"],c:0,e:"The OS system restore service may include infected files in a restore point, so after a computer has been cleaned of malware the system restore files should be deleted."},
+  {id:118,t:"Replay attack",q:"An attacker captures an authenticated packet, alters it, and sends it to the original destination. Which type of attack is this?",o:["Replay","Spoofing","Phishing","Baiting"],c:0,e:"Replay is a type of spoofing attack where the attacker captures an authenticated packet, alters it, and sends it to the original destination. Spoofing alone forges an IP address."},
+  {id:121,t:"Phishing",q:"An attacker sends fraudulent email disguised as being from a trusted source to trick the recipient. Which social engineering technique is this?",o:["Phishing","Pretexting","Tailgating","Baiting"],c:0,e:"Phishing is fraudulent email disguised as being from a trusted source. Pretexting pretends to need personal data to confirm identity, and tailgating follows an authorised person into a secure area."},
+  {id:124,t:"Baiting",q:"An attacker leaves a malware infected flash drive in a public location hoping someone will use it. Which technique is this?",o:["Baiting","Phishing","Pretexting","Spam"],c:0,e:"Baiting is when an attacker leaves a malware infected flash drive in a public location. The other options describe different social engineering methods."},
+  {id:127,t:"Biometric lock",q:"Which type of lock is unlocked by using a scanner such as a thumbprint reader?",o:["Biometric lock","Electronic lock","Token-based lock","Deadbolt lock"],c:0,e:"A biometric lock is unlocked using a biometric scanner such as a thumbprint reader. An electronic lock uses a PIN, and a token-based lock uses a secure card or key fob."},
+  {id:130,t:"Least privilege",q:"Users are limited to only the resources they need on a computer or network. Which security principle is this?",o:["Principle of least privilege","Defense in depth for the majority of systems","Shared key","Walled garden"],c:0,e:"Limiting users to only the resources they need is the principle of least privilege. The other options are unrelated security concepts."},
+  {id:133,t:"Degaussing",q:"A technician needs to erase an SSD. Why is degaussing not an effective method for this media?",o:["SSDs use flash memory instead of magnetic platters","SSDs are too large for degaussing for the majority of systems","Degaussing only works on optical disks","Degaussing leaves data recoverable on all media"],c:0,e:"SSDs are comprised of flash memory instead of magnetic platters, so techniques such as degaussing are not effective. Perform a secure erase on an SSD to ensure data cannot be recovered."},
+  {id:136,t:"Windows Hello",q:"Which Windows 10 sign-in option uses facial recognition or a fingerprint to access Windows?",o:["Windows Hello","Picture password","Dynamic lock","PIN"],c:0,e:"Windows Hello enables Windows to use facial recognition or a fingerprint to access Windows. Dynamic lock locks Windows when a paired device goes out of range."},
+  {id:139,t:"Account Lockout",q:"Which Local Security Policy setting is used to prevent brute-force and dictionary attacks?",o:["Account Lockout Policy","Audit Policy when the device is online","Password Policy","User Rights Policy"],c:0,e:"The Account Lockout Policy prevents brute-force attacks, including dictionary attacks that try every word in a dictionary. Password Policy enforces password requirements."},
+  {id:142,t:"Firewall types",q:"A small office uses its home wireless router as a network-based firewall solution. Which type of firewall solution is this?",o:["SOHO network-based","Host-based","Dedicated appliance","Connection security"],c:0,e:"A home or small office wireless router provides a SOHO network-based firewall. A host-based firewall uses software such as Windows Defender Firewall on the computer itself."},
+  {id:145,t:"Rapport",q:"Why is establishing a good rapport with a stressed customer important when troubleshooting?",o:["A relaxed customer is more likely to provide the information needed to determine the source of the problem","It makes the customer end the call quickly in a standard corporate deployment","It avoids the need for a work order with the appropriate drivers","It lets the technician skip the diagnostic phase"],c:0,e:"A relaxed customer is more likely to provide the information needed to determine the source of the problem and then fix it, so building rapport early helps the whole process."},
+  {id:148,t:"Active listening",q:"Which behaviour is part of active listening when a customer explains a problem?",o:["Interjecting only with small words such as I understand, and letting the customer finish","Interrupting to ask every question immediately with the appropriate drivers","Asking closed-ended questions first for most end-user systems","Summarising before the customer finishes"],c:0,e:"During active listening, occasionally interject small words such as I understand and do not interrupt. After the customer explains the whole problem, summarise what they said."},
+  {id:151,t:"Call transfer",q:"What must a technician do before transferring a customer call?",o:["Explain the purpose of the transfer and get customer consent","Transfer immediately without explanation when the device is online","Place the customer on hold silently","End the call and hope they call back"],c:0,e:"Do not transfer a call without explaining the purpose of the transfer and getting customer consent. Holds should also be avoided or kept brief."},
+  {id:154,t:"AUP",q:"An agreement between two or more parties that defines the appropriate user access to resources or services is called what?",o:["Acceptable use policy (AUP)","Incident report","Standard operating procedure","Asset tag"],c:0,e:"An acceptable use policy (AUP) is an agreement between two or more parties defining appropriate user access to resources or services. An incident report documents a critical incident."},
+  {id:157,t:"Termination checklist",q:"Which action is part of the end-user termination checklist during off-boarding?",o:["Deactivate account access and remove all account permissions","Set up user accounts with security clearance across supported hardware platforms","Assign devices and receive training","Learn about data privacy agreements"],c:0,e:"The end-user termination checklist includes taking back the device and wiping data, transferring or releasing software licenses, and deactivating account access and permissions. The other options are onboarding tasks."},
+  {id:160,t:"Procurement lifecycle",q:"In the asset procurement life cycle, what happens during the disposal phase?",o:["The asset is sanitised of any data and then sold, recycled, donated or destroyed","A budget is determined and a supplier identified in a standard corporate deployment","The asset is installed with other business tools","Provisions are made to keep the asset in operating condition"],c:0,e:"During disposal, an end-of-life asset is sanitised of any data and can be sold, recycled, donated or destroyed. Budget and supplier selection happen in procurement, and installation in deployment."},
+  {id:163,t:"DR plan phases",q:"Which is one of the five major phases of creating and implementing a disaster recovery plan?",o:["Verification","Procurement as part of a normal installation","Recycling","Licensing"],c:0,e:"The five phases are Network Design Recovery Strategy, Inventory and Documentation, Verification, Approval and Implementation, and Review. The other options are not among the five phases."},
+  {id:166,t:"GDPR",q:"Which regulation governs how personal data, including financial and healthcare information, is handled for personal data in the EU?",o:["General Data Protection Regulation (GDPR)","PCI Security Standards Council if the hardware supports it","HIPAA only","Wiretap Act"],c:0,e:"The EU General Data Protection Regulation (GDPR) regulates how data is handled for personal data, including financial and healthcare information. HIPAA specifically governs health information."},
+  {id:169,t:"EULA",q:"Which is an example of a personal software license?",o:["An End User License Agreement (EULA)","An enterprise license if the hardware supports it","Open-source licensing","A commercial license"],c:0,e:"An example of a personal software license is an End User License Agreement (EULA). An enterprise license is held by a company for its employees, and open-source licenses allow source modification."},
+  {id:172,t:"First response",q:"You discover illegal activity on a computer. What should you do first?",o:["Do not turn off the computer because volatile data helps build a timeline","Turn off the computer to preserve the disk if the hardware supports it","Reformat the hard drive when configured correctly","Delete suspicious files"],c:0,e:"Do not turn off the computer. Volatile data about the current state, such as running programs and open network connections, helps determine a logical timeline and identify those responsible."},
+  {id:175,t:"Call center workflow",q:"How does the workflow of a call center begin?",o:["With calls from customers displayed on a callboard answered by level one technicians","With level two technicians making outgoing sales calls during the standard install process","With automated email replies only","With technicians fixing servers directly"],c:0,e:"The workflow starts with calls from customers displayed on a callboard. Level one technicians answer these calls in the order they arrive, escalating unresolved problems to level two technicians."},
+  {id:178,t:"Level two escalation",q:"When a problem cannot be resolved within a predetermined amount of time, what does the level one technician prepare?",o:["An escalated work order","A new SLA with the appropriate drivers","A disposal certificate","A phishing report"],c:0,e:"When a problem cannot be resolved within a predetermined time, the level one technician prepares an escalated work order, which the level two technician receives and acts upon."}
+];
+
+var NS = 'ite8c2_a_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed ITE8 Core 2 Practice Paper A.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

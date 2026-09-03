@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisco ITE Quizzes — Training.Forrest.One</title>
+<style>
+/* ─── Site Navigation ─── */
+:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(20,20,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
+nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
+nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
+nav a{font-size:0.9rem;color:var(--text-dim);text-decoration:none;transition:color 0.2s;text-transform:uppercase;letter-spacing:0.5px}
+nav a:hover,nav a.active{color:var(--accent-text);text-decoration:underline;text-underline-offset:4px}
+nav a:focus{outline:3px solid var(--accent);outline-offset:2px}
+nav .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-dim);margin:5px 0}
+@media(max-width:768px){
+  nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:var(--bg);padding:1rem 2rem;border-bottom:1px solid var(--border)}
+  nav ul.open{display:flex}
+  nav ul li{text-align:center}
+  nav ul li a{display:block;padding:1rem 2rem;font-size:1rem}
+  nav .hamburger{display:block}
+}
+
+/* ─── Hero ─── */
+.hero{min-height:34vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
+.hero h1{font-size:2.2rem;margin-bottom:.5rem}
+.hero h1 .highlight{color:var(--accent-text);font-weight:700}
+.hero .subtitle{font-size:1.05rem;color:var(--text-dim);max-width:640px;margin:0 auto}
+.hero .crumb{margin-top:1rem;font-size:.85rem;color:var(--text-muted)}
+.hero .crumb a{color:var(--accent-text);text-decoration:none}
+.hero .crumb a:hover{text-decoration:underline}
+
+/* ─── Quiz Tiles ─── */
+.quiz-grid{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.quiz-tile{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.quiz-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(168,28,28,0.30)}
+.quiz-tile:focus{outline:3px solid var(--accent2);outline-offset:2px}
+.quiz-tile .icon{font-size:2.5rem;margin-bottom:1rem}
+.quiz-tile h3{color:var(--accent2);font-size:1.1rem;margin-bottom:.5rem}
+.quiz-tile .desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;flex:1}
+.quiz-tile .meta{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
+.quiz-tile .tag{background:#2c313a;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.quiz-tile .tag.blue{background:rgba(0,90,160,0.22);color:#6ab0e0}
+.quiz-tile .tag.core2{background:rgba(168,28,28,0.18);color:#e3503a}
+.quiz-tile .play-badge{display:inline-block;margin-top:.8rem;color:var(--accent2);font-size:.8rem;font-weight:600}
+.quiz-tile:hover .play-badge{color:var(--accent-text)}
+
+/* ─── Section heading ─── */
+.section-head{max-width:1100px;margin:2rem auto 0;padding:0 2rem;display:flex;align-items:center;gap:1rem}
+.section-head h2{color:var(--accent-text);font-size:1.4rem;white-space:nowrap}
+.section-head .line{height:1px;background:var(--border);flex:1}
+
+/* ─── Footer ─── */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.85rem;background:var(--bg)}
+footer .container{max-width:1200px;margin:0 auto}
+
+@media(max-width:768px){
+  .hero{padding:6rem 1.5rem 2rem}
+  .hero h1{font-size:1.8rem}
+  .quiz-grid{padding:2rem 1rem;grid-template-columns:1fr}
+  .section-head{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="logo">&#9674; Training.Forrest.One</div>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/courses/">Courses</a></li>
+      <li><a href="/academic/">Academic</a></li>
+      <li><a href="/game-arena/" class="active">Game Arena</a></li>
+      <li><a href="/mtb/">MTB</a></li>
+      <li><a href="/forensics/">Forensics</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1><span class="highlight">Cisco IT Essentials</span></h1>
+    <p class="subtitle">Six full practice papers for the IT Essentials (ITE8) qualification. Each paper has 60 questions covering the exam syllabus, with a 60% pass mark and per-question explanations after every answer.</p>
+    <p class="crumb"><a href="/game-arena/">Game Arena</a> &#8594; Cisco ITE Quizzes</p>
+  </div>
+</section>
+
+<div class="section-head"><h2>Core 1</h2><div class="line"></div></div>
+<section class="quiz-grid">
+  <a href="/game-arena/ite-quizzes/core-1-a/" class="quiz-tile">
+    <div class="icon">&#128187;</div>
+    <h3>Core 1 &middot; Paper A</h3>
+    <p class="desc">PC hardware and troubleshooting: ESD safety, motherboards, memory, storage, video, power and the six-step troubleshooting process.</p>
+    <div class="meta">
+      <span class="tag blue">Core 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/ite-quizzes/core-1-b/" class="quiz-tile">
+    <div class="icon">&#128187;</div>
+    <h3>Core 1 &middot; Paper B</h3>
+    <p class="desc">Continue the Core 1 syllabus with networking, mobile devices, display and connectivity topics, plus preventive maintenance planning.</p>
+    <div class="meta">
+      <span class="tag blue">Core 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/ite-quizzes/core-1-c/" class="quiz-tile">
+    <div class="icon">&#128187;</div>
+    <h3>Core 1 &middot; Paper C</h3>
+    <p class="desc">Round out the Core 1 material with printers, virtualisation, cloud computing and a final consolidation of hardware essentials.</p>
+    <div class="meta">
+      <span class="tag blue">Core 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+</section>
+
+<div class="section-head"><h2>Core 2</h2><div class="line"></div></div>
+<section class="quiz-grid">
+  <a href="/game-arena/ite-quizzes/core-2-a/" class="quiz-tile">
+    <div class="icon">&#128421;&#65039;</div>
+    <h3>Core 2 &middot; Paper A</h3>
+    <p class="desc">Operating systems and software: OS installation, configuration, Windows tools and basic system administration.</p>
+    <div class="meta">
+      <span class="tag core2">Core 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/ite-quizzes/core-2-b/" class="quiz-tile">
+    <div class="icon">&#128421;&#65039;</div>
+    <h3>Core 2 &middot; Paper B</h3>
+    <p class="desc">Continue Core 2 with security fundamentals, operational procedures and data protection and recovery techniques.</p>
+    <div class="meta">
+      <span class="tag core2">Core 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/ite-quizzes/core-2-c/" class="quiz-tile">
+    <div class="icon">&#128421;&#65039;</div>
+    <h3>Core 2 &middot; Paper C</h3>
+    <p class="desc">Final Core 2 paper consolidating software, security, troubleshooting and professional communication skills for the exam.</p>
+    <div class="meta">
+      <span class="tag core2">Core 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Billy Forrest — Training.Forrest.One. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.querySelector('nav ul');
+  var btn = document.querySelector('nav .hamburger');
+  if(nav && btn){
+    btn.addEventListener('click', function(){ nav.classList.toggle('open'); });
+    nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); }); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITE8 Core 2 Practice Paper C</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITE8 Core 2 Practice Paper C</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:3,t:"Multiprocessing",q:"Which operating system capability is indicated when the OS can use two or more physical processors at once?",o:["Multiprocessing","Multitasking depending on the hardware in use","Multithreading","Multibooting"],c:0,e:"Multiprocessing means the operating system can support two or more CPUs. Multitasking handles multiple applications, while multithreading splits one program."},
+  {id:6,t:"Windows 10",q:"Which feature was newly integrated into Windows 10 alongside the start menu and Microsoft Edge?",o:["The Cortana virtual assistant","The Control Panel","Windows Live Tiles in a separate screen","A 32-bit only kernel"],c:0,e:"Windows 10 integrated the Cortana virtual assistant, combined the Windows 7 style start menu with Windows 8 live tiles, and included the new Microsoft Edge browser."},
+  {id:9,t:"Why upgrade OS",q:"Which is a valid reason to upgrade an operating system?",o:["To reduce the available RAM for the majority of systems","To remain compatible with the latest hardware and software","To permanently remove all user accounts on a typical workstation","To convert a 64-bit OS to a 32-bit OS"],c:1,e:"An OS must be upgraded periodically to remain compatible with the latest hardware and software, and also when the manufacturer stops supporting it."},
+  {id:12,t:"Windows 10 update",q:"Which tool is used to upgrade Windows 7 or Windows 8 directly to Windows 10 while walking through the setup process?",o:["Windows Easy Transfer for most end-user systems","PCmover Express","The Windows 10 Update Assistant","The System Image Manager"],c:2,e:"The Windows 10 Update Assistant, available on the Download Windows 10 website, walks through all the steps of the Windows 10 setup process."},
+  {id:15,t:"PCmover Express",q:"Which tool can transfer selected files, folders, profiles and applications from an old Windows PC to a Windows 10 PC?",o:["Sysprep","PCmover Express","Disk Management","Setup.exe"],c:1,e:"PCmover Express is a tool for transferring selected files, folders, profiles and applications from an old Windows PC to a Windows 10 PC."},
+  {id:18,t:"Active partition",q:"On an MBR disk, which partition is used to store and boot an operating system?",o:["The extended partition","The active partition","The logical drive","The recovery partition"],c:1,e:"On MBR disks the active partition is used to store and boot an OS. An extended partition is used to create more than four partitions."},
+  {id:21,t:"FAT32",q:"What is the maximum partition size supported by the FAT32 file system?",o:["16 exabytes","2 TB","4 GB","512 bytes"],c:1,e:"FAT32 supports partition sizes up to 2 TB or 2,048 GB. NTFS supports partitions up to 16 exabytes in theory."},
+  {id:24,t:"CDFS",q:"Which file system was created specifically for optical disk media?",o:["exFAT","CDFS","NTFS","FAT32"],c:1,e:"CDFS, the Compact Disc File System, was created specifically for optical disk media. NFS is a network-based file system."},
+  {id:27,t:"Standard user",q:"A user account can run applications but cannot install programs. Which account type is this?",o:["Administrator","Standard user","Guest with admin rights","Root user"],c:1,e:"Standard user accounts have limited control and can run applications but cannot install programs. Administrator accounts have complete control and can install programs."},
+  {id:30,t:"Disk cloning",q:"An administrator duplicates the entire contents of a base system disk sector by sector to quickly deploy identical systems. What is this process called?",o:["Disk cloning","Unattended installation","In-place upgrade","Recovery restore"],c:0,e:"Disk cloning uses a program to duplicate all information on a base disk sector by sector to another disk, creating a fully deployed OS that can be used to deploy fresh copies."},
+  {id:33,t:"Unattended install",q:"Which tool is used to create the answer file that customises a standard unattended Windows 10 installation?",o:["System Image Manager for the majority of systems","Windows Easy Transfer","Disk Management","Device Manager"],c:1,e:"Setup.exe is run with the options found in the answer file, and the System Image Manager (SIM) is used to create the setup answer file for a standard Windows 10 installation."},
+  {id:36,t:"Windows 10 startup",q:"Windows 10 boots too quickly for F8 to work. How does a technician access the Startup Settings menu?",o:["Hold Shift and select Restart, then Troubleshoot, Advanced options, Startup settings","Press F8 repeatedly during POST when the device is online","Hold Ctrl and press the power button twice for the majority of systems","Run msconfig from Safe Mode"],c:0,e:"To access Startup Settings on Windows 8 and 10, hold the Shift key and select Restart in the Power menu, then navigate Troubleshoot, Advanced options, Startup settings and Restart."},
+  {id:39,t:"Task Manager tabs",q:"How do the Windows 10 Task Manager tabs differ from those in Windows 7?",o:["The Applications and Processes tabs were combined, and Networking was merged into Performance","The Performance tab was removed entirely when configured correctly","The Users tab was removed as part of a normal installation","A new Networking tab was added separately"],c:0,e:"In Windows 10 the Applications and Processes tabs were combined and the Networking tab is included with the Performance tab, whereas Windows 7 had six separate tabs."},
+  {id:42,t:"File Explorer name",q:"A user is running Windows 10 and needs to manage files. Which application is used for file management in this version?",o:["Windows Explorer","File Explorer","This PC Manager","My Computer"],c:1,e:"File Explorer is used for file management in Windows 10, whereas Windows Explorer was used in Windows 7 and earlier."},
+  {id:45,t:"Path length",q:"What is the default maximum path length for nested folders in Windows 10?",o:["260 characters","512 characters","255 characters","1024 characters"],c:0,e:"In Windows 10 the default limit for the maximum length of a path to folders is 260 characters. This limits the number of nested folders."},
+  {id:48,t:"File attributes",q:"A file is marked with the S attribute. What does this mean?",o:["The file is a system file and a warning is given if it is deleted or modified","The file is read-only for the majority of systems","The file will be archived on next backup in a properly maintained environment","The file is hidden in the directory display"],c:0,e:"The S attribute marks the file as a system file, and a warning is given if an attempt is made to delete or modify it. R is read-only, A is archive, and H is hidden."},
+  {id:51,t:"Credential Manager",q:"A user stores passwords for websites and Windows applications in a secure location. Which utility manages these stored credentials?",o:["Credential Manager","Sync Center across supported hardware platforms","BitLocker","UAC"],c:0,e:"Credential Manager helps manage passwords used for websites and Windows applications, storing usernames and passwords in a secure location. Sync Center handles offline file synchronisation."},
+  {id:54,t:"Screen resolution",q:"A monitor shows a distorted image because the resolution is set incorrectly. Which Windows display feature represents the number of pixels horizontally and vertically?",o:["Screen resolution","Refresh rate when the device is online","Orientation","Display colors"],c:0,e:"Screen resolution is the number of pixels horizontally and vertically; higher numbers such as 1920 x 1080 give better resolution. Refresh rate is how often the screen is redrawn in Hz."},
+  {id:57,t:"Roll back driver",q:"A newly installed driver causes a device to malfunction. In Device Manager, which action changes the current driver back to the previously installed one?",o:["Roll back a driver","Update a driver","Uninstall a driver","Disable a device"],c:0,e:"Roll back a driver changes the currently installed driver to the previously installed one. Update changes to a newer driver, and uninstall removes the driver entirely."},
+  {id:60,t:"Services console",q:"A technician must manage all background services on a computer and remote computers. Which console is opened as SERVICES.MSC?",o:["Services","Component Services","Performance Monitor","Print Management"],c:0,e:"The Services console (SERVICES.MSC) manages all the services on a computer and remote computers. Component Services manages COM components, not background services."},
+  {id:63,t:"MSCONFIG tabs",q:"In System Configuration, which tab is used to choose between Normal, Diagnostic and Selective startup?",o:["General","Boot","Services","Tools"],c:0,e:"The General tab displays Normal startup, Diagnostic startup, and Selective startup. The Boot tab handles safe boot and OS selection, and Services lists services started with the OS."},
+  {id:66,t:"Diskpart",q:"Which command-line utility starts a separate interpreter with commands for working with disk partitions?",o:["diskpart","chkdsk in a properly maintained environment","format","sfc"],c:0,e:"diskpart starts a separate command interpreter with commands for working with disk partitions. chkdsk checks the file system, format creates a new file system, and sfc repairs system files."},
+  {id:69,t:"gpupdate",q:"A technician forces a Group Policy update on the local computer even though the policy has not changed. Which command switch achieves this?",o:["gpupdate /force","gpupdate /boot","gpupdate /target:computer","gpresult /r"],c:0,e:"The /force switch forces an update even if Group Policy has not changed. /target:computer forces an update of another computer and /boot restarts after update."},
+  {id:72,t:"ipconfig",q:"A technician wants to display detailed IP configuration including the physical address and more for all adapters. Which command is correct?",o:["ipconfig /all","ipconfig /release","ipconfig /renew","ping localhost"],c:0,e:"ipconfig /all displays detailed IP configuration information for all adapters. The basic ipconfig shows IP address, subnet mask and default gateway, while /release and /renew manage DHCP leases."},
+  {id:75,t:"Walled garden",q:"Which mobile platform uses a walled garden model in which apps must be submitted to and approved by the vendor before release?",o:["Apple iOS App Store","Google Play","Amazon App store","Android sideloading"],c:0,e:"Apple uses a walled garden model where apps must be submitted to and approved by Apple before release, which helps prevent the spread of malware. Android apps come from multiple sources."},
+  {id:78,t:"Android notifications",q:"How does a user open the notification area on an Android device?",o:["Swipe down from the top of the screen","Press and hold the Home button during the standard install process","Swipe up from the bottom","Tap the recent apps button"],c:0,e:"To open the notification area on Android devices, swipe down from the top of the screen. The other actions do not open the notification area."},
+  {id:81,t:"iOS Spotlight",q:"Which iOS feature shows suggestions from many sources including the internet, iTunes, App Store, movie show times and nearby locations?",o:["Spotlight","Mission Control","Finder","Notification Center"],c:0,e:"iOS Spotlight shows suggestions from many sources including the internet, iTunes, App Store, movie show times and nearby locations. The Notification Center displays alerts."},
+  {id:84,t:"Auto-brightness",q:"A mobile device can auto-adjust its screen brightness depending on the surrounding light. Which hardware must the device have for this feature?",o:["A light sensor","A gyroscope","An accelerometer","A GPS receiver"],c:0,e:"The device must have a light sensor to use auto-brightness, which adjusts brightness based on the amount of surrounding light."},
+  {id:87,t:"Wi-Fi calling",q:"What minimum throughput to the internet must a Wi-Fi hotspot guarantee for a good quality Wi-Fi call?",o:["At least 1 Mbps","At least 10 Mbps","At least 100 Mbps","At least 512 kbps"],c:0,e:"The Wi-Fi hotspot must be able to guarantee a throughput of at least 1 Mbps to the internet for a good quality Wi-Fi call."},
+  {id:90,t:"Remote lock",q:"A lost mobile device is locked with a passcode so others cannot access its data. Which security feature is being used?",o:["Remote Lock","Remote Wipe","Locator ring","Factory reset"],c:0,e:"Remote Lock (iOS lost mode, Android Lock) locks the device with a passcode so others cannot gain access to the data. Remote Wipe deletes all data and returns the device to factory state."},
+  {id:93,t:"Remote backup",q:"A technician wants to back up mobile device data automatically to the cloud. Which option is a native cloud backup account for Android devices?",o:["Google Sync","iCloud as part of a normal installation","OneDrive","Dropbox"],c:0,e:"Most mobile OSes come with a user account linked to the vendor cloud services: iCloud for iOS, Google Sync for Android, and OneDrive for Microsoft. Dropbox is a third-party provider."},
+  {id:96,t:"iOS antivirus",q:"Which statement about antivirus scanning on iOS is correct?",o:["iOS does not allow automatic or scheduled scans","iOS allows automatic scans but not scheduled ones","iOS runs scheduled scans by default","iOS has no antivirus apps at all"],c:0,e:"iOS does not allow automatic or scheduled scans as a safety feature to prevent malicious programs from using unauthorised resources or contaminating other apps or the OS."},
+  {id:99,t:"PRI",q:"Which mobile firmware update configures the data rates between the device and the cell tower to ensure correct communication?",o:["Primary Rate ISDN (PRI)","Preferred Roaming List (PRL)","Kernel patch","Bootloader update"],c:0,e:"The Primary Rate ISDN (PRI) configures the data rates between the device and the cell tower, ensuring the device communicates with the tower at the correct rate."},
+  {id:102,t:"Ubuntu GUI",q:"Which GUI is the default for Ubuntu Linux according to the ITE8 material?",o:["Unity","Aqua","Gnome Shell","KDE"],c:0,e:"Ubuntu Linux uses Unity as its default GUI. The Linux GUI can have multiple desktops or workspaces and is made of subsystems that can be removed or replaced."},
+  {id:105,t:"chmod",q:"A Linux administrator removes write permission for the group on a file named Permissions.txt. Which command achieves this?",o:["chmod g-w Permissions.txt","chmod o+w Permissions.txt","chown g-w Permissions.txt","chmod u+w Permissions.txt"],c:0,e:"chmod allows users to change permissions of files they own. chmod g-w Permissions.txt removes the write permission of the group, where g is group, u is owner and o is others."},
+  {id:108,t:"Time Machine",q:"Which macOS backup tool performs incremental backups periodically to an external drive connected via USB, FireWire or Thunderbolt?",o:["Time Machine","Déjà Dup","Amanda","Backup Utility"],c:0,e:"macOS includes Time Machine, which performs incremental backups periodically to an external drive connected via USB, FireWire or Thunderbolt. Amanda and Déjà Dup are Linux backup tools."},
+  {id:111,t:"Rootkit",q:"Which type of malware is difficult to detect and is used by cybercriminals to gain admin level access to a computer?",o:["Rootkit","Adware on a typical workstation","Virus","Worm"],c:0,e:"Rootkits are difficult to detect and are used to gain admin level access to a computer. Adware displays unsolicited advertising, and worms self-replicate."},
+  {id:114,t:"Signature mirrors",q:"A technician downloads anti-malware signature files from a site that mirrors the manufacturer distribution. What precaution should be taken?",o:["Always link to the mirror site from the manufacturer website","Download from any search result when the device is online","Only download at night in a standard corporate deployment","Use the oldest signature files"],c:0,e:"When downloading signature files from a mirror, ensure it is legitimate and always link to the mirror site from the manufacturer website. Downloads should come from the manufacturer website."},
+  {id:117,t:"DDoS zombies",q:"An amplified DoS attack uses many infected hosts called zombies to overwhelm a target. Which attack is this?",o:["Distributed DoS","Syn Flood","Man-in-the-Middle","Zero-day"],c:0,e:"Distributed DoS is an amplified DoS attack using many infected hosts called zombies to overwhelm a target. Syn Flood exploits the TCP three-way handshake."},
+  {id:120,t:"Defense in depth",q:"Which security approach requires a combination of networking devices and services working together as a layered defence?",o:["Defense-in-depth","Single firewall","MAC filtering only","SSID hiding"],c:0,e:"Defense-in-depth, also known as a layered approach, requires a combination of networking devices and services working together. There is no single solution against all TCP/IP or zero-day attacks."},
+  {id:123,t:"Tailgating",q:"An attacker follows an authorised person into a secure area without being authorised. Which social engineering technique is this?",o:["Tailgating","Impersonation","Dumpster diving","Baiting"],c:0,e:"Tailgating is following an authorised person into a secure area. Impersonation is pretending to be someone else, and dumpster diving searches trash for confidential information."},
+  {id:126,t:"Acceptable use",q:"Which security policy category identifies network resources and usages acceptable to the organisation and may include ramifications for violation?",o:["Acceptable Use Policies","Password Policies","Remote Access Policies","Incident Handling Policies"],c:0,e:"Acceptable Use Policies identify acceptable network resources and usages and may include ramifications for policy violation. Password policies ensure passwords meet minimum requirements."},
+  {id:129,t:"MDM",q:"Which software manages corporate-owned devices and Bring Your Own Device (BYOD), setting policies for connectivity, authentication and device features?",o:["Mobile device management (MDM)","Mobile application management (MAM)","Firewall software","Anti-malware software"],c:0,e:"MDM software manages corporate-owned devices and BYOD, setting policies for connectivity, authentication and features such as the microphone and camera. MAM sets policies for applications."},
+  {id:132,t:"BitLocker requirement",q:"Which two requirements must be met to use BitLocker to encrypt a full hard drive?",o:["At least two volumes and TPM enabled in BIOS","A single partition and no TPM in a standard corporate deployment","An active internet connection only","A domain controller and TPM disabled"],c:0,e:"BitLocker requires at least two volumes on the hard disk and the Trusted Platform Module (TPM) enabled in BIOS. The TPM is a specialised chip storing encryption keys and certificates."},
+  {id:135,t:"BIOS password",q:"Which statement about BIOS or UEFI passwords is correct?",o:["All users, regardless of account, share BIOS passwords","Each user has a separate BIOS password by default","BIOS passwords can be bypassed only on Linux","UEFI passwords are stored in Active Directory by default"],c:0,e:"All users, regardless of user account, share BIOS passwords. UEFI passwords can be set per user, but an authentication server is required for that."},
+  {id:138,t:"Local Security Policy",q:"Which command opens the Windows Local Security Policy tool?",o:["secpol.msc","lusrmgr.msc","wf.msc","services.msc"],c:0,e:"The Run command secpol.msc opens the Local Security Policy tool. lusrmgr.msc opens Local Users and Groups, wf.msc opens Windows Firewall with Advanced Security, and services.msc opens Services."},
+  {id:141,t:"Active Directory",q:"Where are domain accounts stored in an Active Directory environment?",o:["In the Active Directory on a Windows Server Domain Controller","In the Local Security Accounts database during the standard install process","On each workstation only","In the registry hives"],c:0,e:"Domain accounts are stored in the Active Directory on a Windows Server Domain Controller, while local accounts are stored in the Local Security Accounts database of a local machine."},
+  {id:144,t:"WPS",q:"A technician disables WPS on a wireless router. Why is this a security best practice?",o:["WPS is vulnerable to brute-force attack","WPS uses no encryption in a properly maintained environment","WPS broadcasts the SSID to everyone","WPS requires a TPM chip"],c:0,e:"WPS (Wi-Fi Protected Setup) is not entirely secure and is vulnerable to brute-force attack, so it should be turned off as a security best practice. It auto-configures Wi-Fi security via a button or PIN."},
+  {id:147,t:"Smiling on phone",q:"Many call center technicians use a mirror at their desk. Why?",o:["To monitor their facial expressions so customers can sense a smile in their voice","To check for background noise across supported hardware platforms","To read the script without looking away under the default Windows settings","To reflect the monitor display"],c:0,e:"Customers can sense whether a technician is smiling when speaking on the phone, so many call center technicians use a mirror at their desk to monitor their facial expressions."},
+  {id:150,t:"Professional behavior",q:"Which action is NOT acceptable professional behaviour when talking with a customer?",o:["Disclosing customer experiences on social media","Avoiding jargon and slang for the majority of systems","Letting the customer finish speaking","Avoiding unnecessary holds"],c:0,e:"It is not acceptable to disclose any experiences with customers on social media. Avoiding jargon, letting the customer speak, and avoiding unnecessary holds are all professional practices."},
+  {id:153,t:"IT doc categories",q:"IT department documentation generally falls into which four categories?",o:["Policies, Operations, Projects and User Documentation","Policies, Procedures, Users and Hardware across supported hardware platforms","Projects, Security, Networks and Software","Operations, Security, Users and Licenses"],c:0,e:"IT documentation falls into four categories: Policies, Operations, Projects, and User Documentation. The other groupings are not the documented four categories."},
+  {id:156,t:"Incident report",q:"A security breach has occurred. Which document is used to identify potential issues, provide insight for improvements and allow prompt corrective action?",o:["Incident report (after-action report)","Acceptable use policy in the default configuration","Asset database","Disaster recovery plan"],c:0,e:"An incident report, also known as an after-action report (AAR), documents an episode of a critical or major incident such as a security breach and helps prevent a similar event in the future."},
+  {id:159,t:"Asset tags",q:"An asset tag identifies equipment using which identifiers?",o:["A unique serial number, barcode, QR code or RFID","Only a manufacturer model number depending on the hardware in use","A user password","A network MAC address only"],c:0,e:"An asset tag identifies equipment with a unique serial number, barcode, QR code, or radio frequency ID (RFID), and is typically adhered to the asset."},
+  {id:162,t:"Disaster recovery",q:"What is a disaster recovery plan?",o:["A comprehensive document describing how to restore operations quickly and keep critical IT functions running during or after a disaster","A password policy under the default Windows settings","A list of employee contact details when the device is online","A firewall configuration"],c:0,e:"A disaster recovery plan is a comprehensive document describing how to restore operation quickly and keep critical IT functions running during or after a disaster, including offsite locations and backup connectivity."},
+  {id:165,t:"PII examples",q:"Which item is an example of Personal Identifiable Information (PII)?",o:["A social security number","A printer model across supported hardware platforms","A CPU speed","A screen resolution"],c:0,e:"PII includes personal identification numbers such as social security numbers, passport numbers and driver licence numbers, as well as names, addresses and biometric data."},
+  {id:168,t:"PHI regulation",q:"Penalties for breaches of Protected Health Information (PHI) and ePHI are regulated by which act?",o:["Health Insurance Portability and Accountability Act (HIPAA)","General Data Protection Regulation for the majority of systems","PCI Security Standards Council","Wiretap Act"],c:0,e:"Penalties for breaches of PHI and ePHI are very severe and regulated by the Health Insurance Portability and Accountability Act (HIPAA). The other acts cover different data."},
+  {id:171,t:"Volatile data",q:"Which type of computer forensics data disappears as soon as the computer is turned off?",o:["Volatile data","Persistent data","Archived data","Backup data"],c:0,e:"Volatile data in RAM, cache and registries disappears as soon as the computer is turned off. Persistent data is stored on a local drive and is preserved when the computer is off."},
+  {id:174,t:"Cyber law elements",q:"Which three primary elements make up cyber law in the United States?",o:["Wiretap Act, Pen/Trap and Trace Statute, and Stored Electronic Communication Act","HIPAA, PCI and GDPR during the standard install process","EULA, DRM and AUP for the majority of systems","SOP, AAR and AUP"],c:0,e:"In the United States, cyber law has three primary elements: the Wiretap Act, the Pen/Trap and Trace Statute, and the Stored Electronic Communication Act. The others are not cyber law elements."},
+  {id:177,t:"Level one",q:"What is the primary responsibility of a level one technician in a call center?",o:["Gather pertinent information from the customer","Use remote access to fix BIOS settings for most end-user systems","Approve change requests","Write the disaster recovery plan"],c:0,e:"The primary responsibility of a level one technician is to gather pertinent information from the customer. Level two technicians resolve escalated problems and may use remote access."},
+  {id:180,t:"Scripting language",q:"How does a scripting language differ from a compiled language?",o:["Each line of a script is interpreted and then executed when the script is run","Scripts are compiled into machine code before running when the device is online","Scripts can only run on Linux","Scripts cannot automate tasks"],c:0,e:"A scripting language is different from a compiled language because each line is interpreted and then executed when the script is run. Script files automate processes and tasks on various OSes."}
+];
+
+var NS = 'ite8c2_c_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed ITE8 Core 2 Practice Paper C.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

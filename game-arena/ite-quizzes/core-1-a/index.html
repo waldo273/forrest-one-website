@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITE8 Core 1 Practice Paper A</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITE8 Core 1 Practice Paper A</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:1,t:"ESD safety",q:"A technician is about to install a new RAM module into an open desktop case. Which ESD prevention measure is the most effective first action to take?",o:["Keep the RAM module in its antistatic bag until the instant it is inserted","Wear an antistatic wrist strap connected to the grounded case","Stand on a bare concrete floor while working","Use a magnetic screwdriver to handle the module"],c:1,e:"An antistatic wrist strap attached to the grounded case safely discharges any static buildup from the technician before touching components. A bare floor and magnetic tools do not prevent ESD, and while keeping parts bagged helps, the wrist strap directly protects the person handling the parts."},
+  {id:4,t:"Case form factors",q:"Which term describes the physical design, size and look of a computer case such as full tower, compact tower or all-in-one?",o:["Chipset","Bus architecture","Form factor","Port specification"],c:2,e:"Form factor refers to the physical design and look of a case. Tower variants, horizontal cases and all-in-one designs are all examples of case form factors."},
+  {id:7,t:"Motherboard chipset",q:"In a traditional two-part chipset design, which component allows the CPU to communicate with slower speed devices such as hard drives, USB ports and expansion slots?",o:["Northbridge","Southbridge","BIOS chip","Voltage regulator module"],c:1,e:"The Southbridge allows the CPU to communicate with slower speed devices including hard drives, USB ports and expansion slots, while the Northbridge controls high speed access to RAM and the video card."},
+  {id:10,t:"Memory types",q:"Which type of memory is volatile and serves as the temporary working storage for data and programs being accessed by the CPU?",o:["ROM","PROM","RAM","EEPROM"],c:2,e:"RAM is the temporary working storage for data and programs accessed by the CPU and is volatile, meaning its contents are lost when power is removed. ROM and its variants are non-volatile."},
+  {id:13,t:"Error checking",q:"Which memory error-checking method can detect multiple bit errors in memory and also correct single bit errors?",o:["Nonparity","Parity","ECC","Buffered memory"],c:2,e:"ECC (Error Correction Code) memory can detect multiple bit errors in memory and correct single bit errors. Parity only adds a check bit, while nonparity memory performs no error checking."},
+  {id:16,t:"SSD features",q:"Which characteristic best explains why an SSD is generally faster and more energy efficient than a traditional HDD?",o:["It stores data as electrical charges in semiconductor flash memory and has no moving parts","It uses a laser to read magnetised platters","It spins the platters at a higher RPM","It compresses all stored data automatically"],c:0,e:"SSDs store data as electrical charges in semiconductor flash memory, have no moving parts, make no noise, are more energy efficient and produce less heat than HDDs, which rely on rotating magnetic platters."},
+  {id:19,t:"Video ports",q:"A technician must connect a new monitor that only has a DisplayPort input to a computer that only has an HDMI output. What should be used?",o:["A USB to PS/2 adapter","An HDMI to VGA converter","A Molex to SATA adapter","An HDMI to DisplayPort converter or cable"],c:3,e:"Because the two technologies use different connectors and signal standards, an HDMI to DisplayPort converter (or a compatible bidirectional cable) is required. A converter translates signals between technologies, unlike a simple adapter."},
+  {id:22,t:"Case selection",q:"Which factor is most directly determined by the motherboard when choosing a computer case?",o:["The number of lumens produced","The type and size of case that will fit","The colour of the LED lighting","The wattage of the external speakers plugged into the rear audio jacks of the computer"],c:1,e:"The motherboard determines the type of case you can use because its size and shape must match the case. The power supply rating and connection type must also match the motherboard."},
+  {id:25,t:"CPU speed limits",q:"Which two factors primarily limit the maximum speed at which a modern processor can function without errors?",o:["Transmission delay and heat generation","RAM capacity and case size","Power supply wattage and fan colour","Hard drive speed and screen resolution of the monitor that is attached to the system"],c:0,e:"Transmission delay, caused by data passing through the interconnected transistors and wires, and heat generation, which increases with processor speed, are the two primary factors limiting processor speed."},
+  {id:28,t:"Buffered memory",q:"Which type of memory has a control chip built into the module that assists the memory controller in managing large quantities of RAM and is typically used in servers and high-end workstations?",o:["Unbuffered memory","Buffered memory","Nonparity memory","L1 cache"],c:1,e:"Buffered memory is specialised for servers and high-end workstations that use a large amount of RAM. It has a control chip that assists the memory controller, whereas unbuffered memory is the regular faster memory for normal computers."},
+  {id:31,t:"Drive failure signs",q:"Which set of symptoms most strongly suggests that an internal storage device is failing?",o:["Unusual noises, unusual vibrations, error messages or corrupt data","A dimmer LED on the front panel","Higher screen resolution after a reboot","Slower internet speeds when browsing large web pages in the evening"],c:0,e:"Signs that an internal storage device is failing include unusual noises, unusual vibrations, error messages, and even corrupt data or applications that do not load."},
+  {id:34,t:"Drive bay types",q:"Which drive bay size is used for installing an optical drive in a desktop case?",o:["3.5 inch bay built into the front of the computer case","5.25 inch bay","2.5 inch bay","1.8 inch bay"],c:1,e:"An optical drive aligns with the 5.25 inch drive bay opening at the front of the case. Hard drives typically use the smaller 3.5 inch bays."},
+  {id:37,t:"PCIe slots",q:"Which expansion slot is the best choice for installing a high-performance graphics adapter card in a modern motherboard?",o:["PCIe x1","PCIe x4","PCIe x16","Legacy PCI"],c:2,e:"PCIe has four slot types x1, x4, x8 and x16, and a graphics card should be installed in a PCIe x16 slot to provide the bandwidth it needs. The x16 slot is the largest and fastest PCIe slot."},
+  {id:40,t:"Panel connector pin 1",q:"Front panel system panel connectors are not keyed, so how can a technician determine the correct orientation of a front panel LED cable?",o:["The cable has a small arrow indicating pin 1 and the motherboard LED pins are marked with a plus sign","LED cables work in either orientation","The colour of the wire always indicates polarity and which wire is the ground return path","The connector can only fit one way by design"],c:0,e:"Each front panel cable usually has a small arrow indicating pin 1, and each pair of LED pins on the motherboard system panel connector has pin 1 marked with a plus sign, allowing correct orientation of the unkeyed connector."},
+  {id:43,t:"BIOS function",q:"What is the primary function of the BIOS chip on a motherboard?",o:["To store permanent user documents","To run a small program that controls communication between the operating system and the hardware","To supply power to the CPU and to regulate the voltage sent to other components","To cool the processor"],c:1,e:"The BIOS is a ROM chip that contains a small program controlling communication between the operating system and the hardware. It performs POST and identifies available drives, memory configuration, expansion slots, ports and power management features."},
+  {id:46,t:"Ohm's Law",q:"Using Ohm's Law, if a circuit has 2 amps of current flowing through a resistance of 5 ohms, what is the voltage?",o:["2.5 V","5 V","10 V","20 V"],c:2,e:"Ohm's Law states V = IR, so voltage equals current multiplied by resistance: 2 amps times 5 ohms equals 10 volts."},
+  {id:49,t:"Power fluctuation",q:"Which type of AC power fluctuation is a sudden increase in voltage that lasts for a short period and exceeds 100 percent of the normal voltage on the line?",o:["Brownout","Blackout","Spike","Noise"],c:2,e:"A spike is a sudden increase in voltage that lasts for a short period and exceeds 100 percent of the normal voltage on a line. A brownout is a reduced voltage lasting a period of time, and a blackout is a complete loss of AC power."},
+  {id:52,t:"Hyper-Threading",q:"Intel processors use Hyper-Threading so that a single CPU performs as though there are two CPUs. How does it achieve this?",o:["By executing multiple pieces of code (threads) simultaneously in the CPU","By doubling the front-side bus width and also increasing the bus clock frequency","By adding a second physical core","By raising the CPU clock speed permanently"],c:0,e:"With Hyper-Threading, multiple pieces of code (threads) are executed simultaneously in the CPU, so a single CPU performs as though there are two CPUs. AMD's equivalent enhancement is HyperTransport, a high-speed connection between the CPU and Northbridge."},
+  {id:55,t:"Integrated GPU",q:"A customer only needs to watch videos and process graphical documents on a budget PC. What is a valid consideration about an integrated GPU for this use?",o:["It is best suited for intense gaming applications at high frame rates with maximum detail settings","It is dependent on system RAM and good for less complex graphics tasks","It has its own dedicated video memory","It produces excessive heat that needs water cooling"],c:1,e:"Integrated GPUs are often embedded on the CPU and are dependent on system RAM. They are good at less complex tasks like watching videos and processing graphical documents, but not best suited for intense gaming. Their benefits are lower cost and less heat."},
+  {id:58,t:"Monitor resolution",q:"A monitor with a resolution of 1920 x 1080 is known by which display standard name?",o:["HD (720p)","FHD (1080p)","QHD (1440p)","UHD (4k)"],c:1,e:"Full High Definition (FHD) corresponds to a 1920 x 1080 resolution and is also known as 1080p. HD is 1280 x 720, QHD is 2560 x 1440, and UHD is 3840 x 2160."},
+  {id:61,t:"Preventive maintenance",q:"Why does a computer in a dusty construction site environment require more preventive maintenance attention than one in a clean office?",o:["Dusty environments allow dust to travel through cooling fans and accumulate inside, reducing airflow and cooling","Construction site computers run a different operating system which is not supported by the company IT policy","Dusty environments always have higher humidity","Office computers do not need any maintenance"],c:0,e:"Dust on the outside of a computer can travel through cooling fans to the inside, and accumulated dust prevents the flow of air and reduces cooling. Hot components are more likely to break down, so dusty environments need more attention."},
+  {id:64,t:"Maintenance planning",q:"Which two factors are the basis for developing a preventive maintenance plan?",o:["Computer location or environment and computer use","Brand of keyboard and mouse","Screen size and speaker wattage","Operating system version and monitor colour and the colour profile that the monitor is set to"],c:0,e:"Preventive maintenance plans are developed based on at least two factors: computer location or environment, and computer use. A high-traffic school network might require extra scanning and removal of malicious software and unwanted files."},
+  {id:67,t:"Troubleshooting step order",q:"A technician has identified a problem and established a theory of probable cause. What is the next step in the six-step troubleshooting process?",o:["Document findings, actions and outcomes","Test the theory to determine the cause","Verify full functionality","Implement preventive measures"],c:1,e:"The six-step process is: identify the problem, establish a theory of probable cause, test the theory to determine the cause, establish a plan of action to resolve the problem and implement the solution, verify full functionality and implement preventive measures, then document findings, actions and outcomes."},
+  {id:70,t:"Power supply problems",q:"A computer fails to power on at all. Which set of causes is most commonly associated with power supply problems?",o:["A faulty power supply, loose connections, and inadequate wattage","Corrupted display drivers that fail to load correctly at boot time","Incorrect mouse settings","A full hard drive"],c:0,e:"Power problems are often caused by a faulty power supply, loose connections, and inadequate wattage. The power supply must provide enough power for all installed components."},
+  {id:73,t:"Motherboard problems",q:"Which causes are most commonly attributed to motherboard and internal component problems?",o:["Incorrect or loose cables, failed components, incorrect drivers, and corrupted updates","Too much RAM installed in the memory slots on the motherboard","High monitor resolution","Dust on the keyboard"],c:0,e:"Motherboard and internal component problems are often caused by incorrect or loose cables, failed components, incorrect drivers, and corrupted updates. These are the listed common causes for this category."},
+  {id:76,t:"Internet tools",q:"Which of the following is an Internet reference tool a technician can use to research a specific hardware problem?",o:["A manufacturer FAQ page","A paper invoice","A screwdriver set","The computer case manual only"],c:0,e:"Internet reference tools include search engines, news groups, manufacturer FAQs, online computer manuals, online forums and technical websites. These are useful for researching specific hardware problems and possible solutions."},
+  {id:79,t:"Inspection checklist",q:"Which items should appear on a basic checklist of internal components to inspect for dust and damage?",o:["CPU heat sink and fan assembly, RAM modules, storage devices, adapter cards, cables, power devices, keyboard and mouse","Only the case colour and logos and the external branding stickers on the front","The desk and chair arrangement","The router placement in the office"],c:0,e:"A basic checklist of components to inspect for dust and damage includes the CPU heat sink and fan assembly, RAM modules, storage devices, adapter cards, cables, power devices, and keyboard and mouse."},
+  {id:82,t:"VLAN",q:"A technician needs to group users by department on the same physical switched network so that each group behaves as if on its own separate switch. Which technology achieves this?",o:["A VLAN","A hub","A VPN","A WLAN"],c:0,e:"A virtual LAN (VLAN) groups users based on administratively defined boundaries such as department or floor, and devices in a VLAN communicate as if attached to the same switch. VLANs reduce broadcast traffic and implement access and security policies between groups."},
+  {id:85,t:"Satellite limitation",q:"Why is standard satellite internet not a good solution for time-sensitive applications such as online gaming, VoIP and video conferencing?",o:["It cannot carry any voice data or any web browsing traffic at all","High latency makes it unsuitable for time-sensitive applications","It requires a wired fibre connection","It only works in urban areas"],c:1,e:"Satellite internet is a broadband technology for remote areas but is not a good solution for time-sensitive applications like gaming, VoIP and video conferencing because of its high latency."},
+  {id:88,t:"Wireless Bluetooth",q:"Which wireless technology operates in the 2.4 to 2.485 GHz range, follows the 802.15.1 standard, and can create a personal area network of up to 7 devices?",o:["Bluetooth","Zigbee mesh networking standard","RFID","Z-Wave"],c:0,e:"Bluetooth can connect up to 7 devices to create a PAN, uses the 802.15.1 standard, and operates in the 2.4 to 2.485 GHz radio frequency range."},
+  {id:91,t:"DHCP",q:"What is the main purpose of a DHCP server on a network?",o:["To translate domain names into IP addresses for client computers on the network","To automatically assign IP addressing information to hosts","To store network messages sent by devices","To balance load between web servers"],c:1,e:"DHCP is the service used by ISPs, network administrators and wireless routers to automatically assign IP addressing information to hosts, so a host has the IP information it needs before sending data. DNS translates names to addresses, and syslog stores network messages."},
+  {id:94,t:"Web protocols",q:"Which protocol and TCP port pair is used by HTTPS for secure web traffic?",o:["HTTP on TCP port 80","HTTPS using SSL or TLS on TCP port 443","FTP on TCP port 21","SMTP on TCP port 25 used for sending email messages"],c:1,e:"HTTPS uses Secure Sockets Layer (SSL) or Transport Layer Security (TLS) and operates on TCP port 443. Plain HTTP operates on TCP port 80."},
+  {id:97,t:"Load balancer",q:"A company runs a popular web service on multiple servers to provide timely content. Which device placed in front of the servers ensures each server is used as much as the others, preventing timeouts and slow responses?",o:["A load balancer","A hub a passive device that repeats a signal","A patch panel","A network tap"],c:0,e:"A load balancer is placed in front of multiple servers providing one service to distribute the demand of requests, ensuring each server is used as much as the others and preventing network timeouts and slow responses."},
+  {id:100,t:"Cable types",q:"A network run passes through an area with heavy electromagnetic and radio frequency interference. Which cable type is the best choice because it is not affected by EMI or RFI?",o:["Unshielded twisted-pair (UTP)","Coaxial cable","Fiber-optic cable","A telephone RJ-11 cable"],c:2,e:"Fiber-optic cables use light to transmit signals and are not affected by EMI or RFI. UTP is prone to EMI and RFI, and coaxial cable is also susceptible to interference compared with fibre."},
+  {id:103,t:"MAC vs IP",q:"A laptop is moved from one network to another. Which statement about its addresses is correct?",o:["The MAC address changes but the IPv4 and IPv6 addresses stay the same","The MAC address stays the same but the IPv4 and IPv6 addresses change","Both the MAC and IP addresses stay the same","Both the MAC and IP addresses change"],c:1,e:"A MAC address is a unique number that is part of the NIC and stays the same when the laptop moves, whereas IP addresses are assigned by the company or internet provider and change when moving to a different network."},
+  {id:106,t:"Static addressing",q:"Which four items of address information are required for a device using static addressing to communicate with other networks and the internet?",o:["IP address, subnet mask, default gateway, and DNS server","MAC address, IP address, SSID, and channel and the wireless channel number used","Subnet mask, SSID, passphrase, and hostname","IP address, hostname, workgroup, and printer name"],c:0,e:"Static address information needed for communication with other networks and the internet includes the IP address, subnet mask, default gateway (the router address) and DNS server, which converts domain names or URLs to IP addresses."},
+  {id:109,t:"NIC driver",q:"A technician installs a wireless NIC and needs to verify that the correct driver is installed and up to date. Which Windows tool should be used?",o:["Device Manager, expanding the Network adapters category","The BIOS setup utility","Command Prompt with the ping command to test connectivity to a remote host","The Windows Firewall settings"],c:0,e:"To view the driver details of a NIC, use Device Manager, expand the Network adapters category, then right-click the specific NIC and choose Properties or Update driver."},
+  {id:112,t:"Router login",q:"What should a technician do immediately after logging into a wireless router for the first time using the default IP address?",o:["Change the default username and password","Disable the SSID broadcast to hide the network from casual users","Set the channel to the highest number","Remove all connected devices"],c:0,e:"After logging into a router with its default IP address, the technician should change the default username and password immediately to improve security before continuing with configuration."},
+  {id:115,t:"NAT",q:"What is the function of Network Address Translation (NAT) for IPv4?",o:["It converts private IPv4 addresses to Internet-routable public IPv4 addresses","It assigns MAC addresses to devices that connect to the network","It encrypts wireless traffic","It translates domain names to IP addresses"],c:0,e:"Network Address Translation (NAT) converts private IPv4 addresses to Internet-routable public IPv4 addresses, allowing many internal devices to share a limited number of public addresses."},
+  {id:118,t:"DMZ",q:"Which network term describes a network that provides services to an untrusted network and often contains servers, and can be created on some wireless routers?",o:["Demilitarized zone (DMZ)","VLAN (VLAN)","PAN","Syslog"],c:0,e:"A demilitarized zone (DMZ) is a network that provides services to an untrusted network and often contains servers. Some wireless routers support the creation of a DMZ."},
+  {id:121,t:"Laptop motherboards",q:"Why are laptop motherboards generally not interchangeable between manufacturers, unlike desktop motherboards?",o:["Laptop motherboards vary by manufacturer and are proprietary","Laptop motherboards all use the same standard form factor","Laptop motherboards are universal across all brands","Desktop motherboards are proprietary but laptop boards are standard"],c:0,e:"Desktop motherboards have standard form factors so boards from different manufacturers fit into common cases, but laptop motherboards vary by manufacturer and are proprietary, so they are not interchangeable."},
+  {id:124,t:"Fn key",q:"What is the purpose of the Function (Fn) key on a laptop keyboard?",o:["It activates a second function on a dual-purpose key","It deletes the last character typed in any application that is currently open","It always opens the Start menu","It only controls the volume"],c:0,e:"The Fn key activates a second function on a dual-purpose key, such as screen brightness, volume, keyboard backlight, touchpad on or off, and WiFi, cellular or Bluetooth toggles."},
+  {id:127,t:"Touchscreen digitizer",q:"Laptops with touchscreens have a special glass attached to the front of the screen. What is this component called?",o:["A digitizer","An inverter that powers the screen backlight","A backlight","A webcam"],c:0,e:"Laptops with touchscreens have a special glass attached to the front of the screen known as a digitizer, which senses the touch input. Backlights and inverters are display lighting components."},
+  {id:130,t:"Wake on LAN",q:"A technician needs the OS to control laptop power states and wants to configure settings such as system states, thermal management and Wake on LAN. Where must ACPI power management mode first be enabled?",o:["In the BIOS or UEFI setup","In the Windows registry only","In the network adapter driver","In the display settings"],c:0,e:"The ACPI power management mode must be enabled in the BIOS or UEFI to allow the OS to configure the power management states. Technicians configure power settings by changing settings in the BIOS or UEFI setup."},
+  {id:133,t:"Smart card readers",q:"Which type of smart card reader requires a physical connection to the card, made by inserting the card into the reader?",o:["A contact reader","A contactless reader","An NFC reader","A wireless reader"],c:0,e:"A contact smart card reader requires a physical connection to the card made by inserting the card into the reader. A contactless reader works on a radio frequency and communicates when the card comes close to the reader."},
+  {id:136,t:"SIM card",q:"What is the primary function of a SIM card in a mobile phone?",o:["It contains information used to authenticate the device to mobile telephone and data providers","It stores the operating system and all of the system files","It cools the processor","It provides the screen backlight"],c:0,e:"A SIM card contains information used to authenticate a device to mobile telephone and data providers, and it can also hold user data such as personal contacts and text messages."},
+  {id:139,t:"iOS sync vs backup",q:"On an iOS device, what is the difference between Backup and Sync when synchronizing with iTunes?",o:["Backup copies personal data from the phone to the computer, while Sync copies new apps, music, video or books between iTunes and the phone","Backup only copies photos and Sync only copies contacts and calendar entries on the device","Backup requires a USB cable and Sync requires Wi-Fi only","There is no difference between the two"],c:0,e:"Backup copies personal data from the phone to the computer, including application settings, text messages and voicemails, while Sync copies new apps, music, video or books from iTunes to the phone and from the phone to iTunes, resulting in full synchronization on both devices."},
+  {id:142,t:"Colour model",q:"Which set of colours is used by printers for colour output, with black as the key or base colour for inkjets?",o:["Cyan, magenta and yellow (CMY) with black as the key colour","Red, green and blue (RGB) which is the model used by computer monitors","Yellow, green and cyan only","Magenta, cyan and white"],c:0,e:"Printers use cyan, magenta and yellow (CMY), and black is the base or key colour for inkjets. This differs from the RGB colour model used by monitors."},
+  {id:145,t:"Scan to destinations",q:"Which three destinations are the most popular places to which an MFD can direct scans on a network?",o:["Scan to cloud, scan to folder, and scan to email","Scan to CD, scan to floppy, and scan to tape and scan to magnetic tape media","Scan to printer, scan to fax, and scan to USB","Scan to memory, scan to cache, and scan to ROM"],c:0,e:"An MFD can be configured to provide scanning and copying to network locations, with three popular destinations: scan to cloud (upload to cloud storage), scan to folder (a network folder on the LAN) and scan to email (a file attachment)."},
+  {id:148,t:"Laser printing steps",q:"In the seven-step laser printing process, what happens during the fusing step?",o:["Heat and pressure are applied to the paper","The drum is conditioned for a new image","The image is written to the drum with a laser beam","Toner is applied to the image on the drum"],c:0,e:"During fusing, heat and pressure are applied to the paper to permanently bond the toner to it. The full process is processing, charging, exposing, developing, transferring, fusing and cleaning."},
+  {id:151,t:"Impact printers",q:"Which capability is an advantage of an impact printer?",o:["It can print carbon copies","It is completely silent","It produces high-resolution graphics","It prints in full colour easily"],c:0,e:"Impact printers can use regular or continuous feed paper and can print carbon copies, and their ribbons are less expensive supplies than other types. Disadvantages include being noisy, low-resolution graphics and limited colour capabilities."},
+  {id:154,t:"3D printers",q:"What are 3D printers also known as, and what material do they typically use?",o:["Additive manufacturing machines that use plastic filament or other media","Subtractive manufacturing machines that use toner machines that use toner powder","Impact printers that use inked ribbons","Thermal printers that use heat-sensitive paper"],c:0,e:"3D printers are used to create three-dimensional objects, use plastic filament or other media, and are also known as additive manufacturing machines because they build objects by adding material."},
+  {id:157,t:"Printer sharing security",q:"Which potential issues should be considered when sharing printers on a network?",o:["Hard drive caching, user authentication, and data privacy","Screen brightness and resolution and the display resolution settings","Toner colour and page count","Paper tray size and feeder speed"],c:0,e:"Potential data privacy and security issues when sharing printers include hard drive caching, user authentication and data privacy. These should be managed to avoid exposing sensitive data."},
+  {id:160,t:"Thermal maintenance",q:"Which procedure is part of performing preventive maintenance on a thermal printer?",o:["Clean the heating element with a cotton swab dampened with isopropyl alcohol","Replace the print ribbon cartridge and dispose of the old one","Install a new toner cartridge","Replace the imaging drum"],c:0,e:"Preventive maintenance on a thermal printer includes replacing the paper, cleaning the heating element with a cotton swab dampened with isopropyl alcohol, and using compressed air or a lint-free cloth to remove debris."},
+  {id:163,t:"Traditional servers",q:"Which of the following is a disadvantage of the traditional dedicated-server approach to delivering applications and services?",o:["Wasted resources, single point of failure, and server sprawl","Lower energy consumption across the whole data centre","Better use of resources","Faster provisioning"],c:0,e:"Traditional dedicated servers with large amounts of RAM, powerful CPUs and multiple storage devices have disadvantages including wasted resources, a single point of failure, and server sprawl. Virtualization addresses these problems."},
+  {id:166,t:"Type 1 hypervisor",q:"Which type of hypervisor runs directly on the hardware of a host and is typically used for server virtualization in data centres and cloud computing?",o:["Type 1 (native) hypervisor","Type 2 (hosted) hypervisor that runs on top of a host OS","A guest operating system","A virtual machine image"],c:0,e:"Type 1 (native) hypervisors run directly on the hardware of a host and manage the allocation of system resources to VMs. They are typically used with server virtualization, including data centres and cloud computing."},
+  {id:169,t:"Cloud definition",q:"How does cloud computing deliver services to users?",o:["It provides on-demand delivery of computing services over the Internet","It requires all services to run on a single local server server that is located on site","It only provides storage, never computing power","It is limited to offline use"],c:0,e:"Cloud computing provides users with on-demand delivery of computing services over the Internet. Cloud services are owned and hosted by service providers, and organisations typically pay a usage fee based on user access and usage."},
+  {id:172,t:"SDN layers",q:"In the software-defined networking (SDN) model, which layer decides how traffic is prioritised and where to switch it?",o:["The application layer","The infrastructure layer","The control layer only","The data link layer"],c:0,e:"In the SDN model there are three layers: the application layer at the top, the control layer in the centre, and the infrastructure layer at the bottom. The application layer uses logic to decide how traffic is prioritised and where to switch it."},
+  {id:175,t:"VM image",q:"A technician needs to preserve a virtual machine so it can be restarted later exactly as it was. How is this achieved?",o:["An image of the VM can be saved as a file and restarted when required","The VM must be kept running continuously without ever shutting it down","The host OS must be reinstalled","The physical disk must be removed"],c:0,e:"An image of a VM can be saved as a file and then re-started when required. This portability is a key benefit of virtualisation, allowing VMs to be stored, moved and restored."},
+  {id:178,t:"Cloud usage fee",q:"How do organisations typically pay cloud providers for cloud services?",o:["They pay a usage fee based on user access and usage of services","They buy the physical hardware outright and host the hardware themselves","They pay a single flat fee regardless of usage","Cloud services are always free"],c:0,e:"Organisations typically pay cloud providers a usage fee based on user access and usage of services, which reflects the measured and metered nature of cloud computing."}
+];
+
+var NS = 'ite8c1_a_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed ITE8 Core 1 Practice Paper A.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>
