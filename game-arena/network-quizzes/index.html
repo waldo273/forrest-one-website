@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Arena — Training.Forrest.One</title>
+<title>Network Quizzes — Training.Forrest.One</title>
 <style>
 /* ─── Site Navigation ─── */
 :root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a}
@@ -27,36 +27,36 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
 }
 
 /* ─── Hero ─── */
-.hero{min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
-.hero h1{font-size:2.5rem;margin-bottom:.5rem}
+.hero{min-height:36vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
+.hero h1{font-size:2.2rem;margin-bottom:.5rem}
 .hero h1 .highlight{color:var(--accent-text);font-weight:700}
-.hero .subtitle{font-size:1.1rem;color:var(--text-dim);max-width:600px;margin:0 auto}
+.hero .subtitle{font-size:1.05rem;color:var(--text-dim);max-width:620px;margin:0 auto}
+.hero .crumb{margin-top:1rem;font-size:.85rem;color:var(--text-muted)}
+.hero .crumb a{color:var(--accent-text);text-decoration:none}
+.hero .crumb a:hover{text-decoration:underline}
 
-/* ─── Game Tiles ─── */
-.game-grid{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
-.game-tile{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.game-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(168,28,28,0.30)}
-.game-tile:focus{outline:3px solid var(--accent2);outline-offset:2px}
-.game-tile .icon{font-size:2.5rem;margin-bottom:1rem}
-.game-tile h3{color:var(--accent2);font-size:1.1rem;margin-bottom:.5rem}
-.game-tile .desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;flex:1}
-.game-tile .tags{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
-.game-tile .tag{background:#2c313a;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-.game-tile .play-badge{display:inline-block;margin-top:.8rem;color:var(--accent2);font-size:.8rem;font-weight:600}
-.game-tile:hover .play-badge{color:var(--accent-text)}
-.coming-soon{opacity:.5;pointer-events:none}
-.coming-soon .tag{background:rgba(168,28,28,0.18);color:#e3503a}
+/* ─── Quiz Tiles ─── */
+.quiz-grid{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+.quiz-tile{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.quiz-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(168,28,28,0.30)}
+.quiz-tile:focus{outline:3px solid var(--accent2);outline-offset:2px}
+.quiz-tile .icon{font-size:2.5rem;margin-bottom:1rem}
+.quiz-tile h3{color:var(--accent2);font-size:1.1rem;margin-bottom:.5rem}
+.quiz-tile .desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;flex:1}
+.quiz-tile .meta{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
+.quiz-tile .tag{background:#2c313a;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.quiz-tile .tag.hot{background:rgba(168,28,28,0.18);color:#e3503a}
+.quiz-tile .play-badge{display:inline-block;margin-top:.8rem;color:var(--accent2);font-size:.8rem;font-weight:600}
+.quiz-tile:hover .play-badge{color:var(--accent-text)}
 
 /* ─── Footer ─── */
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.85rem;background:var(--bg)}
-footer .socials{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem}
-footer .socials a{color:var(--text-muted);text-decoration:none;font-size:1.2rem;transition:color .2s}
-footer .socials a:hover{color:var(--accent-text)}
+footer .container{max-width:1200px;margin:0 auto}
 
 @media(max-width:768px){
   .hero{padding:6rem 1.5rem 2rem}
   .hero h1{font-size:1.8rem}
-  .game-grid{padding:2rem 1rem;grid-template-columns:1fr}
+  .quiz-grid{padding:2rem 1rem;grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -80,36 +80,38 @@ footer .socials a:hover{color:var(--accent-text)}
 
 <section class="hero">
   <div>
-    <h1><span class="highlight">Game Arena</span></h1>
-    <p class="subtitle">Interactive training games and network simulators to sharpen your CCNA skills</p>
+    <h1><span class="highlight">Network Quizzes</span></h1>
+    <p class="subtitle">Interactive knowledge quizzes to test your understanding of IP addressing and subnetting. Answer, then read the per-option explanation before moving on.</p>
+    <p class="crumb"><a href="/game-arena/">Game Arena</a> &#8594; Network Quizzes</p>
   </div>
 </section>
 
-<section class="game-grid">
-  <a href="/game-arena/vlsm-game/" class="game-tile">
-    <div class="icon">&#9733;</div>
-    <h3>VLSM Subnetting Game</h3>
-    <p class="desc">Master Variable Length Subnet Masking across three difficulty levels. Solve randomised VLSM challenges using /24, /16, and /8 networks. Complete 5 in a row to unlock the next level. Track your score, earn stars, and compete against your best streak.</p>
-    <div class="tags">
-      <span class="tag">CCNA 1</span>
-      <span class="tag">Subnetting</span>
-      <span class="tag">VLSM</span>
-      <span class="tag">Levels 1-3</span>
-    </div>
-    <span class="play-badge">Play Now &rarr;</span>
-  </a>
-
-  <a href="/game-arena/network-quizzes/" class="game-tile">
+<section class="quiz-grid">
+  <a href="/game-arena/network-quizzes/ip-addressing/" class="quiz-tile">
     <div class="icon">&#127891;</div>
-    <h3>Network Quizzes</h3>
-    <p class="desc">Test your IP addressing knowledge. Two interactive quizzes: a foundation quiz covering IPv4 structure, CIDR and subnet masks, and a harder advanced quiz with applied subnetting tasks across Class A, B and C ranges, plus VLSM and route aggregation.</p>
-    <div class="tags">
+    <h3>IP Addressing Quiz</h3>
+    <p class="desc">Test the fundamentals of IPv4 addressing: address structure, subnet masks, CIDR notation, and host counts. Each question links to the micro-teach topic it covers, with clear explanations after every answer.</p>
+    <div class="meta">
       <span class="tag">CCNA 1</span>
       <span class="tag">IPv4</span>
-      <span class="tag">Subnetting</span>
-      <span class="tag">2 Quizzes</span>
+      <span class="tag">Foundation</span>
+      <span class="tag">20 Qs</span>
     </div>
-    <span class="play-badge">Explore Quizzes &rarr;</span>
+    <span class="play-badge">Take the Quiz &rarr;</span>
+  </a>
+
+  <a href="/game-arena/network-quizzes/ip-addressing-advanced/" class="quiz-tile">
+    <div class="icon">&#127919;</div>
+    <h3>IP Addressing Advanced Quiz</h3>
+    <p class="desc">A harder test with applied subnetting tasks across Class A, B and C ranges, plus VLSM and route aggregation. Work out network addresses, broadcast addresses and usable host ranges by hand.</p>
+    <div class="meta">
+      <span class="tag">CCNA 1</span>
+      <span class="tag">Subnetting</span>
+      <span class="tag">Advanced</span>
+      <span class="tag hot">Harder</span>
+      <span class="tag">20 Qs</span>
+    </div>
+    <span class="play-badge">Take the Quiz &rarr;</span>
   </a>
 </section>
 

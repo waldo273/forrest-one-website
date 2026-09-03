@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Micro-teach · IP Addressing — Advanced Quiz</title>
+<style>
+:root{--red:#A81C1C;--red-d:#7F1414;--red-l:#C22828;--ink:#141414;--panel:#171717;
+--card:#1C1C1C;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#3A3A3A;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#F3D9D9}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#C62828;background:#331414}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#331414;border:1px solid #C62828;color:#F3D9D9}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#F0A5A5}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #262626 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.mono{font-family:"Courier New",monospace;letter-spacing:.5px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="start" class="card">
+  <div class="start-ico">&#129302;</div>
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">IP Addressing — Advanced Quiz</h1>
+  <p style="margin:0 0 14px;">A harder IP Addressing knowledge quiz with applied subnetting tasks across Class A, B and C ranges. Answer, then read the per-option explanation before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Topic</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Micro-teach · IP Addressing · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [
+/* ---- Topic 1: IPv4 structure (harder theory) ---- */
+{"d": "1", "a": "IPv4 structure", "c": 0, "q": "How many host addresses are represented by the host portion when an IPv4 address carries a /22 mask?", "o": ["1024 addresses", "512 addresses", "2048 addresses", "4096 addresses"], "x": ["A /22 leaves 10 host bits; 2 to the power 10 is 1024 total addresses.", "512 would require only 9 host bits, i.e. a /23.", "2048 would need 11 host bits, i.e. a /21.", "4096 would need 12 host bits, i.e. a /20."]},
+{"d": "1", "a": "IPv4 structure", "c": 2, "q": "Which octet of a Class B address determines the boundary between network and host under classful rules?", "o": ["The first octet", "The third octet", "After the second octet", "The fourth octet, which is the host field"], "x": ["The first octet fixes the class, not the boundary.", "In a default Class B (/16), the second octet is still network and the boundary falls after it.", "Default Class B boundary is after the second octet (16 network bits).", "The fourth octet is entirely host under the default Class B mask."]},
+{"d": "1", "a": "IPv4 structure", "c": 1, "q": "What is the effect of a /31 mask on a point-to-point link?", "o": ["It provides 2 usable hosts plus a broadcast", "It gives exactly 2 hosts, no network or broadcast", "It is invalid for IPv4 point-to-point links by RFC 3021", "It provides 62 usable host addresses"], "x": ["RFC 3021 defines /31 for point-to-point links, giving exactly 2 host addresses.", "Correct: a /31 leaves 1 host bit, giving 2 addresses; the network and broadcast addresses are reused as usable hosts.", "RFC 3021 makes /31 valid, though many exam contexts still use /30.", "62 usable hosts is a /26, not a /31."]},
+{"d": "1", "a": "IPv4 structure", "c": 3, "q": "A host is configured with 172.16.4.55/255.255.255.0. In which subnet does it belong and what is its directed broadcast address?", "o": ["Subnet 172.16.0.0, broadcast 172.16.255.255", "Subnet 172.16.4.0, broadcast 172.16.4.255", "Subnet 172.16.4.55, broadcast 172.16.4.55", "Subnet 172.16.4.0, broadcast 172.16.3.255"], "x": ["A /24 boundary is after the third octet, so the network is 172.16.4.0, not 172.16.0.0.", "Correct: the third octet is the network field under /24, and the directed broadcast is 172.16.4.255.", "A single host cannot be its own subnet; the host field must be zeroed for the network address.", "The broadcast must be the last address of the block, 172.16.4.255, not 172.16.3.255."]},
+/* ---- Topic 2: CIDR & subnetting theory ---- */
+{"d": "2", "a": "CIDR & subnetting", "c": 2, "q": "What CIDR notation corresponds to mask 255.255.254.0?", "o": ["/22", "/24", "/23", "/21"], "x": ["255.255.254.0 = 8+8+7 bits = 23 network bits, so /23, not /22.", "A /24 is 255.255.255.0, one bit shorter than /23.", "Correct: 255.255.254.0 has 23 contiguous ones.", "/21 is 255.255.248.0, which borrows one more bit than /23."]},
+{"d": "2", "a": "CIDR & subnetting", "c": 1, "q": "How many usable host addresses are available on a /26 subnet?", "o": ["64", "62", "126", "30"], "x": ["64 is the total block size, not the usable count.", "Correct: /26 leaves 6 host bits; 2^6 − 2 = 62 usable.", "126 usable is a /25, one bit longer.", "30 usable is a /27."]},
+{"d": "2", "a": "CIDR & subnetting", "c": 3, "q": "Which of these host addresses is NOT valid in the subnet 192.168.10.64/26?", "o": ["192.168.10.65", "192.168.10.100", "192.168.10.125", "192.168.10.126"], "x": ["65 is the first usable host in this subnet.", "100 falls within the 64–127 block and is usable.", "125 is a valid host address here.", "126 is the directed broadcast for this /26 block, so it is not a usable host."]},
+{"d": "2", "a": "CIDR & subnetting", "c": 0, "q": "What is the block size (range of network addresses) between successive subnets when the mask is /28?", "o": ["16", "32", "8", "64"], "x": ["A /28 leaves 4 host bits, so each subnet spans 2^4 = 16 addresses.", "32 is the block for a /27.", "8 is the block for a /29.", "64 is the block for a /26."]},
+/* ---- Topic 3: Class C subnetting tasks ---- */
+{"d": "3", "a": "Class C subnetting", "c": 1, "q": "You divide 192.168.20.0/24 into /28 subnets. What is the network address of the 3rd subnet (counting from 0) and how many usable hosts does each /28 carry?", "o": ["192.168.20.16, 16 hosts", "192.168.20.32, 14 hosts", "192.168.20.48, 14 hosts", "192.168.20.32, 16 hosts"], "x": ["192.168.20.16 is the 2nd subnet (index 1), not the 3rd.", "Correct: block is 16, so subnets are .0, .16, .32; each /28 has 2^4−2 = 14 usable hosts.", "192.168.20.48 would be the 4th subnet (index 3).", "Usable hosts must be 14, not 16, because network and broadcast are reserved."]},
+{"d": "3", "a": "Class C subnetting", "c": 3, "q": "You need 5 subnets in 192.168.1.0/24, each carrying up to 25 hosts. Which mask satisfies the requirement with the least waste?", "o": ["/26", "/27", "/25", "/28"], "x": ["/26 gives 4 subnets, which is fewer than the 5 needed.", "/27 gives 8 subnets of 30 usable hosts each; this fits both constraints with least waste.", "/25 gives only 2 subnets.", "/28 gives 16 subnets but only 14 usable hosts each, below the 25-host need."]},
+{"d": "3", "a": "Class C subnetting", "c": 2, "q": "What is the valid host range for the subnet 192.168.5.192/27?", "o": ["192.168.5.192 to 192.168.5.222", "192.168.5.193 to 192.168.5.254", "192.168.5.193 to 192.168.5.222", "192.168.5.224 to 192.168.5.254"], "x": ["The first host is .193, not .192, because .192 is the network address.", "This range crosses into the next subnet and includes broadcast .223.", "Correct: the /27 block is 192.168.5.192–.223; hosts run .193–.222.", "224 is the start of the next subnet, not this one."]},
+/* ---- Topic 4: Class B subnetting tasks ---- */
+{"d": "4", "a": "Class B subnetting", "c": 0, "q": "You apply a /20 mask to 172.16.0.0. How many subnets does this create and what is the block size between their network addresses?", "o": ["16 subnets, block 16", "16 subnets, block 256", "32 subnets, block 16", "8 subnets, block 32"], "x": ["Correct: from the default /16, 4 bits are borrowed, giving 2^4 = 16 subnets; the third octet advances in steps of 16.", "Block size is 16 in the third octet, not 256.", "2^4 borrowed bits is 16, not 32.", "4 borrowed bits gives 16, not 8, subnets."]},
+{"d": "4", "a": "Class B subnetting", "c": 1, "q": "172.20.0.0 is subnetted with /22. What is the broadcast address of the subnet that contains the host 172.20.13.77?", "o": ["172.20.12.255", "172.20.15.255", "172.20.13.255", "172.20.14.255"], "x": ["A /22 block in the third octet advances by 4 (blocks 0–3, 4–7, 8–11, 12–15); the block starting 12 runs to broadcast .15.255.", "Correct: host .13.77 sits in the block 172.20.12.0–172.20.15.255, so the broadcast is 172.20.15.255.", "172.20.13.255 would be a /24-style broadcast, not /22.", "172.20.14.255 is inside the block but is not its final address."]},
+{"d": "4", "a": "Class B subnetting", "c": 3, "q": "How many usable host addresses does a single /19 subnet provide?", "o": ["2046", "4094", "16382", "8190"], "x": ["2046 would be a /21, not a /19.", "4094 would be a /20, one bit shorter.", "16382 would be a /18, which gives a larger range.", "Correct: /19 leaves 13 host bits; 2^13 − 2 = 8190 usable."]},
+/* ---- Topic 5: Class A subnetting tasks ---- */
+{"d": "5", "a": "Class A subnetting", "c": 2, "q": "10.0.0.0 is subnetted with a /11 mask. What is the network address of the 3rd subnet (counting from 0) and how many total subnets exist?", "o": ["10.0.0.0, 8 subnets", "10.16.0.0, 8 subnets", "10.32.0.0, 8 subnets", "10.32.0.0, 16 subnets"], "x": ["10.0.0.0 is the first subnet (index 0).", "10.16.0.0 would be the 2nd subnet under a /12 block, not /11.", "Correct: /11 borrows 3 bits from the default /8, giving 8 subnets; the second octet advances in steps of 32, so index 2 is 10.32.0.0.", "Borrowing 3 bits gives 8 subnets, not 16."]},
+{"d": "5", "a": "Class A subnetting", "c": 3, "q": "You need 500 subnets from 10.0.0.0/8, and you want the largest possible subnets. What mask is required, and how many usable hosts does each subnet carry?", "o": ["/18, 16382 hosts", "/19, 8190 hosts", "/16, 65534 hosts", "/17, 32766 hosts"], "x": ["/18 borrows 10 bits (1024 subnets); it works but wastes address space when /17 already fits.", "/19 borrows 11 bits (2048 subnets); still more than needed.", "/16 borrows 8 bits, giving only 256 subnets, below the 500 required.", "Correct: 500 needs 9 borrowed bits (2^9 = 512); the mask is /17 and each subnet leaves 15 host bits, so 2^15 − 2 = 32766 usable hosts."]},
+{"d": "5", "a": "Class A subnetting", "c": 3, "q": "What is the valid host range of the first subnet under 10.0.0.0/12 (excluding the zero subnet if not used)?", "o": ["10.0.0.0 to 10.0.15.255", "10.1.0.1 to 10.16.0.254", "10.0.1.1 to 10.0.15.255", "10.0.0.1 to 10.0.15.254"], "x": ["10.0.0.0 is the network address, not a usable host.", "10.1.0.0 is a different subnet block under /12.", "10.0.1.1 skips the first valid host and .255 is the broadcast.", "Correct: a /12 block spans 16 in the second octet, so the first subnet is 10.0.0.0–10.0.15.255; hosts run 10.0.0.1 to 10.0.15.254."]},
+/* ---- Topic 6: VLSM & aggregation (harder applied) ---- */
+{"d": "6", "a": "VLSM & aggregation", "c": 1, "q": "Four sites use 192.168.0.0/24, 192.168.1.0/24, 192.168.2.0/24 and 192.168.3.0/24. What single summary route can advertise them all?", "o": ["192.168.0.0/25", "192.168.0.0/22", "192.168.0.0/23", "192.168.0.0/24"], "x": ["A /25 covers only part of one site.", "Correct: the four /24s sit in the contiguous block 192.168.0.0–192.168.3.255, which needs a /22 mask.", "A /23 covers only 192.168.0.0–1.255, missing two sites.", "A /24 covers a single site only."]},
+{"d": "6", "a": "VLSM & aggregation", "c": 0, "q": "In VLSM design, why is it essential to assign larger subnets before smaller ones?", "o": ["To fill the gaps left between larger blocks", "Smaller subnets should be placed first to save address space", "To avoid fragmenting the free space into unusable gaps", "It makes no difference to the design"], "x": ["This is the opposite of correct practice; filling gaps leaves no contiguous block for large needs.", "Placing small blocks first fragments the space and blocks larger allocations.", "Correct: allocating big blocks first keeps the remaining free space contiguous so smaller blocks can still find room.", "Order matters in VLSM to avoid an unassignable, fragmented remainder."]},
+{"d": "6", "a": "VLSM & aggregation", "c": 2, "q": "A /26 block needs to be divided to give two subnets of 30 usable hosts and one of 6 usable hosts. What masks do you use, in what order?", "o": ["Two /27s then one /28", "One /27 then two /29s", "Two /27s then one /29", "Three /28s"], "x": ["A /28 gives only 14 usable hosts, not the 6 needed and not 30.", "This order is backwards and does not give two 30-host subnets.", "Correct: two /27s each give 30 usable hosts; the remaining /27 can then be split into /29s, one of which gives 6 usable hosts.", "Three /28s give only 14 usable hosts each, below 30."]}
+];
+var order = [], idx = 0, score = 0;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Topic '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    lab.onclick = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  if(labels[0].classList.contains('locked')){ return; } /* already answered — do not re-score */
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Outstanding — you have IP addressing and subnetting mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for addressing, but review the missed topics.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the session notes, especially subnetting, and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

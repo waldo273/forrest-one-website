@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Micro-teach · IP Addressing — Quiz</title>
+<style>
+:root{--red:#A81C1C;--red-d:#7F1414;--red-l:#C22828;--ink:#141414;--panel:#171717;
+--card:#1C1C1C;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#3A3A3A;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#F3D9D9}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#C62828;background:#331414}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#331414;border:1px solid #C62828;color:#F3D9D9}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#F0A5A5}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #262626 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="start" class="card">
+  <div class="start-ico">&#129302;</div>
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">IP Addressing Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">IP Addressing — interactive learning tool. Each question is linked to the micro-teach topic it tests (e.g. 2 · CIDR & Subnetting). Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Topic</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Micro-teach · IP Addressing · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "1", "a": "IPv4 structure", "c": 0, "q": "How many bits long is an IPv4 address?", "o": ["32 bits", "64 bits", "16 bits", "128 bits"], "x": ["IPv4 is 32 bits, written as four octets of 8 bits in dotted-decimal.", "64 bits is not an IPv4 length — IPv6 is 128 bits.", "16 bits is far too small for a routable address.", "128 bits is the length of an IPv6 address, not IPv4."]}, {"d": "1", "a": "IPv4 structure", "c": 2, "q": "What marks the boundary between the network and host portions of an IPv4 address?", "o": ["The first octet", "The broadcast address", "The subnet mask", "The default gateway"], "x": ["The first octet identifies the old class, not the current boundary.", "The broadcast address is the last address of a range, not a boundary marker.", "The subnet mask marks where the network/host boundary sits.", "The default gateway is the exit router, not a boundary marker."]}, {"d": "1", "a": "IPv4 structure", "c": 1, "q": "Why did CIDR replace classful addressing?", "o": ["It made addresses shorter and easier to type and remember", "It removed the wasted space of fixed classes", "It added encryption", "It enabled IPv6"], "x": ["CIDR did not change address length — both are 32-bit IPv4.", "Fixed classes wasted vast ranges; CIDR let the boundary fall at any bit.", "Encryption is a function of higher layers, not addressing.", "IPv6 is a separate address family, not a CIDR feature."]}, {"d": "2", "a": "CIDR & subnetting", "c": 0, "q": "What is the CIDR notation for mask 255.255.255.240?", "o": ["/28", "/26", "/30", "/24"], "x": ["255.255.255.240 has 28 network bits — the /28 mask.", "/26 is 255.255.255.192, which borrows fewer bits.", "/30 is 255.255.255.252, a point-to-point mask.", "/24 is 255.255.255.0, the base Class C mask."]}, {"d": "2", "a": "CIDR & subnetting", "c": 3, "q": "How many usable hosts does a /29 subnet provide?", "o": ["30", "14", "8", "6"], "x": ["30 is the usable host count for a /27, not a /29.", "14 is the usable count for a /28.", "8 is the total address count, before subtracting network and broadcast.", "/29 has 3 host bits: 2^3 − 2 = 6 usable hosts."]}, {"d": "2", "a": "CIDR & subnetting", "c": 2, "q": "Which two addresses in a subnet can never be assigned to a host?", "o": ["The gateway and the DNS server on the subnet", "The first two addresses", "The network and broadcast addresses", "The highest and lowest usable"], "x": ["The gateway and DNS are real assignable addresses on the subnet.", "The second address is assignable — only the first is the network ID.", "The first address is the network ID and the last is the broadcast — neither is assignable.", "The highest usable and lowest usable addresses are both assignable."]}, {"d": "2", "a": "CIDR & subnetting", "c": 1, "q": "Borrow 2 bits from a /24. How many subnets of what size result?", "o": ["2 subnets of 128 hosts in total", "4 subnets of 62 usable hosts", "8 subnets of 30 hosts", "16 subnets of 14 hosts"], "x": ["2^n with n=2 gives 4 subnets, not 2.", "2^2 = 4 subnets, and with 6 host bits 2^6 − 2 = 62 usable hosts each.", "That is the result of borrowing 3 bits, not 2.", "That is the result of borrowing 4 bits, not 2."]}, {"d": "2", "a": "CIDR & subnetting", "c": 0, "q": "What is the network address of 192.168.10.50/28?", "o": ["192.168.10.48", "192.168.10.32", "192.168.10.0", "192.168.10.64"], "x": ["/28 has a block size of 16; 50 falls in the .48–.63 range, so the network is .48.", ".32 is the start of the previous 16-address block.", ".0 is the start of the first block, not the one holding 50.", ".64 is the start of the next block after 50."]}, {"d": "3", "a": "VLSM", "c": 3, "q": "What is the governing rule when designing a VLSM scheme?", "o": ["Allocate the smallest requirement first", "Use equal-sized subnets", "Start at the broadcast address", "Allocate the largest requirement first"], "x": ["Small-first fragments the address space and can strand large segments.", "Equal-sized subnets defeat the purpose of VLSM.", "Allocation always starts at the network address, not the broadcast.", "Largest-first prevents fragmentation and guarantees the big segments fit."]}, {"d": "3", "a": "VLSM", "c": 2, "q": "A point-to-point WAN link needs two addresses. Which mask is the efficient choice?", "o": ["/24", "/28", "/30", "/26"], "x": ["/24 wastes 252 of its 254 usable addresses on a link.", "/28 gives 14 usable hosts — far more than a link needs.", "/30 gives exactly 2 usable hosts — the point-to-point link mask.", "/26 gives 62 usable hosts, wasteful for a two-address link."]}, {"d": "3", "a": "VLSM", "c": 1, "q": "How does subnet segmentation act as a security control?", "o": ["It speeds up routing", "It limits the blast radius of a compromise", "It encrypts traffic", "It replaces firewalls and other access controls"], "x": ["Segmentation is about isolation, not routing speed.", "A compromised host can only reach its own zone if the firewall denies the others.", "Encryption is a separate control at a different layer.", "Segmentation complements firewalls; it does not replace them."]}, {"d": "4", "a": "IPv6", "c": 1, "q": "How many bits long is an IPv6 address?", "o": ["32 bits", "128 bits", "64 bits", "256 bits"], "x": ["32 bits is IPv4, not IPv6.", "IPv6 uses 128-bit addresses in eight groups of four hex digits.", "64 bits is a common subnet identifier length, not the whole address.", "256 bits is not an IPv6 address length."]}, {"d": "4", "a": "IPv6", "c": 0, "q": "Which IPv6 prefix is link-local, valid only on its own subnet?", "o": ["fe80::/10", "2000::/3 global unicast", "fc00::/7", "ff00::/8"], "x": ["fe80::/10 is the link-local prefix, auto-assigned and never routed.", "2000::/3 is global unicast — routable on the public internet.", "fc00::/7 is unique local — the IPv6 private range.", "ff00::/8 is multicast, for one-to-many delivery."]}, {"d": "4", "a": "IPv6", "c": 3, "q": "How many times may the double colon (::) appear in an IPv6 address?", "o": ["As many times as needed", "Twice", "Three times", "Once"], "x": ["Multiple double colons would make the address ambiguous.", "Two double colons is ambiguous — only one run may be compressed.", "Three is never valid.", "One contiguous run of zero groups becomes :: — once only."]}, {"d": "4", "a": "IPv6", "c": 2, "q": "Which address type replaces broadcast in IPv6?", "o": ["Anycast", "Unicast", "Multicast", "Link-local"], "x": ["Anycast routes to the nearest of many hosts, not a replacement for broadcast.", "Unicast is one-to-one delivery, not a broadcast replacement.", "IPv6 has no broadcast — multicast (ff00::/8) replaces it.", "Link-local is an addressing scope, not a delivery replacement."]}, {"d": "4", "a": "IPv6", "c": 1, "q": "What is the security risk of running dual-stack?", "o": ["IPv6 is slower than IPv4", "IPv6 traffic can bypass IPv4-only ACLs", "IPv6 addresses cannot be logged or traced easily", "Dual-stack disables encryption"], "x": ["Performance is not the security concern of dual-stack.", "IPv6 traffic can slip past ACLs that filter only IPv4 — a quiet open door.", "IPv6 traffic is fully loggable and observable.", "Dual-stack does not affect encryption."]}, {"d": "4", "a": "IPv6", "c": 0, "q": "What does 2001:db8:85a3::8a2e:370:7334 use the double colon to replace?", "o": ["A contiguous run of zero groups", "Leading zeros in one group of the address", "A broadcast address", "A subnet mask"], "x": ["The :: compresses one contiguous run of all-zero groups.", "Leading zeros are dropped within a group, not replaced by ::.", "IPv6 has no broadcast addresses.", "Masks are expressed with /n notation, not the double colon."]}, {"d": "3", "a": "VLSM", "c": 2, "q": "An office needs 50 hosts for engineering. Which mask is the efficient fit?", "o": ["/28", "/29", "/26", "/24"], "x": ["/28 gives 14 usable hosts — too few for 50.", "/29 gives only 6 usable hosts.", "/26 gives 62 usable hosts, the smallest mask that fits 50.", "/24 gives 254 hosts — far more than the 50 needed, wasting space."]}, {"d": "1", "a": "IPv4 structure", "c": 2, "q": "For 192.168.1.10/24, which part is the network?", "o": ["The last octet", "The whole address including host bits", "192.168.1", "The address with a /8 mask applied"], "x": ["The last octet is the host portion under a /24.", "The whole address includes the host bits, not just the network.", "Under /24 the first three octets are the network: 192.168.1.", "A /8 mask is a different boundary, not the /24 in question."]}, {"d": "1", "a": "IPv4 structure", "c": 0, "q": "Which of these is a private RFC 1918 address range?", "o": ["192.168.1.0/16", "8.8.8.0/24", "127.0.0.0/8", "169.254.0.0/16"], "x": ["192.168.0.0/16 is one of the three RFC 1918 private ranges (with 10.0.0.0/8 and 172.16.0.0/12).", "8.8.8.0/24 is a public address block, not a private range.", "127.0.0.0/8 is loopback, not a private range.", "169.254.0.0/16 is APIPA/link-local, a separate reserved range."]}];
+var order = [], idx = 0, score = 0;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Topic '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    lab.onclick = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  if(labels[0].classList.contains('locked')){ return; } /* already answered — do not re-score */
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this topic mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this topic.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>
