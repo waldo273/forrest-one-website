@@ -19,6 +19,26 @@
       --text-muted: #9aa3af;
       --border: #2c313a;
       --border-hover: #3d434d;
+      --nav-bg: rgba(20, 20, 20, 0.95);
+      --nav-bg-solid: rgba(20, 20, 20, 0.97);
+    }
+
+    /* ─── Light Theme ─── */
+    [data-theme="light"] {
+      --bg: #f4f5f7;
+      --bg-alt: #e9ebee;
+      --bg-card: #ffffff;
+      --accent: #A81C1C;
+      --accent-text: #a3201b;
+      --accent2: #8f1a16;
+      --accent3: #b3271f;
+      --text: #1f2328;
+      --text-dim: #41474f;
+      --text-muted: #6b7280;
+      --border: #d5d9de;
+      --border-hover: #c2c7cd;
+      --nav-bg: rgba(244, 245, 247, 0.92);
+      --nav-bg-solid: rgba(244, 245, 247, 0.97);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,7 +73,7 @@
     /* ─── Navigation ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(20, 20, 20, 0.95);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -275,7 +295,7 @@
       .hamburger { display: flex; }
       nav ul {
         display: none; position: fixed; top: 60px; left: 0; right: 0;
-        background: rgba(20, 20, 20, 0.97); backdrop-filter: blur(12px);
+        background: var(--nav-bg-solid); backdrop-filter: blur(12px);
         flex-direction: column; gap: 0; padding: 1rem 0;
         border-bottom: 1px solid var(--border);
       }
@@ -320,6 +340,18 @@
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
     }
+  
+    /* ─── Theme Toggle ─── */
+    .theme-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--bg-card); color: var(--text-dim);
+      border: 1px solid var(--border); cursor: pointer; font-size: 1.1rem;
+      transition: all 0.2s; flex-shrink: 0; margin-right: 0.75rem;
+    }
+    .theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+    .theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
   </style>
 
 
@@ -330,6 +362,7 @@
 <nav>
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
     <button class="hamburger">
       <span></span><span></span><span></span>
     </button>
@@ -403,5 +436,35 @@
     });
   })();
 </script>
+
+<!-- ─── Theme Toggle Logic ─── -->
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
+</script>
+
 </body>
 </html>

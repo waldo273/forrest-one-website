@@ -17,6 +17,25 @@
       --text-dim: #b8bec6;
       --text-muted: #9aa3af;
       --border: #2c313a;
+      --nav-bg: rgba(20, 20, 20, 0.95);
+      --nav-bg-solid: rgba(20, 20, 20, 0.97);
+    }
+    }
+
+    /* ─── Light Theme ─── */
+    [data-theme="light"] {
+      --bg: #f4f5f7;
+      --bg-alt: #e9ebee;
+      --bg-card: #ffffff;
+      --accent: #A81C1C;
+      --accent-text: #a3201b;
+      --accent2: #8f1a16;
+      --text: #1f2328;
+      --text-dim: #41474f;
+      --text-muted: #6b7280;
+      --border: #d5d9de;
+      --nav-bg: rgba(244, 245, 247, 0.92);
+      --nav-bg-solid: rgba(244, 245, 247, 0.97);
     }
     html { scroll-behavior: smooth; }
     body {
@@ -41,7 +60,7 @@
     .skip-link:focus { top: 0; }
     nav {
       position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(20, 20, 20, 0.95);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -61,7 +80,7 @@
       display: none; flex-direction: column; gap: 5px; cursor: pointer;
       background: none; border: none; padding: 8px;
     }
-    .hamburger span { display: block; width: 26px; height: 3px; background: #b8bec6; border-radius: 2px; transition: all 0.3s; }
+    .hamburger span { display: block; width: 26px; height: 3px; background: var(--text-dim); border-radius: 2px; transition: all 0.3s; }
     .hamburger:focus { outline: 3px solid #A81C1C; outline-offset: 2px; }
 
     .academic-hero {
@@ -71,21 +90,21 @@
       padding: 10rem 2rem 4rem;
       background:
         radial-gradient(ellipse at 50% 0%, rgba(168, 28, 28, 0.06) 0%, transparent 60%),
-        linear-gradient(180deg, #141414 0%, #0d0b18 100%);
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
     }
     .academic-hero .crest { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; opacity: 0.6; letter-spacing: 0.3em; }
     .academic-hero h1 {
       font-family: Georgia, 'Times New Roman', Times, serif;
       font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700; line-height: 1.2; color: #f0ece4; margin-bottom: 0.5rem;
+      font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 0.5rem;
     }
-    .academic-hero h1 .highlight { color: #e3503a; }
+    .academic-hero h1 .highlight { color: var(--accent-text); }
     .academic-hero .subtitle {
       font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 1.15rem; color: #9aa3af; font-style: italic; margin-bottom: 0.3rem;
+      font-size: 1.15rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.3rem;
     }
     .academic-hero .conferral {
-      font-size: 0.9rem; color: #706858;
+      font-size: 0.9rem; color: var(--text-muted);
       text-transform: uppercase; letter-spacing: 0.15em; margin-top: 1.5rem;
     }
     .academic-hero .ruled-line {
@@ -99,11 +118,11 @@
     .page-section .content { max-width: 900px; margin: 0 auto; }
     .page-section h2 {
       font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 1.8rem; font-weight: 700; color: #e3503a; margin-bottom: 0.5rem;
+      font-size: 1.8rem; font-weight: 700; color: var(--accent-text); margin-bottom: 0.5rem;
     }
     .page-section .section-line { width: 50px; height: 2px; background: #A81C1C; margin-bottom: 2rem; }
-    .page-section .content p { color: #b8bec6; margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8; }
-    .page-section .content ul { color: #b8bec6; margin-bottom: 1.2rem; padding-left: 1.5rem; }
+    .page-section .content p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8; }
+    .page-section .content ul { color: var(--text-dim); margin-bottom: 1.2rem; padding-left: 1.5rem; }
     .page-section .content ul li { margin-bottom: 0.5rem; }
 
     .qual-grid { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
@@ -114,11 +133,11 @@
       border-radius: 8px; padding: 1.5rem 2rem; transition: all 0.2s;
     }
     .qual-card:hover { border-color: rgba(168, 28, 28, 0.2); background: rgba(168, 28, 28, 0.04); }
-    .qual-card h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.15rem; color: #e8eaed; margin-bottom: 0.3rem; }
-    .qual-card .institution { color: #e3503a; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-    .qual-card .year { color: #b8bec6; font-size: 0.85rem; }
-    .qual-card .result { color: #e3503a; font-size: 0.85rem; font-weight: 600; }
-    .qual-card p { color: #9aa3af; font-size: 0.95rem; margin-top: 0.5rem; margin-bottom: 0; }
+    .qual-card h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.15rem; color: var(--text); margin-bottom: 0.3rem; }
+    .qual-card .institution { color: var(--accent-text); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .qual-card .year { color: var(--text-dim); font-size: 0.85rem; }
+    .qual-card .result { color: var(--accent-text); font-size: 0.85rem; font-weight: 600; }
+    .qual-card p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem; margin-bottom: 0; }
 
     .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .module-card {
@@ -127,13 +146,13 @@
       border-radius: 10px; padding: 1.5rem; transition: all 0.2s;
     }
     .module-card:hover { border-color: rgba(168, 28, 28, 0.2); }
-    .module-card h3 { font-size: 1.1rem; color: #e3503a; margin-bottom: 0.2rem; }
-    .module-card .code { font-size: 0.8rem; color: #606060; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
-    .module-card .outcome { margin-top: 0.5rem; font-size: 0.85rem; color: #e3503a; }
-    .module-card p { color: #9aa3af; font-size: 0.9rem; margin-top: 0.4rem; line-height: 1.6; }
-    .module-card .tma-scores { font-size: 0.8rem; color: #b8bec6; margin-top: 0.5rem; }
+    .module-card h3 { font-size: 1.1rem; color: var(--accent-text); margin-bottom: 0.2rem; }
+    .module-card .code { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+    .module-card .outcome { margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent-text); }
+    .module-card p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem; line-height: 1.6; }
+    .module-card .tma-scores { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem; }
     .module-card .tutor-quote { 
-      font-style: italic; color: #57575f; font-size: 0.85rem; 
+      font-style: italic; color: var(--text-muted); font-size: 0.85rem; 
       border-left: 2px solid rgba(168, 28, 28, 0.15);
       padding-left: 1rem; margin: 0.5rem 0;
     }
@@ -143,9 +162,9 @@
       border: 1px solid rgba(168, 28, 28, 0.1);
       border-radius: 12px; padding: 2rem; margin-top: 1.5rem;
     }
-    .project-card h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3rem; color: #e8eaed; margin-bottom: 0.3rem; }
-    .project-card .institution { color: #e3503a; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-    .project-card p { color: #9aa3af; font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.7; }
+    .project-card h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3rem; color: var(--text); margin-bottom: 0.3rem; }
+    .project-card .institution { color: var(--accent-text); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.7; }
 
     /* ─── UKAIF Accreditation ─── */
     .accreditation-inner {
@@ -157,20 +176,20 @@
       margin-top: 1.5rem;
     }
     .accreditation-badge { width: 160px; height: 160px; object-fit: contain; flex-shrink: 0; border-radius: 12px; }
-    .accreditation-text h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3rem; color: #e8eaed; margin-bottom: 0.3rem; }
-    .accreditation-text .institution { color: #e3503a; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem; }
-    .accreditation-text p { color: #9aa3af; font-size: 0.95rem; line-height: 1.7; margin-bottom: 0; }
+    .accreditation-text h3 { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 1.3rem; color: var(--text); margin-bottom: 0.3rem; }
+    .accreditation-text .institution { color: var(--accent-text); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem; }
+    .accreditation-text p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 0; }
 
     .badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     .badge {
       background: rgba(168, 28, 28, 0.03);
       border: 1px solid rgba(168, 28, 28, 0.06);
       border-radius: 8px; padding: 1rem; text-align: center; transition: all 0.2s;
-      font-size: 0.85rem; color: #b8bec6;
+      font-size: 0.85rem; color: var(--text-dim);
     }
     .badge:hover { border-color: rgba(168, 28, 28, 0.15); }
     .badge .icon { font-size: 1.5rem; margin-bottom: 0.3rem; display: block; }
-    .badge .title { font-weight: 600; color: #e3503a; font-size: 0.9rem; display: block; margin-bottom: 0.2rem; }
+    .badge .title { font-weight: 600; color: var(--accent-text); font-size: 0.9rem; display: block; margin-bottom: 0.2rem; }
 
     .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .research-card {
@@ -178,14 +197,14 @@
       border: 1px solid rgba(168, 28, 28, 0.08);
       border-radius: 10px; padding: 1.5rem; transition: all 0.2s;
     }
-    .research-card h3 { font-size: 1rem; color: #e3503a; margin-bottom: 0.3rem; }
-    .research-card .topic { font-size: 0.8rem; color: #606060; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
-    .research-card p { color: #9aa3af; font-size: 0.9rem; margin-top: 0.4rem; line-height: 1.6; }
+    .research-card h3 { font-size: 1rem; color: var(--accent-text); margin-bottom: 0.3rem; }
+    .research-card .topic { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+    .research-card p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem; line-height: 1.6; }
 
     footer {
       text-align: center; padding: 4rem 2rem;
       border-top: 1px solid rgba(168, 28, 28, 0.06);
-      color: #606060; font-size: 0.85rem;
+      color: var(--text-muted); font-size: 0.85rem;
     }
     footer .socials { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
     footer .socials a {
@@ -195,7 +214,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem; transition: all 0.2s; text-decoration: none;
     }
-    footer .socials a:hover { border-color: #e3503a; background: rgba(168,28,28,0.18); }
+    footer .socials a:hover { border-color: var(--accent-text); background: rgba(168,28,28,0.18); }
     footer .socials a:focus { outline: 3px solid #A81C1C; outline-offset: 2px; }
     footer .socials a:hover svg { fill: #A81C1C; }
 
@@ -207,7 +226,7 @@
       .hamburger { display: flex; }
       nav ul {
         display: none; position: fixed; top: 60px; left: 0; right: 0;
-        background: rgba(20, 20, 20, 0.97); backdrop-filter: blur(12px);
+        background: var(--nav-bg-solid); backdrop-filter: blur(12px);
         flex-direction: column; gap: 0; padding: 1rem 0;
         border-bottom: 1px solid rgba(168, 28, 28, 0.12);
       }
@@ -229,6 +248,18 @@
       footer { padding: 3rem 1rem; }
       footer .socials { gap: 1rem; }
     }
+  
+    /* ─── Theme Toggle ─── */
+    .theme-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--bg-card); color: var(--text-dim);
+      border: 1px solid var(--border); cursor: pointer; font-size: 1.1rem;
+      transition: all 0.2s; flex-shrink: 0; margin-right: 0.75rem;
+    }
+    .theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+    .theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
   </style>
 </head>
 <body>
@@ -236,6 +267,7 @@
 <nav>
   <div class="container">
     <div class="logo">◈ Training.Forrest.One</div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
     <button class="hamburger">
       <span></span><span></span><span></span>
     </button>
@@ -538,5 +570,35 @@
     });
   })();
 </script>
+
+<!-- ─── Theme Toggle Logic ─── -->
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
+</script>
+
 </body>
 </html>
