@@ -117,7 +117,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false">
 var Q = [
   {id:3,t:"AC adapters",q:"A user asks to borrow an AC adapter from a colleague's laptop of a different make to power their own laptop. What is the main risk in doing this?",o:["It will run the battery flat faster","It may damage both the adapter and the laptop","It will only work if the plugs are identical","It reduces the screen brightness"],c:1,e:"AC adapters are manufactured for specific laptops, and exchanging them with a different type of device may cause damage to both the adapter and the laptop because voltages, polarities and wattages differ."},
   {id:6,t:"PSU voltages",q:"Within a desktop power supply, which voltage is used to run the motors in disk drives and fans?",o:["3.3 volts","5 volts","12 volts","24 volts"],c:2,e:"The 12 volt supply is used to run motors in disk drives and fans, whereas the 3.3 and 5 volt supplies are typically used by digital circuits."},
@@ -271,7 +271,7 @@ document.addEventListener('keydown', function(e) {
 });
 window.addEventListener('DOMContentLoaded', render);
 </script>
-<script>
+<script data-cfasync="false">
 /* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
 (function () {
   'use strict';

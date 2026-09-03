@@ -118,7 +118,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false">
 var Q = [
   {id:54,t:"IPv6",q:"How many bits are in each field of an IPv6 address?",o:["16","32","64","8"],c:0,e:"IPv6 has 8 hextets of 16 bits each. 8 x 16 = 128 bits total. Example: 2001:0DB8:ACAD:0001::1."},
   {id:55,t:"IPv6",q:"Which is NOT a type of IPv6 address?",o:["Multicast","Unicast","Anycast","Broadcast"],c:3,e:"IPv6 does not use broadcast. It uses multicast instead. Valid types: Unicast, Multicast, and Anycast."},
@@ -272,7 +272,7 @@ document.addEventListener('keydown', function(e) {
 });
 window.addEventListener('DOMContentLoaded', render);
 </script>
-<script>
+<script data-cfasync="false">
 /* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
 (function () {
   'use strict';
