@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITN Theory Practice Paper A</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .sub{color:#b8d4f0;font-size:.85rem;margin-top:2px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITN Theory Practice Paper A</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:145,t:"OSI Model",q:"At which layer of the OSI model would a physical address be encapsulated?",o:["Physical layer","Data link layer","Application layer","Network layer"],c:1,e:"Physical (MAC) addresses operate at Layer 2 — the Data Link layer. The data link layer encapsulates packets into frames, adding source and destination MAC addresses."},
+  {id:16,t:"Network Types",q:"Which description correctly defines a converged network?",o:["A network that allows users to interact directly with each other over multiple channels","A network that forwards packets as soon as destination MAC addresses are read","A single network channel capable of delivering multiple communication forms","A dedicated network with separate channels for video and voice services"],c:2,e:"A converged network carries voice, video, and data over a single infrastructure, replacing dedicated separate networks."},
+  {id:17,t:"Network Types",q:"Which of the following allows real time collaboration?",o:["Video Conferencing","Web Forum Discussion","Cloud File Storage","Project Management Software"],c:0,e:"Video conferencing enables real-time, synchronous collaboration. Web forums and project tools are typically asynchronous."},
+  {id:18,t:"Network Types",q:"What is the name of a company network used by a single organisation?",o:["Core Network","Intranet","Internet","Extranet"],c:1,e:"An intranet is a private network internal to an organisation. Extranet extends to partners. Internet is public."},
+  {id:19,t:"WAN Topologies",q:"Which WAN topology provides high availability by ensuring each site has a dedicated link to every other site?",o:["Full Mesh","Point-to-Point","Partial Mesh","Hub-and-Spoke"],c:0,e:"Full mesh connects every site to every other for maximum redundancy. Partial mesh connects only some sites directly."},
+  {id:20,t:"Networking Models",q:"What is a key characteristic of the peer-to-peer networking model?",o:["Allows resources to be shared without a dedicated server","Uses a central server architecture","Works best with wireless infrastructure","A form of social networking"],c:0,e:"In P2P, each device acts as both client and server, sharing resources directly without a dedicated server."},
+  {id:87,t:"Network Types",q:"What network can be used to connect equipment that is geographically dispersed?",o:["LAN","Converged Network","WAN","Client Server Architecture"],c:2,e:"A Wide Area Network (WAN) spans large geographical distances. A LAN covers a single building or campus."},
+  {id:25,t:"ARP",q:"What does a PC broadcast to learn an unknown MAC address?",o:["ARP reply","ICMP echo reply","ICMP echo request","ARP request"],c:3,e:"ARP sends a broadcast request to learn the MAC for a known IP. ICMP is used by ping."},
+  {id:26,t:"OSI Model",q:"Which OSI layer checks for errors when a host discards a corrupt frame?",o:["Network","Application","Data Link","Transport"],c:2,e:"Data Link layer (Layer 2) performs error detection via FCS. Mismatched CRC causes frame discard."},
+  {id:27,t:"OSI Model",q:"Which PDU is assigned to the Data Link Layer?",o:["Packet","Bit","Segment","Frame"],c:3,e:"Layer 2 PDU = frame. Segment = L4, Packet = L3, Bit = L1."},
+  {id:28,t:"OSI Model",q:"Which PDU is assigned to the Network Layer?",o:["Bits","Frame","Packet","Segment"],c:2,e:"Network Layer (L3) PDU = packet. Routers forward packets based on destination IP addresses."},
+  {id:29,t:"OSI Model",q:"Which single layer of the OSI model directly corresponds to a layer in the TCP/IP Model with the same functionality?",o:["Data-link","Session","Transport","Physical"],c:2,e:"Transport layer is the only layer with the same name and function in both models."},
+  {id:30,t:"Transport Layer",q:"Which protocol controls the segment size and transmission rate between a web browser and a web server?",o:["IP","HTTP","TCP","Ethernet"],c:2,e:"TCP manages segment size, flow control, and transmission rate via windowing and congestion control."},
+  {id:31,t:"Network Management",q:"Which protocol is used to monitor and manage the status of an enterprise-wide network?",o:["ICMP","SNMP","NTP","SMTP"],c:1,e:"SNMP monitors and manages network devices. SMTP sends email. ICMP does diagnostics. NTP syncs clocks."},
+  {id:32,t:"OSI Model",q:"What is the name assigned to the PDU at the transport layer?",o:["Packet","Frame","Segment","Bits"],c:2,e:"L4 PDU = segment (TCP) or datagram (UDP). Frame = L2, Packet = L3, Bits = L1."},
+  {id:33,t:"Cabling",q:"Which type of UTP cable connects a PC to a switch port if auto-MDIX is not supported?",o:["Console","Crossover","Straight-Through","Roll-Over"],c:2,e:"Straight-through connects unlike devices (PC to switch). Crossover connects like devices."},
+  {id:34,t:"Cabling",q:"Which type of UTP cable is used to connect two routers if they do not support auto-MDIX?",o:["Console","Roll Over","Crossover","Straight through"],c:2,e:"Crossover connects two like devices. It crosses transmit and receive pairs."},
+  {id:35,t:"Cabling",q:"What does 'attenuation' refer to in data communication?",o:["Strengthening of a signal by a networking device","Loss of signal strength as distance increases","Leakage of signals from one cable pair to another","Time for a signal to reach its destination"],c:1,e:"Attenuation is signal loss over distance, which limits Ethernet to 100 metres."},
+  {id:74,t:"Physical Media",q:"Which physical media is most resilient to EMI/RFI?",o:["Wireless","Fibre Optic","UTP","STP"],c:1,e:"Fibre optic uses light, making it immune to EMI/RFI. STP is electrical with some shielding."},
+  {id:112,t:"Physical Layer",q:"Which of the following is NOT a physical layer function?",o:["IP Addressing","Signalling","Physical Components","Encoding"],c:0,e:"IP addressing is Network layer (L3). Physical layer deals with components, encoding, and signalling."},
+  {id:96,t:"OSI model",q:"Which is an advantage of a layered network model?",o:["Layer-specific PDUs work simultaneously","Supports competition and integration between vendors","Prioritises proprietary tech","Easier layer exchange during encapsulation"],c:1,e:"Layered models standardise interfaces, enabling vendor interoperability."},
+  {id:143,t:"OSI model",q:"What is adding control data to application data called?",o:["De-encapsulation","Encapsulation","Encoding","Decoding"],c:1,e:"Encapsulation wraps data with headers at each OSI layer as it travels downward."},
+  {id:100,t:"OSI model",q:"What is adding control info as data moves down OSI layers called?",o:["Cyclic Redundancy Checking","De-encapsulation","Packet Addressing","Encapsulation"],c:3,e:"Encapsulation wraps data with headers/trailers at each layer toward the physical layer."},
+  {id:21,t:"IOS Commands",q:"Effect of copy running-config startup-config?",o:["Replaces config with ROM","Saves config to flash","Saves config to NVRAM","Replaces IOS"],c:2,e:"Saves running config (RAM) to NVRAM as startup config, surviving reload."},
+  {id:22,t:"IOS Commands",q:"Command for Layer 1 and Layer 2 interface details?",o:["show ip interface","show interface","show run begin interface","show mac address-table"],c:1,e:"show interface displays L1 (speed/duplex) and L2 (MAC/MTU) per interface."},
+  {id:23,t:"IOS Commands",q:"Credentials for privileged mode via console?",o:["Password cisco","Password then enable password","Username and password only","Username/password then enable"],c:3,e:"Console needs line password then enable password/secret for privileged EXEC."},
+  {id:24,t:"Switching",q:"Interface for remote switch management from another network?",o:["AUX interface","Console port","All Fast Ethernet ports","Switch Virtual Interface"],c:3,e:"SVI (VLAN 1 default) = virtual L3 for remote mgmt. Physical ports = L2."},
+  {id:78,t:"Physical Media",q:"Light source of multimode fibre?",o:["LED","Laser","Electro-magnetic signal","Electricity"],c:0,e:"Multimode = LED. Single-mode = laser for longer distances."},
+  {id:89,t:"Physical Layer",q:"Capacity of a medium to carry data?",o:["Bandwidth","Goodput","Data rate","Throughput"],c:0,e:"Bandwidth = theoretical max. Throughput = actual speed. Goodput excludes overhead."},
+  {id:123,t:"Cabling",q:"Max segment length of CAT5 and CAT6?",o:["550m","100m","1,000m","2km"],c:1,e:"CAT5/6 max = 100 metres for reliable transmission."},
+  {id:140,t:"Ethernet",q:"Two PCs at 100Mbps full duplex transmit simultaneously?",o:["Both transmissions succeed","Collision occurs","Back-off activates","Both wait"],c:0,e:"Full duplex = separate Tx/Rx. No collisions."},
+  {id:46,t:"Switching",q:"Bytes in a MAC address?",o:["8","4","16","6"],c:3,e:"MAC = 48 bits = 6 bytes = 12 hex digits."},
+  {id:48,t:"OSI model",q:"At which OSI layer does a router forward packets?",o:["Data Link","Network","Transport","Physical"],c:1,e:"Routers = Layer 3 (Network), forwarding via IP addresses."},
+  {id:76,t:"Switching",q:"Two nodes share first 24 MAC bits. Action?",o:["Reinstall TCP/IP","Move to separate LAN","ipconfig release/renew","Nothing -- same manufacturer likely"],c:3,e:"First 24 MAC bits = manufacturer OUI. Same = same vendor, normal."},
+  {id:139,t:"OSI model",q:"Layer organising dialogue for presentation layer?",o:["Session","Application","Network","Presentation"],c:0,e:"Session layer (L5) manages dialogue: establish, maintain, terminate."},
+  {id:43,t:"Ethernet",q:"NOT a field in an Ethernet frame?",o:["Source Address","Username","Type","Data"],c:1,e:"Ethernet: dest MAC, source MAC, Type/Length, Data, FCS. No Username field."},
+  {id:71,t:"OSI model",q:"Revealed upon de-encapsulation of Layer 2 PDU?",o:["Segment","Frame","Packet","Bits"],c:2,e:"De-encapsulation at L2 strips frame, revealing L3 packet."},
+  {id:121,t:"Ethernet",q:"Corrupt frame under 64 bytes called?",o:["FCS Error","Jam fragment","A Runt Frame","CRC Failure"],c:2,e:"Runt = under 64 bytes from collisions. Minimum ensures CSMA/CD."},
+  {id:132,t:"Ethernet",q:"Calculation for FCS field value?",o:["ARP","FTP","CRC","Logical AND"],c:2,e:"CRC (Cyclic Redundancy Check) calculates the FCS."},
+  {id:158,t:"Network Utilities",q:"Loopback test 127.0.0.1 confirms?",o:["End-to-end connectivity","DHCP functioning","NIC correct IP","TCP/IP stack working"],c:3,e:"Loopback tests local TCP/IP stack only, not the cable."},
+  {id:160,t:"ARP",q:"Destination MAC of an ARP request?",o:["FF:FF:FF:FF:FF:FF","0.0.0.0","00:00:00:00:00:00","255.255.255.255"],c:0,e:"ARP = broadcast to FF:FF:FF:FF:FF:FF for all local devices."},
+  {id:81,t:"IP Addressing",q:"IPv4 range 224.0.0.0 to 239.255.255.255?",o:["Class C Networks","Experimental/Reserved","Loopback","Multicast Traffic"],c:3,e:"224.0.0.0/4 = multicast. 127.0.0.0/8 = loopback."},
+  {id:82,t:"IP Addressing",q:"True about 172.16.255.255/16 and 255.255.255.255?",o:["172.16.255.255/16 = directed broadcast","255.255.255.255 only on Ethernet","255.255.255.255 = directed","172.16.255.255 = limited broadcast"],c:0,e:"Directed = targets specific network. Limited = local only."},
+  {id:85,t:"Transport Layer",q:"Dynamic/Private port range?",o:["1 to 1025","49152 to 65535","0 to 1023","1024 to 49151"],c:1,e:"Well-known=0-1023. Registered=1024-49151. Dynamic=49152-65535."},
+  {id:101,t:"Subnetting",q:"Network for host 25.10.97.189/23?",o:["25.10.96.0","25.10.90.0","25.10.97.0","25.10.97.128"],c:0,e:"/23 = 512-byte blocks. 189 in 25.10.96.0 block."},
+  {id:106,t:"Subnetting",q:"Binary network address of 192.168.142.30/30?",o:["11000000 10101000 10001110 00011110","11000000 10101000 10001110 00000000","11000000 10101000 10001110 00011100","11000000 10110000 10001110 00011110"],c:2,e:"/30 = 2 host bits. 30 AND 252 = 28 = 00011100 binary."},
+  {id:15,t:"IP Addressing",q:"Why use private addresses in enterprise networks?",o:["To comply with IEEE 802.3","Consume fewer router resources","To minimise public address use","To minimise routing table entries"],c:2,e:"Private addresses conserve public IPv4. NAT translates at edge."},
+  {id:73,t:"Transport Layer",q:"Messages interleaving along common medium?",o:["Half Duplex","Multiplexing","Full Duplex","Routing"],c:1,e:"Multiplexing combines multiple signals into one channel."},
+  {id:109,t:"Transport Layer",q:"Window size 8000 and MSS 1570 means?",o:["Receiver processes 8000 bytes, max segment 1570","ACK every 1570 within 8000","Segment=8000 processes 1570","ACK after 1570 before 8000"],c:0,e:"Window = receive buffer. MSS = max segment from MTU."},
+  {id:110,t:"Transport Layer",q:"Window size 2500 means?",o:["Port 2500 = window size","2500 bytes before ACK needed","2500 bytes minimum for ACK","2500 segments before ACK"],c:1,e:"TCP window = bytes sender can transmit before waiting for ACK."},
+  {id:116,t:"Transport Layer",q:"Addressing at Layer 4 of OSI?",o:["MAC addressing","IP/mask/gateway","Port numbers for services","Physical and Logical addressing"],c:2,e:"L4 = port numbers. MAC = L2. IP = L3."},
+  {id:122,t:"Transport Layer",q:"How UDP reassembles datagrams?",o:["Uses port numbers","Datagrams not reassembled","Uses application info","Uses sequence number"],c:1,e:"UDP = connectionless. Each datagram independent. App handles ordering."},
+  {id:72,t:"Network Utilities",q:"What does nslookup show in Windows?",o:["Apache Web config","MS Exchange config","DNS server configuration","DHCP server config"],c:2,e:"nslookup queries DNS servers for name-to-IP resolution."},
+  {id:88,t:"Applications",q:"Protocol for P2P file sharing over Internet?",o:["SMB","Telnet","Gnutella","SAMBA"],c:2,e:"Gnutella = P2P. SMB/SAMBA = local Windows sharing."},
+  {id:124,t:"Applications",q:"DNS record type A?",o:["Maps domain to IPv4","Exchange Server Mapping","CNAME mapping","FQDN mapping"],c:0,e:"A record = domain to IPv4. AAAA = IPv6. CNAME = alias."},
+  {id:134,t:"Networking",q:"Standard for Bluetooth?",o:["802.11","802.11a","802.15","802.16"],c:2,e:"Bluetooth = IEEE 802.15 (WPAN). 802.11 = Wi-Fi."},
+  {id:138,t:"Security",q:"NOT a physical security threat?",o:["Hardware Threat","Maintenance Threat","Environmental Threat","Password Threat"],c:3,e:"Password = logical threat. Hardware/environmental/maintenance = physical."},
+  {id:141,t:"Physical Layer",q:"True statement about physical layer?",o:["Wireless uses electrical signals","Copper uses radio transmissions","Fibre-optic uses light pulses","Copper uses radio waves"],c:2,e:"Fibre=light. Copper=electrical. Wireless=radio waves."},
+  {id:131,t:"Physical Media",q:"Best medium for high EMI risk?",o:["Wireless no encryption","Wireless WPA2","Fibre Optic","UTP"],c:2,e:"Fibre = light pulses, completely immune to EMI."},
+  {id:133,t:"IOS Commands",q:"Router port for dial-up access?",o:["Fast Ethernet","Serial","Aux","Console"],c:2,e:"AUX port supports dial-up modem for remote out-of-band mgmt."}
+];;
+
+var NS = 'itn_pg1_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed Practice Paper A.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('paste', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p' || k === 'v') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITN Theory Practice Paper B</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .sub{color:#b8d4f0;font-size:.85rem;margin-top:2px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITN Theory Practice Paper B</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:36,t:"Number Systems",q:"Convert decimal 208 to binary",o:["11110100","11000100","11100100","11010000"],c:3,e:"208 = 11010000. 128+64+0+16+0+0+0+0 = 208. 11000100 = 196, 11100100 = 228, 11110100 = 244."},
+  {id:38,t:"Number Systems",q:"Convert decimal 112 to binary",o:["11100000","1110000","1101100","1110100"],c:1,e:"112 = 1110000 (7 bits). 64+32+16+0+0+0+0 = 112. 11100000 = 224, 1101100 = 108, 1110100 = 116."},
+  {id:39,t:"Number Systems",q:"How many bits are in the hexadecimal value AB00?",o:["32","4","16","128"],c:2,e:"Each hex digit = 4 bits. AB00 has 4 digits, so 4 x 4 = 16 bits. A=1010, B=1011, 0=0000, 0=0000."},
+  {id:86,t:"Number Systems",q:"Convert binary 1100 0011 to hexadecimal",o:["D3","C3","B3","C2"],c:1,e:"1100 = C (12), 0011 = 3. So C3. B3 = 1011 0011, D3 = 1101 0011, C2 = 1100 0010."},
+  {id:127,t:"Number Systems",q:"Convert hexadecimal D7 to binary",o:["1101 0111","0011 0111","0111 0111","1101 1100"],c:0,e:"D = 13 = 1101, 7 = 0111. D7 = 1101 0111. 0011 0111 = 37 hex, 1101 1100 = DC hex."},
+  {id:1,t:"IP Addressing",q:"What is the 169.254.0.1 to 169.254.255.254 range commonly known as?",o:["Class C Private Network Range","Multicast Address Range","Experimental Network Range","APIPA Range"],c:3,e:"169.254.0.0/16 is APIPA, used when DHCP is unavailable. Class C private = 192.168.0.0/16."},
+  {id:12,t:"Subnetting",q:"How many usable host addresses on a /26 subnet?",o:["62","64","26","254"],c:0,e:"/26 = 6 host bits. 2^6 - 2 = 64 - 2 = 62 usable. Subtract network and broadcast addresses."},
+  {id:13,t:"Subnetting",q:"How many usable host addresses on a /27 subnet?",o:["32","62","26","30"],c:3,e:"/27 = 5 host bits. 2^5 - 2 = 32 - 2 = 30 usable."},
+  {id:14,t:"Subnetting",q:"How many usable host addresses on a /29 subnet?",o:["8","2","6","4"],c:2,e:"/29 = 3 host bits. 2^3 - 2 = 8 - 2 = 6 usable. Often used for point-to-point links."},
+  {id:93,t:"IP Addressing",q:"How many usable host addresses in a Class C range?",o:["1022","254","256","1024"],c:1,e:"Class C = /24 = 8 host bits. 2^8 - 2 = 256 - 2 = 254 usable."},
+  {id:41,t:"Ethernet",q:"Which algorithm calculates the FCS in an Ethernet trailer?",o:["MD5","CRC","SHA-1","HDLC"],c:1,e:"FCS uses CRC-32. Sender computes a 32-bit CRC and appends it. HDLC is a protocol, MD5/SHA-1 are cryptographic hashes."},
+  {id:42,t:"Ethernet",q:"Ethernet facilitates error detection using which technique?",o:["Checksum valuation","Cyclic Redundancy Check","Equalisation Check","Parity Check"],c:1,e:"Ethernet uses CRC, stored in the FCS field. Parity checks are simpler. Checksum is used at higher layers (TCP/UDP)."},
+  {id:44,t:"Ethernet",q:"What happens if a device receives a frame smaller than 64 bytes?",o:["The device forwards it as received","The device drops the frame","The device forwards it with an error flag","The device adds padding and forwards it"],c:1,e:"Frames under 64 bytes are 'runt frames' and are dropped. The minimum size ensures reliable collision detection."},
+  {id:45,t:"Switching",q:"Which is an action performed by a Cisco switch?",o:["Source MAC is recorded in the MAC address table","Destination IP is examined and forwarded","Frames with unknown MAC are dropped by default","Destination MAC is recorded in the MAC address table"],c:0,e:"Switches learn by recording the source MAC of each incoming frame in the CAM table."},
+  {id:111,t:"Switching",q:"Which method receives the entire frame before forwarding?",o:["Flooding","Store and Forward","Fragment-free switching","Cut Through"],c:1,e:"Store-and-forward receives the whole frame, checks FCS, then forwards. Cut-through forwards after reading only the destination MAC."},
+  {id:47,t:"Switching",q:"Which switching method prioritises low latency?",o:["FIFO","Converged Network","Cut through","Store and forward"],c:2,e:"Cut-through forwards as soon as the destination MAC is read (first 6 bytes), minimising latency."},
+  {id:108,t:"Networking",q:"What is the default MTU on Ethernet networks?",o:["None needed","1000","1518","1500"],c:3,e:"Default Ethernet MTU is 1500 bytes (max payload). 1518 bytes is total frame size including headers."},
+  {id:125,t:"Routing",q:"Which IP address portion does a router use to select the exit interface?",o:["Destination host portion","Source network portion","Destination network portion","Source host portion"],c:2,e:"Routers match the destination network against the routing table (longest prefix match)."},
+  {id:80,t:"ARP",q:"When is the ARP process used?",o:["When a node communicates outside the LAN","When a node needs the MAC address for an IP not in its ARP cache","When a switch updates its CAM Table","When a DHCP lease expires"],c:1,e:"ARP resolves IP to MAC when not cached. Node broadcasts an ARP request; target responds with its MAC address."},
+  {id:159,t:"ARP",q:"What describes the function of ARP?",o:["ARP discovers the MAC address of any host on a different network","ARP discovers the IP address of any host on the local network","ARP discovers the MAC address of any host on the local network","ARP discovers the IP address of any host on a different network"],c:2,e:"ARP only works within the local broadcast domain. It maps a known IP to an unknown MAC on the same subnet."},
+  {id:2,t:"Subnetting",q:"Last valid host on 172.21.144.0 255.255.255.128?",o:["172.21.160.254","172.21.144.254","172.21.144.126","172.21.152.254"],c:2,e:"/25 = broadcast .127. Last valid = .126."},
+  {id:3,t:"Subnetting",q:"Subnet for host 172.28.121.188 255.255.255.192?",o:["172.28.0.0","172.28.121.128","172.28.121.0","172.28.121.64"],c:1,e:"/26 = 64-blocks. 188 in .128-.191. 3rd block."},
+  {id:4,t:"Subnetting",q:"Subnet for host 172.28.121.200 255.255.255.192?",o:["172.28.121.192","172.28.0.0","172.28.121.64","172.28.121.0"],c:0,e:"/26 = 64-blocks. 200 in .192-.255. 4th block."},
+  {id:5,t:"Subnetting",q:"Subnet for host 172.28.121.60 255.255.255.224?",o:["172.28.0.0","172.28.121.32","172.28.121.0","172.28.121.64"],c:1,e:"/27 = 32-blocks. 60 in 32-63 range."},
+  {id:6,t:"Subnetting",q:"Broadcast for 193.193.193.181/27?",o:["193.193.193.208","193.193.193.209","193.193.193.206","193.193.193.191"],c:3,e:"/27 = 32-blocks. 181 in 160-191. Broadcast = .191."},
+  {id:7,t:"Subnetting",q:"Broadcast for 193.193.193.181/25?",o:["193.193.193.206","193.193.193.255","193.193.193.207","193.193.193.208"],c:1,e:"/25 = 128-blocks. 181 in 128-255. Broadcast = .255."},
+  {id:8,t:"Subnetting",q:"Broadcast for 193.193.193.40/27?",o:["193.193.193.64","193.193.193.63","193.193.193.32","193.193.193.255"],c:1,e:"/27 = 32-blocks. 40 in 32-63. Broadcast = .63."},
+  {id:9,t:"Subnetting",q:"First usable host on 172.29.68.88/27?",o:["172.29.68.87","172.29.68.78","172.29.68.64","172.29.68.65"],c:3,e:"/27 = 32-blocks. 88 in 64-95. Network=.64. First=.65."},
+  {id:10,t:"Subnetting",q:"First valid host on 172.29.68.88/28?",o:["172.29.68.89","172.29.68.80","172.29.68.81","172.29.68.87"],c:2,e:"/28 = 16-blocks. 88 in 80-95. Network=.80. First=.81."},
+  {id:11,t:"Subnetting",q:"First usable host on 172.29.68.90/29?",o:["172.29.68.80","172.29.68.88","172.29.68.89","172.29.68.79"],c:2,e:"/29 = 8-blocks. 90 in 88-95. Network=.88. First=.89."},
+  {id:37,t:"Number Systems",q:"Convert decimal 200 to binary",o:["11110100","11100100","11000100","11001000"],c:3,e:"200 = 11001000. 128+64+0+0+8+0+0+0 = 200."},
+  {id:40,t:"Number Systems",q:"Bits in hex FEAFEAABCABC?",o:["12","36","44","48"],c:3,e:"12 hex digits x 4 bits = 48 bits."},
+  {id:49,t:"IOS Commands",q:"Why is ip address 192.168.2.1 rejected in global config?",o:["Wrong config mode","Invalid mask","Wrong syntax","Must activate interface"],c:0,e:"ip address needs interface config mode, not global."},
+  {id:50,t:"IOS Commands",q:"Default memory for Cisco IOS?",o:["RAM","ROM","NVRAM","FLASH"],c:3,e:"IOS=FLASH. Startup=NVRAM. Running=RAM. Bootstrap=ROM."},
+  {id:51,t:"IOS Commands",q:"Command to enable IPv6 forwarding?",o:["ipv6 routing","ipv6 forwarding","ipv6 unicast-routing","ipv6 neighbour-routing"],c:2,e:"ipv6 unicast-routing in global config enables IPv6 routing."},
+  {id:52,t:"IOS Commands",q:"After console password rsigsconpass123, reconnect?",o:["User exec without password","Privilege exec without password","Password rsigs123","Password rsigsconpass123"],c:0,e:"Console password required on connection, then user EXEC."},
+  {id:53,t:"IOS Commands",q:"How to bypass lost passwords on Cisco router?",o:["Physical access required","Default admin/admin","Factory reset deletes config","Connect via VPN"],c:0,e:"Password recovery needs physical access for ROMmon config register change."},
+  {id:60,t:"ARP",q:"PC-A 192.168.10.1/24 pings PC-B 192.168.10.222/24. First?",o:["DNS request","ARP request for PC-B MAC","ICMP echo-request","ARP request for gateway"],c:1,e:"Same subnet = ARP for PC-B MAC directly."},
+  {id:61,t:"ARP",q:"PC-A 192.168.10.1/24 pings PC-B 192.172.20.222/24. First?",o:["ICMP echo-request","ARP request for PC-B MAC","ARP request for gateway MAC","DNS request"],c:2,e:"Diff subnet = ARP for gateway MAC."},
+  {id:62,t:"Network Utilities",q:"Common ICMP use?",o:["Connectivity testing","Topology change notification","L2 to L3 mapping","Link down notification"],c:0,e:"ICMP powers ping and traceroute for connectivity testing."},
+  {id:65,t:"Security",q:"Command mitigating brute-force password attacks?",o:["exec-timeout 30","service password-encryption","enable secret password","login block-for 180 attempts 3 within 60"],c:3,e:"login block-for limits attempts after threshold in time window."},
+  {id:79,t:"DHCP",q:"NOT offered by DHCP server?",o:["Subnet mask","DNS server info","Network printer info","IP address"],c:2,e:"DHCP: IP, mask, gateway, DNS. Printer info not standard."},
+  {id:83,t:"IOS Commands",q:"Required on VTY lines for remote connections?",o:["Name","Banner","Clock","Password"],c:3,e:"VTY lines need password (SSH preferred) for remote access."},
+  {id:84,t:"Subnetting",q:"Usable hosts with 255.255.248.0?",o:["2046","1022","1024","510"],c:0,e:"/21 = 11 host bits. 2^11-2 = 2048-2 = 2046."},
+  {id:90,t:"IPv6",q:"NOT an IPv6 address type?",o:["Anycast","Broadcast","Unicast","Multicast"],c:1,e:"IPv6 replaces broadcast with multicast."},
+  {id:91,t:"IPv6",q:"Three elements of SLAAC Option 1 RA?",o:["Prefix, Prefix length, Default Gateway","Prefix length, DNS, Gateway","Prefix, Gateway, DNS","Gateway, Prefix, VLAN"],c:0,e:"SLAAC RA: prefix, prefix length, default gateway."},
+  {id:92,t:"IOS Commands",q:"Command summarising all interfaces?",o:["show interface brief","show ip interface brief","show version","show interfaces"],c:1,e:"show ip int brief: one line per interface with IP/status."},
+  {id:94,t:"IOS Commands",q:"Two factors for SSH on a router?",o:["Console Password and Domain Name","Console Password and local username","Aux Password and local username","IP Domain Name and local username/password"],c:3,e:"SSH needs domain name (key gen) and local user/password DB."},
+  {id:102,t:"IOS Commands",q:"Command showing log messages when remote?",o:["debug monitor","show messages","terminal monitor","monitor"],c:2,e:"terminal monitor shows debug/log on current remote session."},
+  {id:103,t:"IOS Commands",q:"Meaning of login local?",o:["Console needs credentials","Login with local username and password","CLI only via SSH/Telnet","Local only no remote"],c:1,e:"login local = authenticate against local username/password DB."},
+  {id:105,t:"IPv6",q:"Correct compressed IPv6 address?",o:["2001:0DB8:0:1111::0200","2001:DB8:0:1111::200","2001:DB8::1111::200","2001:0DB8::1111::0200"],c:1,e:"Leading zeros omitted. One zero block replaced with ::."},
+  {id:107,t:"IOS Commands",q:"Port for remote mgmt via phone line?",o:["Aux port","Serial port","Fast Ethernet port","Console port"],c:0,e:"AUX supports dial-up modem for remote out-of-band mgmt."},
+  {id:113,t:"IPv6",q:"DHCPv6 steps?",o:["Solicit, Advertise, Info Request, Reply","Discover, Offer, Request, ACK","Discover, Advertise, Request, ACK","Solicit, Ask, Request, Reply"],c:0,e:"DHCPv6: Solicit, Advertise, Request/Info-Request, Reply."},
+  {id:114,t:"IOS Commands",q:"Windows command for IP info?",o:["ping","config","config/all","ipconfig"],c:3,e:"ipconfig shows IP config. ipconfig /all gives details."},
+  {id:115,t:"IOS Commands",q:"Command enabling IPv6 forwarding?",o:["R1# ipv6 unicast-routing","R1(config)# ipv6 unicast-routing","R1(config)# upgrade-routing","R1> ipv6-routing"],c:1,e:"ipv6 unicast-routing in global config enables IPv6 routing."},
+  {id:117,t:"Subnetting",q:"192.168.10.0/24, 3 bits borrowed. Broadcast of 3rd subnet?",o:["192.168.10.63","192.168.10.87","192.168.10.79","192.168.10.95"],c:3,e:"3 bits = /27 = 32-blocks. Subnet 3 = .64-.95. Broadcast = .95."},
+  {id:118,t:"IPv6",q:"Example of Link Local Address?",o:["2001:DB8:ACAD:1::","FE80::1","ACAD:1::1::0/128","FE80:111:0:1/64"],c:1,e:"Link-local starts with FE80::/10. FE80::1 is valid."},
+  {id:119,t:"Subnetting",q:"Most efficient mask for 511 hosts?",o:["255.255.255.0","255.255.252.0","255.255.253.0","255.255.254.0"],c:1,e:"511 needs 2^10-2=1022. /22 = 255.255.252.0."},
+  {id:120,t:"IOS Commands",q:"User EXEC to Privileged EXEC command?",o:["enable","interface VLAN1","login","configure terminal"],c:0,e:"enable moves from > to #. configure terminal = global config."},
+  {id:126,t:"Network Utilities",q:"Two functions traceroute uses from IPv4/IPv6?",o:["TTL and Hop Limit","Loopback and TTL","Ping and Loopback","Echo Request and Hop Limit"],c:0,e:"Traceroute uses TTL/Hop Limit, eliciting ICMP Time Exceeded."}
+];;
+
+var NS = 'itn_pg2_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed Practice Paper B.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('paste', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p' || k === 'v') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

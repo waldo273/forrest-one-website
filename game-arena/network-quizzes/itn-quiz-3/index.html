@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ITN Theory Practice Paper C</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#ffffff;color:#002b5c;min-height:100vh;line-height:1.6}
+  .skip-link{position:absolute;left:-9999px;z-index:999;padding:8px 16px;background:#002b5c;color:#fff;font-size:1rem}
+  .skip-link:focus{left:16px;top:16px}
+  .header{background:#002b5c;padding:1rem 1.5rem;text-align:center}
+  .header h1{font-size:1.3rem;font-weight:700;color:#ffffff;letter-spacing:-0.3px}
+  .header .sub{color:#b8d4f0;font-size:.85rem;margin-top:2px}
+  .header .page-info{color:#8ab8e0;font-size:.8rem;margin-top:4px}
+  .container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .results-container{max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem}
+  .progress-section{margin-bottom:1.5rem}
+  .progress-bar{height:8px;background:#e0e8f0;border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#002b5c;border-radius:4px;transition:width .4s ease}
+  .progress-label{text-align:center;font-size:.85rem;color:#4a6a8a;margin-top:6px;font-weight:600}
+  .question-card{background:#ffffff;border:2px solid #d0dce8;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+  .question-card:focus-within{border-color:#002b5c;box-shadow:0 0 0 3px rgba(0,43,92,.15)}
+  .q-number{font-size:.85rem;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .q-topic{font-size:.8rem;color:#6a8aaa;margin-bottom:.75rem}
+  .q-text{font-size:1.25rem;font-weight:600;color:#002b5c;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:10px}
+  .option{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:2px solid #d0dce8;border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s;background:#f8fafc}
+  .option:hover:not(.locked){border-color:#6a8aaa;background:#f0f4f8}
+  .option input[type="radio"]{appearance:none;width:22px;height:22px;border:2px solid #6a8aaa;border-radius:50%;flex-shrink:0;margin-top:1px;position:relative;cursor:pointer}
+  .option input[type="radio"]:checked{border-color:#002b5c}
+  .option input[type="radio"]:checked::after{content:'';position:absolute;inset:4px;background:#002b5c;border-radius:50%}
+  .option input[type="radio"]:focus-visible{outline:3px solid #002b5c;outline-offset:2px}
+  .option .opt-text{font-size:1.05rem;color:#002b5c;line-height:1.4;flex:1}
+  .option .opt-letter{font-weight:700;color:#4a6a8a;font-size:.9rem}
+  .option.correct{background:#e8f5e9;border-color:#2e7d32}
+  .option.correct input[type="radio"]{border-color:#2e7d32}
+  .option.correct input[type="radio"]:checked::after{background:#2e7d32}
+  .option.wrong{background:#fbe9e7;border-color:#c62828}
+  .option.wrong input[type="radio"]{border-color:#c62828}
+  .option.wrong input[type="radio"]:checked::after{background:#c62828}
+  .option.locked{cursor:default}
+  .option.locked:hover{background:#f8fafc;border-color:#d0dce8}
+  .option.correct.locked:hover{background:#e8f5e9;border-color:#2e7d32}
+  .option.wrong.locked:hover{background:#fbe9e7;border-color:#c62828}
+  .explanation{margin-top:1rem;padding:1rem 1.25rem;border-radius:8px;font-size:.95rem;line-height:1.6;border-left:4px solid}
+  .explanation:focus{outline:2px solid #002b5c;outline-offset:2px}
+  .explanation.correct-exp{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+  .explanation.wrong-exp{background:#fbe9e7;border-color:#c62828;color:#b71c1c}
+  .explanation strong{display:block;margin-bottom:6px;font-size:1rem}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;gap:1rem;flex-wrap:wrap}
+  .btn{background:#002b5c;border:none;color:#fff;font-weight:700;font-size:1.1rem;padding:14px 40px;border-radius:8px;cursor:pointer;transition:background .2s;min-width:140px;text-align:center}
+  .btn:hover{background:#004080}
+  .btn:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .btn:disabled{background:#a0b8d0;cursor:not-allowed}
+  .btn-restart{background:#e0e8f0;border:2px solid #d0dce8;color:#002b5c;font-weight:600;font-size:1rem;padding:12px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .btn-restart:hover{background:#d0dce8}
+  .btn-restart:focus-visible{outline:3px solid #002b5c;outline-offset:3px}
+  .status-text{font-size:.95rem;color:#4a6a8a;font-weight:600}
+  .hidden{display:none}
+  .results-card{background:#ffffff;border:2px solid #d0dce8;border-radius:16px;padding:3rem 2rem;text-align:center}
+  .results-card h2{font-size:1.6rem;font-weight:700;color:#002b5c;margin-bottom:.5rem}
+  .score-circle{width:160px;height:160px;border-radius:50%;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:800;border:4px solid}
+  .score-pass{border-color:#2e7d32;color:#2e7d32;background:#e8f5e9}
+  .score-fail{border-color:#c62828;color:#c62828;background:#fbe9e7}
+  .score-desc{font-size:1.1rem;color:#4a6a8a;margin-bottom:1.5rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0 2rem}
+  .summary-item{background:#f8fafc;border:1px solid #d0dce8;border-radius:10px;padding:1rem}
+  .summary-item .num{font-size:1.6rem;font-weight:800}
+  .summary-item .lbl{font-size:.85rem;color:#6a8aaa;margin-top:4px}
+  .summary-item.pass-item .num{color:#2e7d32}
+  .summary-item.fail-item .num{color:#c62828}
+  .summary-item.total-item .num{color:#002b5c}
+  .pass-msg{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+  @media(max-width:600px){
+    .container{padding:1rem .75rem 2rem}
+    .question-card{padding:1.25rem}
+    .q-text{font-size:1.1rem}
+    .option{padding:12px 14px}
+    .btn{padding:12px 28px;font-size:1rem;min-width:120px}
+    .results-card{padding:2rem 1rem}
+    .summary-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="header" role="banner">
+  <h1>ITN Theory Practice Paper C</h1>
+  <div class="page-info">60 Questions</div>
+</div>
+
+<div class="container" id="questionsSection" role="main">
+  <div class="progress-section" aria-label="Progress">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Question 1 of 60</div>
+  </div>
+  <div id="questionArea" aria-live="polite"></div>
+  <div class="nav-bar">
+    <span class="status-text" id="statusText">&nbsp;</span>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="results-container hidden" id="resultsSection" role="main">
+  <div class="results-card">
+    <h2>Assessment Complete</h2>
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-desc" id="scoreDesc">Calculating your score...</div>
+    <div class="summary-grid">
+      <div class="summary-item pass-item"><div class="num" id="correctCount">0</div><div class="lbl">Correct</div></div>
+      <div class="summary-item fail-item"><div class="num" id="wrongCount">0</div><div class="lbl">Incorrect</div></div>
+      <div class="summary-item total-item"><div class="num" id="totalCount">0</div><div class="lbl">Total</div></div>
+    </div>
+    <div class="pass-msg" id="passMsg"></div>
+    <button class="btn-restart" onclick="restartAll()">Start a New Assessment</button>
+  </div>
+</div>
+
+<script>
+var Q = [
+  {id:54,t:"IPv6",q:"How many bits are in each field of an IPv6 address?",o:["16","32","64","8"],c:0,e:"IPv6 has 8 hextets of 16 bits each. 8 x 16 = 128 bits total. Example: 2001:0DB8:ACAD:0001::1."},
+  {id:55,t:"IPv6",q:"Which is NOT a type of IPv6 address?",o:["Multicast","Unicast","Anycast","Broadcast"],c:3,e:"IPv6 does not use broadcast. It uses multicast instead. Valid types: Unicast, Multicast, and Anycast."},
+  {id:56,t:"IPv6",q:"Which is the all-routers multicast address in IPv6?",o:["FF02::2","FF02::4","FF02::3","FF02::1"],c:0,e:"FF02::2 is all-routers. FF02::1 is all-nodes. Routers on a link listen to FF02::2."},
+  {id:57,t:"IPv6",q:"Which represents an IPv6 link-local address?",o:["0FE8::4321:1234:ABCD:DCBA","EFE0::4321:1234:ABCD:DCBA","80FE::4321:1234:ABCD:DCBA","FE80::4321:1234:ABCD:DCBA"],c:3,e:"Link-local addresses start with FE80::/10. Only FE80::4321:1234:ABCD:DCBA matches this prefix."},
+  {id:58,t:"IPv6",q:"Which provides dynamic global IPv6 addressing without maintaining address records?",o:["SLAAC","Static IPv6 addresses","DHCPv6","Stateful DHCPv6"],c:0,e:"SLAAC uses Router Advertisements. No server tracks assignments — it is 'stateless'."},
+  {id:59,t:"IPv6",q:"In SLAAC, how many bits are allocated for the interface ID?",o:["64 bits","32 bits","48 bits","16 bits"],c:0,e:"SLAAC uses a /64 prefix, leaving 64 bits for the interface ID, derived via EUI-64."},
+  {id:99,t:"IPv6",q:"How many bits are in the IPv6 Global Routing Prefix?",o:["32","128","8","48"],c:3,e:"The Global Routing Prefix is typically 48 bits. Structure: 48 + 16 (subnet) + 64 (interface) = 128."},
+  {id:63,t:"Transport Layer",q:"What is added during encapsulation at Layer 4?",o:["Source and destination MAC address","Source and destination application","Source and destination port number","Source and destination IP address"],c:2,e:"Layer 4 adds port numbers for applications. IP addresses = L3, MAC addresses = L2."},
+  {id:75,t:"Transport Layer",q:"How does TCP distinguish between conversations?",o:["Sequence numbers","Window size acknowledgements","Source and destination port numbers","Source and destination IP addresses"],c:2,e:"TCP uses the socket pair (source IP, source port, dest IP, dest port) to uniquely identify conversations."},
+  {id:95,t:"Transport Layer",q:"Why is UDP faster than TCP?",o:["Smaller Application Layer Functionality","Reduced Layer 4 Header","Advanced Packet Allocation","LLC and MAC Address Optimisation"],c:1,e:"UDP has an 8-byte header vs TCP's 20-60 bytes. No handshake, no ACKs, no flow control."},
+  {id:97,t:"Transport Layer",q:"What is the second part of the TCP handshake?",o:["SYN flag set","SYN flag and ACK flag set","ACK flag set","FIN flag set"],c:1,e:"(1) Client sends SYN. (2) Server sends SYN-ACK (both flags). (3) Client sends ACK."},
+  {id:104,t:"Transport Layer",q:"What does the TCP acknowledgment number represent?",o:["The total bytes received","One more than the sequence number","The port number for reply","The next byte the destination expects to receive"],c:3,e:"The ACK number indicates the next expected byte, confirming receipt of all prior bytes."},
+  {id:64,t:"Network Security",q:"Which firewall feature ensures incoming packets match internal requests?",o:["Zone-based Firewalls","Packet Filtering","Stateful Packet Inspection","URL Filtering"],c:2,e:"SPI tracks connection states and only permits incoming packets matching an established session."},
+  {id:66,t:"Network Security",q:"Which provides a secure CLI session with encryption?",o:["Console","Aux","SSH","Telnet"],c:2,e:"SSH encrypts all traffic including passwords. Telnet sends plain text. Aux/Console are physical ports."},
+  {id:67,t:"Network Security",q:"Which does NOT create a secure encrypted connection?",o:["SSH","Console","Telnet","Aux"],c:2,e:"Telnet transmits everything in plain text — no encryption. The others are encrypted or physically secured."},
+  {id:137,t:"DHCP",q:"What is the DHCPv4 process for new hosts?",o:["Discover, Offer, Request, Acknowledge","Discover, Order, Read, Accept","Request, Offer, Discover, Accept","Ask, Offer, Request, Deny"],c:0,e:"DORA: (1) Discover, (2) Offer, (3) Request, (4) Acknowledge."},
+  {id:68,t:"Network Utilities",q:"What does 'arp -a' show on Windows?",o:["A standard delay is added to each entry","The contents of the ARP cache","The contents of the ARP cache are deleted","A detailed report on the ARP cache"],c:1,e:"'arp -a' displays IP-to-MAC mappings in the ARP cache. 'arp -d' deletes entries."},
+  {id:69,t:"Network Security",q:"Which attack prevents authorised users from accessing a server?",o:["Reconnaissance Attack","Access Attack","Trust Exploitation Attack","Denial of Service Attack"],c:3,e:"DoS overwhelms a resource, preventing legitimate access. Trust exploitation abuses trust relationships."},
+  {id:70,t:"DHCP",q:"If a DHCP lease expires while the PC is offline, what happens?",o:["The configuration is permanent","The IP address returns to the DHCP pool for reallocation","The DHCP server permanently reserves the IP address","The lease renews so the same address can be reallocated"],c:1,e:"The expired address returns to the pool. No reservation without manual configuration."},
+  {id:98,t:"Email",q:"When is POP used in an email system?",o:["When uploading from email client to server","To send and relay emails between mail servers","When a client syncs email, keeping messages on both","When a client downloads email, removing it from the server"],c:3,e:"POP downloads and removes from server ('download-and-delete'). IMAP keeps messages. SMTP sends and relays."},
+  {id:128,t:"IOS Commands",q:"Recommended modulus for SSH keys?",o:["1024","360","640","580"],c:0,e:"Min recommended = 1024 bits. 2048/4096 more secure."},
+  {id:129,t:"IPv6",q:"Subnets from IPv6 Subnet ID?",o:["65534","1024","32548","65536"],c:3,e:"16-bit Subnet ID = 2^16 = 65,536 subnets."},
+  {id:130,t:"IPv6",q:"Three parts of IPv6 GUA?",o:["Prefix, Unique ID, MAC","Global Routing Prefix, Subnet ID, Interface ID","Subnet ID, MAC, Unique ID","Class, Subnet, MAC"],c:1,e:"GUA = Global Routing Prefix + Subnet ID + Interface ID."},
+  {id:135,t:"Transport Layer",q:"Size of app data in segment?",o:["Max 2048 Bytes","Max 1023 Bytes","Depends on L3","It Varies"],c:3,e:"Varies by app protocol and MSS from MTU."},
+  {id:136,t:"IPv6",q:"Best method to subnet IPv6?",o:["Borrow from Interface ID","Borrow from host portion","Modify hexadecimal Subnet ID","Use link-local"],c:2,e:"Subnet via Subnet ID between prefix and interface ID."},
+  {id:142,t:"Subnetting",q:"Subnet mask for /20?",o:["255.255.224.0","255.255.240.0","255.255.255.0","255.255.255.248"],c:1,e:"/20 = 255.255.240.0 (20 bits: 8+8+4)."},
+  {id:144,t:"Applications",q:"Email protocol for centralised storage/backup?",o:["SMTP","POP","IMAP","HTTPS"],c:2,e:"IMAP keeps on server. POP downloads/deletes. SMTP sends."},
+  {id:146,t:"Networking",q:"Benefit of cloud computing?",o:["Private clouds by Tier 1 ISPs","Internet via electrical wiring","Direct Internet without ISP","Reduced infrastructure cost"],c:3,e:"Cloud = no hardware purchase. Pay-as-you-go. Still need ISP."},
+  {id:147,t:"IPv6",q:"Auto-assigned address when IPv6 enabled?",o:["Default Gateway","Link-Local","Loopback","Global Unicast"],c:1,e:"Link-local (FE80::/10) auto-assigned on every IPv6 interface."},
+  {id:148,t:"Networking",q:"Communication to a group on IPv4 LAN?",o:["Anycast","Broadcast","Multicast","Unicast"],c:2,e:"Multicast=group. Broadcast=all. Unicast=one. Anycast=nearest."},
+  {id:149,t:"Cabling",q:"Rollover cable used for?",o:["When Auto-MDIX not supported","Connecting unlike devices","Console port connection","Connecting like devices"],c:2,e:"Rollover = PC to Cisco console for out-of-band mgmt."},
+  {id:150,t:"Applications",q:"FTP port numbers?",o:["80 and 443","20 and 21","80 and 8080","22 and 23"],c:1,e:"FTP: 21 (control) + 20 (data). HTTP=80. SSH=22."},
+  {id:151,t:"Switching",q:"Where is IP on L2 switch?",o:["Physical Interface","Virtual Interface","Serial Interface","Console port"],c:1,e:"L2 switch IP on SVI, typically VLAN 1, for remote mgmt."},
+  {id:152,t:"Security",q:"Command: block 30s after 3 failures in 10s?",o:["login block-for 3 attempts 30 within 30","login block-for 30 attempts 3 within 10","login block-for 20 attempts 3 within 10","login block-for 30 attempts 2 within 10"],c:1,e:"Syntax: login block-for <s> attempts <n> within <s>."},
+  {id:153,t:"Security",q:"Attack gathering vulnerability info?",o:["Reconnaissance","ARP Poisoning","DDoS","Man-in-the-middle"],c:0,e:"Recon = scanning. Others execute exploits."},
+  {id:154,t:"Security",q:"Role of an IPS?",o:["Detects and alerts admin","Interminable Power Supply","Detects and blocks threats real-time","Form of router RAM"],c:2,e:"IPS = inline, detects and blocks. IDS = alerts only."},
+  {id:155,t:"Network Utilities",q:"Why use Traceroute?",o:["Display IP info","Test TCP/IP stack","Find where packet lost/delayed","Initiate connection"],c:2,e:"Traceroute maps hops, measures latency to find issues."},
+  {id:156,t:"Troubleshooting",q:"After speaking with user, next step?",o:["Turn off and on","Test theory","Establish theory of probable cause","Reset all routers"],c:2,e:"After gathering info, establish theory before testing."},
+  {id:157,t:"Security",q:"Which describes information theft?",o:["Obtaining Top Secret documents illegally","Pretending to be someone else","Malware overheating servers","Malware deleting records"],c:0,e:"Info theft = illegally obtaining data."},
+  {id:161,t:"Switching",q:"Switch has no MAC for PC3. PC1 sends to PC3?",o:["Forward to dest port","Flood all ports except receiving","Forward to receiving port","Frame dropped"],c:1,e:"Unknown dest MAC = flood all ports except receiving port."},
+  {id:162,t:"IPv6",q:"IPv6 feature replacing ARP?",o:["Advanced Ping","Switch discovery","Broadcast","Neighbour Discovery"],c:3,e:"NDP via ICMPv6 replaces ARP for MAC resolution."},
+  {id:163,t:"Security",q:"Purpose of ARP spoofing?",o:["Improve efficiency","Associate IP to wrong MAC","Create switch backdoor","Find hidden MACs"],c:1,e:"ARP spoofing = forged replies to intercept traffic."},
+  {id:164,t:"ARP",q:"PC1 ARPs for server on different network. Learned address?",o:["IP of gateway","IP of server","MAC of default gateway","MAC of server"],c:2,e:"Different net = via gateway. ARP resolves gateway MAC."},
+  {id:165,t:"Security",q:"Remote access with encryption?",o:["AUX","SSH","TELNET","Console"],c:1,e:"SSH = encrypted. Console/AUX = physical. Telnet = plain."},
+  {id:166,t:"Security",q:"Device analysing data entering/exiting network?",o:["Switch","Hub","Firewall","WAP"],c:2,e:"Firewall inspects and applies rules at network perimeter."},
+  {id:167,t:"Security",q:"Why block NSLookup and FPing?",o:["Allow VPNs","Create baseline","Needed for VLANs","Prevent Reconnaissance Attacks"],c:3,e:"Recon tools. Blocking prevents network discovery."},
+  {id:134,t:"Networking",q:"Standard for Bluetooth?",o:["802.15","802.11a","802.11","802.16"],c:0,e:"Bluetooth = IEEE 802.15 (WPAN). 802.11 = Wi-Fi."},
+  {id:73,t:"Transport Layer",q:"Messages interleaving along common medium?",o:["Multiplexing","Routing","Half Duplex","Full Duplex"],c:0,e:"Multiplexing combines multiple signals into one channel."},
+  {id:109,t:"Transport Layer",q:"Window size 8000 and MSS 1570 means?",o:["ACK every 1570 within 8000","ACK after 1570 before 8000","Receiver processes 8000 bytes, max segment 1570","Segment=8000 processes 1570"],c:2,e:"Window = receive buffer. MSS = max segment from MTU."},
+  {id:110,t:"Transport Layer",q:"Window size 2500 means?",o:["2500 bytes before ACK needed","Port 2500 = window size","2500 bytes minimum for ACK","2500 segments before ACK"],c:0,e:"TCP window = bytes sender can transmit before waiting for ACK."},
+  {id:116,t:"Transport Layer",q:"Addressing at Layer 4 of OSI?",o:["Port numbers for services","IP/mask/gateway","MAC addressing","Physical and Logical addressing"],c:0,e:"L4 = port numbers. MAC = L2. IP = L3."},
+  {id:122,t:"Transport Layer",q:"How UDP reassembles datagrams?",o:["Uses sequence number","Uses port numbers","Datagrams not reassembled","Uses application info"],c:2,e:"UDP = connectionless. Each datagram independent. App handles ordering."},
+  {id:72,t:"Network Utilities",q:"What does nslookup show in Windows?",o:["Apache Web config","DHCP server config","DNS server configuration","MS Exchange config"],c:2,e:"nslookup queries DNS servers for name-to-IP resolution."},
+  {id:88,t:"Applications",q:"Protocol for P2P file sharing over Internet?",o:["Gnutella","SAMBA","Telnet","SMB"],c:0,e:"Gnutella = P2P. SMB/SAMBA = local Windows sharing."},
+  {id:124,t:"Applications",q:"DNS record type A?",o:["Maps domain to IPv4","CNAME mapping","Exchange Server Mapping","FQDN mapping"],c:0,e:"A record = domain to IPv4. AAAA = IPv6. CNAME = alias."},
+  {id:131,t:"Physical Media",q:"Best medium for high EMI risk?",o:["UTP","Fibre Optic","Wireless no encryption","Wireless WPA2"],c:1,e:"Fibre = light pulses, completely immune to EMI."},
+  {id:133,t:"IOS Commands",q:"Router port for dial-up access?",o:["Console","Fast Ethernet","Serial","Aux"],c:3,e:"AUX port supports dial-up modem for remote out-of-band mgmt."},
+  {id:79,t:"DHCP",q:"NOT offered by DHCP server?",o:["Network printer info","IP address","Subnet mask","DNS server info"],c:0,e:"DHCP: IP, mask, gateway, DNS. Printer info not standard."},
+  {id:65,t:"Security",q:"Command mitigating brute-force password attacks?",o:["service password-encryption","enable secret password","login block-for 180 attempts 3 within 60","exec-timeout 30"],c:2,e:"login block-for limits attempts after threshold in time window."},
+  {id:126,t:"Network Utilities",q:"Two functions traceroute uses from IPv4/IPv6?",o:["Loopback and TTL","Echo Request and Hop Limit","TTL and Hop Limit","Ping and Loopback"],c:2,e:"Traceroute uses TTL/Hop Limit, eliciting ICMP Time Exceeded."}
+];;
+
+var NS = 'itn_pg3_';
+var cur = 0;
+var total = Q.length;
+
+function render() {
+  var area = document.getElementById('questionArea');
+  var q = Q[cur];
+  var L = ['A','B','C','D'];
+  var saved = localStorage.getItem(NS + 'ans_' + q.id);
+  var html = '<div class="question-card" tabindex="-1" id="qCard">';
+  html += '<div class="q-number">Question ' + q.id + '</div><div class="q-topic">' + q.t + '</div>';
+  html += '<div class="q-text">' + q.q + '</div>';
+  html += '<div class="options" role="radiogroup" aria-label="Answer options">';
+  for (var i = 0; i < q.o.length; i++) {
+    var ck = (saved !== null && parseInt(saved) === i) ? 'checked' : '';
+    html += '<label class="option' + (saved !== null ? ' locked' : '') + '" id="opt' + i + '">';
+    html += '<input type="radio" name="q" value="' + i + '" ' + ck + ' onclick="pick(' + i + ')" aria-label="Option ' + L[i] + ': ' + q.o[i] + '">';
+    html += '<span class="opt-letter">' + L[i] + '.</span><span class="opt-text">' + q.o[i] + '</span></label>';
+  }
+  html += '</div>';
+  if (saved !== null) {
+    var f = parseInt(saved), ok = (f === q.c);
+    html += '<div class="explanation ' + (ok ? 'correct-exp' : 'wrong-exp') + '" tabindex="0">';
+    html += '<strong>' + (ok ? '&#10003; Correct' : '&#10007; Incorrect') + '</strong>' + q.e + '</div>';
+    html = html.replace('id="opt' + q.c + '"', 'id="opt' + q.c + '" class="option locked correct"');
+    if (f !== q.c) html = html.replace('id="opt' + f + '"', 'id="opt' + f + '" class="option locked wrong"');
+  }
+  html += '</div>';
+  area.innerHTML = html;
+
+  var cnt = 0;
+  for (var j = 0; j < total; j++) { if (localStorage.getItem(NS + 'ans_' + Q[j].id) !== null) cnt++; }
+  document.getElementById('progressFill').style.width = Math.round(((cur + 1) / total) * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + (cur + 1) + ' of ' + total;
+  document.getElementById('statusText').textContent = 'Answered: ' + cnt + ' of ' + total;
+  var card = document.getElementById('qCard');
+  if (card) card.focus({preventScroll:true});
+  var btn = document.getElementById('nextBtn');
+  if (cur >= total - 1) { btn.textContent = 'Submit Assessment'; btn.setAttribute('aria-label','Submit for scoring'); }
+  else { btn.textContent = 'Next \u2192'; btn.setAttribute('aria-label','Next question'); }
+}
+
+function pick(i) {
+  if (localStorage.getItem(NS + 'ans_' + Q[cur].id) !== null) return;
+  localStorage.setItem(NS + 'ans_' + Q[cur].id, String(i));
+  render();
+}
+
+function nextQuestion() {
+  if (cur < total - 1) { cur++; render(); }
+  else { showResults(); }
+}
+
+function showResults() {
+  document.getElementById('questionsSection').classList.add('hidden');
+  document.getElementById('resultsSection').classList.remove('hidden');
+  var c = 0, t = 0;
+  for (var j = 0; j < total; j++) {
+    var v = localStorage.getItem(NS + 'ans_' + Q[j].id);
+    if (v !== null) { t++; if (parseInt(v) === Q[j].c) c++; }
+  }
+  var pct = t > 0 ? Math.round((c / t) * 100) : 0;
+  var pass = pct >= 60;
+  document.getElementById('scoreCircle').textContent = pct + '%';
+  document.getElementById('scoreCircle').className = 'score-circle ' + (pass ? 'score-pass' : 'score-fail');
+  document.getElementById('correctCount').textContent = c;
+  document.getElementById('wrongCount').textContent = t - c;
+  document.getElementById('totalCount').textContent = t;
+  document.getElementById('scoreDesc').textContent = pass ? 'Well done! You passed Practice Paper C.' : 'You did not reach the 60% pass mark. Review the topics and try again.';
+  var msg = document.getElementById('passMsg');
+  msg.style.color = pass ? '#2e7d32' : '#c62828';
+  msg.textContent = pass ? 'PASS' : 'FAIL';
+}
+
+function restartAll() {
+  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
+  window.location.reload();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    var a = document.activeElement;
+    if (a && (a.tagName === 'BODY' || a.closest('.question-card'))) {
+      var btn = document.getElementById('nextBtn');
+      if (btn && !btn.disabled) { e.preventDefault(); nextQuestion(); }
+    }
+  }
+});
+window.addEventListener('DOMContentLoaded', render);
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('paste', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p' || k === 'v') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>

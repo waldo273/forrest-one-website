@@ -27,16 +27,16 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
 }
 
 /* ─── Hero ─── */
-.hero{min-height:36vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
+.hero{min-height:34vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 2rem;background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%)}
 .hero h1{font-size:2.2rem;margin-bottom:.5rem}
 .hero h1 .highlight{color:var(--accent-text);font-weight:700}
-.hero .subtitle{font-size:1.05rem;color:var(--text-dim);max-width:620px;margin:0 auto}
+.hero .subtitle{font-size:1.05rem;color:var(--text-dim);max-width:640px;margin:0 auto}
 .hero .crumb{margin-top:1rem;font-size:.85rem;color:var(--text-muted)}
 .hero .crumb a{color:var(--accent-text);text-decoration:none}
 .hero .crumb a:hover{text-decoration:underline}
 
 /* ─── Quiz Tiles ─── */
-.quiz-grid{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
+.quiz-grid{max-width:1100px;margin:0 auto;padding:2rem 2rem 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
 .quiz-tile{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .quiz-tile:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(168,28,28,0.30)}
 .quiz-tile:focus{outline:3px solid var(--accent2);outline-offset:2px}
@@ -46,8 +46,15 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
 .quiz-tile .meta{display:flex;gap:6px;margin-top:1rem;flex-wrap:wrap}
 .quiz-tile .tag{background:#2c313a;color:var(--accent2);font-size:.7rem;padding:3px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
 .quiz-tile .tag.hot{background:rgba(168,28,28,0.18);color:#e3503a}
+.quiz-tile .tag.itn{background:rgba(0,90,160,0.22);color:#6ab0e0}
+.quiz-tile .tag.srwe{background:rgba(140,110,200,0.22);color:#b69fe0}
 .quiz-tile .play-badge{display:inline-block;margin-top:.8rem;color:var(--accent2);font-size:.8rem;font-weight:600}
 .quiz-tile:hover .play-badge{color:var(--accent-text)}
+
+/* ─── Section heading ─── */
+.section-head{max-width:1100px;margin:2rem auto 0;padding:0 2rem;display:flex;align-items:center;gap:1rem}
+.section-head h2{color:var(--accent-text);font-size:1.4rem;white-space:nowrap}
+.section-head .line{height:1px;background:var(--border);flex:1}
 
 /* ─── Footer ─── */
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:.85rem;background:var(--bg)}
@@ -57,6 +64,7 @@ footer .container{max-width:1200px;margin:0 auto}
   .hero{padding:6rem 1.5rem 2rem}
   .hero h1{font-size:1.8rem}
   .quiz-grid{padding:2rem 1rem;grid-template-columns:1fr}
+  .section-head{padding:0 1rem}
 }
 </style>
 </head>
@@ -81,11 +89,12 @@ footer .container{max-width:1200px;margin:0 auto}
 <section class="hero">
   <div>
     <h1><span class="highlight">Network Quizzes</span></h1>
-    <p class="subtitle">Interactive knowledge quizzes to test your understanding of IP addressing and subnetting. Answer, then read the per-option explanation before moving on.</p>
+    <p class="subtitle">Interactive knowledge quizzes across the Cisco networking curriculum: IP addressing and subnetting, ITN (Introduction to Networks) and SRWE (Switching, Routing and Wireless Essentials). Answer, then read the per-question explanation before moving on.</p>
     <p class="crumb"><a href="/game-arena/">Game Arena</a> &#8594; Network Quizzes</p>
   </div>
 </section>
 
+<div class="section-head"><h2>IP Addressing</h2><div class="line"></div></div>
 <section class="quiz-grid">
   <a href="/game-arena/network-quizzes/ip-addressing/" class="quiz-tile">
     <div class="icon">&#127891;</div>
@@ -112,6 +121,90 @@ footer .container{max-width:1200px;margin:0 auto}
       <span class="tag">20 Qs</span>
     </div>
     <span class="play-badge">Take the Quiz &rarr;</span>
+  </a>
+</section>
+
+<div class="section-head"><h2>ITN &middot; Introduction to Networks</h2><div class="line"></div></div>
+<section class="quiz-grid">
+  <a href="/game-arena/network-quizzes/itn-quiz-1/" class="quiz-tile">
+    <div class="icon">&#127760;</div>
+    <h3>ITN Practice Paper A</h3>
+    <p class="desc">Foundation networking theory: how networks operate, IP addressing basics, protocols, and the OSI and TCP/IP models. A full 60-question paper with a 60% pass mark.</p>
+    <div class="meta">
+      <span class="tag itn">ITN</span>
+      <span class="tag">CCNA 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/network-quizzes/itn-quiz-2/" class="quiz-tile">
+    <div class="icon">&#127760;</div>
+    <h3>ITN Practice Paper B</h3>
+    <p class="desc">Continue Introduction to Networks with Ethernet, switches, IPv4 subnetting, and network access concepts. A fresh 60-question paper covering the core ITN topics.</p>
+    <div class="meta">
+      <span class="tag itn">ITN</span>
+      <span class="tag">CCNA 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/network-quizzes/itn-quiz-3/" class="quiz-tile">
+    <div class="icon">&#127760;</div>
+    <h3>ITN Practice Paper C</h3>
+    <p class="desc">Round out the ITN syllabus with routing basics, IPv6 fundamentals, and transport and application layer services. A third 60-question paper for exam readiness.</p>
+    <div class="meta">
+      <span class="tag itn">ITN</span>
+      <span class="tag">CCNA 1</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+</section>
+
+<div class="section-head"><h2>SRWE &middot; Switching, Routing &amp; Wireless Essentials</h2><div class="line"></div></div>
+<section class="quiz-grid">
+  <a href="/game-arena/network-quizzes/srwe-quiz-1/" class="quiz-tile">
+    <div class="icon">&#128279;</div>
+    <h3>SRWE Practice Paper A</h3>
+    <p class="desc">Switching essentials: VLANs, EtherChannel, auto-MDIX, and wireless fundamentals. A 60-question paper that randomises on every attempt, with a 60% pass mark.</p>
+    <div class="meta">
+      <span class="tag srwe">SRWE</span>
+      <span class="tag">CCNA 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/network-quizzes/srwe-quiz-2/" class="quiz-tile">
+    <div class="icon">&#128279;</div>
+    <h3>SRWE Practice Paper B</h3>
+    <p class="desc">Routing essentials: static and dynamic routing, OSPF, inter-VLAN routing and redundancy. A second 60-question paper with questions and options reshuffled each time.</p>
+    <div class="meta">
+      <span class="tag srwe">SRWE</span>
+      <span class="tag">CCNA 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
+  </a>
+
+  <a href="/game-arena/network-quizzes/srwe-quiz-3/" class="quiz-tile">
+    <div class="icon">&#128279;</div>
+    <h3>SRWE Practice Paper C</h3>
+    <p class="desc">Consolidate switching, routing and wireless: STP, EtherChannel configuration, wireless LANs, and troubleshooting. A third 60-question paper for exam readiness.</p>
+    <div class="meta">
+      <span class="tag srwe">SRWE</span>
+      <span class="tag">CCNA 2</span>
+      <span class="tag">60 Qs</span>
+      <span class="tag">Pass 60%</span>
+    </div>
+    <span class="play-badge">Start Paper &rarr;</span>
   </a>
 </section>
 

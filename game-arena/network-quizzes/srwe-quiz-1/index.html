@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRWE Practice Theory Paper A</title>
+<style>
+body { background: #ffffff; color: #002b5c; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+a.skip-link { position: absolute; top: -100px; left: 8px; background: #002b5c; color: #fff; padding: 8px 16px; z-index: 100; border-radius: 0 0 4px 4px; text-decoration: none; }
+a.skip-link:focus { top: 0; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+h1 { color: #002b5c; border-bottom: 2px solid #002b5c; padding-bottom: 12px; text-align: center; }
+.progress { text-align: center; margin: 20px 0; font-size: 1.1em; color: #666; }
+#current-q { color: #002b5c; font-weight: bold; }
+.question-card { display: none; animation: fadeIn 0.2s ease; }
+.question-card.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.q-text { font-size: 1.15em; margin: 20px 0; line-height: 1.5; color: #002b5c; }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.options label { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: #e8edf5; border: 2px solid transparent; border-radius: 8px; cursor: pointer; font-size: 1em; transition: border-color 0.15s, background 0.15s; }
+.options label:hover { background: #d4dcec; }
+.options label.selected { border-color: #002b5c; background: #d4dcec; }
+.options label.correct { border-color: #4caf50; background: #d4edda; }
+.options label.incorrect { border-color: #f44336; background: #f8d7da; }
+.options input { margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px; accent-color: #002b5c; cursor: pointer; }
+.op-text { flex: 1; }
+.opt-letter { font-weight: bold; color: #4a6a8a; flex-shrink: 0; width: 22px; }
+.explanation { margin: 16px 0; padding: 14px 18px; border-radius: 8px; display: none; line-height: 1.5; }
+.explanation.correct { display: block; background: #d4edda; border-left: 4px solid #4caf50; }
+.explanation.incorrect { display: block; background: #f8d7da; border-left: 4px solid #f44336; }
+.exp-label { font-weight: bold; font-size: 1.1em; margin-bottom: 6px; }
+.nav-buttons { display: flex; justify-content: flex-end; margin: 24px 0; gap: 12px; }
+.nav-btn { padding: 14px 20px; background: #002b5c; color: #fff; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; transition: background 0.15s; min-width: 120px; }
+.nav-btn:hover:not(:disabled) { background: #1a5276; }
+.nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.nav-btn:focus-visible, *:focus-visible { outline: 3px solid #002b5c; outline-offset: 2px; }
+.result-card { display: none; text-align: center; padding: 40px 20px; }
+.result-card.active { display: block; }
+.result-card h2 { color: #002b5c; font-size: 1.8em; }
+.score-big { font-size: 4em; font-weight: bold; margin: 20px 0; }
+.score-pass { color: #4caf50; }
+.score-fail { color: #f44336; }
+.pass-status { font-size: 1.3em; margin: 10px 0; }
+.pass { color: #4caf50; font-weight: bold; }
+.fail { color: #f44336; font-weight: bold; }
+.result-detail { color: #666; margin: 8px 0; }
+.reset-area { margin-top: 30px; padding: 20px; background: #e8edf5; border-radius: 8px; display: inline-block; }
+.reset-area label { display: block; margin-bottom: 8px; color: #666; }
+.reset-area input { padding: 10px; border: 2px solid #002b5c; border-radius: 6px; background: #ffffff; color: #002b5c; font-size: 1em; width: 200px; text-align: center; letter-spacing: 4px; }
+.reset-area input:focus { border-color: #002b5c; outline: none; }
+.reset-btn { padding: 10px 30px; background: #002b5c; color: #fff; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; margin-top: 10px; transition: background 0.15s; }
+.reset-btn:hover { background: #1a5276; }
+.reset-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.reset-msg { color: #f44336; margin-top: 8px; min-height: 1.4em; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media (max-width: 600px) { .container { padding: 12px; } .q-text { font-size: 1em; } .options label { padding: 12px; } .score-big { font-size: 3em; } }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<main id="main" class="container">
+<h1>SRWE Practice Theory Paper A</h1>
+<div class="progress" role="status" aria-live="polite">Question <span id="current-q">1</span> of 60</div>
+<div id="questions-container"></div>
+<div class="nav-buttons">
+<button class="nav-btn" id="next-btn" aria-label="Next question">Next</button>
+<button class="nav-btn" id="submit-btn" style="display:none;background:#1b5e20;color:#fff;" aria-label="Submit assessment">Submit</button>
+</div>
+<div class="result-card" id="result-card">
+<h2>Assessment Complete</h2>
+<div class="score-big" id="score-display">0%</div>
+<p class="pass-status" id="pass-status">--</p>
+<div class="result-detail">Pass mark: 60%</div>
+<div class="result-detail" id="correct-count">0 of 60 correct</div>
+<div class="reset-area">
+<button class="reset-btn" id="reset-btn">Reset</button>
+<div class="reset-msg" id="reset-msg"></div>
+</div>
+</div>
+</main>
+<script>
+(function() {
+var STORAGE_KEY = 'srwe_paper_1_state';
+var questions = [{"q":"Which command enables auto-MDIX on a Cisco switch interface?","opts":["mdix auto","auto-mdix on","auto-mdix enable","set mdix enable"],"ans":0,"exp":"The 'mdix auto' interface configuration command enables auto-MDIX. When enabled, the interface automatically detects the required cable type (straight-through or crossover)."},{"q":"What is EtherChannel?","opts":["A routing protocol for load balancing","A technology that bundles multiple physical links into one logical link","A VLAN trunking protocol","A wireless security standard"],"ans":1,"exp":"EtherChannel bundles up to 8 physical Ethernet links into a single logical link, providing increased bandwidth and redundancy."},{"q":"What are the two wireless topology modes defined by 802.11?","opts":["Infrastructure mode and ad hoc mode","Centralised and distributed","Mesh and star","Client-server and peer-to-peer"],"ans":0,"exp":"802.11 defines infrastructure mode (clients connect through an AP) and ad hoc mode (clients connect peer-to-peer without an AP)."},{"q":"What is the default native VLAN on a Cisco switch?","opts":["VLAN 10","VLAN 99","VLAN 100","VLAN 1"],"ans":3,"exp":"Unless changed, VLAN 1 is the native VLAN on all Cisco switches."},{"q":"Which two PAgP modes will form an EtherChannel?","opts":["Desirable and Auto","Auto and Auto","On and Passive","Desirable and On"],"ans":0,"exp":"PAgP Desirable actively negotiates, and Auto responds to negotiation. Desirable-Auto forms a channel. Auto-Auto does not."},{"q":"What CSMA/CA stand for in 802.11 wireless?","opts":["Carrier Sense Multiple Access with Collision Avoidance","Centralised Spectrum Management Access Control","Code Sequence Multiple Access Collision Avoidance","Carrier Sense Multiple Access with Collision Detection"],"ans":0,"exp":"CSMA/CA is the medium access method used by 802.11 wireless networks. It avoids collisions by listening before transmitting and using random backoff times."},{"q":"How does a switch build its MAC address table?","opts":["By using ARP requests","By examining destination MAC addresses","By querying a DHCP server","By recording source MAC addresses and the receiving port"],"ans":3,"exp":"A switch examines the source MAC address of each incoming frame and records it along with the ingress port into the MAC address table."},{"q":"What does LACP stand for?","opts":["Load Balancing Control Protocol","Local Area Connection Protocol","Link Aggregation Control Protocol","Link Access Control Protocol"],"ans":2,"exp":"LACP is the IEEE 802.3ad standard protocol for link aggregation, allowing multi-vendor EtherChannel implementations."},{"q":"What is tethering in wireless networking?","opts":["A type of wireless bridge","A security feature for WLANs","Connecting two APs with a cable","Using a smartphone as a personal hotspot to share cellular data"],"ans":3,"exp":"Tethering is when a smartphone or tablet with cellular data acts as a personal hotspot, creating an ad hoc wireless network for other devices."},{"q":"What information does a BPDU contain for STP root bridge election?","opts":["IP address and subnet mask","Bridge ID (BID) including priority, MAC, and extended system ID","Port speed and duplex settings","VLAN number and trunk status"],"ans":1,"exp":"Each BPDU contains a Bridge ID (BID) composed of the priority value, MAC address of the switch, and extended system ID. The lowest BID wins the root bridge election."},{"q":"What is required for all member ports in an EtherChannel?","opts":["Same VLAN speed and duplex","Different STP port costs","Different native VLANs","Same IP address"],"ans":0,"exp":"All member ports must have consistent VLAN assignments, speed, duplex, and trunking configuration for the EtherChannel to form."},{"q":"Which protocol do lightweight APs use to communicate with a WLC?","opts":["CAPWAP (Control and Provisioning of Wireless Access Points)","SSH","SNMP","HTTP"],"ans":0,"exp":"CAPWAP is the IETF standard protocol for communication between lightweight APs and WLCs, tunnelling both control and data traffic."},{"q":"Which port role in STP provides an alternative path and is placed in a blocking state?","opts":["Root port","Trunk port","Alternate port","Designated port"],"ans":2,"exp":"Alternate ports provide an alternative path to the root bridge and are placed in a blocking state to prevent Layer 2 loops."},{"q":"How are addresses excluded from a DHCP pool on a Cisco router?","opts":["ip dhcp excluded-address low high","dhcp except address","no ip dhcp pool address","ip dhcp reserve address"],"ans":0,"exp":"The ip dhcp excluded-address command reserves specific addresses (e.g., for routers, servers, printers) so they are not assigned to DHCP clients."},{"q":"What is the purpose of WPA3 in wireless security?","opts":["To manage QoS for voice traffic","To replace SSL certificates","To provide enhanced security with SAE (Simultaneous Authentication of Equals) handshake","To increase wireless range"],"ans":2,"exp":"WPA3 uses the SAE handshake (replacing WPA2s 4-way handshake) to provide stronger authentication and forward secrecy, protecting against offline dictionary attacks."},{"q":"What does a switch do when a port security violation occurs and the port is configured for shutdown mode?","opts":["The violating frame is dropped and a log message is generated","The port is placed in error-disabled state","The port is administratively disabled","The MAC address is dynamically added"],"ans":1,"exp":"When a port security violation occurs in shutdown mode, the port is immediately placed in the error-disabled state, no traffic is sent or received, and the port LED turns off."},{"q":"What is a DHCP relay agent used for?","opts":["To forward DHCP broadcasts between different VLANs","To secure DHCP messages with encryption","To translate DHCP addresses to public IPs","To balance DHCP requests across multiple servers"],"ans":0,"exp":"A DHCP relay agent (configured with ip helper-address) forwards DHCP broadcast messages from clients in one VLAN to a DHCP server in another subnet."},{"q":"What is the function of the distribution system (DS) in 802.11?","opts":["To distribute IP addresses to wireless clients","To distribute power to APs","To interconnect BSSs in an ESS via a wired backbone","To balance client load across APs"],"ans":2,"exp":"The distribution system is the wired infrastructure that interconnects BSSs to form an ESS, enabling client roaming and communication across APs."},{"q":"Both ends of a trunk link must be configured with the same:","opts":["Native VLAN","Port security settings","STP priority","Speed and duplex"],"ans":0,"exp":"Both ends of a trunk link must be configured with the same native VLAN for proper operation."},{"q":"Which flag in a Router Advertisement tells an IPv6 client to use SLAAC only?","opts":["A=0 M=1 O=1","A=0 M=0 O=1","A=1 M=1 O=0","A=1 M=0 O=0"],"ans":3,"exp":"When the A flag (auto-configuration) is set to 1 and both M (managed) and O (other) flags are 0, the host uses SLAAC only with the prefix from the RA."},{"q":"What is the difference between a wireless client in ad hoc mode and infrastructure mode?","opts":["Ad hoc uses an AP; infrastructure is peer-to-peer","Ad hoc is peer-to-peer without an AP; infrastructure uses an AP","Ad hoc is faster; infrastructure is more secure","Ad hoc requires WLC; infrastructure is standalone"],"ans":1,"exp":"Ad hoc mode allows clients to communicate directly (peer-to-peer) without an AP. Infrastructure mode requires an AP to connect clients to the network."},{"q":"In a router-on-a-stick topology, how are subinterfaces configured on the router?","opts":["With separate physical ports","With encapsulation dot1Q vlan for each subinterface","Using static MAC addresses","Using the same IP address on all subinterfaces"],"ans":1,"exp":"Each subinterface is configured with encapsulation dot1Q vlan-id to associate it with a specific VLAN."},{"q":"What does the M flag in a Router Advertisement indicate?","opts":["Use a DHCPv6 server for address assignment (stateful)","Use SLAAC only","Enable multicast on the link","The router is a designated gateway"],"ans":0,"exp":"When the Managed (M) flag is set to 1, hosts should use a stateful DHCPv6 server to obtain IPv6 addresses."},{"q":"What is the default administrative distance of a static route?","opts":["5","1","0","20"],"ans":1,"exp":"Static routes have a default administrative distance of 1, making them preferred over dynamic routing protocols."},{"q":"What is an SVI on a multilayer switch?","opts":["A management interface","A trunk interface","A physical port configured for routing","A virtual interface representing a VLAN"],"ans":3,"exp":"A Switched Virtual Interface (SVI) is a virtual interface that represents a VLAN on a Layer 3 switch, allowing routing between VLANs."},{"q":"Which is a Cisco proprietary FHRP?","opts":["GLBP","VRRP","Both HSRP and GLBP","HSRP"],"ans":2,"exp":"Both HSRP (Hot Standby Router Protocol) and GLBP (Gateway Load Balancing Protocol) are Cisco proprietary. VRRP is IEEE standard 3768."},{"q":"What is the adjacency table in CEF?","opts":["A table containing Layer 2 next-hop information for each entry in the FIB","A list of connected switch ports","A table of MAC addresses","A list of neighbouring routers"],"ans":0,"exp":"The adjacency table stores Layer 2 addressing information (MAC addresses and outgoing interfaces) needed to encapsulate packets for each next hop in the FIB."},{"q":"In a basic switch configuration, what does the no shutdown command do?","opts":["Shuts down the interface","Enables CDP on the interface","Administratively enables the interface","Resets the interface to defaults"],"ans":2,"exp":"The no shutdown command administratively enables an interface. By default, all switch ports are enabled, but router interfaces are disabled."},{"q":"Which command configures AAA authentication on a Cisco device?","opts":["authentication aaa","aaa authentication enable","aaa new-model","enable aaa"],"ans":2,"exp":"The aaa new-model global configuration command enables AAA (Authentication, Authorization, and Accounting) on a Cisco device."},{"q":"How is a default static route configured for IPv4?","opts":["ip route 0.0.0.0 255.255.255.255 next-hop","ip route default next-hop","ip default-route next-hop","ip route 0.0.0.0 0.0.0.0 next-hop"],"ans":3,"exp":"A default static route uses ip route 0.0.0.0 0.0.0.0 next-hop-ip (destination network 0.0.0.0 and subnet mask 0.0.0.0)."},{"q":"What management access method is most secure for configuring a switch remotely?","opts":["Telnet","SSH","HTTP","SNMP"],"ans":1,"exp":"SSH (Secure Shell) encrypts all management traffic including authentication credentials. Telnet sends everything in plaintext."},{"q":"What is port security on a Cisco switch?","opts":["Disabling unused ports","Limiting which MAC addresses can send traffic through a port","Encrypting traffic on a port","Setting a password on each port"],"ans":1,"exp":"Port security restricts access by limiting the MAC addresses allowed to communicate through a switch port."},{"q":"What administrative distance is typically used for a floating static route?","opts":["1","0","255","5 or greater"],"ans":3,"exp":"Floating static routes typically use an administrative distance of 5, 10, or higher greater than the primary routes distance but less than 255 (unreachable)."},{"q":"What happens to a frame with a broadcast MAC address received by a switch?","opts":["It is dropped","It is forwarded only to the default gateway","It is forwarded out all ports except the ingress port","It is stored in the MAC address table"],"ans":2,"exp":"Broadcast frames (destination FF:FF:FF:FF:FF:FF) are flooded out all ports except the port on which they were received."},{"q":"What is the default action on a port security violation?","opts":["Restrict","Log only","Protect","Shutdown"],"ans":3,"exp":"The default violation mode is shutdown, which immediately places the port in error-disabled state when a violation occurs."},{"q":"What does the traceroute command show?","opts":["Each router hop along the path from source to destination","The MAC address of each switch","The VLAN path through the network","The DNS path to a destination"],"ans":0,"exp":"Traceroute shows every Layer 3 hop (router) between source and destination, useful for identifying where packets are being dropped or delayed."},{"q":"Which switching method is the default on most Cisco switches?","opts":["Fragment-free","Fast switching","Cut-through","Store-and-forward"],"ans":3,"exp":"Store-and-forward is the default switching method on most modern Cisco switches."},{"q":"What is the default maximum number of secure MAC addresses allowed per port?","opts":["5","2","10","1"],"ans":3,"exp":"By default, port security allows only 1 MAC address per port. This can be increased using switchport port-security maximum number."},{"q":"What is the difference between a directly connected route and a static route?","opts":["Directly connected is manually configured; static is learned automatically","Static routes have AD 0; directly connected have AD 1","Directly connected is automatically added when an interface is up; static is manually configured","There is no difference"],"ans":2,"exp":"Directly connected routes appear automatically when an interface with an IP address is activated. Static routes require manual configuration with the ip route command."},{"q":"Which protocol does a switch use to discover neighbouring Cisco devices?","opts":["CDP","STP","LLDP","VTP"],"ans":0,"exp":"Cisco Discovery Protocol (CDP) is a proprietary Layer 2 protocol used by Cisco devices to discover directly connected neighbouring devices."},{"q":"What is Dynamic ARP Inspection (DAI)?","opts":["A protocol for dynamic ARP assignment","A tool for troubleshooting ARP issues","A security feature that validates ARP packets against the DHCP snooping binding table","An encryption protocol for ARP"],"ans":2,"exp":"DAI intercepts ARP packets and validates them against the DHCP snooping binding table, dropping invalid ARP responses to prevent ARP spoofing attacks."},{"q":"What is the show ip interface brief command used for?","opts":["To display VLAN information","To show routing protocol neighbours","To show detailed interface statistics","To display a summary of all interfaces with IP address and status"],"ans":3,"exp":"The show ip interface brief command provides a quick summary of all interfaces, showing IP address, status (up/down), and protocol status."},{"q":"Which range are extended VLANs on a Cisco switch?","opts":["1006 to 4094","100 to 1000","1 to 4094","1 to 1005"],"ans":0,"exp":"Normal range VLANs are 1 to 1005. Extended range VLANs are 1006 to 4094 and require VTP transparent mode."},{"q":"What are the three roles in 802.1X authentication?","opts":["Client server and certificate authority","Supplicant authenticator and authentication server","User switch and router","Sender receiver and verifier"],"ans":1,"exp":"The supplicant (client device) requests access, the authenticator (switch/AP) enforces access control, and the authentication server (RADIUS) verifies credentials."},{"q":"What is the first step in troubleshooting a static route issue?","opts":["Delete and recreate the static route","Reboot the router","Verify the network is reachable check interface status and IP configuration","Change the administrative distance"],"ans":2,"exp":"Start by verifying basic connectivity check that the relevant interfaces are up/up and correctly addressed, then verify the route is in the routing table."},{"q":"What is the default VLAN on all ports of a Cisco switch?","opts":["VLAN 10","VLAN 1","VLAN 99","VLAN 100"],"ans":1,"exp":"By default, all ports on a Cisco switch are assigned to VLAN 1, which also serves as the default management VLAN."},{"q":"How can VLAN hopping be prevented?","opts":["Disable DTP on access ports and set the native VLAN to an unused VLAN","Configure port security","Enable STP","Use dynamic VLAN assignment"],"ans":0,"exp":"Disable DTP (Dynamic Trunking Protocol) on access ports using switchport mode access and change the native VLAN to a dedicated unused VLAN."},{"q":"What is the purpose of the ipv6 unicast-routing command?","opts":["Enables multicast routing for IPv6","Configures a unicast address on an interface","Disables IPv6 routing","Enables IPv6 routing on a router that has it disabled by default"],"ans":3,"exp":"IPv6 routing is disabled by default on Cisco IOS. The ipv6 unicast-routing global command must be entered before the router can forward IPv6 packets."},{"q":"Which command configures a voice VLAN on a switch port?","opts":["vlan voice 10","set voice vlan 10","switchport voice vlan 10","voice vlan enable"],"ans":2,"exp":"The switchport voice vlan vlan-id command configures the voice VLAN on an access port connected to a VoIP phone."},{"q":"What is the purpose of storm control on a Cisco switch?","opts":["To limit the amount of broadcast multicast or unicast traffic on an interface","To prioritise traffic for voice","To monitor weather conditions at the data center","To control packet storms in routing protocols"],"ans":0,"exp":"Storm control prevents excessive broadcast, multicast, or unknown unicast traffic from degrading network performance by setting traffic level thresholds."},{"q":"What does the show interfaces command tell you about a failed network connection?","opts":["Whether the interface is up/down and line protocol status","The routing protocols running","The VLAN assignments","The IP address assigned"],"ans":0,"exp":"The show interfaces command displays the interface status (administratively down/up) and line protocol status (up/down), essential for troubleshooting connectivity."},{"q":"What is the default STP port cost for a 100 Mbps link?","opts":["19","4","100","1"],"ans":0,"exp":"The default STP path cost for a 100 Mbps link is 19. (10 Mbps = 100, 1 Gbps = 4, 10 Gbps = 2.)"},{"q":"What is a rogue DHCP server attack?","opts":["A DHCP server overloaded with requests","An attacker installs an unauthorised DHCP server to assign malicious IP configurations","A legitimate DHCP server malfunction","An attacker modifies the DHCP database"],"ans":1,"exp":"A rogue DHCP server on the network can issue false IP configurations, directing clients to malicious DNS servers or default gateways for man-in-the-middle attacks."},{"q":"What does it mean when a port shows administratively down?","opts":["The port is physically disconnected","The port has been disabled with the shutdown command","Port security has disabled the port","STP is blocking the port"],"ans":1,"exp":"An administratively down interface has been disabled using the shutdown command. It can be re-enabled with the no shutdown command."},{"q":"Which Cisco proprietary protocol improves STP convergence time?","opts":["VTP","PVST+","CDP","DTP"],"ans":1,"exp":"Per-VLAN Spanning Tree Plus (PVST+) is Ciscos enhancement that runs a separate STP instance for each VLAN and provides faster convergence."},{"q":"Which command prevents a port from forming a trunk?","opts":["switchport trunk disable","no trunk","switchport mode access","port non-trunk"],"ans":2,"exp":"The switchport mode access command sets the port to permanent access mode and disables trunking, preventing VLAN hopping via DTP."},{"q":"What does the show ip route connected command display?","opts":["Only dynamic routes","The routing protocol neighbours","All routes including static","Only directly connected routes"],"ans":3,"exp":"The show ip route connected command filters the routing table to display only directly connected networks."},{"q":"Which command deletes a VLAN from a Cisco switch?","opts":["no vlan 10","delete vlan 10","remove vlan 10","vlan 10 delete"],"ans":0,"exp":"The no vlan vlan-id global configuration command deletes a VLAN from the switchs running configuration."},{"q":"Which security feature helps prevent CAM table overflow attacks?","opts":["Port security with MAC limiting","VTP pruning","CDP","STP"],"ans":0,"exp":"Port security limits the number of MAC addresses per port, preventing an attacker from flooding the CAM table via a single port."},{"q":"Which layer does a router primarily operate at?","opts":["Layer 4 (Transport)","Layer 3 (Network)","Layer 1 (Physical)","Layer 2 (Data Link)"],"ans":1,"exp":"Routers operate at Layer 3 (Network layer) of the OSI model, making forwarding decisions based on IP addresses."}];
+var qlen = 60;
+var current = 0;
+
+/* ── Randomise on every start ──
+   Shuffle the question order AND the options within each question (remapping
+   the correct-answer index), so each fresh load presents a different paper.
+   A Fisher-Yates shuffle is used. Stale saved state is cleared because the
+   previous session's order no longer matches. */
+function shuffleArray(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+(function () {
+  shuffleArray(questions);
+  for (var qi = 0; qi < questions.length; qi++) {
+    var q = questions[qi];
+    var order = [0, 1, 2, 3];
+    shuffleArray(order);
+    var newOpts = [], newAns = -1;
+    for (var oi = 0; oi < order.length; oi++) {
+      newOpts.push(q.opts[order[oi]]);
+      if (order[oi] === q.ans) newAns = oi;
+    }
+    q.opts = newOpts;
+    q.ans = newAns;
+  }
+  try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+})();
+
+var answered = new Array(60).fill(false);
+var selected = new Array(60).fill(-1);
+var correct = new Array(60).fill(false);
+var submitted = false;
+
+function restoreState() {
+  try {
+    var saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      var state = JSON.parse(saved);
+      current = state.current || 0;
+      answered = state.answered || new Array(60).fill(false);
+      selected = state.selected || new Array(60).fill(-1);
+      correct = state.correct || new Array(60).fill(false);
+      submitted = state.submitted || false;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function saveState() {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+      current: current, answered: answered, selected: selected,
+      correct: correct, submitted: submitted
+    }));
+  } catch(e) {}
+}
+
+function clearState() {
+  try { sessionStorage.removeItem(STORAGE_KEY); } catch(e) {}
+}
+
+restoreState();
+
+var container = document.getElementById('questions-container');
+var nextBtn = document.getElementById('next-btn');
+var submitBtn = document.getElementById('submit-btn');
+var currentQSpan = document.getElementById('current-q');
+var resultCard = document.getElementById('result-card');
+var L = ['A','B','C','D'];
+
+function buildQuestions() {
+  var h = '';
+  for (var i = 0; i < 60; i++) {
+    var q = questions[i];
+    h += '<div class="question-card" id="qcard-' + i + '">';
+    h += '<div class="q-text">' + (i+1) + '. ' + q.q + '</div>';
+    h += '<div class="options" id="opts-' + i + '">';
+    for (var j = 0; j < q.opts.length; j++) {
+      h += '<label id="optlabel-' + i + '-' + j + '"><input type="radio" name="q' + i + '" value="' + j + '" id="opt-' + i + '-' + j + '"><span class="opt-letter">' + L[j] + '.</span><span class="op-text">' + q.opts[j] + '</span></label>';
+    }
+    h += '</div>';
+    h += '<div class="explanation" id="expl-' + i + '"><div class="exp-label" id="expl-label-' + i + '"></div><span id="expl-text-' + i + '">' + q.exp + '</span></div>';
+    h += '</div>';
+  }
+  container.innerHTML = h;
+}
+
+function restoreUI() {
+  for (var i = 0; i < 60; i++) {
+    if (!answered[i]) continue;
+    var inp = document.querySelectorAll('input[name="q' + i + '"]');
+    var lbs = document.querySelectorAll('#opts-' + i + ' label');
+    for (var x = 0; x < inp.length; x++) inp[x].disabled = true;
+    for (var y = 0; y < lbs.length; y++) lbs[y].classList.add('selected');
+    var ca = questions[i].ans;
+    document.getElementById('optlabel-' + i + '-' + ca).classList.add('correct');
+    if (selected[i] !== ca) {
+      var wl = document.getElementById('optlabel-' + i + '-' + selected[i]);
+      if (wl) wl.classList.add('incorrect');
+    }
+    var expl = document.getElementById('expl-' + i);
+    var explLabel = document.getElementById('expl-label-' + i);
+    if (correct[i]) { expl.classList.add('correct'); explLabel.textContent = 'Correct!'; }
+    else { expl.classList.add('incorrect'); explLabel.textContent = 'Incorrect.'; }
+  }
+  if (submitted) showFinalResults();
+}
+
+function showQuestion(idx) {
+  var cards = document.querySelectorAll('.question-card');
+  for (var c = 0; c < cards.length; c++) cards[c].classList.remove('active');
+  var card = document.getElementById('qcard-' + idx);
+  if (card) card.classList.add('active');
+  currentQSpan.textContent = idx + 1;
+  var isLast = idx === 59;
+  nextBtn.style.display = isLast ? 'none' : '';
+  submitBtn.style.display = isLast ? '' : 'none';
+  saveState();
+}
+
+function handleSelect(qIdx, optIdx) {
+  if (answered[qIdx]) return;
+  var inp = document.querySelectorAll('input[name="q' + qIdx + '"]');
+  var lbs = document.querySelectorAll('#opts-' + qIdx + ' label');
+  for (var x = 0; x < inp.length; x++) inp[x].disabled = true;
+  for (var y = 0; y < lbs.length; y++) lbs[y].classList.add('selected');
+  selected[qIdx] = optIdx;
+  answered[qIdx] = true;
+  var ca = questions[qIdx].ans;
+  var isCorrect = optIdx === ca;
+  correct[qIdx] = isCorrect;
+  document.getElementById('optlabel-' + qIdx + '-' + ca).classList.add('correct');
+  if (!isCorrect) {
+    document.getElementById('optlabel-' + qIdx + '-' + optIdx).classList.add('incorrect');
+  }
+  var expl = document.getElementById('expl-' + qIdx);
+  var explLabel = document.getElementById('expl-label-' + qIdx);
+  if (isCorrect) { expl.classList.add('correct'); explLabel.textContent = 'Correct!'; }
+  else { expl.classList.add('incorrect'); explLabel.textContent = 'Incorrect.'; }
+  saveState();
+}
+
+function showFinalResults() {
+  var total = 0;
+  for (var i = 0; i < 60; i++) { if (correct[i]) total++; }
+  var pct = Math.round((total / 60) * 100);
+  document.querySelectorAll('.nav-buttons, .progress, .question-card').forEach(function(el) { el.style.display = 'none'; });
+  resultCard.classList.add('active');
+  var scoreEl = document.getElementById('score-display');
+  scoreEl.textContent = pct + '%';
+  scoreEl.className = 'score-big ' + (pct >= 60 ? 'score-pass' : 'score-fail');
+  document.getElementById('correct-count').textContent = total + ' of 60 correct';
+  var passEl = document.getElementById('pass-status');
+  passEl.innerHTML = pct >= 60
+    ? '<span class="pass">PASS</span> — You met the 60% pass mark.'
+    : '<span class="fail">FAIL</span> — You did not meet the 60% pass mark.';
+  saveState();
+}
+
+container.addEventListener('click', function(e) {
+  if (submitted) return;
+  var label = e.target.closest('label');
+  if (!label || !label.id || label.id.indexOf('optlabel-') !== 0) return;
+  var input = label.querySelector('input[type="radio"]');
+  if (!input || input.disabled) return;
+  var parts = label.id.split('-');
+  handleSelect(parseInt(parts[1]), parseInt(parts[2]));
+});
+
+nextBtn.addEventListener('click', function() {
+  if (current < 59) { current++; showQuestion(current); }
+});
+
+submitBtn.addEventListener('click', function() {
+  submitted = true;
+  showFinalResults();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' && nextBtn.style.display !== 'none') nextBtn.click();
+  if (e.key === 'Enter' && submitBtn.style.display !== 'none') submitBtn.click();
+});
+
+document.getElementById('reset-btn').addEventListener('click', function() {
+  answered = new Array(60).fill(false);
+  selected = new Array(60).fill(-1);
+  correct = new Array(60).fill(false);
+  current = 0;
+  submitted = false;
+  clearState();
+  document.querySelectorAll('.nav-buttons, .progress, .question-card').forEach(function(el) { el.style.display = ''; });
+  nextBtn.style.display = '';
+  submitBtn.style.display = 'none';
+  resultCard.classList.remove('active');
+  for (var i = 0; i < 60; i++) {
+    var inp = document.querySelectorAll('input[name="q' + i + '"]');
+    for (var x = 0; x < inp.length; x++) { inp[x].checked = false; inp[x].disabled = false; }
+    var lbs = document.querySelectorAll('#opts-' + i + ' label');
+    for (var y = 0; y < lbs.length; y++) lbs[y].className = '';
+    var ex = document.getElementById('expl-' + i);
+    ex.className = 'explanation';
+    ex.style.display = 'none';
+  }
+  showQuestion(0);
+});
+
+buildQuestions();
+restoreUI();
+showQuestion(current);
+if (submitted) showFinalResults();
+})();
+</script>
+<script>
+/* Exam integrity guard: blocks right-click, copy, and common shortcut exfiltration routes (client-side deterrent only) */
+(function () {
+  'use strict';
+
+  var toast = null;
+
+  function showNotice() {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-protect-notice';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.textContent = 'Copying is disabled on this assessment.';
+      var s = toast.style;
+      s.position = 'fixed'; s.bottom = '16px'; s.left = '50%'; s.transform = 'translateX(-50%)';
+      s.background = '#002b5c'; s.color = '#ffffff'; s.padding = '10px 20px';
+      s.borderRadius = '8px'; s.fontSize = '.9rem'; s.fontWeight = '700';
+      s.boxShadow = '0 4px 12px rgba(0,0,0,.25)'; s.zIndex = '9999';
+      s.fontFamily = 'Arial, Helvetica, sans-serif'; s.display = 'none';
+      document.body.appendChild(toast);
+    }
+    toast.style.display = 'block';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.display = 'none'; }, 2500);
+  }
+
+  function nope(e) { e.preventDefault(); }
+  function nopeAndWarn(e) { e.preventDefault(); showNotice(); }
+
+  document.addEventListener('contextmenu', nopeAndWarn);
+  document.addEventListener('copy', nopeAndWarn);
+  document.addEventListener('cut', nopeAndWarn);
+  document.addEventListener('paste', nopeAndWarn);
+  document.addEventListener('dragstart', nope);
+
+  var root = document.documentElement;
+  root.style.userSelect = 'none';
+  root.style.webkitUserSelect = 'none';
+  root.style.webkitTouchCallout = 'none';
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+
+  document.addEventListener('keydown', function (e) {
+    var k = (e.key || '').toLowerCase();
+    if (e.key === 'F12') { e.preventDefault(); showNotice(); return; }
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); showNotice(); return; }
+    if (k === 'c' || k === 'x' || k === 'u' || k === 's' || k === 'p' || k === 'v') { e.preventDefault(); showNotice(); }
+  });
+})();
+</script>
+</body>
+</html>
