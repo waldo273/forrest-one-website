@@ -54,6 +54,11 @@ h1 { color: #002b5c; border-bottom: 2px solid #002b5c; padding-bottom: 12px; tex
 .reset-msg { color: #f44336; margin-top: 8px; min-height: 1.4em; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media (max-width: 600px) { .container { padding: 12px; } .q-text { font-size: 1em; } .options label { padding: 12px; } .score-big { font-size: 3em; } }
+
+  /* Return to Game Arena button */
+  .return-game-arena{position:fixed;bottom:18px;right:18px;z-index:9998;display:inline-block;background:#002b5c;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:background .2s}
+  .return-game-arena:hover{background:#004080}
+  .return-game-arena:focus-visible{outline:3px solid #ffd700;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -351,5 +356,6 @@ if (submitted) showFinalResults();
   });
 })();
 </script>
+<a class="return-game-arena" href="/game-arena/" aria-label="Return to Game Arena">&#8592; Return to Game Arena</a>
 </body>
 </html>
