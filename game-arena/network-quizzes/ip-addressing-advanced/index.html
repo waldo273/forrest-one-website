@@ -7,6 +7,31 @@
 <style>
 :root{--red:#A81C1C;--red-d:#7F1414;--red-l:#C22828;--ink:#141414;--panel:#171717;
 --card:#1C1C1C;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#3A3A3A;}
+/* ─── Light Theme ─── */
+[data-theme="light"]{
+  --red:#A81C1C;--red-d:#8f1a16;--red-l:#c7372b;
+  --ink:#f4f5f7;--panel:#ffffff;--card:#ffffff;
+  --text:#1f2328;--body:#3a3f47;--muted:#5b6470;--faint:#6b7280;--line:#d5d9de;
+}
+[data-theme="light"] .topbar p{color:#6b1c1a}
+[data-theme="light"] label.opt.correct{border-color:#2e7d32;background:#e9f7ec}
+[data-theme="light"] label.opt.wrong{border-color:#c62828;background:#fdf0ee}
+[data-theme="light"] .feedback.ok{background:#eefaf1;border-color:#2e7d32;color:#1b5e20}
+[data-theme="light"] .feedback.bad{background:#fdf0ee;border-color:#c62828;color:#8b1a1a}
+[data-theme="light"] .feedback .expl .why-c{color:#157a34}
+[data-theme="light"] .feedback .expl .why-w{color:#b3261e}
+[data-theme="light"] .results .gauge{background:conic-gradient(var(--red-l) calc(var(--p)*1%), #e3e6ea 0)}
+[data-theme="light"] .mono{color:var(--text)}
+/* ─── Theme Toggle (floating) ─── */
+.theme-toggle{
+  position:fixed;top:14px;right:14px;z-index:999;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:1.15rem;
+  background:var(--card);color:var(--text);border:1px solid var(--line);
+  transition:all .18s;
+}
+.theme-toggle:hover{border-color:var(--red-l)}
+.theme-toggle:focus{outline:3px solid var(--red);outline-offset:2px}
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
 .wrap{max-width:860px;margin:0 auto;padding:18px}
@@ -57,10 +82,11 @@ footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:1
 </head>
 <body>
 <div class="wrap">
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
 
 <div id="start" class="card">
   <div class="start-ico">&#129302;</div>
-  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">IP Addressing — Advanced Quiz</h1>
+  <h1 style="color:var(--text);margin:0 0 6px;font-size:22px;">IP Addressing — Advanced Quiz</h1>
   <p style="margin:0 0 14px;">A harder IP Addressing knowledge quiz with applied subnetting tasks across Class A, B and C ranges. Answer, then read the per-option explanation before moving on.</p>
   <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
   <button class="btn" onclick="startQuiz()">Begin quiz</button>
@@ -80,7 +106,7 @@ footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:1
 </div>
 
 <div id="results" class="card hidden">
-  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <h1 style="color:var(--text);margin:0 0 6px;text-align:center;">Quiz complete</h1>
   <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
   <div class="grade" id="grade"></div>
   <div class="sumline" id="sum"></div>
@@ -165,7 +191,7 @@ function select(sel){
   var fb = document.getElementById('fb');
   fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
   var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
-            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+            ' &mdash; the correct answer is <span style="color:var(--text);">'+q.o[q.c]+'</span>.</div><ul class="expl">';
   q.x.forEach(function(e,i){
     var good = (i === q.c);
     exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
@@ -202,6 +228,34 @@ function restart(){
   var s = document.getElementById('start');
   s.classList.remove('hidden');
 }
+</script>
+<!-- ─── Theme Toggle Logic ─── -->
+<script data-cfasync="false">
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
 </script>
 </body>
 </html>
