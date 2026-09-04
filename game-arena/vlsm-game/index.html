@@ -5,14 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VLSM Subnetting Game</title>
 <style>
-:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a}
+:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a;--nav-bg:rgba(20,20,20,0.95);--nav-bg-solid:rgba(20,20,20,0.97)}
+/* ─── Light Theme ─── */
+[data-theme="light"]{--bg:#f4f5f7;--bg-card:#ffffff;--accent:#A81C1C;--accent-text:#a3201b;--accent2:#8f1a16;--text:#1f2328;--text-dim:#41474f;--text-muted:#6b7280;--border:#d5d9de;--nav-bg:rgba(244,245,247,0.92);--nav-bg-solid:rgba(244,245,247,0.97)}
+[data-theme="light"] .level-badge{background:#e9ecf1;color:#8f1a16}
+[data-theme="light"] .hosts-table th{background:#e9ecf1;color:#8f1a16}
+[data-theme="light"] .leaderboard-btn{background:#e9ecf1}
+[data-theme="light"] .leaderboard-btn:hover{background:#e2e5ea}
+[data-theme="light"] .feedback-box.error{color:#b3261e;background:#fdf0ee;border-color:#c62828}
+[data-theme="light"] .feedback-box.success{color:#1b7a34;background:#eefaf1;border-color:#2e7d32}
+[data-theme="light"] .field-row input.correct{background:#eefaf1}
+[data-theme="light"] .field-row input.wrong{background:#fdf0ee}
+[data-theme="light"] .clear-btn{color:#b3261e;border-color:#c62828}
+[data-theme="light"] .clear-btn:hover{background:#fdf0ee}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;min-height:100vh}
 .skip-link{position:absolute;top:-100px;left:8px;background:var(--accent2);color:#fff;padding:8px 16px;border-radius:0 0 4px 4px;z-index:1000;font-size:.85rem;text-decoration:none;transition:top .15s}
 .skip-link:focus{top:0;outline:3px solid #ffd700}
 :focus-visible{outline:2px solid #ffd700;outline-offset:2px}
 /* ─── Site Nav ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(20,20,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
 nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
 nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
 nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
@@ -28,6 +40,16 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
   nav ul li a{display:block;padding:1rem 2rem;font-size:1rem}
   nav .hamburger{display:block}
 }
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 8px;
+  background: var(--bg-card); color: var(--text-dim);
+  border: 1px solid var(--border); cursor: pointer; font-size: 1.1rem;
+  transition: all 0.2s; flex-shrink: 0; margin-right: 0.75rem;
+}
+.theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+.theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
 /* ─── Game ─── */
 .top-bar{background:var(--bg-card);border-bottom:2px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .top-bar h1{font-size:1.2rem;font-weight:700;color:var(--accent2)}
@@ -125,6 +147,7 @@ nav .hamburger span{display:block;width:24px;height:2px;background:var(--text-di
 <nav>
   <div class="container">
     <div class="logo">&#9674; Training.Forrest.One</div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
     <button class="hamburger"><span></span><span></span><span></span></button>
     <ul>
       <li><a href="/">Home</a></li>
@@ -722,6 +745,34 @@ document.querySelector('.hamburger').addEventListener('click', function(){
 document.querySelectorAll('nav ul a').forEach(function(a){
   a.addEventListener('click', function(){ document.querySelector('nav ul').classList.remove('open'); });
 });
+</script>
+<!-- ─── Theme Toggle Logic ─── -->
+<script data-cfasync="false">
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
 </script>
 </body>
 </html>

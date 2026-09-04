@@ -6,10 +6,12 @@
 <title>Network Quizzes — Training.Forrest.One</title>
 <style>
 /* ─── Site Navigation ─── */
-:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a}
+:root{--bg:#141414;--bg-card:#20242c;--accent:#A81C1C;--accent-text:#e3503a;--accent2:#e3503a;--text:#e8eaed;--text-dim:#b8bec6;--text-muted:#9aa3af;--border:#2c313a;--nav-bg:rgba(20,20,20,0.95);--nav-bg-solid:rgba(20,20,20,0.97)}
+/* ─── Light Theme ─── */
+[data-theme="light"]{--bg:#f4f5f7;--bg-card:#ffffff;--accent:#A81C1C;--accent-text:#a3201b;--accent2:#8f1a16;--text:#1f2328;--text-dim:#41474f;--text-muted:#6b7280;--border:#d5d9de;--nav-bg:rgba(244,245,247,0.92);--nav-bg-solid:rgba(244,245,247,0.97)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7}
-nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:rgba(20,20,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;font-family:'Segoe UI',system-ui,sans-serif}
 nav .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;max-width:1200px;margin:0 auto}
 nav .logo{font-size:1.1rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
 nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
@@ -66,12 +68,23 @@ footer .container{max-width:1200px;margin:0 auto}
   .quiz-grid{padding:2rem 1rem;grid-template-columns:1fr}
   .section-head{padding:0 1rem}
 }
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 8px;
+  background: var(--bg-card); color: var(--text-dim);
+  border: 1px solid var(--border); cursor: pointer; font-size: 1.1rem;
+  transition: all 0.2s; flex-shrink: 0; margin-right: 0.75rem;
+}
+.theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+.theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
 </style>
 </head>
 <body>
 <nav>
   <div class="container">
     <div class="logo">&#9674; Training.Forrest.One</div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle theme" aria-pressed="false">&#9790;</button>
     <button class="hamburger"><span></span><span></span><span></span></button>
     <ul>
       <li><a href="/">Home</a></li>
@@ -223,6 +236,35 @@ footer .container{max-width:1200px;margin:0 auto}
     nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); }); });
   }
 })();
+</script>
+
+<!-- ─── Theme Toggle Logic ─── -->
+<script data-cfasync="false">
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var STORE = 'tfone-theme';
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (btn) {
+        btn.textContent = (theme === 'light') ? '\u2600' : '\u263E';
+        btn.setAttribute('aria-pressed', theme === 'light');
+        btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+      try { localStorage.setItem(STORE, theme); } catch (e) {}
+    }
+    function current() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    apply(current());
+    if (btn) btn.addEventListener('click', function () {
+      var next = (root.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      apply(next);
+    });
+  })();
 </script>
 </body>
 </html>
