@@ -185,6 +185,20 @@ var Q = [
 var NS = 'itn_pg2_';
 var cur = 0;
 var total = Q.length;
+/* ── Randomise on every start: Fisher-Yates question order AND option order (remap the correct-answer index) ── */
+function shuffleArr(a){ for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+(function(){
+  for (var qi=0; qi<Q.length; qi++){
+    var ord=[]; for (var oi=0; oi<Q[qi].o.length; oi++) ord.push(oi);
+    shuffleArr(ord);
+    var no=[], nc=0;
+    for (var k=0;k<ord.length;k++){ no.push(Q[qi].o[ord[k]]); if (ord[k]===Q[qi].c) nc=k; }
+    Q[qi].o=no; Q[qi].c=nc;
+  }
+  shuffleArr(Q);
+  /* stale saved answers reference the OLD option indices, so clear them for a fresh random paper */
+  for (var kk in localStorage){ if (kk.indexOf(NS)===0) localStorage.removeItem(kk); }
+})();
 
 function render() {
   var area = document.getElementById('questionArea');
