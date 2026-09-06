@@ -284,7 +284,7 @@
     <h1><span class="highlight">CREST</span> Practice Labs</h1>
     <div class="ruled-line"></div>
     <p class="subtitle">Hands-on labs for the CREST Practitioner certifications</p>
-    <p class="tagline">A self-contained Docker environment for the CREST Practitioner Intrusion Analyst (CPIA) and CREST Practitioner Security Analyst (CPSA) certification domains. Bring up the console on your own machine and work the exercises.</p>
+    <p class="tagline">A self-contained Docker environment for the CREST Practitioner Intrusion Analyst (CPIA) and CREST Practitioner Security Analyst (CPSA) certification domains, plus a full Kali Linux desktop in the browser. Bring up the console on your own machine and work the exercises.</p>
     <div>
       <a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener">Open Lab Console</a>
       <a href="#labs" class="btn btn-secondary">Explore the ranges</a>
@@ -309,6 +309,12 @@
         <p>Security assessment of a deliberately weak network-services host. Host discovery, service enumeration, credential testing, NFS &amp; RPC enumeration, SMTP user enumeration, and web application testing.</p>
       </div>
       <div class="lab-card">
+        <span class="pillar-tag">Full Kali Desktop</span>
+        <span class="icon">&#x1F5A5;&#xFE0F;</span>
+        <h3>Kali — Browser Desktop Sandbox</h3>
+        <p>A complete Kali Linux rolling desktop you open in any browser. The full security toolset is installed, and a shared workspace folder moves files in and out of the desktop. Login as kasm-user with password kalipass.</p>
+      </div>
+      <div class="lab-card">
         <span class="pillar-tag">Evidence-Based</span>
         <span class="icon">&#x1F4C4;</span>
         <h3>Findings &amp; Reports</h3>
@@ -326,9 +332,10 @@
       <h3>Run the labs on your machine</h3>
       <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
       <span class="lab-url">http://172.16.0.100:8020</span>
-      <p>The console has two dashboards — <strong>/cpia</strong> for intrusion analysis and <strong>/cpsa</strong> for security assessment — plus an in-browser terminal for each lab exercise.</p>
-      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website — the button opens the console on your network.</p>
-      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Launch the Console</a></p>
+      <p>The console has two dashboards — <strong>/cpia</strong> for intrusion analysis and <strong>/cpsa</strong> for security assessment — plus an in-browser terminal for each lab exercise, and a <strong>/kali</strong> tab that opens a full Kali desktop in the browser.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for these links to respond. They are not hosted on this website — the buttons open the console and desktop on your network.</p>
+      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Launch the Console</a>
+      <a href="http://172.16.0.100:8040/" class="btn btn-secondary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open Kali Desktop</a></p>
     </div>
   </div>
 </section>
