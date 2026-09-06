@@ -285,9 +285,15 @@
     <div class="ruled-line"></div>
     <p class="subtitle">Hands-on labs for the CREST Practitioner certifications</p>
     <p class="tagline">A self-contained Docker environment for the CREST Practitioner Intrusion Analyst (CPIA) and CREST Practitioner Security Analyst (CPSA) certification domains, plus a full Kali Linux desktop in the browser. Bring up the console on your own machine and work the exercises.</p>
-    <div>
-      <a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener">Open Lab Console</a>
-      <a href="#labs" class="btn btn-secondary">Explore the ranges</a>
+    <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener">Open Lab Console</a></p>
+
+    <div class="access-note" style="margin-top:2.5rem;">
+      <span class="status-pill" id="labStatus"><span class="dot"></span>Checking lab console…</span>
+      <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
+      <span class="lab-url">http://172.16.0.100:8020</span>
+      <p>The console has three tabs — <strong>/cpia</strong> for intrusion analysis, <strong>/cpsa</strong> for security assessment, and <strong>/kali</strong> for a full Kali desktop — each with in-browser terminals and a doc pack.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website — the button opens the console on your network.</p>
+      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open the Lab Console</a></p>
     </div>
   </div>
 </section>
@@ -320,22 +326,6 @@
         <h3>Findings &amp; Reports</h3>
         <p>Every lab is designed around the core certification skill: evidence-based assessment. Record your findings, correlate scanners with manual probes, and produce a professional report.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="bg-alt">
-  <div class="container">
-    <h2>Open the <span class="highlight">Lab Console</span></h2>
-    <div class="access-note">
-      <span class="status-pill" id="labStatus"><span class="dot"></span>Checking lab console…</span>
-      <h3>Run the labs on your machine</h3>
-      <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
-      <span class="lab-url">http://172.16.0.100:8020</span>
-      <p>The console has two dashboards — <strong>/cpia</strong> for intrusion analysis and <strong>/cpsa</strong> for security assessment — plus an in-browser terminal for each lab exercise, and a <strong>/kali</strong> tab that opens a full Kali desktop in the browser.</p>
-      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for these links to respond. They are not hosted on this website — the buttons open the console and desktop on your network.</p>
-      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Launch the Console</a>
-      <a href="https://172.16.0.100:8040/" class="btn btn-secondary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open Kali Desktop</a></p>
     </div>
   </div>
 </section>
