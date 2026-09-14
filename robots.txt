@@ -1,0 +1,49 @@
+# training.forrest.one — robots.txt
+# Replaces the GitHub Pages default (which blocked GPTBot/ClaudeBot/CCBot/Google-Extended
+# at domain level and had no sitemap directive).
+
+# ── Search engines: full access ─────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: *
+
+# ── AI crawlers ─────────────────────────────────────────────────────────────
+# Policy: allow discovery/citation, disallow training. Content signals mirror
+# this. Remove a block below if you decide you want AI training on the content.
+User-agent: GPTBot
+Allow: /
+Disallow: /resources/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /resources/
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+# Google-Extended controls AI *training*, NOT AI Overviews or AI Mode.
+# Blocking it removes you from Gemini training but does not leave AI Overviews.
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ── Explicitly disallowed: scrapers with no referral value ──────────────────
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+Sitemap: https://training.forrest.one/sitemap.xml
