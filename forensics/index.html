@@ -201,21 +201,12 @@
     .guide-card .icon { font-size: 3rem; margin-bottom: 1rem; }
     .guide-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--accent-text); }
     .guide-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    /* Description is the last element now the button is gone — no trailing gap */
+    .guide-card > p:last-of-type { margin-bottom: 0; }
     .guide-card .meta {
       color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;
       text-transform: uppercase; letter-spacing: 0.05em;
     }
-    /* Opening affordance — replaces the old Download button */
-    .guide-card .open-hint {
-      display: inline-block;
-      color: var(--accent-text);
-      font-size: 0.85rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      margin-bottom: 0;
-    }
-    .guide-card:hover .open-hint { text-decoration: underline; text-underline-offset: 3px; }
-    /* Space between description and the hint */
-    .guide-card .open-hint { margin-top: 0.25rem; }
 
     /* ─── Content ─── */
     .page-section { padding: 5rem 0 4rem; }
@@ -342,7 +333,6 @@
           <h3>Volatility Memory Analysis</h3>
           <p class="meta">Memory Forensics</p>
           <p>Step-by-step guide to analysing a Windows memory image with Volatility — from image identification and process listing through to dumping credentials and detecting injected code.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/PLASO-GUIDE.pdf" target="_blank" rel="noopener">
@@ -350,7 +340,6 @@
           <h3>Plaso Timeline Guide</h3>
           <p class="meta">Artifact Timeline</p>
           <p>Step-by-step guide to building and filtering a forensic timeline from EVTX attack samples using plaso (psteal and psort) — turning scattered logs into a chronological story.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/WIRESHARK-GUIDE.pdf" target="_blank" rel="noopener">
@@ -358,7 +347,6 @@
           <h3>Wireshark Traffic Analysis</h3>
           <p class="meta">Network Forensics</p>
           <p>Step-by-step guide to analysing packet captures with Wireshark and tshark — from capture and display filters through to following streams and extracting IoCs.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/NMAP-GUIDE.pdf" target="_blank" rel="noopener">
@@ -366,7 +354,6 @@
           <h3>Nmap Master Guide</h3>
           <p class="meta">Network Recon · CPSA &amp; CPIA</p>
           <p>The complete nmap guide for both exam ranges — host discovery, port scanning, version and OS fingerprinting, NSE scripts, timing and evasion — with the assessor's workflow (CPSA) and the analyst's detection workflow (CPIA).</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/LIVE-INCIDENT-RECONSTRUCTION.pdf" target="_blank" rel="noopener">
@@ -374,7 +361,6 @@
           <h3>Live Incident Reconstruction</h3>
           <p class="meta">Incident Response</p>
           <p>Step-by-step guide to reconstructing a live attack by correlating the packet capture with host logs — from SSH brute force and web exploits through to C2 beaconing.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/LINUX-BASICS-GUIDE.pdf" target="_blank" rel="noopener">
@@ -382,7 +368,6 @@
           <h3>Linux Basics for Pentesters</h3>
           <p class="meta">Command Line Fundamentals</p>
           <p>Step-by-step guide to the everyday Linux command line every assessment needs — navigating the filesystem, permissions and sudo, finding files with grep and find, chaining commands with pipes, and scripting your first recon loop.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
         <a class="guide-card" href="/resources/HERMES-BOT-MODE-GUIDE.pdf" target="_blank" rel="noopener">
@@ -390,7 +375,6 @@
           <h3>Hermes Bot Mode Teams</h3>
           <p class="meta">Multi-Agent Research Setup</p>
           <p>Step-by-step guide to building a small, human-reviewed multi-agent research team in Hermes Agent — define one bot per role, choose tools deliberately, test the team, and run bounded research threads under your control.</p>
-          <span class="open-hint" aria-hidden="true">View PDF &rarr;</span>
           </a>
 
       </div>
