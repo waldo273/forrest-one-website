@@ -1,8 +1,24 @@
 # training.forrest.one — robots.txt
-# Replaces the GitHub Pages default (which blocked GPTBot/ClaudeBot/CCBot/Google-Extended
-# at domain level and had no sitemap directive).
 
-# ── Search engines: full access ─────────────────────────────────────────────
+# NOTE ON THE DUPLICATE BLOCK ABOVE
+# Cloudflare injects its own "content signals" robots.txt preamble ahead of this
+# file, and it is not editable from the repo. That injected block already
+# contains: Content-Signal: search=yes,ai-train=no,use=reference, Allow: / and
+# Disallow: / for Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot,
+# CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot and
+# meta-externalagent.
+#
+# robots.txt does NOT merge duplicate groups: when a crawler appears in more than
+# one group, implementations keep the FIRST matching group and discard later
+# ones. So the Cloudflare block wins for every agent it names, and any rule I
+# write for those agents here is ignored.
+#
+# Consequently this file only carries rules Cloudflare does NOT already set,
+# which is why it is short. To change the AI-crawler policy, edit it in the
+# Cloudflare dashboard (AI Crawl Control), not here.
+
+# ── Search engines Cloudflare does not name: full access ────────────────────
+# (Googlebot/Bingbot are not in the injected block, so these apply.)
 User-agent: Googlebot
 Allow: /
 
@@ -12,38 +28,22 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-User-agent: *
-
-# ── AI crawlers ─────────────────────────────────────────────────────────────
-# Policy: allow discovery/citation, disallow training. Content signals mirror
-# this. Remove a block below if you decide you want AI training on the content.
-User-agent: GPTBot
-Allow: /
-Disallow: /resources/
-
-User-agent: ClaudeBot
-Allow: /
-Disallow: /resources/
-
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Google-Extended
-# Google-Extended controls AI *training*, NOT AI Overviews or AI Mode.
-# Blocking it removes you from Gemini training but does not leave AI Overviews.
+# ── Catch-all for everything else ───────────────────────────────────────────
+User-agent: *
 Allow: /
 
-User-agent: CCBot
-Allow: /
-
-# ── Explicitly disallowed: scrapers with no referral value ──────────────────
-User-agent: Bytespider
+# ── Never wanted ────────────────────────────────────────────────────────────
+User-agent: SemrushBot
 Disallow: /
 
-User-agent: Amazonbot
+User-agent: AhrefsBot
 Disallow: /
 
-User-agent: CloudflareBrowserRenderingCrawler
+User-agent: MJ12bot
 Disallow: /
 
+# ── Sitemap ─────────────────────────────────────────────────────────────────
 Sitemap: https://training.forrest.one/sitemap.xml
