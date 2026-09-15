@@ -197,7 +197,14 @@ function shuffleArray(a) {
   }
   return a;
 }
-(function () {
+function clearStoredAnswers() {
+  try {
+    for (var key in localStorage) {
+      if (key.indexOf(NS) === 0) localStorage.removeItem(key);
+    }
+  } catch (e) {}
+}
+function shuffleQuiz() {
   shuffleArray(Q);
   for (var qi = 0; qi < Q.length; qi++) {
     var q = Q[qi];
@@ -212,12 +219,9 @@ function shuffleArray(a) {
     q.o = newOpts;
     q.c = newC;
   }
-  try {
-    for (var key in localStorage) {
-      if (key.indexOf(NS) === 0) localStorage.removeItem(key);
-    }
-  } catch (e) {}
-})();
+}
+shuffleQuiz();
+clearStoredAnswers();
 function render() {
   var area = document.getElementById('questionArea');
   var q = Q[cur];
@@ -289,8 +293,13 @@ function showResults() {
 }
 
 function restartAll() {
-  for (var k in localStorage) { if (k.startsWith(NS)) localStorage.removeItem(k); }
-  window.location.reload();
+  clearStoredAnswers();
+  shuffleQuiz();
+  clearStoredAnswers();
+  cur = 0;
+  document.getElementById('questionsSection').classList.remove('hidden');
+  document.getElementById('resultsSection').classList.add('hidden');
+  render();
 }
 
 document.addEventListener('keydown', function(e) {
