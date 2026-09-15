@@ -190,6 +190,34 @@ var NS = 'ite8c2_b_';
 var cur = 0;
 var total = Q.length;
 
+function shuffleArray(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+(function () {
+  shuffleArray(Q);
+  for (var qi = 0; qi < Q.length; qi++) {
+    var q = Q[qi];
+    var order = [];
+    for (var k = 0; k < q.o.length; k++) order.push(k);
+    shuffleArray(order);
+    var newOpts = [], newC = -1;
+    for (var oi = 0; oi < order.length; oi++) {
+      newOpts.push(q.o[order[oi]]);
+      if (order[oi] === q.c) newC = oi;
+    }
+    q.o = newOpts;
+    q.c = newC;
+  }
+  try {
+    for (var key in localStorage) {
+      if (key.indexOf(NS) === 0) localStorage.removeItem(key);
+    }
+  } catch (e) {}
+})();
 function render() {
   var area = document.getElementById('questionArea');
   var q = Q[cur];
