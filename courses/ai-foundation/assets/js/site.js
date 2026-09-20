@@ -112,4 +112,85 @@
       }
     });
   }
+
+  /* ==========================================================================
+     Clean URLs: hide the .html extension from the address bar.
+     Client-side router scoped to the course base. Because stripping the
+     extension never changes directory depth, every relative asset/link in the
+     fetched page still resolves correctly against the clean URL. The site still
+     works without this block (fallback = plain .html navigation).
+     ========================================================================== */
+  (function () {
+    var BASE = "/courses/ai-foundation/";
+    var origin = location.origin;
+
+    // The real .html file that a (clean) URL maps to, or null if outside the course.
+    function realFile(url) {
+      var path = (url.split("#")[0] + "").split("?")[0];
+      if (path.indexOf(origin) === 0) { path = path.slice(origin.length); }
+      else if (path.charAt(0) !== "/") { return null; } // relative-to-page handled by caller
+      if (path.indexOf(BASE) !== 0) { return null; }     // not a course URL
+      var rel = path.slice(BASE.length);
+      if (rel === "" || rel === "index" || rel === "index.html") { return BASE + "index.html"; }
+      return BASE + rel.replace(/\.html$/, "") + ".html";
+    }
+
+    // Display form of a URL for the address bar (extensionless).
+    function pretty(url) {
+      var u;
+      try { u = new URL(url, location.href); } catch (e) { return url; }
+      if (u.origin !== origin) { return null; }
+      var p = u.pathname;
+      if (p === BASE + "index.html") { p = BASE.slice(0, -1); }
+      else if (p.indexOf(BASE) === 0 && p.slice(-"index.html".length) === "/index.html") {
+        p = p.slice(0, -"index.html".length);
+      }
+      else if (p.endsWith(".html")) { p = p.slice(0, -5); }
+      return p + u.search + u.hash;
+    }
+
+    function load(pageUrl) {
+      return fetch(pageUrl, { credentials: "same-origin", cache: "no-cache" })
+        .then(function (r) {
+          if (!r.ok) { throw new Error("load failed: " + pageUrl); }
+          return r.text();
+        })
+        .then(function (html) {
+          document.open("text/html", "replace");
+          document.write(html);
+          document.close();
+          window.scrollTo(0, 0);
+        })
+        .catch(function () { /* keep the current page */ });
+    }
+
+    document.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (!a) { return; }
+      var href = a.getAttribute("href");
+      if (!href || href.charAt(0) === "#") { return; }
+      // Only intercept links to course pages (they carry a .html path).
+      if (href.indexOf(".html") === -1) { return; }
+      var clean = pretty(href);
+      var real = realFile(clean);
+      if (!real) { return; }
+      e.preventDefault();
+      var target = clean.split("#")[0];
+      var hash = clean.indexOf("#") !== -1 ? clean.slice(clean.indexOf("#")) : "";
+      history.pushState({ file: real }, "", target + hash);
+      load(real);
+    });
+
+    window.addEventListener("popstate", function () {
+      var real = realFile(location.href);
+      if (real) { load(real); }
+    });
+
+    // If we landed directly on a .html URL, hide it from the bar (no reload).
+    var shown = pretty(location.href);
+    if (shown && shown.charAt(0) === "/" && shown.indexOf(BASE) === 0 &&
+        location.href.indexOf(".html") !== -1) {
+      history.replaceState(null, "", shown);
+    }
+  })();
 })();

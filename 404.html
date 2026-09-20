@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found — Training.Forrest.One</title>
+  <style>
+    :root {
+      --bg: #141414; --text: #e8eaed; --dim: #b8bec6; --muted: #9aa3af;
+      --accent: #A81C1C; --accent-text: #e3503a; --border: #2c313a; --card: #20242c;
+    }
+    [data-theme="light"] {
+      --bg: #f4f5f7; --text: #1f2328; --dim: #41474f; --muted: #6b7280;
+      --accent-text: #a3201b; --border: #d5d9de; --card: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 3rem 2rem;
+    }
+    a { color: var(--accent-text); }
+    .code { font-size: clamp(4rem, 12vw, 7rem); font-weight: 800; color: var(--accent-text); line-height: 1; }
+    h1 { font-size: 1.6rem; margin: 1rem 0 0.5rem; }
+    p { color: var(--dim); max-width: 520px; }
+    .btn {
+      display: inline-block; margin-top: 1.75rem; padding: 0.8rem 2rem; border-radius: 50px;
+      background: var(--accent-text); color: #fff; font-weight: 600; text-decoration: none;
+    }
+  </style>
+  <script>
+  (function () {
+    var BASE = "/courses/ai-foundation/";
+    var origin = location.origin;
+    var path = (location.pathname || "").split("?")[0];
+
+    function realFile(p) {
+      if (p.charAt(0) !== "/") { return null; }
+      if (p.indexOf(BASE) !== 0) { return null; }
+      var rel = p.slice(BASE.length);
+      if (rel === "" || rel === "index" || rel === "index.html") { return BASE + "index.html"; }
+      return BASE + rel.replace(/\.html$/, "") + ".html";
+    }
+
+    var page = realFile(path);
+    if (page) {
+      fetch(page, { credentials: "same-origin", cache: "no-cache" })
+        .then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+        .then(function (html) {
+          document.open("text/html", "replace");
+          document.write(html);
+          document.close();
+          window.scrollTo(0, 0);
+        })
+        .catch(function () {
+          // fall through to the generic 404 below
+          try { document.documentElement.setAttribute("data-theme",
+            (localStorage.getItem("tfone-theme") || "") === "light" ? "light" : "dark"); } catch (e) {}
+        });
+    } else {
+      try { document.documentElement.setAttribute("data-theme",
+        (localStorage.getItem("tfone-theme") || "") === "light" ? "light" : "dark"); } catch (e) {}
+    }
+  })();
+  </script>
+</head>
+<body>
+  <div class="code">404</div>
+  <h1>Page not found</h1>
+  <p>The page you're looking for doesn't exist or has moved.</p>
+  <a class="btn" href="/">Back to Training.Forrest.One</a>
+</body>
+</html>
