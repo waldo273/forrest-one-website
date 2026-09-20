@@ -37,6 +37,7 @@
 
     function realFile(p) {
       if (p.charAt(0) !== "/") { return null; }
+      if (p === BASE.slice(0, -1)) { p = BASE; }
       if (p.indexOf(BASE) !== 0) { return null; }
       var rel = p.slice(BASE.length);
       if (rel === "" || rel === "index" || rel === "index.html") { return BASE + "index.html"; }

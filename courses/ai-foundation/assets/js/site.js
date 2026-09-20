@@ -129,6 +129,7 @@
       var path = (url.split("#")[0] + "").split("?")[0];
       if (path.indexOf(origin) === 0) { path = path.slice(origin.length); }
       else if (path.charAt(0) !== "/") { return null; } // relative-to-page handled by caller
+      if (path === BASE.slice(0, -1)) { path = BASE; }  // base without trailing slash = root
       if (path.indexOf(BASE) !== 0) { return null; }     // not a course URL
       var rel = path.slice(BASE.length);
       if (rel === "" || rel === "index" || rel === "index.html") { return BASE + "index.html"; }
@@ -141,7 +142,7 @@
       try { u = new URL(url, location.href); } catch (e) { return url; }
       if (u.origin !== origin) { return null; }
       var p = u.pathname;
-      if (p === BASE + "index.html") { p = BASE.slice(0, -1); }
+      if (p === BASE + "index.html") { p = BASE; }
       else if (p.indexOf(BASE) === 0 && p.slice(-"index.html".length) === "/index.html") {
         p = p.slice(0, -"index.html".length);
       }
