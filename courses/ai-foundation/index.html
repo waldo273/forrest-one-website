@@ -91,7 +91,12 @@
       min-height: 78vh; display: flex; align-items: center; justify-content: center;
       text-align: center; padding: 8rem 2rem 3rem;
     }
-    .hero .bear-img { width: 300px; height: 300px; object-fit: contain; margin-bottom: 1.5rem; }
+    .hero .logo-img {
+      height: 132px; max-width: 420px; width: auto; object-fit: contain;
+      background: #ffffff; border-radius: 14px; padding: 1rem 1.75rem;
+      margin-bottom: 1.5rem; display: inline-block;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    }
     .hero h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.5rem; }
     .hero h1 .highlight { color: var(--ai); }
     .hero .badge {
@@ -149,7 +154,7 @@
       nav ul li { text-align: center; }
       nav ul li a { display: block; padding: 1rem 2rem; font-size: 1rem; }
       .hero { padding: 6rem 1rem 3rem; min-height: 90vh; }
-      .hero .bear-img { width: 180px; height: 180px; }
+      .hero .logo-img { height: 84px; padding: 0.7rem 1.1rem; max-width: 80vw; }
       .hero h1 { font-size: clamp(1.9rem, 8vw, 2.7rem); }
       .btn { padding: 0.8rem 1.8rem; font-size: 0.85rem; }
       .btn-secondary { margin-left: 0; margin-top: 0.8rem; }
@@ -184,7 +189,7 @@
   <section class="hero">
     <div class="container">
       <span class="badge">Coming soon</span>
-      <img class="bear-img" src="/mascots/fozzie-17-ai.png" alt="Fozzie the AI trainer, a brown bear wearing a cyan circuit vest holding a glowing AI tablet">
+      <img class="logo-img" src="/ukaic-logo-colour.png" alt="UK AI Council — UK AI Foundation logo">
       <h1>UK <span class="highlight">AI Foundation</span></h1>
       <p class="subtitle">Certified AI training — all eight domains of the UKAIF syllabus</p>
       <p class="tagline">Generative AI, prompt engineering, responsible AI, and AI security, taught hands-on by a UK AI Council (UKAIF) Certified Trainer.</p>
