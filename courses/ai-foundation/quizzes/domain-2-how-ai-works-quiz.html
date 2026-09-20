@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"/>
+<title>UKAIC AI Foundation, Domain 2 Quiz, How AI Works</title>
+<style>
+:root{--navy:#002b5c;--ink:#0d1b2a;--ok:#2e7d32;--bad:#c62828;--line:#c9d4e4;--bg:#ffffff;--tint:#eef3fa;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--navy);
+font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6;}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;
+padding:12px 20px;z-index:999;font-weight:bold;text-decoration:none;}
+.skip-link:focus{left:0;}
+header[role="banner"]{background:var(--navy);color:#fff;padding:14px 24px;}
+header[role="banner"] h1{margin:0;font-size:1.15rem;font-weight:bold;letter-spacing:.2px;}
+header[role="banner"] .sub{font-size:.85rem;opacity:.9;margin-top:3px;}
+main[role="main"]{max-width:900px;margin:0 auto;padding:24px 20px 60px;}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+margin-bottom:8px;font-size:1rem;font-weight:bold;}
+.progress-outer{height:14px;background:var(--tint);border:1px solid var(--line);
+border-radius:8px;overflow:hidden;margin-bottom:26px;}
+.progress-inner{height:100%;width:0;background:var(--navy);
+transition:width .3s ease;}
+@media (prefers-reduced-motion: reduce){.progress-inner{transition:none;}}
+.qtext{font-size:1.3rem;font-weight:bold;margin:0 0 20px;line-height:1.45;}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;
+background:var(--tint);border:2px solid var(--line);border-radius:10px;
+padding:15px 17px;margin-bottom:12px;font-size:1.05rem;color:var(--ink);
+font-family:inherit;cursor:pointer;line-height:1.5;}
+.opt:hover:not(:disabled){background:#dde7f5;border-color:#9db3d0;}
+.opt:disabled{cursor:default;}
+.opt:focus-visible{outline:3px solid var(--navy);outline-offset:2px;}
+.opt.correct{background:#dff3e1;border-color:var(--ok);}
+.opt.wrong{background:#fbe3e3;border-color:var(--bad);}
+.opt-letter{font-weight:bold;color:#4a6a8a;flex-shrink:0;width:24px;}
+.opt.correct .opt-letter{color:var(--ok);}
+.opt.wrong .opt-letter{color:var(--bad);}
+.op-text{flex:1;}
+.tag{font-weight:bold;font-size:.85rem;margin-left:8px;white-space:nowrap;}
+.tag.correct{color:var(--ok);}
+.tag.wrong{color:var(--bad);}
+.analysis{margin-top:16px;padding:16px 18px;border-left:6px solid var(--navy);
+background:var(--tint);border-radius:0 8px 8px 0;}
+.analysis h3{margin:0 0 10px;font-size:1rem;text-transform:uppercase;
+letter-spacing:.5px;}
+.analysis p{margin:0 0 9px;font-size:.97rem;}
+.analysis p:last-child{margin-bottom:0;}
+.analysis .why{font-weight:bold;}
+.analysis .good{color:var(--ok);}
+.analysis .bad{color:var(--bad);}
+.navrow{margin-top:26px;}
+button.primary{background:var(--navy);color:#fff;border:none;border-radius:8px;
+padding:15px 30px;font-size:1.05rem;font-weight:bold;cursor:pointer;
+font-family:inherit;}
+button.primary:hover{background:#00408a;}
+button.primary:focus-visible{outline:3px solid #002b5c;outline-offset:3px;}
+button.primary:disabled{background:#9db3d0;cursor:not-allowed;}
+button.submit{background:var(--ok);}
+button.submit:hover{background:#1f5b23;}
+.verdict{font-size:1.15rem;font-weight:bold;margin:0 0 18px;padding:14px 18px;
+border-radius:8px;}
+.verdict.ok{background:#dff3e1;color:#1f5b23;border:2px solid var(--ok);}
+.verdict.no{background:#fbe3e3;color:#8c1c1c;border:2px solid var(--bad);}
+#results{display:none;text-align:center;}
+.gauge{width:230px;height:230px;border-radius:50%;margin:0 auto 26px;
+display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.gauge .pct{font-size:3.2rem;font-weight:bold;line-height:1;}
+.gauge .lbl{font-size:.95rem;margin-top:6px;letter-spacing:1px;}
+.grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0;}
+.cell{border:2px solid var(--line);border-radius:10px;padding:16px 26px;min-width:130px;}
+.cell .n{font-size:2rem;font-weight:bold;display:block;}
+.cell .t{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;}
+.cell.good{border-color:var(--ok);} .cell.good .n{color:var(--ok);}
+.cell.bad{border-color:var(--bad);} .cell.bad .n{color:var(--bad);}
+.note{font-size:.95rem;color:#3d5878;max-width:640px;margin:0 auto 22px;}
+/* Assessment integrity: selection and copy are disabled on question content. */
+#qholder,#results,.analysis,.opt{-webkit-user-select:none;-moz-user-select:none;
+  -ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quiz,#results{-webkit-user-drag:none;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;padding:13px 24px;border-radius:8px;
+  font-size:.95rem;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.25);
+  z-index:9999;display:none;}
+.toast.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.toast{transition:opacity .2s ease;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<header role="banner">
+  <h1>UKAIC AI Foundation, Domain 2 Quiz, How AI Works</h1>
+  <div class="sub">17 questions · Pass standard 70%</div>
+</header>
+<main role="main" id="main">
+  <div id="quiz">
+    <div class="bar">
+      <span id="counter" role="status" aria-live="polite">Question 1 of 17</span>
+      <span id="running" aria-live="polite">Score: 0 / 0</span>
+    </div>
+    <div class="progress-outer" role="progressbar" aria-labelledby="counter"
+         aria-valuemin="0" aria-valuemax="17" aria-valuenow="0" id="pbar">
+      <div class="progress-inner" id="pinner"></div>
+    </div>
+    <div id="qholder"></div>
+    <div class="navrow">
+      <button class="primary" id="next" type="button">Next question &rarr;</button>
+      <button class="primary submit" id="submit" type="button"
+              style="display:none">Submit assessment</button>
+    </div>
+  </div>
+  <div id="results" role="region" aria-label="Assessment results">
+    <div class="gauge" id="gauge"><span class="pct" id="pct">0%</span>
+      <span class="lbl" id="verdictlbl">, </span></div>
+    <div class="grid">
+      <div class="cell good"><span class="n" id="ncorrect">0</span>
+        <span class="t">Correct</span></div>
+      <div class="cell bad"><span class="n" id="nwrong">0</span>
+        <span class="t">Incorrect</span></div>
+      <div class="cell"><span class="n" id="ntotal">0</span>
+        <span class="t">Total</span></div>
+    </div>
+    <p class="note" id="dignote"></p>
+    <ul id="missed" style="text-align:left;max-width:760px;margin:0 auto 24px;
+      padding-left:22px;font-size:.98rem;"></ul>
+    <button class="primary" id="restart" type="button">Restart assessment</button>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+var Q = [{"q":"What is a model, at the level of description the syllabus requires?","opts":["A collection of logical rules written by the system's developers.","A database of stored answers that the system looks up when asked. This is a plausible-sounding but incorrect description.","A set of learned values that has been adjusted during training on data.","A live connection to a search index of current web pages."],"ans":2,"exp":"Correct. A model is parameters, learned numeric values. It is not a store of discrete facts, which is why it cannot be fact-checked internally.","why":["Incorrect. Rules written by developers describe classical automation. A model's behaviour is derived from data, not authored by hand.","Incorrect. This is the most common misconception. There is no answer table to look up; the response is computed from learned values.","Correct. A model is parameters, learned numeric values. It is not a store of discrete facts, which is why it cannot be fact-checked internally.","Incorrect. A base model has no live connection to anything. Some applications add search around the model, but the model itself remains frozen."]},{"q":"Which correctly distinguishes training from inference?","opts":["Training produces output; inference adjusts the model's values.","Training applies to images; inference applies to text only.","Training happens on the user's device; inference happens in the cloud.","Training learns the model; inference uses the model to produce output."],"ans":3,"exp":"Correct. Training is the compute-intensive phase in which values are learned. Inference is the read-only phase in which those frozen values generate output for a user.","why":["Incorrect. This reverses the two. Inference does not change the model, and training does not serve users.","Incorrect. Neither phase is restricted by data type. Models are trained and run on text, images, audio and other data.","Incorrect. Location is not the distinction. Both phases can occur on-device or in the cloud.","Correct. Training is the compute-intensive phase in which values are learned. Inference is the read-only phase in which those frozen values generate output for a user."]},{"q":"A learner asks whether the model learns from their conversation. What is the accurate answer?","opts":["No, because parameters are frozen at inference; the conversation does not retrain it.","Yes, because every exchange adds new examples to the training set.","Yes, but only if the conversation is longer than the context window. This confuses a related concept with the one being tested.","No, because conversations are deleted before they reach the model."],"ans":0,"exp":"Correct. Inference is read-only. The parameters the model uses are frozen, so nothing said in a session is absorbed into the model itself.","why":["Correct. Inference is read-only. The parameters the model uses are frozen, so nothing said in a session is absorbed into the model itself.","Incorrect. Retraining is a separate, deliberate process. A live exchange never updates the weights.","Incorrect. Context length is unrelated. Exceeding the window causes detail to be lost from working memory, not added to training.","Incorrect. Deletion policy is a separate matter and is not the reason. The model does not learn because inference cannot change parameters."]},{"q":"How does a language model produce a response?","opts":["It asks a human reviewer to approve each sentence before display.","It predicts likely next tokens repeatedly, given the prompt and text so far.","It applies grammar rules to assemble sentences from a fixed template set.","It searches a curated fact database and returns the closest stored passage. This is a plausible-sounding but incorrect description."],"ans":1,"exp":"Correct. Next-token prediction is the core mechanism. Each token is chosen from a probability distribution conditioned on everything that came before.","why":["Incorrect. No human is in this loop. Generation is immediate and automatic.","Correct. Next-token prediction is the core mechanism. Each token is chosen from a probability distribution conditioned on everything that came before.","Incorrect. Grammar templates would produce rigid text. The model's variety comes from statistical generation, not templates.","Incorrect. No fact database is consulted. The output is generated, not retrieved, which is why it can be plausible and wrong."]},{"q":"Why does fluent, well-written AI output sometimes contain factual errors?","opts":["Errors appear only when the user makes a spelling mistake in the prompt.","Fluent output is produced only when the model has verified the facts first.","Fluency is optimised for, while factual accuracy is not checked internally.","Errors appear only in languages the model was not trained on."],"ans":2,"exp":"Correct. The model optimises for plausible continuation. It has no built-in fact-checker, so confident and wrong is a normal output, not a malfunction.","why":["Incorrect. Prompt quality affects the usefulness of the answer, but errors occur with perfectly written prompts.","Incorrect. No verification step exists inside the model. Fluency simply reflects well-formed language, not checked facts.","Correct. The model optimises for plausible continuation. It has no built-in fact-checker, so confident and wrong is a normal output, not a malfunction.","Incorrect. Confident errors occur in the best-supported languages too. Training coverage affects the rate, not the existence, of error."]},{"q":"Which statement best characterises output generation?","opts":["The output is retrieved from training data exactly as originally written. This confuses a related concept with the one being tested.","The output is a summary of documents the model selected in advance.","The output is copied verbatim from the highest-ranked search result.","The output is generated rather than retrieved, so it is not sourced content."],"ans":3,"exp":"Correct. Generated is not the same as sourced. Nothing in the output carries a provenance record unless the application supplies one.","why":["Incorrect. Training does not store verbatim documents for later retrieval. Values are learned from text, not the text itself.","Incorrect. No documents are pre-selected. Without retrieval-augmented generation, no external document is consulted at all.","Incorrect. Even where an application adds search, the base model's phrasing is generated, not copied from a result.","Correct. Generated is not the same as sourced. Nothing in the output carries a provenance record unless the application supplies one."]},{"q":"How should the mechanism of language generation be described?","opts":["More sophisticated than simple autocomplete, but with no built-in fact-checker.","Essentially identical to simple autocomplete on a mobile phone keyboard.","A form of reasoning in which the model evaluates the truth of each claim. This is a plausible-sounding but incorrect description.","A retrieval process that fetches verified text from the training corpus."],"ans":0,"exp":"Correct. The syllabus deliberately holds both halves of this together: the mechanism is genuinely more capable than autocomplete, and it still has no fact-checker.","why":["Correct. The syllabus deliberately holds both halves of this together: the mechanism is genuinely more capable than autocomplete, and it still has no fact-checker.","Incorrect. Simple autocomplete is a useful entry analogy, but the syllabus explicitly says the mechanism is more sophisticated. Treating them as identical misleads.","Incorrect. No truth evaluation occurs. The model produces likely text; it does not assess whether that text is correct.","Incorrect. Nothing is fetched from the corpus at inference time. The corpus shapes the learned values, then is not consulted again."]},{"q":"What is a token, at Foundation level?","opts":["A billing category used only by commercial API providers.","The basic unit of text that a model reads and writes.","A password used to authenticate a request to the model.","A single word, always separated by spaces in the source text."],"ans":1,"exp":"Correct. Tokens are the units of text the model processes. They approximate words or word fragments, and they are the currency in which context is measured.","why":["Incorrect. Billing may be calculated in tokens, but the concept is architectural, not commercial. The model works in tokens regardless of how it is charged for.","Correct. Tokens are the units of text the model processes. They approximate words or word fragments, and they are the currency in which context is measured.","Incorrect. This confuses an access credential with a unit of text. They share a word but nothing else.","Incorrect. A token is not the same as a word. Words are often split into several tokens, and common fragments may share one."]},{"q":"What is the context window best described as?","opts":["The maximum length of a document the model can read in its lifetime.","The model's permanent store of everything it has ever been told.","The model's short-term working memory for the current interaction.","The physical memory installed in the server hosting the model."],"ans":2,"exp":"Correct. The context window is working memory: it holds the prompt, the conversation so far, and any supplied material for the current interaction only.","why":["Incorrect. Lifetime capacity is not the concept. The window constrains what is available at one time, not in total.","Incorrect. Nothing in the window persists. It is scoped to the interaction, and clearing it loses everything it held.","Correct. The context window is working memory: it holds the prompt, the conversation so far, and any supplied material for the current interaction only.","Incorrect. The window is a design limit on text handling, not a hardware specification. Server memory is an implementation matter."]},{"q":"A user pastes a very long document and finds the model ignored an instruction placed in the middle. What best explains this?","opts":["The model refuses to follow instructions that appear inside pasted documents. This is a plausible-sounding but incorrect description.","The document exceeded the model's permanent knowledge storage capacity.","The instruction was placed in the middle, which the model cannot read at all.","The middle of a large context is attended to less reliably than the start and end."],"ans":3,"exp":"Correct. This is the 'lost in the middle' effect. Attention is unevenly distributed, so detail in the middle of a large context can be missed entirely.","why":["Incorrect. Models do follow instructions inside supplied content. The issue is positional reliability, not a policy against it.","Incorrect. The context window is temporary working memory. It is not a permanent store, so 'capacity' here means the current window, not lifetime knowledge.","Incorrect. The middle is not unreadable. It is attended to less reliably, which is a matter of degree and can be improved by repositioning.","Correct. This is the 'lost in the middle' effect. Attention is unevenly distributed, so detail in the middle of a large context can be missed entirely."]},{"q":"Which practical measure best mitigates context window limitations?","opts":["Keep prompts concise and place key instructions at the start or end.","Pasting the whole document guarantees neither coverage nor accuracy.","Repeating the prompt consumes capacity without improving reliability.","Changing the display font has no effect on how text is processed."],"ans":0,"exp":"Correct. Concision, chunking and deliberate placement of key instructions are the syllabus's stated mitigations. They work with the attention pattern rather than against it.","why":["Correct. Concision, chunking and deliberate placement of key instructions are the syllabus's stated mitigations. They work with the attention pattern rather than against it.","Incorrect. Whole-document pasting causes shallow traversal and crowding. It is the cause of the problem, not the remedy.","Incorrect. Repetition consumes window capacity and adds no reliability. It trades away space that useful content needs.","Incorrect. Font size is a visual property of the interface. It has no effect on how text is tokenised or attended to."]},{"q":"What happens to earlier detail as a long conversation continues?","opts":["It remains fully available because the window expands as needed.","It can fall out of the context window and stop influencing the output.","It is summarised automatically and stored in a searchable archive.","It is permanently written into the model's parameters for later recall."],"ans":1,"exp":"Correct. When the window fills, earlier material is dropped. This is why constraints agreed at the start of a long session can be silently forgotten.","why":["Incorrect. The window is a fixed size for a given configuration. It does not grow on demand.","Correct. When the window fills, earlier material is dropped. This is why constraints agreed at the start of a long session can be silently forgotten.","Incorrect. Any summarisation is an application feature, not a property of the model, and it is not automatic or guaranteed.","Incorrect. Inference never writes to parameters. Nothing from the conversation becomes part of the model."]},{"q":"What is a knowledge cut-off?","opts":["The maximum number of questions a user may ask in one day.","The point at which a model stops generating and requires a new prompt.","The date after which a base model has no knowledge of events.","The moment when a model's safety filters begin to decline requests."],"ans":2,"exp":"Correct. Training happens at a point in time. Events after that date are simply absent from the model, which is why time-sensitive questions are unreliable.","why":["Incorrect. Usage limits are commercial policy. A knowledge cut-off is an inherent property of training.","Incorrect. This describes an output limit, not a knowledge boundary. The two are unrelated.","Correct. Training happens at a point in time. Events after that date are simply absent from the model, which is why time-sensitive questions are unreliable.","Incorrect. Safety filters are a separate mechanism. A cut-off concerns what the model was exposed to during training."]},{"q":"Why are time-sensitive questions unreliable when put to a base model alone?","opts":["The model deliberately withholds recent information for safety reasons.","The model can only discuss events it has been explicitly asked about.","The model prioritises older information because it is better written.","The model has no knowledge of events after its training date."],"ans":3,"exp":"Correct. Anything after the training date is absent, and the model may still answer confidently, producing out-of-date output presented as current.","why":["Incorrect. There is no deliberate withholding. The information is not a policy decision, it is a training boundary.","Incorrect. The model can discuss anything within its training distribution. The limit is the training date, not the question's novelty.","Incorrect. Age does not confer priority. Older content is not favoured; newer content is simply unavailable.","Correct. Anything after the training date is absent, and the model may still answer confidently, producing out-of-date output presented as current."]},{"q":"An application answers a question about this week's news accurately. What does this tell you about the base model?","opts":["Nothing; the application likely supplied live search, while the base model stays frozen.","It proves the base model has been retrained to include current events.","It proves the base model has an internal clock it consults before answering. This confuses a related concept with the one being tested.","It proves the base model's knowledge cut-off has been removed entirely."],"ans":0,"exp":"Correct. Some applications add live search around the model. That is an application capability layered on top, and the base model itself remains frozen at its training date.","why":["Correct. Some applications add live search around the model. That is an application capability layered on top, and the base model itself remains frozen at its training date.","Incorrect. Retraining does not happen per query. Continuously retraining a base model is neither feasible nor how live search works.","Incorrect. The model has no clock or awareness of time passing. It cannot know what 'this week' means without being told or supplied with information.","Incorrect. A cut-off is inherent to training. It cannot be removed by the application, only worked around by supplying external information."]},{"q":"Why can the same prompt produce different answers on separate occasions?","opts":["The model deliberately varies its output to appear more natural.","The model samples from a probability distribution rather than always taking one fixed path.","The model's parameters are re-randomised each time it starts up.","The model is learning from other users' conversations between attempts. This is a plausible-sounding but incorrect description."],"ans":1,"exp":"Correct. Sampling means the next token is drawn from a distribution, so multiple valid continuations exist. A temperature-style setting controls how freely it samples.","why":["Incorrect. There is no intent or performance involved. Variation is a mechanical consequence of probabilistic selection.","Correct. Sampling means the next token is drawn from a distribution, so multiple valid continuations exist. A temperature-style setting controls how freely it samples.","Incorrect. Parameters are fixed, not re-randomised per session. Variability comes from sampling, not from the weights.","Incorrect. Inference does not update parameters, so other users' input cannot change your result."]},{"q":"Which statement correctly distinguishes a model from an application built around it?","opts":["The model is always cloud-hosted; the application always runs locally.","The model provides the interface; the application provides the learned values. This is a common misconception rather than the accurate position.","The model generates text; the application adds the interface, tools and safeguards.","The model stores user data; the application stores the training corpus."],"ans":2,"exp":"Correct. The model is the engine. The application is everything wrapped around it: interface, prompts, retrieval, tool access, logging and guardrails. Two applications can share one model and behave very differently.","why":["Incorrect. Deployment location varies independently for both. Neither is defined by where it runs.","Incorrect. This reverses the roles. Learned values are the model; the interface belongs to the application.","Correct. The model is the engine. The application is everything wrapped around it: interface, prompts, retrieval, tool access, logging and guardrails. Two applications can share one model and behave very differently.","Incorrect. Data storage is a policy matter handled largely by the application and its provider, not a defining property of the model."]}];
+var PASS = 70;
+var L = ["A","B","C","D"];
+var cur = 0, answered = [], correct = [], submitted = false;
+
+// Randomise question order on every attempt so the sequence cannot be memorised
+// from a screenshot. Uses the same RNG discipline as the accessible quiz standard.
+(function shuffleQuestions(){
+  var seed = Date.now() % 2147483647;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = Q.length - 1; i > 0; i--){
+    var j = Math.floor(rnd() * (i + 1));
+    var t = Q[i]; Q[i] = Q[j]; Q[j] = t;
+  }
+})();
+
+// --- Copy / cut / paste attenuation -------------------------------------------------
+// Assessment integrity: discourage copying questions out and pasting answers in.
+// This is a deterrent, NOT a security control, a determined user can defeat it via
+// devtools. It stops casual text harvesting and pasted-in answers during a sitting.
+(function blockClipboard(){
+  function stop(e){
+    e.preventDefault();
+    showToast('Copying, cutting and pasting are disabled during this assessment.');
+    return false;
+  }
+  ['copy','cut','paste','contextmenu'].forEach(function(evt){
+    document.addEventListener(evt, stop, true);
+  });
+  // Disable text selection inside the question and analysis areas only, so that
+  // the skip link and buttons remain fully keyboard accessible.
+  var style = document.createElement('style');
+  style.textContent = '#qholder, #results { -webkit-user-select:none; -moz-user-select:none;'
+                    + ' -ms-user-select:none; user-select:none; }';
+  document.head.appendChild(style);
+})();
+
+function showToast(msg){
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+var qlen = Q.length;
+for (var i = 0; i < qlen; i++){ answered.push(false); correct.push(false); }
+
+function el(id){ return document.getElementById(id); }
+
+function render(){
+  var q = Q[cur];
+  var h = '<h2 class="qtext" id="qt">' + q.q + '</h2>';
+  h += '<div role="radiogroup" aria-labelledby="qt">';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<button class="opt" type="button" role="radio" aria-checked="false" '
+       + 'data-q="' + cur + '" data-o="' + j + '" id="o' + cur + '_' + j + '">'
+       + '<span class="opt-letter">' + L[j] + '.</span>'
+       + '<span class="op-text">' + q.opts[j] + '</span>'
+       + '<span class="tag" id="t' + cur + '_' + j + '"></span></button>';
+  }
+  h += '</div><div id="ex' + cur + '"></div>';
+  el('qholder').innerHTML = h;
+  var btns = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < btns.length; k++){
+    btns[k].addEventListener('click', onPick);
+  }
+  var last = (cur === qlen - 1);
+  el('next').style.display = last ? 'none' : '';
+  el('submit').style.display = last ? '' : 'none';
+  el('next').disabled = !answered[cur];
+  el('submit').disabled = !answered[cur];
+  updateBar();
+}
+
+function onPick(e){
+  var b = e.currentTarget;
+  var qi = parseInt(b.getAttribute('data-q'), 10);
+  var oi = parseInt(b.getAttribute('data-o'), 10);
+  if (answered[qi]) return;
+  answered[qi] = true;
+  var q = Q[qi];
+  var isRight = (oi === q.ans);
+  correct[qi] = isRight;
+  var all = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < all.length; k++){
+    var kq = parseInt(all[k].getAttribute('data-q'), 10);
+    var ko = parseInt(all[k].getAttribute('data-o'), 10);
+    if (kq !== qi) continue;
+    all[k].disabled = true;
+    all[k].setAttribute('aria-checked', ko === oi ? 'true' : 'false');
+    var tg = el('t' + kq + '_' + ko);
+    if (ko === q.ans){
+      all[k].classList.add('correct');
+      if (tg) tg.textContent = ko === oi ? '✓ Correct' : '✓ This was correct';
+      if (tg) tg.className = 'tag correct';
+    } else if (ko === oi){
+      all[k].classList.add('wrong');
+      if (tg) tg.textContent = '✗ Your answer';
+      if (tg) tg.className = 'tag wrong';
+    }
+  }
+  renderAnalysis(qi);
+  var done = 0;
+  for (var m = 0; m < qlen; m++){ if (answered[m]) done++; }
+  el('running').textContent = 'Score: ' + tally() + ' / ' + done;
+  el('next').disabled = false;
+  el('submit').disabled = false;
+  updateBar();
+}
+
+function renderAnalysis(qi){
+  var q = Q[qi];
+  var h = '<div class="analysis"><h3>Why each option is right or wrong</h3>';
+  h += '<p class="why good">Correct answer: ' + L[q.ans] + '. '
+     + q.opts[q.ans] + '</p><p>' + q.exp + '</p>';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<p><span class="why">' + L[j] + '.</span> ' + q.why[j] + '</p>';
+  }
+  h += '</div>';
+  el('ex' + qi).innerHTML = h;
+}
+
+function tally(){
+  var n = 0;
+  for (var i = 0; i < qlen; i++){ if (correct[i]) n++; }
+  return n;
+}
+
+function updateBar(){
+  el('counter').textContent = 'Question ' + (cur + 1) + ' of ' + qlen;
+  var pct = Math.round(((cur + 1) / qlen) * 100);
+  el('pinner').style.width = pct + '%';
+  var pb = el('pbar');
+  if (pb){ pb.setAttribute('aria-valuenow', String(cur + 1)); }
+}
+
+el('next').addEventListener('click', function(){
+  if (cur < qlen - 1){ cur++; render(); }
+});
+el('submit').addEventListener('click', function(){ showResults(false); });
+
+function mark(){
+  var c = tally();
+  var p = Math.round((c / qlen) * 100);
+  el('pct').textContent = p + '%';
+  el('ncorrect').textContent = c;
+  el('nwrong').textContent = qlen - c;
+  el('ntotal').textContent = qlen;
+  var g = el('gauge');
+  var pass = (p >= PASS);
+  g.style.background = pass ? '#dff3e1' : '#fbe3e3';
+  g.style.border = '8px solid ' + (pass ? '#2e7d32' : '#c62828');
+  el('verdictlbl').textContent = pass ? 'PASS' : 'NOT YET';
+  el('verdictlbl').style.color = pass ? '#2e7d32' : '#c62828';
+  el('pct').style.color = pass ? '#2e7d32' : '#c62828';
+  el('dignote').textContent = pass
+    ? 'You have met the pass standard for this section. Revisit any missed items below, then move on.'
+    : 'Below the pass standard of ' + PASS + '%. Review each missed item below and retake when ready.';
+  var ul = el('missed');
+  ul.innerHTML = '';
+  var missed = 0;
+  for (var i = 0; i < qlen; i++){
+    if (!correct[i]){
+      missed++;
+      var li = document.createElement('li');
+      li.style.marginBottom = '8px';
+      li.textContent = Q[i].q + ', correct: ' + L[Q[i].ans] + '. ' + Q[i].opts[Q[i].ans];
+      ul.appendChild(li);
+    }
+  }
+  if (missed === 0){
+    var li2 = document.createElement('li');
+    li2.textContent = 'No missed items.';
+    ul.appendChild(li2);
+  }
+}
+
+function showResults(force){
+  if (submitted && !force) return;
+  submitted = true;
+  mark();
+  el('quiz').style.display = 'none';
+  el('results').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+el('restart').addEventListener('click', function(){
+  var p = window.prompt('Enter supervisor passcode to reset this assessment:');
+  if (p !== '1234'){
+    if (p !== null){ window.alert('Incorrect passcode. Assessment not reset.'); }
+    return;
+  }
+  location.reload();
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' && !answered[cur] === false && cur < qlen - 1){
+    e.preventDefault(); cur++; render();
+  }
+});
+
+// ---- Assessment integrity guard ----
+// Deterrent only: browser menus can bypass keyboard blocks and the HTML source
+// always contains the questions. Pair with invigilation for real integrity.
+(function integrityGuard(){
+  var tc = null;
+  function toast(msg){
+    var t = el('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    if (tc) clearTimeout(tc);
+    tc = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function block(e, msg){
+    e.preventDefault();
+    e.stopPropagation();
+    toast(msg || 'Copying is disabled on this assessment.');
+    return false;
+  }
+  document.addEventListener('contextmenu', function(e){ block(e); });
+  document.addEventListener('copy', function(e){ block(e); });
+  document.addEventListener('cut', function(e){ block(e); });
+  document.addEventListener('dragstart', function(e){ block(e, 'Dragging is disabled.'); });
+  document.addEventListener('selectstart', function(e){
+    var n = e.target;
+    while (n && n !== document.body){
+      if (n.id === 'qholder' || n.id === 'results' ||
+          (n.classList && (n.classList.contains('opt') || n.classList.contains('analysis')))){
+        block(e, 'Selecting question text is disabled.');
+        return;
+      }
+      n = n.parentNode;
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === 'c' || k === 'x' || k === 'a' || k === 'u' || k === 's' || k === 'p')){
+      block(e); return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')){
+      block(e, 'Developer tools are disabled.'); return;
+    }
+    if (e.key === 'F12'){ block(e, 'Developer tools are disabled.'); }
+  }, true);
+})();
+
+render();
+</script>
+<script>
+(function () {
+  function native(){ return typeof window.Capacitor!=='undefined' && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform(); }
+  function setup(){
+    if(!native()){return;}
+    var App = window.Capacitor.Plugins && window.Capacitor.Plugins.App; if(!App){return;}
+    var t=null,b=0;
+    function toast(m){ if(!t){t=document.createElement('div'); t.className='app-toast'; t.setAttribute('role','status'); document.body.appendChild(t);} t.textContent=m; t.classList.add('show'); clearTimeout(t._z); t._z=setTimeout(function(){t.classList.remove('show');},2200); }
+    App.addListener('backButton', function(info){ var cb=info&&info.canGoBack;
+      if(cb){ if(window.history.length>1){window.history.back();} else {window.location.href=window.location.origin+'/';} return; }
+      var n=Date.now(); if(n-b<2200){App.exitApp(); return;} b=n; toast('Press back again to exit');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
+})();
+</script>
+<footer role="contentinfo" style="text-align:center;padding:18px 20px;border-top:2px solid var(--line,#c9d4e4);margin-top:30px;color:var(--navy,#002b5c);font-size:.9rem">
+  <p>&copy; 2026 Billy Forrest</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"/>
+<title>UKAIC AI Foundation, Domain 4 Quiz: Prompt Engineering Fundamentals</title>
+<style>
+:root{--navy:#002b5c;--ink:#0d1b2a;--ok:#2e7d32;--bad:#c62828;--line:#c9d4e4;--bg:#ffffff;--tint:#eef3fa;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--navy);
+font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6;}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;
+padding:12px 20px;z-index:999;font-weight:bold;text-decoration:none;}
+.skip-link:focus{left:0;}
+header[role="banner"]{background:var(--navy);color:#fff;padding:14px 24px;}
+header[role="banner"] h1{margin:0;font-size:1.15rem;font-weight:bold;letter-spacing:.2px;}
+header[role="banner"] .sub{font-size:.85rem;opacity:.9;margin-top:3px;}
+main[role="main"]{max-width:900px;margin:0 auto;padding:24px 20px 60px;}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+margin-bottom:8px;font-size:1rem;font-weight:bold;}
+.progress-outer{height:14px;background:var(--tint);border:1px solid var(--line);
+border-radius:8px;overflow:hidden;margin-bottom:26px;}
+.progress-inner{height:100%;width:0;background:var(--navy);
+transition:width .3s ease;}
+@media (prefers-reduced-motion: reduce){.progress-inner{transition:none;}}
+.qtext{font-size:1.3rem;font-weight:bold;margin:0 0 20px;line-height:1.45;}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;
+background:var(--tint);border:2px solid var(--line);border-radius:10px;
+padding:15px 17px;margin-bottom:12px;font-size:1.05rem;color:var(--ink);
+font-family:inherit;cursor:pointer;line-height:1.5;}
+.opt:hover:not(:disabled){background:#dde7f5;border-color:#9db3d0;}
+.opt:disabled{cursor:default;}
+.opt:focus-visible{outline:3px solid var(--navy);outline-offset:2px;}
+.opt.correct{background:#dff3e1;border-color:var(--ok);}
+.opt.wrong{background:#fbe3e3;border-color:var(--bad);}
+.opt-letter{font-weight:bold;color:#4a6a8a;flex-shrink:0;width:24px;}
+.opt.correct .opt-letter{color:var(--ok);}
+.opt.wrong .opt-letter{color:var(--bad);}
+.op-text{flex:1;}
+.tag{font-weight:bold;font-size:.85rem;margin-left:8px;white-space:nowrap;}
+.tag.correct{color:var(--ok);}
+.tag.wrong{color:var(--bad);}
+.analysis{margin-top:16px;padding:16px 18px;border-left:6px solid var(--navy);
+background:var(--tint);border-radius:0 8px 8px 0;}
+.analysis h3{margin:0 0 10px;font-size:1rem;text-transform:uppercase;
+letter-spacing:.5px;}
+.analysis p{margin:0 0 9px;font-size:.97rem;}
+.analysis p:last-child{margin-bottom:0;}
+.analysis .why{font-weight:bold;}
+.analysis .good{color:var(--ok);}
+.analysis .bad{color:var(--bad);}
+.navrow{margin-top:26px;}
+button.primary{background:var(--navy);color:#fff;border:none;border-radius:8px;
+padding:15px 30px;font-size:1.05rem;font-weight:bold;cursor:pointer;
+font-family:inherit;}
+button.primary:hover{background:#00408a;}
+button.primary:focus-visible{outline:3px solid #002b5c;outline-offset:3px;}
+button.primary:disabled{background:#9db3d0;cursor:not-allowed;}
+button.submit{background:var(--ok);}
+button.submit:hover{background:#1f5b23;}
+.verdict{font-size:1.15rem;font-weight:bold;margin:0 0 18px;padding:14px 18px;
+border-radius:8px;}
+.verdict.ok{background:#dff3e1;color:#1f5b23;border:2px solid var(--ok);}
+.verdict.no{background:#fbe3e3;color:#8c1c1c;border:2px solid var(--bad);}
+#results{display:none;text-align:center;}
+.gauge{width:230px;height:230px;border-radius:50%;margin:0 auto 26px;
+display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.gauge .pct{font-size:3.2rem;font-weight:bold;line-height:1;}
+.gauge .lbl{font-size:.95rem;margin-top:6px;letter-spacing:1px;}
+.grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0;}
+.cell{border:2px solid var(--line);border-radius:10px;padding:16px 26px;min-width:130px;}
+.cell .n{font-size:2rem;font-weight:bold;display:block;}
+.cell .t{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;}
+.cell.good{border-color:var(--ok);} .cell.good .n{color:var(--ok);}
+.cell.bad{border-color:var(--bad);} .cell.bad .n{color:var(--bad);}
+.note{font-size:.95rem;color:#3d5878;max-width:640px;margin:0 auto 22px;}
+/* Assessment integrity: selection and copy are disabled on question content. */
+#qholder,#results,.analysis,.opt{-webkit-user-select:none;-moz-user-select:none;
+  -ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quiz,#results{-webkit-user-drag:none;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;padding:13px 24px;border-radius:8px;
+  font-size:.95rem;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.25);
+  z-index:9999;display:none;}
+.toast.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.toast{transition:opacity .2s ease;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<header role="banner">
+  <h1>UKAIC AI Foundation, Domain 4 Quiz, Prompt Engineering Fundamentals</h1>
+  <div class="sub">31 questions · 16% of the examination · Pass standard 70%</div>
+</header>
+<main role="main" id="main">
+  <div id="quiz">
+    <div class="bar">
+      <span id="counter" role="status" aria-live="polite">Question 1 of 31</span>
+      <span id="running" aria-live="polite">Score: 0 / 0</span>
+    </div>
+    <div class="progress-outer" role="progressbar" aria-labelledby="counter"
+         aria-valuemin="0" aria-valuemax="31" aria-valuenow="0" id="pbar">
+      <div class="progress-inner" id="pinner"></div>
+    </div>
+    <div id="qholder"></div>
+    <div class="navrow">
+      <button class="primary" id="next" type="button">Next question &rarr;</button>
+      <button class="primary submit" id="submit" type="button"
+              style="display:none">Submit assessment</button>
+    </div>
+  </div>
+  <div id="results" role="region" aria-label="Assessment results">
+    <div class="gauge" id="gauge"><span class="pct" id="pct">0%</span>
+      <span class="lbl" id="verdictlbl">, </span></div>
+    <div class="grid">
+      <div class="cell good"><span class="n" id="ncorrect">0</span>
+        <span class="t">Correct</span></div>
+      <div class="cell bad"><span class="n" id="nwrong">0</span>
+        <span class="t">Incorrect</span></div>
+      <div class="cell"><span class="n" id="ntotal">0</span>
+        <span class="t">Total</span></div>
+    </div>
+    <p class="note" id="dignote"></p>
+    <ul id="missed" style="text-align:left;max-width:760px;margin:0 auto 24px;
+      padding-left:22px;font-size:.98rem;"></ul>
+    <button class="primary" id="restart" type="button">Restart assessment</button>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+var Q = [{"q": "A prompt is built from four components. Which set names all four?", "opts": ["Role, model, temperature and token budget.", "Subject, tone, length and language register.", "Task, context, format and constraints", "Question, example, answer and final review."], "ans": 2, "exp": "Syllabus 4.1 defines exactly four components: task (what you want done), context (background the model needs), format (how the output should be shaped) and constraints (the limits it must respect). These four are the backbone of the syllabus prompting model.", "why": ["These are real prompt qualities, but not the four components the syllabus defines; they sit inside format and constraints.", "This describes a question-and-answer cycle rather than the four-component anatomy of a single prompt.", "Correct. Task, context, format and constraints is the syllabus 4.1 set, and the checklist to run every prompt against.", "This mixes concepts: role is syllabus 4.2, while model and temperature are Domain 2 settings rather than prompt components."]}, {"q": "You write: 'Summarise this report. It is for our board. Keep it to one page. Use short paragraphs and no jargon.' Which component is 'for our board'?", "opts": ["Format.", "Task.", "Context", "Constraints."], "ans": 2, "exp": "Naming the audience supplies the background that shapes register and depth, which syllabus 4.2 treats as context. The task is 'summarise'; the format is one page and short paragraphs; the constraints are no jargon.", "why": ["The task is the action requested, 'summarise this report', while the audience is separate information.", "A constraint is a limit or prohibition, so 'no jargon' is the constraint here rather than 'for our board'.", "Correct. The audience tells the model what background to assume and how formal to be, which is context.", "Format governs the shape of the output such as one page and short paragraphs, not who will read it."]}, {"q": "What does assigning a role, such as 'act as a critical reviewer', actually do?", "opts": ["It guarantees the output will be factually accurate.", "It unlocks a hidden specialist mode inside the model.", "It shapes the register, depth and emphasis of the output", "It gives the model real domain expertise it otherwise lacks."], "ans": 2, "exp": "Syllabus 4.2: assigning a role or persona shapes the register and depth of output, and naming the audience does the same for framing. A role steers style, vocabulary and what the model foregrounds; it does not add knowledge or verify anything.", "why": ["A role is only a text instruction, so it cannot grant knowledge the model was never trained on.", "There is no hidden privileged mode; the role changes how the same model responds and nothing more.", "Correct. The role is a framing instruction that changes tone, depth and what gets emphasised in the reply.", "No role assignment makes output accurate, and syllabus 2.2 still applies in full."]}, {"q": "Which describes few-shot prompting?", "opts": ["Breaking a long task into many separate chat sessions over time.", "Giving the model several attempts so it can correct its own work.", "Asking the same question several times and keeping the best reply.", "Supplying one or more worked examples to calibrate style and format"], "ans": 3, "exp": "Syllabus 4.3: few-shot prompting uses one or more examples to calibrate style, format and tone. Zero-shot gives no examples; few-shot gives some. The examples teach the pattern you want.", "why": ["Self-correction attempts are iterative refinement at syllabus 4.5, a different technique entirely.", "Splitting work across sessions relates to the context window at syllabus 2.3, not to few-shot prompting.", "Repeating a question is not few-shot prompting; that is re-running a prompt hoping for variation.", "Correct. Examples demonstrate the pattern, which is far more reliable than describing it in the abstract."]}, {"q": "When is few-shot prompting most worth the extra effort?", "opts": ["When you need a very specific format, tone or pattern consistently", "When you want a short and quick answer to a simple closed question.", "When the question is a straightforward factual lookup of one item.", "When the task is fully described by one clear and unambiguous sentence."], "ans": 0, "exp": "Examples earn their cost when the requirement is hard to state in words but easy to show, such as a house style, a table layout or a particular tone. If the instruction is already unambiguous, examples add length without adding calibration.", "why": ["Correct. Examples are most valuable when the pattern is easier to demonstrate than to describe in words.", "A factual lookup needs no style calibration, so examples would only consume context window space.", "If one sentence fully specifies the task then the prompt is already clear and examples are redundant.", "A short answer needs less shaping, which means examples usually add very little value here."]}, {"q": "Which prompt best requests structured output?", "opts": ["Give me your best and most considered thoughts on the risks involved.", "Please be organised, methodical and clear in your written response.", "Write about the identified risks in a professional and readable way.", "Return a table with columns: Risk, Likelihood, Impact, Mitigation"], "ans": 3, "exp": "Syllabus 4.4: requesting structured output means naming the structure, including tables, headed sections and defined fields. Specifying the columns makes the shape unambiguous and directly checkable.", "why": ["This asks for considered opinions with no format instruction at all, leaving structure to the model.", "Professional and readable sets tone but says nothing about structure, so the output shape stays unpredictable.", "Being organised is an aspiration rather than a specification, so the model must guess the structure.", "Correct. Naming the exact columns gives an unambiguous, verifiable output structure to work against."]}, {"q": "What is task decomposition in prompting?", "opts": ["Shortening the prompt so that it comfortably fits the context window.", "Removing constraints so that the model has more freedom to respond.", "Asking the model to answer faster by generating fewer output tokens.", "Breaking a complex task into ordered steps and asking for them in sequence"], "ans": 3, "exp": "Syllabus 4.4: decompose a complex task into ordered steps, and ask for a plan or reasoning where useful. Decomposition makes the work tractable and the reasoning inspectable.", "why": ["Removing constraints loosens the prompt, whereas decomposition adds structure rather than removing it.", "Token efficiency is a cost and context concern and has nothing to do with decomposing a task.", "Trimming a prompt is a context-window technique at syllabus 2.3 rather than decomposition.", "Correct. Ordered steps turn one large ambiguous request into a sequence of checkable ones."]}, {"q": "Your first output is broadly right but too formal. What is the correct next move?", "opts": ["Give a specific corrective follow-up naming the change you want", "Accept the output as it stands, since the actual content is right.", "Start a brand-new chat and rewrite the prompt from the beginning.", "Add further constraints to a fresh copy of the original prompt."], "ans": 0, "exp": "Syllabus 4.5 treats the first output as a draft and refinement as a conversation that builds on previous responses. A specific correction such as 'make it warmer and less formal, but keep the structure' is the efficient move.", "why": ["Correct. A targeted follow-up preserves what worked and fixes only the part that did not.", "Accepting the wrong tone means the output goes out unfit for purpose when one line would fix it.", "Rewriting in a fresh chat loses the draft and may add constraints that you do not actually need.", "Restarting throws away the working draft along with the context that produced it."]}, {"q": "Which is a 'one-and-done' prompting fault?", "opts": ["Accepting the very first output without any refinement at all", "Naming the intended audience clearly within the prompt itself.", "Providing a single worked example of the format that you want.", "Sending a large number of follow-up corrections to the model."], "ans": 0, "exp": "Syllabus 4.6 lists one-and-done prompts among the common faults. Treating the initial response as final wastes the model's ability to improve through correction, so iterative refinement at 4.5 is exactly what gets skipped.", "why": ["Correct. One-and-done means treating a draft as a finished product and never refining it.", "Refining thoroughly is the recommended practice rather than a fault, and 4.5 encourages correction.", "Supplying an example is good practice under few-shot prompting at syllabus 4.3.", "Naming the audience is good practice under role and audience at syllabus 4.2."]}, {"q": "A prompt says: 'Look at this and tell me if it's any good and maybe improve it and also check the figures and make it shorter.' What is the main fault?", "opts": ["It is overloaded, bundling too many separate tasks into one request", "It is leading the model toward one particular preferred conclusion.", "It is unformatted, specifying no required structure for the answer.", "It is vague about the target audience for the finished output."], "ans": 0, "exp": "Syllabus 4.6 names overloaded prompts as a fault. This one asks for four different things, namely evaluation, improvement, figure checking and shortening, with no order or priority, so no single output can satisfy it well.", "why": ["Correct. Bundled unordered demands make it impossible for the model to know what to prioritise.", "Unformatted is a real fault, but the dominant problem here is that four tasks are crammed together.", "Audience vagueness is a fault in itself, but it is not what is principally wrong with this prompt.", "A leading prompt steers toward a desired conclusion, and this prompt does not suggest any answer."]}, {"q": "Which prompt is 'leading'?", "opts": ["Why is remote work clearly better for productivity in most teams?", "Summarise the available evidence on remote working productivity.", "What are the main arguments for and against remote working?.", "List the main findings on remote working in the published literature."], "ans": 0, "exp": "A leading prompt embeds the conclusion in the question, so the model is nudged to justify a premise rather than examine it. The phrase 'clearly better' presumes the answer, and syllabus 4.6 lists leading prompts as a fault.", "why": ["Correct. 'Clearly better' asserts the conclusion, so the model is invited to agree rather than assess.", "Listing findings asks what the literature says rather than what it ideally ought to say.", "Summarising the evidence is neutral about what that evidence actually shows on balance.", "This asks for both sides of the argument and so does not presuppose any particular answer."]}, {"q": "What is the difference between zero-shot and few-shot prompting?", "opts": ["Zero-shot needs no prompt, while few-shot needs a system-level message.", "Zero-shot gives no examples, while few-shot gives one or more examples", "Zero-shot uses no role, while few-shot always assigns a specific role.", "Zero-shot works only for short tasks, while few-shot suits only long ones."], "ans": 1, "exp": "Syllabus 4.3 draws this distinction precisely: zero-shot prompting supplies no examples, and few-shot prompting supplies one or more to calibrate style, format and tone. Role and audience at 4.2 are separate and independent techniques.", "why": ["Shot count is unrelated to task length, since short tasks can use examples and long ones may not.", "Correct. The distinguishing feature is purely the presence or absence of worked examples.", "Zero-shot still requires a prompt, which is the whole point; both are prompts that differ in examples.", "Role assignment is independent of shot count, so you can use few-shot without any role at all."]}, {"q": "Which is the strongest reason to name your audience in a prompt?", "opts": ["It makes the model more factually accurate in what it produces.", "It automatically shortens the output to a concise useful length.", "It sets the appropriate register, depth and assumed prior knowledge", "It prevents the model from hallucinating details it cannot know."], "ans": 2, "exp": "Syllabus 4.2: naming the audience shapes the register and depth of the output. Telling the model that the reader is, say, a finance committee means it explains less background and chooses different vocabulary, but it does not change factual reliability.", "why": ["Audience does not control length, which is a format or constraint instruction you must state separately.", "Audience framing affects style rather than factual accuracy, and hallucination is a Domain 6 concern.", "Correct. Audience information calibrates vocabulary, assumed background and the level of detail given.", "No prompt technique eliminates hallucination, as syllabus 6.1 makes entirely clear."]}, {"q": "You need every output in a consistent corporate house style. Which technique fits best?", "opts": ["Few-shot prompting using a short example of the house style", "Asking for the output to be written in the usual corporate way.", "Raising the temperature setting so the model is more creative.", "Adding the broad constraint to make the writing professional."], "ans": 0, "exp": "House style is a pattern that is far easier to show than to describe. Syllabus 4.3 identifies using examples to calibrate style, format and tone as exactly this use case.", "why": ["Correct. A short worked example conveys a house style more reliably than any written description.", "The usual corporate way is undefined, so the model has no way to know your particular house style.", "Higher temperature increases variation, which is the precise opposite of the consistency you want.", "Professional is far too coarse to capture a specific house style and leaves the model guessing."]}, {"q": "How should you treat the first response to a complex prompt?", "opts": ["As the final answer provided that it reads fluently and well.", "As fundamentally unreliable and worth discarding immediately.", "As a reliable source of facts that can be quoted directly.", "As a draft to be reviewed and refined through follow-up turns"], "ans": 3, "exp": "Syllabus 4.5 frames checking output as drafting: treat the first result as a draft and refine through specific, corrective follow-ups. Fluency is not a quality signal, and syllabus 2.2 warns that fluent text is not necessarily accurate.", "why": ["Fluency is a poor quality signal, so a polished draft can still contain errors you must catch.", "Nothing should be quoted directly without verification, as Domains 5 and 6 make plain.", "Discarding a broadly correct draft wastes useful work that one follow-up could have refined.", "Correct. Draft treatment is the syllabus own framing and it keeps refinement conversational."]}, {"q": "Which best explains why prompting should be treated as a conversation?", "opts": ["Longer conversations always cost substantially less than shorter ones.", "Each response gives information you use to write a better next instruction", "The model permanently remembers your work between separate sessions.", "The model needs a few exchanges to warm up before it performs well."], "ans": 1, "exp": "Syllabus 4.5: understand prompting as a conversation that builds on previous responses. Each output reveals what worked, and your next instruction can build on it, so the conversation is a feedback loop rather than a nicety.", "why": ["There is no warm-up effect, since a model does not need prior turns to become ready to respond.", "Correct. The conversation is a feedback loop in which each turn informs the next instruction.", "Conversation length relates to context window use at syllabus 2.3 and is not inherently cheaper.", "Whether work persists between sessions depends on the application and is not the reason prompting is conversational."]}, {"q": "Which single change most reliably fixes a vague prompt?", "opts": ["State the task, audience and required output format explicitly", "Add the instruction to be accurate and thorough in the answer.", "Make the prompt much longer and more detailed in a general way.", "Repeat the same request twice within the body of the prompt."], "ans": 0, "exp": "Syllabus 4.1 gives the remedy for vagueness: supply the missing components, which are a clear task, the relevant context, an explicit format and any real constraints. Length is not the answer, since specification is what matters.", "why": ["Correct. Vagueness is a specification gap, and the four components close it directly.", "Longer is not clearer, so padding a vague prompt leaves it vague and consumes context window space.", "Being accurate and thorough is an aspiration the model cannot act on and does not improve accuracy.", "Repeating a request adds noise and can confuse the instruction rather than resolve the vagueness."]}, {"q": "What does 'decomposing' a task let you do that a single mega-prompt cannot?", "opts": ["Avoid using the context window at all during the whole process.", "Guarantee that the final combined output will be entirely correct.", "Check and correct each step before it feeds into the next one", "Obtain the final answer without performing any verification work."], "ans": 2, "exp": "Syllabus 4.4 pairs decomposition with asking for a plan or reasoning where useful. Splitting work into ordered steps gives you intermediate outputs you can review, which is what makes the later steps trustworthy.", "why": ["No technique guarantees correctness, as the syllabus is explicit that output always requires verification.", "Decomposition is not a route to skipping verification, since Domains 5 and 6 still apply in full.", "Correct. Intermediate steps are checkpoints where errors get caught before they propagate onwards.", "Decomposition still uses the context window, and may use more because each step carries its own text."]}, {"q": "A prompt says: 'Don't be too verbose, but also be comprehensive, and keep it brief but make sure nothing important is left out.' What is the fault?", "opts": ["It fails to specify any useful output format for the finished answer.", "The prompt is far too short to convey what the task actually is.", "It provides neither a role nor an audience for the requested output.", "The constraints contradict each other so no output can satisfy them"], "ans": 3, "exp": "Syllabus 4.6 covers faults including overloaded and unclear constraint sets. Here comprehensive and brief-with-nothing-left-out pull in opposite directions, so the model must silently pick one and your results become unpredictable.", "why": ["Length of the prompt is not the problem, since the conflict between its requirements is what matters.", "An unstated format is a genuine gap, yet the dominant defect is the contradictory constraints.", "Missing role and audience are real gaps but secondary to the contradictory requirements here.", "Correct. Mutually exclusive constraints leave the model to choose arbitrarily, which is unpredictable."]}, {"q": "What is the practical benefit of requesting a structured format like a table?", "opts": ["It makes the model considerably more knowledgeable about the topic.", "It makes omissions and errors easier to spot and compare", "It removes any need for you to verify the content afterwards.", "It makes the resulting response shorter than an unstructured one."], "ans": 1, "exp": "Syllabus 4.4 recommends structured output such as tables and headed sections. The real payoff is reviewability, since a fixed set of columns shows immediately what is missing or inconsistent, which speeds up your verification step.", "why": ["Structured output still requires verification, because format is not in itself a correctness guarantee.", "Correct. Structure turns review into a checklist, exposing gaps and inconsistencies very quickly.", "Format changes presentation rather than knowledge, so the model is no more expert than before.", "A table may be longer or shorter depending on content, so brevity is not the point of structuring."]}, {"q": "Which best describes the relationship between prompting and hallucination?", "opts": ["Prompting has no measurable effect on hallucination at all.", "Better prompting eliminates hallucination completely and reliably.", "Better prompting reduces but cannot eliminate hallucination", "Hallucination is caused solely by writing excessively long prompts."], "ans": 2, "exp": "Syllabus 6.4 lists grounding prompts in real content as one risk-reduction measure, while 6.1 states hallucination is inherent to how language models work. Prompting is therefore a genuine but partial mitigation rather than a cure.", "why": ["Prompt quality does influence error rates, so claiming zero effect understates the value of better prompting.", "Prompt length is not the cause, since hallucination arises from how the model generates text.", "Correct. Grounding and clarity help materially, but the mechanism still permits confident errors.", "No prompt technique removes hallucination, which the syllabus describes as inherent and not a removable bug."]}, {"q": "Your prompt reads: 'Summarise the attached 40-page contract in 200 words.' Which component is the 200-word limit?", "opts": ["Role.", "Constraint", "Task.", "Context."], "ans": 1, "exp": "Syllabus 4.1 treats constraints as the limits the output must respect. A word limit is a hard boundary, which is exactly a constraint. The task is to summarise, and the context is the attached contract.", "why": ["Context is background information the model needs, and the contract supplies that rather than the word count.", "Correct. A word limit is a boundary on the output, which is the definition of a constraint.", "The task is the action to summarise, while the 200-word figure governs how that task is executed.", "No role or persona is assigned anywhere in this particular prompt at all."]}, {"q": "Which is the best follow-up to sharpen an output that is correct but disorganised?", "opts": ["Try the whole thing again but do it noticeably better.", "Reorganise the same content under these four headings", "Are you completely sure that this version is right.", "You made some mistakes, so please fix them for me."], "ans": 1, "exp": "Syllabus 4.5 requires specific, corrective follow-ups. Naming the exact structure you want is specific, preserves the content you approved, and directly addresses the one problem with the draft.", "why": ["Asking for reassurance does not specify a correction and is unlikely to improve the structure.", "Correct. Naming the four headings is precise, actionable and keeps the approved content intact.", "Better gives no direction at all, so the model must guess what to change and may alter the wrong things.", "This implies errors without saying where, risking destructive changes to content that was already right."]}, {"q": "Why does the syllabus recommend asking for reasoning or a plan where useful?", "opts": ["It guarantees that the final conclusion is entirely correct.", "It exposes the model's logic so that you can check it", "It makes the model genuinely think like a human being.", "It significantly reduces the number of tokens used overall."], "ans": 1, "exp": "Syllabus 4.4 suggests asking for a plan or reasoning where useful. The value is inspectability, since seeing the steps lets you spot the faulty link, which you cannot do from a bare conclusion.", "why": ["A visible chain of reasoning can still be wrong or even rationalise a wrong answer, so it guarantees nothing.", "Correct. Visible steps create review points where a wrong assumption becomes apparent to you.", "Asking for reasoning generally increases output length and therefore token use rather than reducing it.", "The model does not reason like a human, and the benefit is auditability rather than anthropomorphism."]}, {"q": "What is the key risk of a prompt that is vague about the output format?", "opts": ["The model will hallucinate considerably more statistics overall.", "Each run may return a different shape, making output hard to reuse", "The model will simply refuse to provide any answer at all. This assumes the model holds intent it does not have.", "The answer will always come back far too long to be useful."], "ans": 1, "exp": "Syllabus 4.1 treats format as one of the four required components. Without a format instruction the model chooses, and its choice varies between runs, which is why vague prompts produce output you cannot reliably reuse or compare.", "why": ["Hallucination is driven by how models generate text rather than by format specification.", "Correct. Unspecified format means inconsistent structure that resists reuse and comparison.", "Models answer vague format requests happily; they simply pick a shape for themselves.", "Unformatted output can be short or long, since length is governed by explicit constraints."]}, {"q": "Which combination best matches the four prompt components in: 'Acting as a data analyst, review this sales spreadsheet and give me a table of the three biggest risks.'?", "opts": ["Task is the data analyst, format is reviewing, constraints are the three biggest risks listed.", "Task is the table, format is the data analyst, constraints are the review of the spreadsheet.", "Task is the three biggest risks, format is the spreadsheet, constraints are the data analyst role.", "Task is reviewing the spreadsheet, format is a table, constraints are the three biggest risks"], "ans": 3, "exp": "The task is the action requested, which is reviewing the spreadsheet. The context is the material supplied, which is the sales data. The format is the requested shape, which is a table. The constraint bounds the answer to the three biggest risks. The analyst role is a layered 4.2 element.", "why": ["This assigns components to the wrong elements, since the three biggest risks bound the answer rather than form the context.", "This labels the role as the format, but a persona is not a structure for presenting an answer.", "This mistakes the role for the task, because a data analyst is a persona rather than a requested action.", "Correct. Each component is correctly identified, with the role recognised as a separate 4.2 layer."]}, {"q": "When would zero-shot prompting actually be the better choice?", "opts": ["When the task is simple and a clear instruction is sufficient", "When you need a specific house tone across all the output.", "When the task is complex and very highly patterned throughout.", "When the output must follow a strict and detailed template."], "ans": 0, "exp": "Syllabus 4.3 asks when to use examples. The answer is when calibration is genuinely needed. For a simple, well-specified task, examples add context-window cost with little benefit, so a clear zero-shot instruction is more efficient.", "why": ["Correct. Simple clearly specified tasks need no calibration, so zero-shot is leaner and just as effective.", "A specific house tone is easier to show than describe, so that is clearly a few-shot case.", "A strict template is precisely where examples help most, which makes zero-shot the weaker choice.", "Complex patterned tasks benefit most from demonstration, which makes few-shot the better fit."]}, {"q": "An output misses a required element. What is the most efficient correction?", "opts": ["Accept the output and simply add the missing element yourself.", "Point to the specific missing element and ask for it to be added", "Ask the model whether anything at all is missing from its answer.", "Rewrite the entire prompt from scratch and open a new chat."], "ans": 1, "exp": "Syllabus 4.6 covers diagnosing and correcting faults, and 4.5 makes refinement specific and corrective. Naming the exact gap keeps the rest of the draft and fixes the problem directly.", "why": ["Restarting discards approved content along with the context that produced it.", "Correct. A pointed specific follow-up is the fastest route and preserves the working draft.", "Asking the model to find its own omissions is unreliable, since it may not recognise the gap.", "Doing it yourself may be quick once, but it forgoes the refinement the tool is capable of providing."]}, {"q": "Which statement about prompting is most consistent with the syllabus?", "opts": ["Prompting is largely an innate talent that only some people happen to possess.", "Prompting only matters for technical professionals in engineering roles. This mistakes a symptom of the problem for its cause.", "Prompting is the highest-leverage practical skill and is learnable through structure", "Prompting is a temporary skill that improving models will soon make obsolete."], "ans": 2, "exp": "Syllabus Domain 4 is introduced as the highest-leverage practical skill, and it is taught as a set of structured techniques including components, roles, examples, decomposition and refinement. That framing makes it learnable and improvable.", "why": ["The syllabus teaches prompting as technique with named components, which implies it is learnable rather than innate.", "Domain 4 sits in a vendor-neutral non-technical certification aimed at any industry and not only at specialists.", "Correct. The syllabus frames prompting as the highest-leverage practical skill and presents it as structured technique.", "The syllabus presents prompting as core professional competence developed and assessed across the course."]}, {"q": "Which is the best example of an unformatted prompt fault from syllabus 4.6?", "opts": ["Summarise the Q3 results in three bullets written for the board.", "Return a table with four columns covering our Q3 results.", "List the three largest Q3 variances together with their figures.", "Tell me about our Q3 results"], "ans": 3, "exp": "Syllabus 4.6 lists unformatted prompts as a fault. The bare request states no output shape and no bound, so the model picks the structure, the length and the angle itself, which is exactly the unformatted fault.", "why": ["This specifies the format of a list and the content of three variances with figures.", "This specifies the format of three bullets and names the audience as the board.", "This specifies both the structure and the four columns, so it is well formatted.", "Correct. No format and no bound are given, so the output shape is left entirely to the model."]}, {"q": "Why does the syllabus treat reviewing and personalising AI output as important, rather than using it unchanged?", "opts": ["Because the AI model retains ownership of any output that it generates for you.", "Because AI output is always factually wrong in every single case without exception.", "Because you remain accountable for the accuracy and fitness of what you send", "Because using unchanged AI output is against the law in most professional settings."], "ans": 2, "exp": "This ties Domain 4 to Domains 5 and 8, since the syllabus states plainly that the user rather than the AI remains accountable. Reviewing and personalising output is how that accountability is discharged in practice.", "why": ["AI output is often accurate, but accuracy cannot be assumed, which is a different and more useful point.", "Ownership questions sit outside the syllabus scope, and the real driver is professional accountability.", "Correct. Accountability sits with the human, so review and personalisation are obligations rather than courtesies.", "The syllabus explicitly excludes legal interpretation, so a legal prohibition is not the syllabus position."]}];
+var PASS = 70;
+var L = ["A","B","C","D"];
+var cur = 0, answered = [], correct = [], submitted = false;
+
+// Randomise question order on every attempt so the sequence cannot be memorised
+// from a screenshot. Uses the same RNG discipline as the accessible quiz standard.
+(function shuffleQuestions(){
+  var seed = Date.now() % 2147483647;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = Q.length - 1; i > 0; i--){
+    var j = Math.floor(rnd() * (i + 1));
+    var t = Q[i]; Q[i] = Q[j]; Q[j] = t;
+  }
+})();
+
+// --- Copy / cut / paste attenuation -------------------------------------------------
+// Assessment integrity: discourage copying questions out and pasting answers in.
+// This is a deterrent, NOT a security control, a determined user can defeat it via
+// devtools. It stops casual text harvesting and pasted-in answers during a sitting.
+(function blockClipboard(){
+  function stop(e){
+    e.preventDefault();
+    showToast('Copying, cutting and pasting are disabled during this assessment.');
+    return false;
+  }
+  ['copy','cut','paste','contextmenu'].forEach(function(evt){
+    document.addEventListener(evt, stop, true);
+  });
+  // Disable text selection inside the question and analysis areas only, so that
+  // the skip link and buttons remain fully keyboard accessible.
+  var style = document.createElement('style');
+  style.textContent = '#qholder, #results { -webkit-user-select:none; -moz-user-select:none;'
+                    + ' -ms-user-select:none; user-select:none; }';
+  document.head.appendChild(style);
+})();
+
+function showToast(msg){
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+var qlen = Q.length;
+for (var i = 0; i < qlen; i++){ answered.push(false); correct.push(false); }
+
+function el(id){ return document.getElementById(id); }
+
+function render(){
+  var q = Q[cur];
+  var h = '<h2 class="qtext" id="qt">' + q.q + '</h2>';
+  h += '<div role="radiogroup" aria-labelledby="qt">';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<button class="opt" type="button" role="radio" aria-checked="false" '
+       + 'data-q="' + cur + '" data-o="' + j + '" id="o' + cur + '_' + j + '">'
+       + '<span class="opt-letter">' + L[j] + '.</span>'
+       + '<span class="op-text">' + q.opts[j] + '</span>'
+       + '<span class="tag" id="t' + cur + '_' + j + '"></span></button>';
+  }
+  h += '</div><div id="ex' + cur + '"></div>';
+  el('qholder').innerHTML = h;
+  var btns = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < btns.length; k++){
+    btns[k].addEventListener('click', onPick);
+  }
+  var last = (cur === qlen - 1);
+  el('next').style.display = last ? 'none' : '';
+  el('submit').style.display = last ? '' : 'none';
+  el('next').disabled = !answered[cur];
+  el('submit').disabled = !answered[cur];
+  updateBar();
+}
+
+function onPick(e){
+  var b = e.currentTarget;
+  var qi = parseInt(b.getAttribute('data-q'), 10);
+  var oi = parseInt(b.getAttribute('data-o'), 10);
+  if (answered[qi]) return;
+  answered[qi] = true;
+  var q = Q[qi];
+  var isRight = (oi === q.ans);
+  correct[qi] = isRight;
+  var all = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < all.length; k++){
+    var kq = parseInt(all[k].getAttribute('data-q'), 10);
+    var ko = parseInt(all[k].getAttribute('data-o'), 10);
+    if (kq !== qi) continue;
+    all[k].disabled = true;
+    all[k].setAttribute('aria-checked', ko === oi ? 'true' : 'false');
+    var tg = el('t' + kq + '_' + ko);
+    if (ko === q.ans){
+      all[k].classList.add('correct');
+      if (tg) tg.textContent = ko === oi ? '✓ Correct' : '✓ This was correct';
+      if (tg) tg.className = 'tag correct';
+    } else if (ko === oi){
+      all[k].classList.add('wrong');
+      if (tg) tg.textContent = '✗ Your answer';
+      if (tg) tg.className = 'tag wrong';
+    }
+  }
+  renderAnalysis(qi);
+  var done = 0;
+  for (var m = 0; m < qlen; m++){ if (answered[m]) done++; }
+  el('running').textContent = 'Score: ' + tally() + ' / ' + done;
+  el('next').disabled = false;
+  el('submit').disabled = false;
+  updateBar();
+}
+
+function renderAnalysis(qi){
+  var q = Q[qi];
+  var h = '<div class="analysis"><h3>Why each option is right or wrong</h3>';
+  h += '<p class="why good">Correct answer: ' + L[q.ans] + '. '
+     + q.opts[q.ans] + '</p><p>' + q.exp + '</p>';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<p><span class="why">' + L[j] + '.</span> ' + q.why[j] + '</p>';
+  }
+  h += '</div>';
+  el('ex' + qi).innerHTML = h;
+}
+
+function tally(){
+  var n = 0;
+  for (var i = 0; i < qlen; i++){ if (correct[i]) n++; }
+  return n;
+}
+
+function updateBar(){
+  el('counter').textContent = 'Question ' + (cur + 1) + ' of ' + qlen;
+  var pct = Math.round(((cur + 1) / qlen) * 100);
+  el('pinner').style.width = pct + '%';
+  var pb = el('pbar');
+  if (pb){ pb.setAttribute('aria-valuenow', String(cur + 1)); }
+}
+
+el('next').addEventListener('click', function(){
+  if (cur < qlen - 1){ cur++; render(); }
+});
+el('submit').addEventListener('click', function(){ showResults(false); });
+
+function mark(){
+  var c = tally();
+  var p = Math.round((c / qlen) * 100);
+  el('pct').textContent = p + '%';
+  el('ncorrect').textContent = c;
+  el('nwrong').textContent = qlen - c;
+  el('ntotal').textContent = qlen;
+  var g = el('gauge');
+  var pass = (p >= PASS);
+  g.style.background = pass ? '#dff3e1' : '#fbe3e3';
+  g.style.border = '8px solid ' + (pass ? '#2e7d32' : '#c62828');
+  el('verdictlbl').textContent = pass ? 'PASS' : 'NOT YET';
+  el('verdictlbl').style.color = pass ? '#2e7d32' : '#c62828';
+  el('pct').style.color = pass ? '#2e7d32' : '#c62828';
+  el('dignote').textContent = pass
+    ? 'You have met the pass standard for this section. Revisit any missed items below, then move on.'
+    : 'Below the pass standard of ' + PASS + '%. Review each missed item below and retake when ready.';
+  var ul = el('missed');
+  ul.innerHTML = '';
+  var missed = 0;
+  for (var i = 0; i < qlen; i++){
+    if (!correct[i]){
+      missed++;
+      var li = document.createElement('li');
+      li.style.marginBottom = '8px';
+      li.textContent = Q[i].q + ', correct: ' + L[Q[i].ans] + '. ' + Q[i].opts[Q[i].ans];
+      ul.appendChild(li);
+    }
+  }
+  if (missed === 0){
+    var li2 = document.createElement('li');
+    li2.textContent = 'No missed items.';
+    ul.appendChild(li2);
+  }
+}
+
+function showResults(force){
+  if (submitted && !force) return;
+  submitted = true;
+  mark();
+  el('quiz').style.display = 'none';
+  el('results').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+el('restart').addEventListener('click', function(){
+  var p = window.prompt('Enter supervisor passcode to reset this assessment:');
+  if (p !== '1234'){
+    if (p !== null){ window.alert('Incorrect passcode. Assessment not reset.'); }
+    return;
+  }
+  location.reload();
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' && !answered[cur] === false && cur < qlen - 1){
+    e.preventDefault(); cur++; render();
+  }
+});
+
+// ---- Assessment integrity guard ----
+// Deterrent only: browser menus can bypass keyboard blocks and the HTML source
+// always contains the questions. Pair with invigilation for real integrity.
+(function integrityGuard(){
+  var tc = null;
+  function toast(msg){
+    var t = el('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    if (tc) clearTimeout(tc);
+    tc = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function block(e, msg){
+    e.preventDefault();
+    e.stopPropagation();
+    toast(msg || 'Copying is disabled on this assessment.');
+    return false;
+  }
+  document.addEventListener('contextmenu', function(e){ block(e); });
+  document.addEventListener('copy', function(e){ block(e); });
+  document.addEventListener('cut', function(e){ block(e); });
+  document.addEventListener('dragstart', function(e){ block(e, 'Dragging is disabled.'); });
+  document.addEventListener('selectstart', function(e){
+    var n = e.target;
+    while (n && n !== document.body){
+      if (n.id === 'qholder' || n.id === 'results' ||
+          (n.classList && (n.classList.contains('opt') || n.classList.contains('analysis')))){
+        block(e, 'Selecting question text is disabled.');
+        return;
+      }
+      n = n.parentNode;
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === 'c' || k === 'x' || k === 'a' || k === 'u' || k === 's' || k === 'p')){
+      block(e); return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')){
+      block(e, 'Developer tools are disabled.'); return;
+    }
+    if (e.key === 'F12'){ block(e, 'Developer tools are disabled.'); }
+  }, true);
+})();
+
+render();
+</script>
+<script>
+(function () {
+  function native(){ return typeof window.Capacitor!=='undefined' && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform(); }
+  function setup(){
+    if(!native()){return;}
+    var App = window.Capacitor.Plugins && window.Capacitor.Plugins.App; if(!App){return;}
+    var t=null,b=0;
+    function toast(m){ if(!t){t=document.createElement('div'); t.className='app-toast'; t.setAttribute('role','status'); document.body.appendChild(t);} t.textContent=m; t.classList.add('show'); clearTimeout(t._z); t._z=setTimeout(function(){t.classList.remove('show');},2200); }
+    App.addListener('backButton', function(info){ var cb=info&&info.canGoBack;
+      if(cb){ if(window.history.length>1){window.history.back();} else {window.location.href=window.location.origin+'/';} return; }
+      var n=Date.now(); if(n-b<2200){App.exitApp(); return;} b=n; toast('Press back again to exit');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
+})();
+</script>
+<footer role="contentinfo" style="text-align:center;padding:18px 20px;border-top:2px solid var(--line,#c9d4e4);margin-top:30px;color:var(--navy,#002b5c);font-size:.9rem">
+  <p>&copy; 2026 Billy Forrest</p>
+</footer>
+</body>
+</html>

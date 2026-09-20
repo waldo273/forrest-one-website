@@ -1,0 +1,12 @@
+# Virtual environment and caches — never publish these
+.venv/
+__pycache__/
+*.pyc
+
+# Playwright artefacts
+test-results/
+playwright-report/
+
+# OS noise
+.DS_Store
+Thumbs.db

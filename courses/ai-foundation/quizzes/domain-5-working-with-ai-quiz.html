@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"/>
+<title>UKAIC AI Foundation, Domain 5 Quiz, Working with AI Day to Day</title>
+<style>
+:root{--navy:#002b5c;--ink:#0d1b2a;--ok:#2e7d32;--bad:#c62828;--line:#c9d4e4;--bg:#ffffff;--tint:#eef3fa;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--navy);
+font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6;}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;
+padding:12px 20px;z-index:999;font-weight:bold;text-decoration:none;}
+.skip-link:focus{left:0;}
+header[role="banner"]{background:var(--navy);color:#fff;padding:14px 24px;}
+header[role="banner"] h1{margin:0;font-size:1.15rem;font-weight:bold;letter-spacing:.2px;}
+header[role="banner"] .sub{font-size:.85rem;opacity:.9;margin-top:3px;}
+main[role="main"]{max-width:900px;margin:0 auto;padding:24px 20px 60px;}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+margin-bottom:8px;font-size:1rem;font-weight:bold;}
+.progress-outer{height:14px;background:var(--tint);border:1px solid var(--line);
+border-radius:8px;overflow:hidden;margin-bottom:26px;}
+.progress-inner{height:100%;width:0;background:var(--navy);
+transition:width .3s ease;}
+@media (prefers-reduced-motion: reduce){.progress-inner{transition:none;}}
+.qtext{font-size:1.3rem;font-weight:bold;margin:0 0 20px;line-height:1.45;}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;
+background:var(--tint);border:2px solid var(--line);border-radius:10px;
+padding:15px 17px;margin-bottom:12px;font-size:1.05rem;color:var(--ink);
+font-family:inherit;cursor:pointer;line-height:1.5;}
+.opt:hover:not(:disabled){background:#dde7f5;border-color:#9db3d0;}
+.opt:disabled{cursor:default;}
+.opt:focus-visible{outline:3px solid var(--navy);outline-offset:2px;}
+.opt.correct{background:#dff3e1;border-color:var(--ok);}
+.opt.wrong{background:#fbe3e3;border-color:var(--bad);}
+.opt-letter{font-weight:bold;color:#4a6a8a;flex-shrink:0;width:24px;}
+.opt.correct .opt-letter{color:var(--ok);}
+.opt.wrong .opt-letter{color:var(--bad);}
+.op-text{flex:1;}
+.tag{font-weight:bold;font-size:.85rem;margin-left:8px;white-space:nowrap;}
+.tag.correct{color:var(--ok);}
+.tag.wrong{color:var(--bad);}
+.analysis{margin-top:16px;padding:16px 18px;border-left:6px solid var(--navy);
+background:var(--tint);border-radius:0 8px 8px 0;}
+.analysis h3{margin:0 0 10px;font-size:1rem;text-transform:uppercase;
+letter-spacing:.5px;}
+.analysis p{margin:0 0 9px;font-size:.97rem;}
+.analysis p:last-child{margin-bottom:0;}
+.analysis .why{font-weight:bold;}
+.analysis .good{color:var(--ok);}
+.analysis .bad{color:var(--bad);}
+.navrow{margin-top:26px;}
+button.primary{background:var(--navy);color:#fff;border:none;border-radius:8px;
+padding:15px 30px;font-size:1.05rem;font-weight:bold;cursor:pointer;
+font-family:inherit;}
+button.primary:hover{background:#00408a;}
+button.primary:focus-visible{outline:3px solid #002b5c;outline-offset:3px;}
+button.primary:disabled{background:#9db3d0;cursor:not-allowed;}
+button.submit{background:var(--ok);}
+button.submit:hover{background:#1f5b23;}
+.verdict{font-size:1.15rem;font-weight:bold;margin:0 0 18px;padding:14px 18px;
+border-radius:8px;}
+.verdict.ok{background:#dff3e1;color:#1f5b23;border:2px solid var(--ok);}
+.verdict.no{background:#fbe3e3;color:#8c1c1c;border:2px solid var(--bad);}
+#results{display:none;text-align:center;}
+.gauge{width:230px;height:230px;border-radius:50%;margin:0 auto 26px;
+display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.gauge .pct{font-size:3.2rem;font-weight:bold;line-height:1;}
+.gauge .lbl{font-size:.95rem;margin-top:6px;letter-spacing:1px;}
+.grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0;}
+.cell{border:2px solid var(--line);border-radius:10px;padding:16px 26px;min-width:130px;}
+.cell .n{font-size:2rem;font-weight:bold;display:block;}
+.cell .t{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;}
+.cell.good{border-color:var(--ok);} .cell.good .n{color:var(--ok);}
+.cell.bad{border-color:var(--bad);} .cell.bad .n{color:var(--bad);}
+.note{font-size:.95rem;color:#3d5878;max-width:640px;margin:0 auto 22px;}
+/* Assessment integrity: selection and copy are disabled on question content. */
+#qholder,#results,.analysis,.opt{-webkit-user-select:none;-moz-user-select:none;
+  -ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quiz,#results{-webkit-user-drag:none;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;padding:13px 24px;border-radius:8px;
+  font-size:.95rem;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.25);
+  z-index:9999;display:none;}
+.toast.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.toast{transition:opacity .2s ease;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<header role="banner">
+  <h1>UKAIC AI Foundation, Domain 5 Quiz, Working with AI Day to Day</h1>
+  <div class="sub">15 questions · Pass standard 70%</div>
+</header>
+<main role="main" id="main">
+  <div id="quiz">
+    <div class="bar">
+      <span id="counter" role="status" aria-live="polite">Question 1 of 15</span>
+      <span id="running" aria-live="polite">Score: 0 / 0</span>
+    </div>
+    <div class="progress-outer" role="progressbar" aria-labelledby="counter"
+         aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" id="pbar">
+      <div class="progress-inner" id="pinner"></div>
+    </div>
+    <div id="qholder"></div>
+    <div class="navrow">
+      <button class="primary" id="next" type="button">Next question &rarr;</button>
+      <button class="primary submit" id="submit" type="button"
+              style="display:none">Submit assessment</button>
+    </div>
+  </div>
+  <div id="results" role="region" aria-label="Assessment results">
+    <div class="gauge" id="gauge"><span class="pct" id="pct">0%</span>
+      <span class="lbl" id="verdictlbl">, </span></div>
+    <div class="grid">
+      <div class="cell good"><span class="n" id="ncorrect">0</span>
+        <span class="t">Correct</span></div>
+      <div class="cell bad"><span class="n" id="nwrong">0</span>
+        <span class="t">Incorrect</span></div>
+      <div class="cell"><span class="n" id="ntotal">0</span>
+        <span class="t">Total</span></div>
+    </div>
+    <p class="note" id="dignote"></p>
+    <ul id="missed" style="text-align:left;max-width:760px;margin:0 auto 24px;
+      padding-left:22px;font-size:.98rem;"></ul>
+    <button class="primary" id="restart" type="button">Restart assessment</button>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+var Q = [{"q":"What is the most appropriate role for AI in drafting professional content?","opts":["Producing a first draft that a person then reviews and personalises.","Final versions are published only after human review and sign-off.","Drafting support is valuable whenever it saves time, not only as a fallback.","Drafting assistance increases rather than removes the need for review."],"ans":0,"exp":"Correct. A first draft is the highest-value use: it removes the blank page, and the human supplies accuracy, judgement and voice.","why":["Correct. A first draft is the highest-value use: it removes the blank page, and the human supplies accuracy, judgement and voice.","Incorrect. Unreviewed publication is exactly what the syllabus warns against. The draft is a starting point.","Incorrect. Drafting support is useful whenever it saves time, not only as a fallback when staffing is short.","Incorrect. Drafting assistance does not remove the review requirement. It increases the need for it, because the text was machine-generated."]},{"q":"Which task is reshaping existing content rather than generating new content?","opts":["Writing a briefing on a topic that has not been covered before. This is a common misconception rather than the accurate position.","Shortening a 900-word briefing to 300 words for a different audience.","Producing a list of new product name ideas from a brief.","Generating a set of interview questions for a new role."],"ans":1,"exp":"Correct. Reshaping takes existing material and changes its length, level or tone. The content already exists and is being re-presented.","why":["Incorrect. Writing about an uncovered topic creates new content.","Correct. Reshaping takes existing material and changes its length, level or tone. The content already exists and is being re-presented.","Incorrect. Generating name ideas produces new material from scratch.","Incorrect. Producing interview questions creates new content rather than reshaping existing content."]},{"q":"Why should a person personalise an AI draft before sending it?","opts":["Unpersonalised drafts are always factually incorrect.","Personalisation is required by data protection legislation in all cases. This confuses a related concept with the one being tested.","The draft reflects general patterns, not the specific relationship or facts at hand.","The model refuses to produce drafts suitable for external use."],"ans":2,"exp":"Correct. AI drafts are average by construction. What makes a communication land is the specific detail and relationship knowledge only the sender holds.","why":["Incorrect. Drafts can be factually sound. The issue is generic tone and missing context.","Incorrect. Some uses are regulated, but personalisation is a quality and ownership matter, not a universal legal duty.","Correct. AI drafts are average by construction. What makes a communication land is the specific detail and relationship knowledge only the sender holds.","Incorrect. Models readily produce external-facing drafts. Suitability for a specific recipient is the human's judgement."]},{"q":"What makes a summary directed and audience-targeted?","opts":["Matching source vocabulary often defeats the purpose of summarising.","Length ratios are arbitrary; the right length follows the reader's need.","Preserving every point is compression, not the selection a summary requires.","It is shaped around what a specific reader needs to decide or do."],"ans":3,"exp":"Correct. A summary's value is selection. What a finance lead needs from a report differs from what a project manager needs, so the summary must be pointed at a reader.","why":["Incorrect. Matching source vocabulary often defeats the purpose. Summaries usually need to re-level the language.","Incorrect. Length ratios are arbitrary. The right length follows from the reader's need.","Incorrect. Preserving everything is compression, not summarising. Selection is the point.","Correct. A summary's value is selection. What a finance lead needs from a report differs from what a project manager needs, so the summary must be pointed at a reader."]},{"q":"What is the key limitation of AI summarising?","opts":["It can omit critical detail, so high-stakes documents must be read in the original.","It cannot work on documents longer than one page.","It always changes the meaning of the original text. This is a common misconception rather than the accurate position.","It is unable to summarise technical subject matter."],"ans":0,"exp":"Correct. Compression is lossy by design. The model decides what matters, and it can drop the clause that carried the condition or the exception.","why":["Correct. Compression is lossy by design. The model decides what matters, and it can drop the clause that carried the condition or the exception.","Incorrect. Length is not the barrier. Long documents can be summarised, often through chunking.","Incorrect. Good summaries preserve meaning. The risk is omission and distortion, not inevitable meaning change.","Incorrect. Technical material can be summarised. The risk of dropping a critical qualifier is higher in technical text, not the capability absent."]},{"q":"When must a summary not substitute for reading the original?","opts":["Whenever the document exceeds two pages in length.","When the decision is high-stakes or the document is legally binding.","Whenever the summary was produced by an AI system.","Never; a good summary is always a sufficient substitute. This confuses a related concept with the one being tested."],"ans":1,"exp":"Correct. Where money, safety, rights or legal obligations turn on precise wording, the original governs. A summary cannot carry that weight.","why":["Incorrect. Length alone does not determine stakes. A short contract clause can matter more than a long informal report.","Correct. Where money, safety, rights or legal obligations turn on precise wording, the original governs. A summary cannot carry that weight.","Incorrect. Origin matters less than consequence. The rule is driven by stakes, not by who produced the summary.","Incorrect. This is the misconception the syllabus corrects. Summaries omit detail, and omission is exactly what high-stakes decisions cannot tolerate."]},{"q":"How should AI be used in ideation and planning?","opts":["As a replacement for the team meeting where ideas are discussed. This is a plausible-sounding but incorrect description.","As the decision-maker that selects the best option to pursue.","As a thinking partner that generates options, with the human owning the result.","As a source of verified fact that planning can rely on directly."],"ans":2,"exp":"Correct. Volume of options is where AI adds value. Judgement, selection and ownership stay with the person.","why":["Incorrect. It supplements discussion. Multiple human perspectives surface constraints that a generated list will miss.","Incorrect. Selection is judgement. AI proposes; a person decides and owns the outcome.","Correct. Volume of options is where AI adds value. Judgement, selection and ownership stay with the person.","Incorrect. Ideation output is not verified fact. Anything factual drawn from it must be checked."]},{"q":"How should AI research assistance be treated?","opts":["As reliable on facts but unreliable on interpretation.","As an authoritative source suitable for direct citation. This is a common misconception rather than the accurate position.","As a substitute for consulting primary sources.","As a starting point whose claims are verified before use."],"ans":3,"exp":"Correct. Research assistance is good for orientation and for finding the questions worth asking. Every material claim still needs a primary source.","why":["Incorrect. Both facts and interpretation need checking. Confident fabrication affects factual claims most visibly.","Incorrect. Generated content has no provenance. Citing it directly risks propagating fabricated or misattributed material.","Incorrect. It complements primary sources. It cannot replace them, because it has no verifiable grounding.","Correct. Research assistance is good for orientation and for finding the questions worth asking. Every material claim still needs a primary source."]},{"q":"Who owns the output of an AI-assisted planning exercise?","opts":["The person who used the tool and produced the plan.","The provider of the AI service that generated the content.","The organisation's IT department that approved the tool.","Nobody, because AI output is not attributable."],"ans":0,"exp":"Correct. Human ownership is the central principle. Authorship and accountability sit with whoever produces and submits the work.","why":["Correct. Human ownership is the central principle. Authorship and accountability sit with whoever produces and submits the work.","Incorrect. A vendor provides a tool, not the plan. Responsibility does not transfer with the software.","Incorrect. Approval of a tool is a governance act. It does not make the approving team the author of every output.","Incorrect. Attributability is precisely what the syllabus insists on. 'AI did it' is not a defence."]},{"q":"What should determine whether AI is suitable for a given task?","opts":["Whether the tool is currently popular among colleagues.","The nature of the task and the stakes attached to getting it wrong.","Whether the task is text-based or numeric.","Whether the tool was released recently enough to be capable. This is a plausible-sounding but incorrect description."],"ans":1,"exp":"Correct. Task type sets suitability, stakes set the level of oversight required. Together they drive the decision.","why":["Incorrect. Popularity is a social signal, not an assessment of fitness.","Correct. Task type sets suitability, stakes set the level of oversight required. Together they drive the decision.","Incorrect. Both text and numeric work can be appropriate or inappropriate depending on stakes and accuracy needs.","Incorrect. Release timing is irrelevant to suitability. The question is whether the tool fits the task and risk level."]},{"q":"When should human expertise or an authoritative source lead instead of AI?","opts":["The time of day has no bearing on whether a tool is appropriate.","Routine single-document work is well suited to assisted processing.","When the task requires professional judgement or a definitive legal or clinical answer.","Task duration does not determine suitability; stakes determine oversight. This is a common misconception rather than the accurate position."],"ans":2,"exp":"Correct. Where the answer carries professional, legal or clinical weight, the qualified source leads and AI at most assists.","why":["Incorrect. Timing has no bearing on whether AI is appropriate.","Incorrect. Multiple documents are routine for AI-assisted work, often handled by chunking or retrieval.","Correct. Where the answer carries professional, legal or clinical weight, the qualified source leads and AI at most assists.","Incorrect. Task duration does not determine suitability. A short task can be extremely high-stakes."]},{"q":"A team wants to use AI to generate the final wording of a redundancy consultation letter. What is the appropriate response?","opts":["Disclosure does not substitute for checking the wording is correct.","Familiarity of pattern does not reduce the legal stakes involved.","Drafting support is appropriate here; unverified use is what is not. This confuses a related concept with the one being tested.","Use AI for structure and drafting, with legal expertise leading and verifying the final text."],"ans":3,"exp":"Correct. Drafting support is genuinely useful, but this is a high-stakes, legally consequential document. Qualified review leads and owns the final wording.","why":["Incorrect. Disclosure does not substitute for verification. Saying it was AI-generated does not make incorrect wording safe.","Incorrect. Familiarity of pattern does not lower the stakes. Small wording changes carry legal meaning in this context.","Incorrect. This over-corrects. Drafting support is appropriate; unverified use is not.","Correct. Drafting support is genuinely useful, but this is a high-stakes, legally consequential document. Qualified review leads and owns the final wording."]},{"q":"Which items require verification before acting on AI output?","opts":["Facts, figures, dates, names, quotes and citations.","Sentence structure, paragraph order and formatting.","Only figures, since text errors are self-evident.","Only citations, since other details are low risk."],"ans":0,"exp":"Correct. These are the specific high-risk categories, and they are high risk precisely because errors in them look completely plausible.","why":["Correct. These are the specific high-risk categories, and they are high risk precisely because errors in them look completely plausible.","Incorrect. Structure and formatting are stylistic. They do not create the same liability as a wrong figure or a fabricated quote.","Incorrect. Text errors are not self-evident. A plausible sentence is the hardest kind of error to catch by reading alone.","Incorrect. Figures, names and dates are equally high risk. Narrowing verification to citations leaves the largest exposures open."]},{"q":"Why does accountability remain with the user rather than the AI?","opts":["The AI provider accepts liability for all errors it produces. This is a common misconception rather than the accurate position.","AI systems cannot hold legal or professional responsibility, so it stays with the human deploying them.","Accountability is shared equally between user and provider.","Accountability transfers to the AI once it acts autonomously."],"ans":1,"exp":"Correct. Responsibility requires a person or organisation able to bear it. The tool cannot, so it rests with whoever chose to use it and submit the result.","why":["Incorrect. Providers set terms that generally disclaim output accuracy. Liability sits with the user.","Correct. Responsibility requires a person or organisation able to bear it. The tool cannot, so it rests with whoever chose to use it and submit the result.","Incorrect. Shared liability is not the position. The professional who submits the work owns it.","Incorrect. Autonomy does not create liability. A person still chose to deploy the agent and configure its permissions."]},{"q":"At awareness level, what is the purpose of a personal prompt library?","opts":["To share commercially sensitive prompts with external providers. This confuses a related concept with the one being tested.","To store every prompt ever used in case of an audit request.","To save and organise reusable prompts and templates for recurring tasks.","To record the model's responses so they can be reused verbatim."],"ans":2,"exp":"Correct. Recurring tasks benefit from prompts that have already been refined. A library turns a one-off improvement into a durable asset.","why":["Incorrect. Sharing externally is the opposite of the intent and would be a data-governance concern.","Incorrect. Retention for audit is a governance activity, not the purpose of a personal library.","Correct. Recurring tasks benefit from prompts that have already been refined. A library turns a one-off improvement into a durable asset.","Incorrect. Storing responses is not the point. The value is in the reusable instruction, not in old outputs."]}];
+var PASS = 70;
+var L = ["A","B","C","D"];
+var cur = 0, answered = [], correct = [], submitted = false;
+
+// Randomise question order on every attempt so the sequence cannot be memorised
+// from a screenshot. Uses the same RNG discipline as the accessible quiz standard.
+(function shuffleQuestions(){
+  var seed = Date.now() % 2147483647;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = Q.length - 1; i > 0; i--){
+    var j = Math.floor(rnd() * (i + 1));
+    var t = Q[i]; Q[i] = Q[j]; Q[j] = t;
+  }
+})();
+
+// --- Copy / cut / paste attenuation -------------------------------------------------
+// Assessment integrity: discourage copying questions out and pasting answers in.
+// This is a deterrent, NOT a security control, a determined user can defeat it via
+// devtools. It stops casual text harvesting and pasted-in answers during a sitting.
+(function blockClipboard(){
+  function stop(e){
+    e.preventDefault();
+    showToast('Copying, cutting and pasting are disabled during this assessment.');
+    return false;
+  }
+  ['copy','cut','paste','contextmenu'].forEach(function(evt){
+    document.addEventListener(evt, stop, true);
+  });
+  // Disable text selection inside the question and analysis areas only, so that
+  // the skip link and buttons remain fully keyboard accessible.
+  var style = document.createElement('style');
+  style.textContent = '#qholder, #results { -webkit-user-select:none; -moz-user-select:none;'
+                    + ' -ms-user-select:none; user-select:none; }';
+  document.head.appendChild(style);
+})();
+
+function showToast(msg){
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+var qlen = Q.length;
+for (var i = 0; i < qlen; i++){ answered.push(false); correct.push(false); }
+
+function el(id){ return document.getElementById(id); }
+
+function render(){
+  var q = Q[cur];
+  var h = '<h2 class="qtext" id="qt">' + q.q + '</h2>';
+  h += '<div role="radiogroup" aria-labelledby="qt">';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<button class="opt" type="button" role="radio" aria-checked="false" '
+       + 'data-q="' + cur + '" data-o="' + j + '" id="o' + cur + '_' + j + '">'
+       + '<span class="opt-letter">' + L[j] + '.</span>'
+       + '<span class="op-text">' + q.opts[j] + '</span>'
+       + '<span class="tag" id="t' + cur + '_' + j + '"></span></button>';
+  }
+  h += '</div><div id="ex' + cur + '"></div>';
+  el('qholder').innerHTML = h;
+  var btns = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < btns.length; k++){
+    btns[k].addEventListener('click', onPick);
+  }
+  var last = (cur === qlen - 1);
+  el('next').style.display = last ? 'none' : '';
+  el('submit').style.display = last ? '' : 'none';
+  el('next').disabled = !answered[cur];
+  el('submit').disabled = !answered[cur];
+  updateBar();
+}
+
+function onPick(e){
+  var b = e.currentTarget;
+  var qi = parseInt(b.getAttribute('data-q'), 10);
+  var oi = parseInt(b.getAttribute('data-o'), 10);
+  if (answered[qi]) return;
+  answered[qi] = true;
+  var q = Q[qi];
+  var isRight = (oi === q.ans);
+  correct[qi] = isRight;
+  var all = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < all.length; k++){
+    var kq = parseInt(all[k].getAttribute('data-q'), 10);
+    var ko = parseInt(all[k].getAttribute('data-o'), 10);
+    if (kq !== qi) continue;
+    all[k].disabled = true;
+    all[k].setAttribute('aria-checked', ko === oi ? 'true' : 'false');
+    var tg = el('t' + kq + '_' + ko);
+    if (ko === q.ans){
+      all[k].classList.add('correct');
+      if (tg) tg.textContent = ko === oi ? '✓ Correct' : '✓ This was correct';
+      if (tg) tg.className = 'tag correct';
+    } else if (ko === oi){
+      all[k].classList.add('wrong');
+      if (tg) tg.textContent = '✗ Your answer';
+      if (tg) tg.className = 'tag wrong';
+    }
+  }
+  renderAnalysis(qi);
+  var done = 0;
+  for (var m = 0; m < qlen; m++){ if (answered[m]) done++; }
+  el('running').textContent = 'Score: ' + tally() + ' / ' + done;
+  el('next').disabled = false;
+  el('submit').disabled = false;
+  updateBar();
+}
+
+function renderAnalysis(qi){
+  var q = Q[qi];
+  var h = '<div class="analysis"><h3>Why each option is right or wrong</h3>';
+  h += '<p class="why good">Correct answer: ' + L[q.ans] + '. '
+     + q.opts[q.ans] + '</p><p>' + q.exp + '</p>';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<p><span class="why">' + L[j] + '.</span> ' + q.why[j] + '</p>';
+  }
+  h += '</div>';
+  el('ex' + qi).innerHTML = h;
+}
+
+function tally(){
+  var n = 0;
+  for (var i = 0; i < qlen; i++){ if (correct[i]) n++; }
+  return n;
+}
+
+function updateBar(){
+  el('counter').textContent = 'Question ' + (cur + 1) + ' of ' + qlen;
+  var pct = Math.round(((cur + 1) / qlen) * 100);
+  el('pinner').style.width = pct + '%';
+  var pb = el('pbar');
+  if (pb){ pb.setAttribute('aria-valuenow', String(cur + 1)); }
+}
+
+el('next').addEventListener('click', function(){
+  if (cur < qlen - 1){ cur++; render(); }
+});
+el('submit').addEventListener('click', function(){ showResults(false); });
+
+function mark(){
+  var c = tally();
+  var p = Math.round((c / qlen) * 100);
+  el('pct').textContent = p + '%';
+  el('ncorrect').textContent = c;
+  el('nwrong').textContent = qlen - c;
+  el('ntotal').textContent = qlen;
+  var g = el('gauge');
+  var pass = (p >= PASS);
+  g.style.background = pass ? '#dff3e1' : '#fbe3e3';
+  g.style.border = '8px solid ' + (pass ? '#2e7d32' : '#c62828');
+  el('verdictlbl').textContent = pass ? 'PASS' : 'NOT YET';
+  el('verdictlbl').style.color = pass ? '#2e7d32' : '#c62828';
+  el('pct').style.color = pass ? '#2e7d32' : '#c62828';
+  el('dignote').textContent = pass
+    ? 'You have met the pass standard for this section. Revisit any missed items below, then move on.'
+    : 'Below the pass standard of ' + PASS + '%. Review each missed item below and retake when ready.';
+  var ul = el('missed');
+  ul.innerHTML = '';
+  var missed = 0;
+  for (var i = 0; i < qlen; i++){
+    if (!correct[i]){
+      missed++;
+      var li = document.createElement('li');
+      li.style.marginBottom = '8px';
+      li.textContent = Q[i].q + ', correct: ' + L[Q[i].ans] + '. ' + Q[i].opts[Q[i].ans];
+      ul.appendChild(li);
+    }
+  }
+  if (missed === 0){
+    var li2 = document.createElement('li');
+    li2.textContent = 'No missed items.';
+    ul.appendChild(li2);
+  }
+}
+
+function showResults(force){
+  if (submitted && !force) return;
+  submitted = true;
+  mark();
+  el('quiz').style.display = 'none';
+  el('results').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+el('restart').addEventListener('click', function(){
+  var p = window.prompt('Enter supervisor passcode to reset this assessment:');
+  if (p !== '1234'){
+    if (p !== null){ window.alert('Incorrect passcode. Assessment not reset.'); }
+    return;
+  }
+  location.reload();
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' && !answered[cur] === false && cur < qlen - 1){
+    e.preventDefault(); cur++; render();
+  }
+});
+
+// ---- Assessment integrity guard ----
+// Deterrent only: browser menus can bypass keyboard blocks and the HTML source
+// always contains the questions. Pair with invigilation for real integrity.
+(function integrityGuard(){
+  var tc = null;
+  function toast(msg){
+    var t = el('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    if (tc) clearTimeout(tc);
+    tc = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function block(e, msg){
+    e.preventDefault();
+    e.stopPropagation();
+    toast(msg || 'Copying is disabled on this assessment.');
+    return false;
+  }
+  document.addEventListener('contextmenu', function(e){ block(e); });
+  document.addEventListener('copy', function(e){ block(e); });
+  document.addEventListener('cut', function(e){ block(e); });
+  document.addEventListener('dragstart', function(e){ block(e, 'Dragging is disabled.'); });
+  document.addEventListener('selectstart', function(e){
+    var n = e.target;
+    while (n && n !== document.body){
+      if (n.id === 'qholder' || n.id === 'results' ||
+          (n.classList && (n.classList.contains('opt') || n.classList.contains('analysis')))){
+        block(e, 'Selecting question text is disabled.');
+        return;
+      }
+      n = n.parentNode;
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === 'c' || k === 'x' || k === 'a' || k === 'u' || k === 's' || k === 'p')){
+      block(e); return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')){
+      block(e, 'Developer tools are disabled.'); return;
+    }
+    if (e.key === 'F12'){ block(e, 'Developer tools are disabled.'); }
+  }, true);
+})();
+
+render();
+</script>
+<script>
+(function () {
+  function native(){ return typeof window.Capacitor!=='undefined' && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform(); }
+  function setup(){
+    if(!native()){return;}
+    var App = window.Capacitor.Plugins && window.Capacitor.Plugins.App; if(!App){return;}
+    var t=null,b=0;
+    function toast(m){ if(!t){t=document.createElement('div'); t.className='app-toast'; t.setAttribute('role','status'); document.body.appendChild(t);} t.textContent=m; t.classList.add('show'); clearTimeout(t._z); t._z=setTimeout(function(){t.classList.remove('show');},2200); }
+    App.addListener('backButton', function(info){ var cb=info&&info.canGoBack;
+      if(cb){ if(window.history.length>1){window.history.back();} else {window.location.href=window.location.origin+'/';} return; }
+      var n=Date.now(); if(n-b<2200){App.exitApp(); return;} b=n; toast('Press back again to exit');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
+})();
+</script>
+<footer role="contentinfo" style="text-align:center;padding:18px 20px;border-top:2px solid var(--line,#c9d4e4);margin-top:30px;color:var(--navy,#002b5c);font-size:.9rem">
+  <p>&copy; 2026 Billy Forrest</p>
+</footer>
+</body>
+</html>

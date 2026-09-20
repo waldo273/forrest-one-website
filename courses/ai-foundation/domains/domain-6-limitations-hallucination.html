@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Critical evaluation and verification as a core professional competency."/>
+  <title>Domain 6: Limitations, Risks &amp; Hallucination, UKAIC AI Foundation, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">UK AI Council · Professional AI Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">UKAIC AI Foundation</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../domains.html">Domains</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../notes.html">Student Notes</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../domains.html">Domains</a></li><li aria-current="page">Domain 6</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Domain 6 of 8</span>
+    <h1>Limitations, Risks &amp; Hallucination</h1>
+    <p class="lede">Critical evaluation and verification as a core professional competency.</p>
+    <div class="pills">
+      <span class="pill">5 syllabus areas</span>
+    </div>
+  </section>
+  <h2 id="video">Domain video</h2>
+  <p class="sub">Narrated walkthrough of this domain.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/domain-6-limitations-hallucination.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this domain, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+      <li>Define hallucination and explain why it is inherent rather than an occasional bug</li>
+      <li>Identify out-of-date output arising from the knowledge cut-off</li>
+      <li>Recognise fabricated statistics, citations, quotes and case studies that appear authoritative</li>
+      <li>Explain why generated content is not the same as sourced content</li>
+      <li>Apply risk-reduction techniques: grounding, uncertainty flagging, and cross-checking against primary sources</li>
+      <li>Recognise contexts where verification is mandatory</li>
+      <li>Explain why cross-checking against another AI is not valid verification</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this domain.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/domain6-limitations-hallucination-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+
+  <h2 id="areas">What this subject is about</h2>
+  <p class="sub">What this domain covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>6.1, Hallucination</h3>
+<p>Hallucination has four features, and the course expects all of them: confident (no hedging), fluent (perfectly grammatical and plausible), factually wrong, and silent (no signal that anything is amiss). It is inherent to how language models work, next-token prediction with no built-in fact-checker, rather than an occasional bug. It can be managed, not cured. The scale is real: a Stanford study found 69&ndash;88% hallucination on specific legal queries across leading models, and an independent review found 28.6% of GPT-4 references hallucinated.</p>
+<h3>6.2, Stale information &amp; fabrication</h3>
+<p>Two distinct failure modes. Stale: the base model knows nothing after its training date, so time-sensitive questions are unreliable, some applications add live search, but the base model stays frozen. Fabricated: the model invents statistics, citations, quotes and case studies that look perfectly authoritative. Specificity is a feature of the model, not proof of reality, named authors, precise numbers and perfect formatting can all be invented.</p>
+<h3>6.3, Provenance &amp; citation checking</h3>
+<p>Generated content is not sourced content. The model has no memory of where an idea came from, so citations, statistics and quotes are high-risk. The four-step citation check from the session: isolate every citation and claim in the output; locate the original source; compare the claim against the original; then keep, correct or discard. A fake citation looks like evidence and can carry a whole decision, which is why provenance checking exists.</p>
+<h3>6.4, Reducing the risk</h3>
+<p>Four defences, each mapped to a risk. Ground the prompt in real content (reduces error, the syllabus says reduces, not removes). Ask the model to flag uncertainty and provide sources (surfaces the doubt the model hides by default). Cross-check against primary sources, never another AI, which may share the same error. Keep a human in the loop: AI proposes, a person decides.</p>
+<h3>6.5, Mandatory-verification contexts</h3>
+<p>Six contexts where verification is required: legal, medical, financial, safety, HR/people decisions, and anything published externally. The default position: assume verification is required unless the context is clearly low-stakes. When unsure, verify.</p>
+</div>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="domain-5-working-with-ai.html">Domain 5</a><a class="navbtn" href="domain-7-security-privacy-data.html">Domain 7</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>&copy; 2026 Billy Forrest</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="The highest-leverage practical skill: constructing effective prompts and improving weak ones."/>
+  <title>Domain 4: Prompt Engineering Fundamentals, UKAIC AI Foundation, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">UK AI Council · Professional AI Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">UKAIC AI Foundation</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../domains.html">Domains</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../notes.html">Student Notes</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../domains.html">Domains</a></li><li aria-current="page">Domain 4</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Domain 4 of 8</span>
+    <h1>Prompt Engineering Fundamentals</h1>
+    <p class="lede">The highest-leverage practical skill: constructing effective prompts and improving weak ones.</p>
+    <div class="pills">
+      <span class="pill">6 syllabus areas</span>
+    </div>
+  </section>
+  <h2 id="video">Domain video</h2>
+  <p class="sub">Narrated walkthrough of this domain.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/domain-4-prompt-engineering.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this domain, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+      <li>Construct a prompt using the four components: task, context, format and constraints</li>
+      <li>Assign a role or persona and name the audience to shape register and depth</li>
+      <li>Distinguish zero-shot from few-shot prompting and know when to use examples</li>
+      <li>Request structured output and decompose a complex task into ordered steps</li>
+      <li>Treat first output as a draft and refine through specific, corrective follow-ups</li>
+      <li>Diagnose and correct vague, overloaded, leading, unformatted and one-and-done prompts</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this domain.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/domain4-prompt-engineering-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+
+  <h2 id="areas">What this subject is about</h2>
+  <p class="sub">What this domain covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>4.1, Anatomy of a prompt</h3>
+<p>Every effective prompt can be labelled with four components. Task: what you want done. Context: what the model needs to know to do it well. Format: how the output should look, table, bullets, headed sections, length. Constraints: limits and rules, length, tone, exclusions, audience. Strong prompts contain all four; weak prompts omit them. Example: \"Write a 300-word introduction to networking for new apprentices\" labels task (write an introduction), context (networking), format (300 words), and audience (new apprentices).</p>
+<h3>4.2, Role &amp; audience</h3>
+<p>A persona shapes the stance the model takes; a named audience shapes register and depth. \"As a technical reviewer, for the board\" produces different output from \"as a coach, for apprentices\", same facts, different depth, different vocabulary. The test: would the intended reader understand the output? If not, re-target the role or audience.</p>
+<h3>4.3, Few-shot prompting</h3>
+<p>Zero-shot: no examples given. Few-shot: one or more examples attached, calibrating style, format and tone. The deciding rule (slide 10): use examples whenever the output must match a pattern, a meeting agenda, a report structure, a particular tone. The course compares the two directly; know when each is appropriate.</p>
+<h3>4.4, Structure &amp; decomposition</h3>
+<p>Request structured output explicitly, tables, headed sections, bullets, numbered steps, and the model delivers work product rather than prose. For complex tasks, decompose: split into ordered steps, ask for a plan first, execute step by step, review each. Decomposition tames complexity; plans before execution improve quality.</p>
+<h3>4.5, Iterative refinement</h3>
+<p>The first output is a draft, not an answer. Refine with specific, corrective follow-ups, \"shorten the second paragraph\", \"retone for a non-technical reader\", \"turn the middle section into a table\", one change at a time. \"Make it better\" fails because it gives the model nothing to act on. Prompting is a conversation that converges.</p>
+<h3>4.6, Common prompting faults</h3>
+<p>Five faults, each with a repair: vague (no explicit task, state what you want done); overloaded (too many asks at once, split them); leading (suggests the answer, ask neutrally and let evidence decide); unformatted (no format requested, specify it); one-and-done (no refinement, treat the output as a draft). Diagnose, name, repair, re-test.</p>
+</div>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="domain-3-ai-landscape.html">Domain 3</a><a class="navbtn" href="domain-5-working-with-ai.html">Domain 5</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>&copy; 2026 Billy Forrest</p>
+  </div>
+</footer>
+</body>
+</html>

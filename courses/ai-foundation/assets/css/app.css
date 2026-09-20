@@ -1,0 +1,97 @@
+/* UKAIC AI Foundation app - mobile layer for course pages.
+   Guarantees touch-friendly, no-horizontal-scroll layout on small screens. */
+:root { --aif-safe-bottom: env(safe-area-inset-bottom, 0px); }
+
+html, body { overflow-x: hidden; }
+
+/* Bigger, touch-friendly nav on small screens */
+@media (max-width: 720px) {
+  .mainnav ul { flex-direction: column; width: 100%; }
+  .mainnav li { width: 100%; }
+  .mainnav a { display: block; padding: 14px 12px; }
+  .nav-toggle { display: inline-block; }
+}
+
+/* Tables scroll horizontally instead of overflowing the screen */
+.tablewrap, .card, section, article { max-width: 100%; }
+.tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Quizzes: keep controls thumb-friendly */
+#exit-toast, .app-toast {
+  position: fixed; left: 50%; bottom: calc(24px + var(--aif-safe-bottom));
+  transform: translateX(-50%); z-index: 99999;
+  background: rgba(0, 20, 40, 0.92); color: #fff;
+  padding: 12px 18px; border-radius: 22px;
+  font-size: 15px; max-width: 90vw; text-align: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+}
+#exit-toast.show, .app-toast.show { opacity: 1; }
+
+/* Student notes readability on phone */
+.notes-body { font-size: 17px; line-height: 1.65; }
+.notes-body h2 { margin-top: 1.4em; }
+.notes-body table { width: 100%; }
+.notes-body blockquote {
+  border-left: 4px solid var(--navy, #002b5c);
+  margin: 1em 0; padding: 0.4em 1em;
+  background: var(--tint, #eef3fa); border-radius: 4px;
+}
+.notes-body code { background: rgba(0,0,0,0.06); padding: 0.1em 0.35em; border-radius: 3px; }
+/* Open status pill + clickable resource buttons */
+.status.open { background:#2f6fb5; color:#fff; }
+a.resbtn { display:flex; align-items:center; gap:8px; text-decoration:none; color:inherit; width:100%; }
+a.resbtn .ico { flex-shrink:0; }
+/* tap feedback: flash + no blue highlight on clickable boxes */
+a.card { -webkit-tap-highlight-color: rgba(0,43,92,0.18); text-decoration: none; }
+a.card h2, a.card h3, a.card p, a.card li, a.card span { text-decoration: none; }
+a.card:active, a.card.flash { background:#d7e3f2 !important; box-shadow: inset 0 0 0 2px #2f6fb5; }
+a.card { transition: background .08s ease; }
+/* right-side overshoot fixes: smaller text + scrollable tables (notes/glossary) */
+.notes-body { font-size:15px; line-height:1.5; }
+/* fit tables to screen width so content never overshoots the right edge */
+.notes-body table, #main table {
+  width: 100% !important; max-width: 100% !important;
+  table-layout: fixed; border-collapse: collapse;
+}
+.notes-body th, .notes-body td, #main th, #main td {
+  font-size: 14px; word-break: break-word; overflow-wrap: break-word; hyphens: auto;
+}
+.notes-body th:first-child, .notes-body td:first-child,
+#main th:first-child, #main td:first-child { width: 34%; }
+#main, .notes-body, .notes-body * { max-width: 100%; }
+.notes-body img, #main img { max-width: 100%; height: auto; }
+.notes-body pre, #main pre { white-space: pre-wrap; word-break: break-word; max-width: 100%; }
+.notes-body code { white-space: pre-wrap; word-wrap: break-word; }
+
+/* Text-block replacements for tables (mobile-first, never overflow) */
+dl.kv { margin:0 0 1em; padding:0; }
+dl.kv dt { font-weight:bold; color:#002b5c; margin:0.7em 0 0.1em; }
+dl.kv dd { margin:0 0 0.3em; padding-left:0.9em; border-left:3px solid #c9d4e0; }
+.defs { margin:0 0 1em; }
+.defs p.def { margin:0 0 0.75em; }
+.defs p.def strong { color:#002b5c; }
+.defs span.area { display:inline-block; background:#eef3fa; color:#2f6fb5;
+  border-radius:10px; padding:0 8px; font-size:0.8rem; font-weight:bold; margin-right:4px; }
+.tblprose { margin:0 0 1em; }
+.tblprose p { margin:0 0 0.7em; }
+
+/* Home page header logo, left of the brand text */
+.brandrow { align-items: center; }
+a.homelogo { display: inline-flex; align-items: center; flex: 0 0 auto; }
+a.homelogo img { display: block; height: 46px; width: auto; max-width: 62vw; }
+@media (max-width: 720px) { a.homelogo img { height: 38px; } }
+
+/* Domain page bottom link button, blue, reads just 'Domain N' */
+p.dombtn-wrap { margin: 34px 0 10px; text-align: center; }
+a.dombtn { display: inline-block; background: #2f6fb5; color: #fff; font-weight: bold;
+  text-decoration: none; padding: 15px 34px; border-radius: 10px; font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(0,43,92,0.22); }
+a.dombtn:active { background: #002b5c; }
+
+/* Page nav links as blue buttons (bottom of page) */
+nav.pager { display: flex; gap: 10px; justify-content: space-between; align-items: center;
+  margin: 30px 0 10px; padding: 0; width: 100%; }
+nav.pager a.navbtn { display: inline-block; background: #2f6fb5; color: #fff;
+  font-weight: bold; text-decoration: none; padding: 7px 13px; border-radius: 7px;
+  font-size: 0.78rem; box-shadow: 0 1px 4px rgba(0,43,92,0.2); }
+nav.pager a.navbtn:active { background: #002b5c; }

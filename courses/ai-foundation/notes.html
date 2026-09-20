@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"/>
+  <meta name="description" content="Complete revision notes for the UKAIC AI Foundation examination: all eight domains, glossary and exam checklist."/>
+  <title>Student Notes, UKAIC AI Foundation, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">UK AI Council · Professional AI Certification Pathway</p>
+        <p class="sitebrand"><a href="index.html">UKAIC AI Foundation</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="domains.html">Domains</a></li>
+          <li><a href="quizzes.html">Quizzes</a></li>
+          <li><a href="final-exam.html">Final Exam</a></li>
+          <li><a href="notes.html">Student Notes</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero">
+<h1>Student Notes and Revision Guide</h1>
+<p class="lede">Complete study notes for the UKAIC AI Foundation examination, written to the syllabus (SYL_AIF v1.0). Work through the eight domains, then use the glossary and checklist to consolidate.</p>
+</section>
+
+<div class="notes-body">
+<h2>How to use this guide</h2>
+<p>This guide follows the official UKAIC AI Foundation technical syllabus domain by domain. Each domain is shown with its exam weighting and question count, and every sub area is covered with concise revision notes distilled from the "what is tested" column of the syllabus.</p>
+<ul>
+<li>Work through the domains in order, then revise the glossary and the decision framework at the back.</li>
+<li>Sub areas marked <strong>awareness</strong> are tested only at a recognition level: you need to recognise and identify the concept, not explain it in depth.</li>
+<li>The exam is closed book. Revise so that definitions, lists and the decision framework are recallable without notes.</li>
+</ul>
+<h2>The exam at a glance</h2>
+<dl class="kv">
+<dt>Awarding body</dt><dd>UK AI Council (UKAIC)</dd>
+<dt>Syllabus reference</dt><dd>SYL_AIF v1.0</dd>
+<dt>Component</dt><dd>One written multiple choice paper</dd>
+<dt>Questions</dt><dd>120 multiple choice questions, single best answer</dd>
+<dt>Pass mark</dt><dd>70% (84 of 120)</dd>
+<dt>Duration</dt><dd>120 minutes</dd>
+<dt>Delivery</dt><dd>Supervised and proctored, administered by authorised providers</dd>
+<dt>Book</dt><dd>Closed book</dd>
+<dt>Prerequisites</dt><dd>None</dd>
+<dt>Vendor neutrality</dt><dd>No question requires knowledge of any specific commercial AI product</dd>
+<dt>Level</dt><dd>Foundation: understand and apply concepts, not engineer or specialise</dd>
+</dl>
+<h2>Domain weighting</h2>
+<p>The examination is weighted across the eight domains as follows. The practical competencies of effective use and verification carry the greatest weight, so prompt engineering (Domain 4) and limitations and verification (Domain 6) are the heaviest areas.</p>
+<div class="tblprose">
+<p>1. Understanding AI: The Big Picture &middot; 12% &middot; 14</p>
+<p>2. How AI Works (Without the Maths) &middot; 14% &middot; 17</p>
+<p>3. The AI Landscape and Generative AI &middot; 12% &middot; 14</p>
+<p>4. Prompt Engineering Fundamentals &middot; 16% &middot; 19</p>
+<p>5. Working with AI Day to Day &middot; 12% &middot; 15</p>
+<p>6. Limitations, Risks and Hallucination &middot; 16% &middot; 19</p>
+<p>7. AI Security, Privacy and Data &middot; 10% &middot; 12</p>
+<p>8. Ethics, Bias, Responsible AI and Governance &middot; 8% &middot; 10</p>
+<p>Total &middot; 100% &middot; 120</p>
+</div>
+<hr />
+<h2>Domain 1. Understanding AI: The Big Picture</h2>
+<p>This domain builds accurate, vendor neutral vocabulary and framing for artificial intelligence. It corrects common misconceptions and makes sure you can talk about AI precisely.</p>
+<h3>1.1 Defining AI</h3>
+<ul>
+<li>AI is a broad term for systems that perform tasks that normally require human intelligence.</li>
+<li>Most modern AI <strong>learns patterns from data</strong> to make predictions, generate content, or take actions. This is the working definition you should hold: AI learns patterns from data to predict, generate, or act.</li>
+<li><strong>What AI is not:</strong> AI is not conscious, it is not infallible, and it is not "magic". It is a statistical tool that can make mistakes.</li>
+<li>Some systems are <strong>rule based</strong> rather than learning systems (they follow fixed instructions rather than learning from data). Recognise that both exist.</li>
+<li>A simple explanation can still be accurate: "simple is not wrong". Do not assume a plain explanation is incorrect just because it is short.</li>
+</ul>
+<h3>1.2 AI, ML, Deep Learning and Generative AI</h3>
+<ul>
+<li>The four terms nest inside each other:</li>
+<li><strong>AI</strong> is the largest umbrella term.</li>
+<li><strong>Machine learning (ML)</strong> is a subset of AI: algorithms that learn from data.</li>
+<li><strong>Deep learning</strong> is a subset of ML: models with many layers inspired loosely by the structure of the brain.</li>
+<li><strong>Generative AI</strong> and <strong>large language models (LLMs)</strong> are a subset of deep learning that create new content.</li>
+<li>In other words: AI contains machine learning, which contains deep learning, which contains generative AI and LLMs.</li>
+<li>The four terms are often wrongly used as synonyms. You should be able to spot when a claim or product description uses them imprecisely.</li>
+<li>Precision matters when reading tool claims, vendor marketing, and media coverage: "AI powered" marketing often means a narrower technology underneath.</li>
+</ul>
+<h3>1.3 Narrow vs General AI</h3>
+<ul>
+<li><strong>Narrow AI (weak AI / ANI):</strong> systems designed for a specific task. They are capable within their domain but limited outside it. Examples include spam filtering, image recognition in medical diagnostics, and language translation.</li>
+<li><strong>General AI (strong AI / AGI):</strong> a hypothetical system able to perform any intellectual task a human can. It is a research goal, not a current product.</li>
+<li><strong>All commercial AI today is narrow AI.</strong> Apply the "narrow or general?" test to dramatic claims: any claim that a current product is truly general, conscious, or human-like should be treated with suspicion.</li>
+</ul>
+<h3>1.4 Everyday AI</h3>
+<ul>
+<li>Narrow AI is already embedded in routine tools that most people use daily without noticing: spam filtering, search ranking, navigation, and recommendation systems.</li>
+<li>Awareness point: most professionals are already daily AI users, even if they would not describe themselves that way.</li>
+</ul>
+<hr />
+<h2>Domain 2. How AI Works (Without the Maths)</h2>
+<p>This domain gives you an accurate, non mathematical model of how AI produces outputs and where it is unreliable. No maths is required, but you need the concepts precisely.</p>
+<h3>2.1 Models, Training and Inference</h3>
+<ul>
+<li>A <strong>model</strong> is a set of learned values (called <strong>parameters</strong>), not a database of stored answers. It does not look up answers; it produces them from what it learned.</li>
+<li><strong>Training</strong> is the process of learning the model from a dataset (adjusting the parameters so the model gets better at the task).</li>
+<li><strong>Inference</strong> is using the trained model to produce an output from a new input.</li>
+<li><strong>Parameters</strong> (at Foundation level) are the adjustable values learned during training. They are what the model actually is.</li>
+</ul>
+<h3>2.2 How Language Models Generate Text</h3>
+<ul>
+<li>Language models work by <strong>next token prediction</strong>: producing the most likely continuation of the prompt and the text generated so far.</li>
+<li>Output is <strong>generated, not retrieved</strong>: the model creates text word by word; it is not pulling a stored answer out of a database.</li>
+<li>Because it is generated, <strong>fluency does not guarantee accuracy</strong>. A fluent sentence can still be wrong.</li>
+<li>The mechanism is more sophisticated than simple autocomplete, but the model has <strong>no built in fact checker</strong>. It is not checking facts as it writes.</li>
+</ul>
+<h3>2.3 Tokens and the Context Window</h3>
+<ul>
+<li><strong>Tokens</strong> are the basic unit of text a model reads and writes. A token is often a word or part of a word, not a whole sentence or page.</li>
+<li>The <strong>context window</strong> is the model's short term working memory: the fixed amount of text (tokens) it can consider at once.</li>
+<li>Exceeding the context window has effects: earlier detail may be "forgotten", and very long pastes can crowd out or push out your instructions.</li>
+<li>Practical ways to work within the window: keep prompts concise, put key instructions at the start or end (where they are most likely to be attended to), and chunk large inputs into separate smaller requests.</li>
+</ul>
+<h3>2.4 Knowledge Cut off</h3>
+<ul>
+<li>A base model has <strong>no knowledge of events after its training date</strong> (its knowledge cut off).</li>
+<li>Time sensitive questions are therefore unreliable from the base model alone, because the model may be answering about a world state it has never seen.</li>
+<li>Some applications add <strong>live search</strong> on top of the model to bring in up to date information, but the base model itself remains frozen at its training date.</li>
+</ul>
+<h3>2.5 Variability and Embeddings</h3>
+<ul>
+<li>Identical prompts can produce <strong>different answers</strong> because generation uses sampling: the model draws from a range of likely next tokens, influenced by settings such as the "temperature" (how random or creative the output is).</li>
+<li>Distinguish the <strong>model</strong> from the <strong>application</strong> built around it. The same model can power different apps with different guardrails, prompts, and interfaces.</li>
+<li><strong>Embeddings</strong> (awareness): a way of representing the meaning of text as numbers, so that related items sit close together in a numerical space. Used for search and for finding similar content.</li>
+</ul>
+<hr />
+<h2>Domain 3. The AI Landscape and Generative AI</h2>
+<p>This domain is a vendor neutral map of AI capabilities and how to choose the right category of tool. It stresses choosing a category, not a specific product.</p>
+<h3>3.1 Generative AI and Output Types</h3>
+<ul>
+<li><strong>Generative</strong> means producing new content, as opposed to classifying or labelling existing content.</li>
+<li>The major <strong>output types</strong> generative AI can produce: <strong>text, image, audio/voice, video, and code</strong>.</li>
+</ul>
+<h3>3.2 Foundation Models and Multimodal AI (both awareness)</h3>
+<ul>
+<li><strong>Foundation models</strong> (awareness): large, general purpose models adapted to many different tasks, rather than built for one task.</li>
+<li><strong>Multimodal AI</strong> (awareness): AI that handles more than one type of input or output, for example text and images together.</li>
+</ul>
+<h3>3.3 Retrieval Augmented Generation (RAG)</h3>
+<ul>
+<li>The <strong>grounding problem</strong>: a model generating from memory alone can produce answers not tied to real, current, or specific sources.</li>
+<li><strong>RAG</strong> is a technique that first <strong>retrieves relevant sources</strong> (for example documents or web pages) and then <strong>generates an answer grounded in those sources</strong>.</li>
+<li>RAG improves <strong>freshness and grounding</strong>, but it <strong>reduces rather than removes</strong> error. Grounded output can still be wrong if the retrieved sources are wrong or misused.</li>
+</ul>
+<h3>3.4 AI Agents (awareness)</h3>
+<ul>
+<li>An <strong>AI agent</strong> is a multi step, tool using system that pursues a goal, as opposed to a single turn assistant that just answers one question.</li>
+<li>Agents take actions and use tools across several steps.</li>
+<li>Because agents take actions, they <strong>require greater human oversight</strong>; an autonomous agent doing real work needs monitoring.</li>
+</ul>
+<h3>3.5 Model, Application and Service (awareness)</h3>
+<ul>
+<li>Distinguish three layers:</li>
+<li>The <strong>model</strong>: the engine that produces output.</li>
+<li>The <strong>application</strong>: the interface the user interacts with.</li>
+<li>The <strong>AI enabled service</strong>: the broader product or service the model powers.</li>
+<li><strong>Open weight / self hosted</strong> versus <strong>hosted</strong> options (awareness): self hosting gives more control and data residency but needs setup and maintenance; hosted options are easier but data may leave your control. Trade offs: control and data residency versus convenience and maintenance.</li>
+</ul>
+<h3>3.6 Selecting a Tool Category</h3>
+<ul>
+<li>Choose an appropriate <strong>category of tool</strong>, not a specific product.</li>
+<li>Decide using four factors: <strong>capability, cost, data sensitivity, and organisational approval</strong>.</li>
+<li>Whether an AI tool is appropriate depends on what it can do, what it costs, how sensitive the data is, and whether the organisation has approved its use.</li>
+</ul>
+<hr />
+<h2>Domain 4. Prompt Engineering Fundamentals</h2>
+<p>This is the highest leverage practical skill in the exam, so it carries the most questions. You must be able to construct effective prompts and to improve weak ones.</p>
+<h3>4.1 Anatomy of a Prompt</h3>
+<ul>
+<li>A strong prompt has four components:</li>
+<li><strong>Task:</strong> what you want the model to do.</li>
+<li><strong>Context:</strong> the background information the model needs.</li>
+<li><strong>Format:</strong> how you want the output arranged (for example a list, a table, or email style).</li>
+<li><strong>Constraints:</strong> limits and requirements (for example length, tone, what to exclude).</li>
+<li>To construct an effective prompt, state all four components clearly.</li>
+</ul>
+<h3>4.2 Role and Audience</h3>
+<ul>
+<li>Assigning a <strong>role</strong> or <strong>persona</strong> to the model shapes the register of the output (for example "act as a senior editor").</li>
+<li><strong>Naming the audience</strong> shapes depth and tone (for example "explain to a non technical reader").</li>
+<li>Role and audience together control how formal, how detailed, and how accessible the output is.</li>
+</ul>
+<h3>4.3 Few shot Prompting</h3>
+<ul>
+<li><strong>Zero shot</strong> prompting gives the model no examples and asks it to do the task directly.</li>
+<li><strong>Few shot</strong> prompting gives the model one or more examples before asking it to do the task.</li>
+<li>Use examples to <strong>calibrate style, format, and tone</strong>: a couple of worked examples show the model exactly what you expect.</li>
+<li>Use few shot prompting when you need a specific style or format that the model is unlikely to guess from a description alone.</li>
+</ul>
+<h3>4.4 Structure and Decomposition</h3>
+<ul>
+<li><strong>Request structured output</strong>, for example tables, headed sections, or bullet lists, so the result is easy to scan and use.</li>
+<li><strong>Decompose</strong> a complex task into ordered steps: break a large task into a sequence of smaller instructions.</li>
+<li>Ask for a <strong>plan or reasoning</strong> where useful, so the model works through a task methodically rather than guessing the whole answer at once.</li>
+</ul>
+<h3>4.5 Iterative Refinement</h3>
+<ul>
+<li>Treat the <strong>first output as a draft</strong>, not the finished answer.</li>
+<li><strong>Refine through specific, corrective follow up prompts</strong>: point out what is wrong and what to change (for example "shorten this to five sentences" or "remove the jargon").</li>
+<li>Understand prompting as a <strong>conversation that builds on previous responses</strong>, not a single one way request.</li>
+</ul>
+<h3>4.6 Common Prompting Faults</h3>
+<ul>
+<li>Diagnose and correct these faults:</li>
+<li><strong>Vague:</strong> too general, no clear task (for example "give me info about sales").</li>
+<li><strong>Overloaded:</strong> too many instructions at once, so the model cannot do all of them.</li>
+<li><strong>Leading:</strong> the prompt steers the model toward a desired answer rather than asking for a fair analysis.</li>
+<li><strong>Unformatted:</strong> no requested structure, so the output is unstructured.</li>
+<li><strong>"One and done":</strong> giving up after the first weak output instead of refining it.</li>
+</ul>
+<hr />
+<h2>Domain 5. Working with AI Day to Day</h2>
+<p>This domain applies AI to real professional work, with the judgement and habits that keep it safe. It stresses that you own the output.</p>
+<h3>5.1 Drafting and Rewriting</h3>
+<ul>
+<li>Use AI to produce <strong>first drafts</strong> and to <strong>reshape content</strong>: shortening, re levelling for an audience, or changing tone or format.</li>
+<li>Always <strong>review and personalise</strong> AI output rather than using it unchanged. The output is a starting point, not the final product.</li>
+</ul>
+<h3>5.2 Summarising</h3>
+<ul>
+<li>Use AI to produce <strong>directed, audience targeted summaries</strong> (for example "summarise for a busy executive in three bullets").</li>
+<li>Be aware of the limitation: <strong>summaries can omit critical detail</strong>.</li>
+<li>For high stakes documents, <strong>read the original</strong>, do not rely on a summary alone.</li>
+</ul>
+<h3>5.3 Ideation, Planning and Research Assistance</h3>
+<ul>
+<li>Use AI as a <strong>thinking partner</strong> for ideas and planning, with <strong>human ownership</strong> of the result. The plan and decision are yours.</li>
+<li>Treat <strong>research assistance</strong> as a <strong>starting point to verify</strong>, not as an authoritative source.</li>
+</ul>
+<h3>5.4 Appropriate Use</h3>
+<ul>
+<li>Decide when AI is suitable and when <strong>human expertise, conventional tools, or authoritative sources</strong> should lead.</li>
+<li>The decision depends on the <strong>task and the stakes</strong>: the higher the stakes, the more you need human expertise and verification.</li>
+</ul>
+<h3>5.5 The Verification Habit</h3>
+<ul>
+<li><strong>Verify</strong> facts, figures, dates, names, quotes, and citations <strong>before acting on or sharing</strong> AI output.</li>
+<li>Understand that <strong>the user, not the AI, remains accountable</strong> for what is produced and shared. "The AI did it" is not a defence.</li>
+</ul>
+<h3>5.6 Personal Prompt Library (awareness)</h3>
+<ul>
+<li>The purpose of saving and organising <strong>reusable prompts and templates</strong> for recurring tasks: speed, consistency, and quality across repeated work.</li>
+<li>Awareness level: know that a personal prompt library stores reusable prompts for recurring tasks.</li>
+</ul>
+<hr />
+<h2>Domain 6. Limitations, Risks and Hallucination</h2>
+<p>Critical evaluation and verification are core professional competencies and carry heavy weight in the exam. This domain is about spotting when AI is wrong.</p>
+<h3>6.1 Hallucination</h3>
+<ul>
+<li><strong>Hallucination</strong> is confident, fluent output that is <strong>factually wrong, with no signal that anything is amiss</strong>. The model does not flag that it is uncertain or mistaken.</li>
+<li>It is <strong>inherent to how language models work</strong> (probabilistic next token prediction), not an occasional bug that can be fully fixed.</li>
+</ul>
+<h3>6.2 Stale Information and Fabrication</h3>
+<ul>
+<li><strong>Stale (out of date) output</strong> arises from the knowledge cut off: the model cannot know events after its training date.</li>
+<li><strong>Fabrication:</strong> the model can invent statistics, citations, quotes, and case studies that look authoritative but do not exist.</li>
+</ul>
+<h3>6.3 Provenance and Citation Checking</h3>
+<ul>
+<li>Generated content is <strong>not the same as sourced content</strong>. A model generating prose is not checking a library.</li>
+<li><strong>Citations, statistics, and quotes are high risk</strong>, because they are exactly the kinds of items the model will fabricate fluently.</li>
+<li><strong>Confirm important information at its original source</strong> (the real document, dataset, or person), not from the model's claim.</li>
+</ul>
+<h3>6.4 Reducing the Risk</h3>
+<ul>
+<li>Reduce hallucination risk by:</li>
+<li><strong>Grounding prompts in real content</strong> (paste in the actual documents to summarise, not "tell me about your documents").</li>
+<li>Asking the model to <strong>flag uncertainty</strong> where it is not sure.</li>
+<li><strong>Cross checking against primary sources</strong>, not against another AI (an AI checking an AI can compound the error).</li>
+<li><strong>Keeping a human in the loop</strong> to review before the output is used.</li>
+</ul>
+<h3>6.5 Mandatory Verification Contexts</h3>
+<ul>
+<li>Recognise contexts where verification is <strong>mandatory</strong>:</li>
+<li><strong>Legal</strong></li>
+<li><strong>Medical</strong></li>
+<li><strong>Financial</strong></li>
+<li><strong>Safety</strong></li>
+<li><strong>HR / people decisions</strong></li>
+<li><strong>Anything published externally</strong></li>
+<li>In these contexts, unverified AI output is not acceptable as a basis for action.</li>
+</ul>
+<hr />
+<h2>Domain 7. AI Security, Privacy and Data</h2>
+<p>This domain is about protecting information and recognising AI enabled threats at a professional literacy level.</p>
+<h3>7.1 Protecting Information</h3>
+<ul>
+<li>Do <strong>not</strong> enter into public or unapproved AI tools:</li>
+<li><strong>Personal data</strong></li>
+<li><strong>Confidential and commercially sensitive information</strong></li>
+<li><strong>Credentials</strong> (passwords, keys)</li>
+<li><strong>Confidential documents</strong></li>
+<li>The default rule: <strong>when in doubt, leave it out</strong>. If you are not sure whether something can be shared with an AI tool, do not enter it.</li>
+</ul>
+<h3>7.2 Data Handling by AI Services</h3>
+<ul>
+<li><strong>Third party services may transmit, store, or use inputs</strong> according to their own terms and conditions.</li>
+<li>Basic concepts: <strong>data retention</strong> (how long inputs are kept) and <strong>data residency</strong> (where data is stored, which may be another country).</li>
+<li><strong>Organisational policy governs use</strong>: what you may enter into which tool is set by your organisation, and you must comply.</li>
+</ul>
+<h3>7.3 Shadow AI</h3>
+<ul>
+<li><strong>Shadow AI</strong> is unapproved AI use outside organisational oversight: using tools the organisation has not sanctioned, often with data the organisation has not approved.</li>
+<li>It creates risk because there is no oversight of what data is exposed or how the tool behaves.</li>
+<li>Use <strong>approved tools</strong>, and <strong>seek approval for new ones</strong>. Treat a <strong>policy gap as a reason to escalate</strong> (ask), not as a reason to proceed on your own.</li>
+</ul>
+<h3>7.4 AI Enabled Threats (awareness)</h3>
+<ul>
+<li>Recognise <strong>deepfakes</strong> (realistic fake images, audio, or video), <strong>impersonation</strong>, and <strong>AI assisted phishing and social engineering</strong>.</li>
+<li>For <strong>unexpected or urgent requests</strong> (for example a manager urgently asking for a payment or credentials), <strong>verify through a separate, trusted channel</strong>, not by replying to the same message.</li>
+</ul>
+<h3>7.5 Prompt Injection (awareness)</h3>
+<ul>
+<li><strong>Prompt injection</strong> is malicious instructions hidden inside content that the AI processes, designed to override the AI's intended behaviour (for example hidden text in a document that tells the AI to reveal data or ignore instructions).</li>
+<li>Be cautious with <strong>untrusted content</strong> (content of unknown origin that the AI reads) and keep <strong>oversight of AI actions</strong>.</li>
+<li>Awareness level: recognise what prompt injection is and the need for caution with untrusted content.</li>
+</ul>
+<hr />
+<h2>Domain 8. Ethics, Bias, Responsible AI and Governance</h2>
+<p>Responsible use, oversight, disclosure, and a professional decision framework. Fewer questions, but the framework is central and often tested.</p>
+<h3>8.1 Bias and Fairness</h3>
+<ul>
+<li>Bias has multiple <strong>sources</strong>: the <strong>training data</strong>, the <strong>design choices</strong>, and the <strong>deployment context</strong>.</li>
+<li>Bias produces <strong>real world impacts</strong> in people affecting uses such as <strong>hiring, lending, and content</strong>.</li>
+<li><strong>Bias assessment is a duty</strong> in people affecting uses of AI: if AI affects people, you must assess and mitigate bias.</li>
+</ul>
+<h3>8.2 Transparency, Accountability and Explainability</h3>
+<ul>
+<li><strong>The human or organisation remains accountable.</strong> "The AI did it" is <strong>not a defence</strong>.</li>
+<li><strong>Transparency:</strong> being open about when and how AI is used.</li>
+<li><strong>Explainability</strong> (at Foundation level): the ability to give a reasonable account of why an AI produced a particular result.</li>
+</ul>
+<h3>8.3 Human Oversight</h3>
+<ul>
+<li><strong>Human oversight is necessary</strong> because AI, left to decide alone, can act in ways humans would not choose.</li>
+<li>Automated decision making raises risk where it affects people with no human review.</li>
+<li>The central principle: <strong>AI proposes, while a person decides and owns the outcome.</strong></li>
+</ul>
+<h3>8.4 Disclosure</h3>
+<ul>
+<li>Disclose AI use <strong>where required, where AI substantially generated the content, or where non disclosure would mislead</strong>.</li>
+<li>If a reader would reasonably assume a human wrote or created something, and a machine produced it, you should disclose.</li>
+</ul>
+<h3>8.5 Policy and Governance (policy full, regulatory picture awareness)</h3>
+<ul>
+<li>An <strong>organisational AI policy</strong> sets out how AI may and may not be used, what tools are approved, and what data may be entered.</li>
+<li>Basic <strong>governance</strong> provides <strong>oversight, accountability, and review</strong> of AI use in the organisation.</li>
+<li>The <strong>high level, risk based regulatory picture</strong> (awareness): regulators take a risk based approach, with heavier expectations where AI affects people or safety. UKAIC works within existing frameworks such as NIST, ISO and the EU AI Act.</li>
+</ul>
+<h3>8.6 Professional Decision Framework</h3>
+<ul>
+<li>Apply the four category framework for any AI task:</li>
+<li><strong>Use:</strong> the task is appropriate, low risk, and the AI is competent for it.</li>
+<li><strong>Use with verification:</strong> the output matters, so check facts and sources before acting.</li>
+<li><strong>Escalate:</strong> you are unsure whether AI is appropriate, the policy is unclear, or the task is beyond your judgement. Ask before proceeding.</li>
+<li><strong>Do not use:</strong> the task is unsafe, high stakes without verification possible, or prohibited by policy.</li>
+<li><strong>Be more cautious when unsure.</strong> When in doubt, escalate or do not use.</li>
+<li>The framework demonstrates the central principle: <strong>AI can assist while humans remain accountable.</strong></li>
+</ul>
+<hr />
+<h2>Exam strategy and high yield tips</h2>
+<ul>
+<li><strong>Domains 4 and 6 together are one third of the exam</strong> (32% combined). Spend revision time on prompt engineering and on limitations, hallucination and verification.</li>
+<li><strong>Definitions matter.</strong> Many questions test whether you can recall a definition exactly: hallucination, tokens, context window, inference vs training, narrow vs general AI.</li>
+<li><strong>Know your lists.</strong> The output types (text, image, audio, video, code); the four prompt components (task, context, format, constraints); the data that must not be entered; the sources of bias.</li>
+<li><strong>The decision framework</strong> (use, use with verification, escalate, do not use) is the most portable concept in the exam. Apply it to any scenario question.</li>
+<li><strong>Accountability always sits with the human or organisation.</strong> Choose the option where a person verifies, decides, and owns the outcome.</li>
+<li><strong>Vendor neutral:</strong> answers reference categories and practices, never a specific commercial product. Choose the option that is about the general concept, not a brand.</li>
+<li><strong>Simple is not wrong.</strong> Prefer the plain, accurate, measured option over a dramatic or overclaimed one.</li>
+</ul>
+<h2>Glossary of key terms</h2>
+<div class="defs">
+<p class="def"><strong>Artificial intelligence (AI)</strong>, Systems that learn patterns from data to predict, generate content, or take actions</p>
+<p class="def"><strong>Machine learning (ML)</strong>, A subset of AI: algorithms that learn from data</p>
+<p class="def"><strong>Deep learning</strong>, A subset of ML: multi layered neural networks</p>
+<p class="def"><strong>Generative AI</strong>, Deep learning that produces new content (text, image, audio, video, code)</p>
+<p class="def"><strong>Large language model (LLM)</strong>, A deep learning model that recognises, summarises, translates, predicts and generates text on huge datasets</p>
+<p class="def"><strong>Model</strong>, A set of learned values (parameters) that produces outputs, not a database of answers</p>
+<p class="def"><strong>Parameter</strong>, An adjustable value learned during training</p>
+<p class="def"><strong>Training</strong>, Learning the model from a dataset</p>
+<p class="def"><strong>Inference</strong>, Using the trained model to produce an output</p>
+<p class="def"><strong>Token</strong>, The basic unit of text a model reads and writes</p>
+<p class="def"><strong>Context window</strong>, The model's short term working memory (fixed number of tokens it can consider)</p>
+<p class="def"><strong>Knowledge cut off</strong>, The date after which a base model has no knowledge</p>
+<p class="def"><strong>Embedding</strong>, A numerical representation of meaning so related items sit close together</p>
+<p class="def"><strong>Temperature</strong>, A setting controlling randomness or creativity of generation</p>
+<p class="def"><strong>Foundation model</strong>, A large, general purpose model adapted to many tasks</p>
+<p class="def"><strong>Multimodal AI</strong>, AI handling more than one type of input or output</p>
+<p class="def"><strong>Retrieval augmented generation (RAG)</strong>, Retrieving relevant sources, then generating an answer grounded in them</p>
+<p class="def"><strong>AI agent</strong>, A multi step, tool using system that pursues a goal</p>
+<p class="def"><strong>Hallucination</strong>, Confident, fluent output that is factually wrong with no signal of error</p>
+<p class="def"><strong>Zero shot prompting</strong>, Prompting with no examples</p>
+<p class="def"><strong>Few shot prompting</strong>, Prompting with one or more worked examples</p>
+<p class="def"><strong>Prompt injection</strong>, Malicious instructions hidden in content the AI processes</p>
+<p class="def"><strong>Shadow AI</strong>, Unapproved AI use outside organisational oversight</p>
+<p class="def"><strong>Deepfake</strong>, Realistic fake image, audio, or video of a person</p>
+<p class="def"><strong>Narrow AI</strong>, AI designed for a specific task, limited outside it</p>
+<p class="def"><strong>General AI (AGI)</strong>, A hypothetical AI able to perform any intellectual task a human can</p>
+<p class="def"><strong>Human in the loop</strong>, Keeping a person reviewing and deciding on AI output</p>
+</div>
+<h2>Quick revision checklist</h2>
+<ul>
+<li>I can define AI and say what it is not, and that "simple is not wrong".</li>
+<li>I can order AI, ML, deep learning and generative AI from broadest to most specific.</li>
+<li>I can distinguish narrow AI from general AI and state that all current AI is narrow.</li>
+<li>I can distinguish training from inference, and know a model is parameters, not a database.</li>
+<li>I can explain next token prediction and that fluency does not guarantee accuracy.</li>
+<li>I can define tokens and the context window, and describe what happens when it is exceeded.</li>
+<li>I can explain the knowledge cut off and why time sensitive questions are unreliable from the base model.</li>
+<li>I can describe variability (temperature) and that the model differs from the application.</li>
+<li>I can name the generative output types and explain what "generative" means.</li>
+<li>I can explain RAG: retrieve sources then generate a grounded answer; it reduces, not removes, error.</li>
+<li>I can describe agents and why they need more human oversight.</li>
+<li>I can list the four prompt components and build a prompt from them.</li>
+<li>I can set a role and audience, and use few shot prompting with examples.</li>
+<li>I can decompose complex tasks and refine output through follow ups.</li>
+<li>I can diagnose vague, overloaded, leading, unformatted and one and done prompts.</li>
+<li>I can use AI for drafting, summarising and ideation while owning and personalising the output.</li>
+<li>I know summaries can omit detail and that I must read high stakes originals.</li>
+<li>I have the verification habit and know the user, not the AI, is accountable.</li>
+<li>I can define hallucination and know why it is inherent, not a fixable bug.</li>
+<li>I know citations, statistics, quotes and dates are high risk and I check the original source.</li>
+<li>I know mandatory verification contexts: legal, medical, financial, safety, HR, and external publication.</li>
+<li>I protect personal, confidential, secret and credential data: when in doubt, leave it out.</li>
+<li>I can explain data handling by AI services, retention, residency, and organisational policy.</li>
+<li>I can recognise shadow AI, deepfakes and prompt injection, and escalate policy gaps.</li>
+<li>I can explain the sources of bias and the duty to assess bias in people affecting uses.</li>
+<li>I know that the human or organisation stays accountable and that "the AI did it" is no defence.</li>
+<li>I apply human oversight: AI proposes, a person decides and owns the outcome.</li>
+<li>I know when to disclose AI use.</li>
+<li>I can classify any task into use, use with verification, escalate, or do not use.</li>
+<li>I know the exam format: 120 questions, 70% pass, 120 minutes, closed book.</li>
+</ul>
+<h6>Good luck with your revision. See you at the exam.</h6>
+</div>
+<nav class="pager" aria-label="Page navigation"><a class="navbtn" href="final-exam.html">Exam</a><a class="navbtn" href="glossary.html">Glossary</a></nav>
+</main>
+
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p><strong>UKAIC AI Foundation, Course Pack.</strong> Built against
+      <em>UKAIC AI Foundation Technical Syllabus v1.0</em> (document reference SYL_AIF, Public Release).</p>
+    <p>The UKAIC AI Foundation certification, its syllabus and its examination are the
+      property of the UK AI Council. This is an independent training pack, not an official
+      UKAIC publication, and it is not endorsed by UKAIC. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. No examinable content requires
+      knowledge of any specific commercial AI product.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

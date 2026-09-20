@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="An accurate, non-mathematical model of how AI produces outputs and where it is unreliable."/>
+  <title>Domain 2: How AI Works (Without the Maths), UKAIC AI Foundation, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">UK AI Council · Professional AI Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">UKAIC AI Foundation</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../domains.html">Domains</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../notes.html">Student Notes</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../domains.html">Domains</a></li><li aria-current="page">Domain 2</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Domain 2 of 8</span>
+    <h1>How AI Works (Without the Maths)</h1>
+    <p class="lede">An accurate, non-mathematical model of how AI produces outputs and where it is unreliable.</p>
+    <div class="pills">
+      <span class="pill">5 syllabus areas</span>
+    </div>
+  </section>
+  <h2 id="video">Domain video</h2>
+  <p class="sub">Narrated walkthrough of this domain.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/domain-2-how-ai-works.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this domain, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+      <li>Describe a model as a set of learned values rather than a database of stored answers</li>
+      <li>Distinguish training (learning the model) from inference (using it)</li>
+      <li>Explain next-token prediction and why fluency does not guarantee accuracy</li>
+      <li>Explain tokens and the context window, and the effects of exceeding it</li>
+      <li>Describe the knowledge cut-off and why time-sensitive questions are unreliable</li>
+      <li>Explain why identical prompts can produce different answers</li>
+      <li>Describe embeddings as the representation of meaning as numbers</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this domain.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/domain-2-how-ai-works-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+
+  <h2 id="areas">What this subject is about</h2>
+  <p class="sub">What this domain covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>2.1, Models, training &amp; inference</h3>
+<p>The single most important correction in the whole course: a model is a set of learned values, not a database of stored answers. It does not contain a copy of its training text. The training data shaped the values; then the data itself is gone. When the model answers, it generates from patterns, it does not fetch from memory. This one idea explains both the fluency and the failures you will meet in Session 6.</p>
+<p>Training is the phase where the model learns patterns from datasets, it happens once, at build time, and it is expensive in data and compute. Inference is the phase where the model produces an output, it happens every time you use it, and it is comparatively cheap. Your role sits in inference: you are the user, not the trainer. Parameters are the adjustable values the training process sets; modern models have billions of them, but you need only the idea, learned settings that shape every output, never the maths.</p>
+<h3>2.2, How language models generate text</h3>
+<p>Generation works token by token. The model predicts the most likely next piece of text given the prompt and everything written so far; that new token extends the text, and the model predicts again, thousands of times for a long answer. It is more sophisticated than simple autocomplete, vast patterns, long-range context, subtle style, but the core is the same family: prediction.</p>
+<p>Because output is generated rather than retrieved, there is no lookup table and no built-in fact-checker. Fluency does not guarantee accuracy: a smooth, confident sentence can be entirely wrong. Nothing checks the output against reality. That single fact, fluency ≠ accuracy, no fact-checker, explains more AI failures than anything else in this course.</p>
+<h3>2.3, Tokens &amp; the context window</h3>
+<p>Tokens are the basic units of text the model reads and writes, roughly parts of words. One word is not one token: a token may be a fragment, a whole word, or a word plus its trailing space. Models price and limit by tokens, not characters, and both long prompts and long outputs consume them.</p>
+<p>The context window is the maximum text the model can consider at once, think of it as short-term working memory. Everything inside is in mind for this response; everything outside is effectively forgotten. Exceeding it has two effects: earlier detail drops out, and large pastes crowd out your instructions, so the model answers from the most recent material rather than your actual request. Three habits keep the window working for you: concise prompts (say what matters, skip padding); key instructions first or last (positioning helps them survive); and chunking (split large documents into sections for separate passes).</p>
+<h3>2.4, Knowledge cut-off</h3>
+<p>The base model is frozen at its training date: it has no knowledge of events after that point. Time-sensitive questions, who won last month, what is the latest regulation, are unreliable from the base model alone. Some applications add live search, which makes the app feel current, but the base model underneath stays frozen. The app can be fresh while the engine is not. The habit: treat output as stale until proven current, ask about a recent event and verify.</p>
+<h3>2.5, Variability &amp; embeddings</h3>
+<p>Identical prompts can produce different answers because of sampling: the model draws from likely tokens, not always the single most likely one, and the temperature setting controls how random the sampling is. The practical consequence: a second run is a second draft, not a verification, asking again just rolls the dice again.</p>
+<p>The model is the engine, the learned values that generate text. The application is the interface, settings and tools built around it. Changing the application does not change the model's knowledge. Embeddings represent meaning as numbers, placing related items close together; treat these as awareness only, you recognise what they are, not how they are built.</p>
+</div>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="domain-1-understanding-ai.html">Domain 1</a><a class="navbtn" href="domain-3-ai-landscape.html">Domain 3</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>&copy; 2026 Billy Forrest</p>
+  </div>
+</footer>
+</body>
+</html>

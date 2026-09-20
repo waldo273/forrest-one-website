@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0"/>
+<title>UKAIC AI Foundation, Domain 1 Quiz, Understanding AI: The Big Picture</title>
+<style>
+:root{--navy:#002b5c;--ink:#0d1b2a;--ok:#2e7d32;--bad:#c62828;--line:#c9d4e4;--bg:#ffffff;--tint:#eef3fa;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--navy);
+font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6;}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;
+padding:12px 20px;z-index:999;font-weight:bold;text-decoration:none;}
+.skip-link:focus{left:0;}
+header[role="banner"]{background:var(--navy);color:#fff;padding:14px 24px;}
+header[role="banner"] h1{margin:0;font-size:1.15rem;font-weight:bold;letter-spacing:.2px;}
+header[role="banner"] .sub{font-size:.85rem;opacity:.9;margin-top:3px;}
+main[role="main"]{max-width:900px;margin:0 auto;padding:24px 20px 60px;}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+margin-bottom:8px;font-size:1rem;font-weight:bold;}
+.progress-outer{height:14px;background:var(--tint);border:1px solid var(--line);
+border-radius:8px;overflow:hidden;margin-bottom:26px;}
+.progress-inner{height:100%;width:0;background:var(--navy);
+transition:width .3s ease;}
+@media (prefers-reduced-motion: reduce){.progress-inner{transition:none;}}
+.qtext{font-size:1.3rem;font-weight:bold;margin:0 0 20px;line-height:1.45;}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;
+background:var(--tint);border:2px solid var(--line);border-radius:10px;
+padding:15px 17px;margin-bottom:12px;font-size:1.05rem;color:var(--ink);
+font-family:inherit;cursor:pointer;line-height:1.5;}
+.opt:hover:not(:disabled){background:#dde7f5;border-color:#9db3d0;}
+.opt:disabled{cursor:default;}
+.opt:focus-visible{outline:3px solid var(--navy);outline-offset:2px;}
+.opt.correct{background:#dff3e1;border-color:var(--ok);}
+.opt.wrong{background:#fbe3e3;border-color:var(--bad);}
+.opt-letter{font-weight:bold;color:#4a6a8a;flex-shrink:0;width:24px;}
+.opt.correct .opt-letter{color:var(--ok);}
+.opt.wrong .opt-letter{color:var(--bad);}
+.op-text{flex:1;}
+.tag{font-weight:bold;font-size:.85rem;margin-left:8px;white-space:nowrap;}
+.tag.correct{color:var(--ok);}
+.tag.wrong{color:var(--bad);}
+.analysis{margin-top:16px;padding:16px 18px;border-left:6px solid var(--navy);
+background:var(--tint);border-radius:0 8px 8px 0;}
+.analysis h3{margin:0 0 10px;font-size:1rem;text-transform:uppercase;
+letter-spacing:.5px;}
+.analysis p{margin:0 0 9px;font-size:.97rem;}
+.analysis p:last-child{margin-bottom:0;}
+.analysis .why{font-weight:bold;}
+.analysis .good{color:var(--ok);}
+.analysis .bad{color:var(--bad);}
+.navrow{margin-top:26px;}
+button.primary{background:var(--navy);color:#fff;border:none;border-radius:8px;
+padding:15px 30px;font-size:1.05rem;font-weight:bold;cursor:pointer;
+font-family:inherit;}
+button.primary:hover{background:#00408a;}
+button.primary:focus-visible{outline:3px solid #002b5c;outline-offset:3px;}
+button.primary:disabled{background:#9db3d0;cursor:not-allowed;}
+button.submit{background:var(--ok);}
+button.submit:hover{background:#1f5b23;}
+.verdict{font-size:1.15rem;font-weight:bold;margin:0 0 18px;padding:14px 18px;
+border-radius:8px;}
+.verdict.ok{background:#dff3e1;color:#1f5b23;border:2px solid var(--ok);}
+.verdict.no{background:#fbe3e3;color:#8c1c1c;border:2px solid var(--bad);}
+#results{display:none;text-align:center;}
+.gauge{width:230px;height:230px;border-radius:50%;margin:0 auto 26px;
+display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.gauge .pct{font-size:3.2rem;font-weight:bold;line-height:1;}
+.gauge .lbl{font-size:.95rem;margin-top:6px;letter-spacing:1px;}
+.grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0;}
+.cell{border:2px solid var(--line);border-radius:10px;padding:16px 26px;min-width:130px;}
+.cell .n{font-size:2rem;font-weight:bold;display:block;}
+.cell .t{font-size:.9rem;text-transform:uppercase;letter-spacing:.5px;}
+.cell.good{border-color:var(--ok);} .cell.good .n{color:var(--ok);}
+.cell.bad{border-color:var(--bad);} .cell.bad .n{color:var(--bad);}
+.note{font-size:.95rem;color:#3d5878;max-width:640px;margin:0 auto 22px;}
+/* Assessment integrity: selection and copy are disabled on question content. */
+#qholder,#results,.analysis,.opt{-webkit-user-select:none;-moz-user-select:none;
+  -ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#quiz,#results{-webkit-user-drag:none;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;padding:13px 24px;border-radius:8px;
+  font-size:.95rem;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.25);
+  z-index:9999;display:none;}
+.toast.show{display:block;}
+@media (prefers-reduced-motion: no-preference){.toast{transition:opacity .2s ease;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<header role="banner">
+  <h1>UKAIC AI Foundation, Domain 1 Quiz, Understanding AI: The Big Picture</h1>
+  <div class="sub">14 questions · Pass standard 70%</div>
+</header>
+<main role="main" id="main">
+  <div id="quiz">
+    <div class="bar">
+      <span id="counter" role="status" aria-live="polite">Question 1 of 14</span>
+      <span id="running" aria-live="polite">Score: 0 / 0</span>
+    </div>
+    <div class="progress-outer" role="progressbar" aria-labelledby="counter"
+         aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="pbar">
+      <div class="progress-inner" id="pinner"></div>
+    </div>
+    <div id="qholder"></div>
+    <div class="navrow">
+      <button class="primary" id="next" type="button">Next question &rarr;</button>
+      <button class="primary submit" id="submit" type="button"
+              style="display:none">Submit assessment</button>
+    </div>
+  </div>
+  <div id="results" role="region" aria-label="Assessment results">
+    <div class="gauge" id="gauge"><span class="pct" id="pct">0%</span>
+      <span class="lbl" id="verdictlbl">, </span></div>
+    <div class="grid">
+      <div class="cell good"><span class="n" id="ncorrect">0</span>
+        <span class="t">Correct</span></div>
+      <div class="cell bad"><span class="n" id="nwrong">0</span>
+        <span class="t">Incorrect</span></div>
+      <div class="cell"><span class="n" id="ntotal">0</span>
+        <span class="t">Total</span></div>
+    </div>
+    <p class="note" id="dignote"></p>
+    <ul id="missed" style="text-align:left;max-width:760px;margin:0 auto 24px;
+      padding-left:22px;font-size:.98rem;"></ul>
+    <button class="primary" id="restart" type="button">Restart assessment</button>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+var Q = [{"q":"Which statement best describes what most modern artificial intelligence systems actually do?","opts":["They learn patterns from data to make predictions, generate content, or take actions.","They store a complete database of verified facts and retrieve the correct answer on demand.","They reason about problems using logic rules written by human programmers.","They develop an internal awareness of the topics they are asked about."],"ans":0,"exp":"Correct. Most modern AI is a pattern-learning technology: it derives statistical regularities from data and uses them to predict, generate, or act.","why":["Correct. Most modern AI is a pattern-learning technology: it derives statistical regularities from data and uses them to predict, generate, or act.","Incorrect. This describes a conventional database. A model holds learned values in its parameters, not a store of discrete verified facts, which is why it can produce fluent errors.","Incorrect. Rule-based systems do exist, but they are not what most modern AI does. Modern AI learns from data rather than following hand-written logic.","Incorrect. AI systems have no awareness or understanding. They process statistical patterns with no comprehension of meaning."]},{"q":"A colleague says their AI assistant 'knows' the answer to a question. Why is this a misleading description?","opts":["The system does not answer questions outside its training topics. This is a common misconception rather than the accurate position.","The system generates plausible output rather than knowing a verified fact.","There is no stored knowledge that the system fails to express.","No human expert is consulted at any stage of generation."],"ans":1,"exp":"Correct. The assistant generates a likely continuation; it does not hold verified knowledge. Fluency and confidence are not evidence of accuracy.","why":["Incorrect. The system handles novel phrasings and questions it was never specifically programmed for. That generality is precisely why errors are sometimes hard to spot.","Correct. The assistant generates a likely continuation; it does not hold verified knowledge. Fluency and confidence are not evidence of accuracy.","Incorrect. There is no hidden knowledge the system is failing to express. The limitation is that there is no knowledge store at all, only learned patterns.","Incorrect. No human is consulted. The response is generated entirely from the model's learned parameters, or from sources retrieved for it automatically."]},{"q":"Which of the following is a rule-based system rather than a learning system?","opts":["A search engine that ranks pages using a learned relevance model.","A tool that flags unusual spending by comparing each claim to learned norms.","A payroll calculation that applies fixed tax bands to each salary figure.","A navigation app that predicts traffic from historical journey data."],"ans":2,"exp":"Correct. Fixed tax bands applied deterministically are rule-based automation: the same input always produces the same output, with no learning involved.","why":["Incorrect. A learned relevance model is trained on data. Page ranking by learning is a classic machine-learning application.","Incorrect. Comparing against learned norms means the thresholds were derived from data, that is a learning system.","Correct. Fixed tax bands applied deterministically are rule-based automation: the same input always produces the same output, with no learning involved.","Incorrect. Predicting traffic from historical journey data is learning from data, not applying fixed rules."]},{"q":"Which sequence correctly describes how the AI terminology nests?","opts":["Generative AI contains deep learning, which contains AI, which contains machine learning.","Machine learning contains AI, which contains generative AI, which contains deep learning.","Deep learning contains AI, which contains machine learning, which contains generative AI.","AI contains machine learning, which contains deep learning, which contains generative AI."],"ans":3,"exp":"Correct. The nesting runs from broadest to narrowest: AI is the widest field; machine learning is a subset; deep learning is a subset of machine learning; generative AI and large language models sit within deep learning.","why":["Incorrect. Generative AI is the narrowest category shown here. It sits inside deep learning, not outside it.","Incorrect. This inverts the relationship. Machine learning is a subset of AI, not the container for it.","Incorrect. Deep learning is one approach within machine learning, so it cannot sit above AI in the hierarchy.","Correct. The nesting runs from broadest to narrowest: AI is the widest field; machine learning is a subset; deep learning is a subset of machine learning; generative AI and large language models sit within deep learning."]},{"q":"A vendor product page claims the tool is 'AI-powered machine learning deep learning generative AI'. Why does this matter?","opts":["The terms are nested, so listing all four adds no information about the product.","The terms mean the same thing, so the repetition is merely poor editing.","The claim is accurate and confirms the product uses every technique named. This is a common misconception rather than the accurate position.","The terms contradict each other, so the product cannot work as described."],"ans":0,"exp":"Correct. Because the terms nest, naming all four describes one narrow thing. Precision matters when reading tool claims: the stack of jargon is marketing, not specification.","why":["Correct. Because the terms nest, naming all four describes one narrow thing. Precision matters when reading tool claims: the stack of jargon is marketing, not specification.","Incorrect. They are not synonyms. They are nested categories with genuinely different meanings, conflating them is the error the syllabus asks learners to catch.","Incorrect. A product cannot 'use' all four as distinct features, because three are contained within the fourth. The list is meaningless as a capability statement.","Incorrect. The terms do not contradict each other; they overlap by design. The problem is redundancy and vagueness, not impossibility."]},{"q":"Which statement correctly distinguishes machine learning from classical rule-based automation?","opts":["Machine learning runs faster, whereas rule-based automation is inherently slower. This confuses a related concept with the one being tested.","Machine learning derives its behaviour from data, whereas rules are specified by a person.","Machine learning requires the internet, whereas rule-based automation does not.","Machine learning is always more accurate, whereas rules always produce errors."],"ans":1,"exp":"Correct. The defining difference is origin: a rule is written by a human, while a learned behaviour is inferred from examples. This is what allows learning systems to handle messy, novel inputs.","why":["Incorrect. Speed is not the distinguishing feature. Both can be fast or slow depending on implementation.","Correct. The defining difference is origin: a rule is written by a human, while a learned behaviour is inferred from examples. This is what allows learning systems to handle messy, novel inputs.","Incorrect. Many learning systems run entirely offline. Connectivity is an implementation detail, not a defining property.","Incorrect. Neither is always better. Learned models can be confidently wrong on unfamiliar input, and well-written rules can be perfectly accurate within their scope."]},{"q":"Which description matches narrow AI?","opts":["A system that can transfer skills learned in one field to solve problems in another.","A system able to perform any intellectual task that a human being can perform.","A system designed for a specific task, capable within its domain but limited outside it.","A system with general reasoning ability that is still under active commercial development."],"ans":2,"exp":"Correct. Narrow AI is task-specific: highly capable within its domain, and unable to apply that competence elsewhere without retraining.","why":["Incorrect. Cross-domain skill transfer is a defining ambition of AGI. Narrow systems cannot move their competence between domains.","Incorrect. That describes artificial general intelligence (AGI), which is a research goal rather than a shipped product.","Correct. Narrow AI is task-specific: highly capable within its domain, and unable to apply that competence elsewhere without retraining.","Incorrect. General reasoning ability is not under active commercial development in the sense of a product you can buy. It remains hypothetical."]},{"q":"A news headline announces a new AI system that 'thinks like a human and can do anything'. What is the most reasonable professional response?","opts":["Disregard the product entirely, since AI claims are never accurate.","Assume the system is genuinely general, because the vendor released it publicly.","Assume it is narrow but will become general within the current product cycle.","Apply the narrow-or-general test, since all commercial AI today is narrow."],"ans":3,"exp":"Correct. The narrow-or-general test is the syllabus's tool for exactly this moment. Impressive performance on tasks is not evidence of general intelligence.","why":["Incorrect. Dismissing everything is as uncritical as believing everything. The right move is to apply a test and assess the specific claim.","Incorrect. Public release is evidence of commercial availability, not of general capability. Every shipped system today is narrow.","Incorrect. Narrow-to-general progression is not a scheduled upgrade path. General AI is a research ambition, not a roadmap item.","Correct. The narrow-or-general test is the syllabus's tool for exactly this moment. Impressive performance on tasks is not evidence of general intelligence."]},{"q":"Why is it professionally useful to distinguish narrow from general AI when reading vendor material?","opts":["It exposes claims that overstate capability by implying general competence.","It determines whether the tool requires an internet connection to operate. This confuses a related concept with the one being tested.","It establishes whether the tool is compliant with data protection law.","It reveals the exact number of parameters used in the underlying model."],"ans":0,"exp":"Correct. The distinction is a claim-testing device. Vague language like 'understands anything' is a red flag when every commercial system is narrow.","why":["Correct. The distinction is a claim-testing device. Vague language like 'understands anything' is a red flag when every commercial system is narrow.","Incorrect. Connectivity is unrelated to the narrow/general distinction. It is a deployment characteristic.","Incorrect. Compliance depends on how data is handled, not on how broad the model's capability is.","Incorrect. Parameter counts are an architectural detail. The syllabus places them outside Foundation scope, and they say nothing about capability breadth."]},{"q":"Which of the following is an example of narrow AI that most professionals already use daily?","opts":["A calculator applies fixed arithmetic rules and cannot learn.","An email spam filter that classifies messages as wanted or unwanted.","A spreadsheet macro replays recorded steps exactly as specified.","A human checklist is a procedure followed by a person, not a system."],"ans":1,"exp":"Correct. Spam filtering is a learned classification task: the filter is trained on labelled messages and predicts a category. It is narrow AI embedded in routine work.","why":["Incorrect. A calculator applies fixed arithmetic rules. It is deterministic automation, not a learning system.","Correct. Spam filtering is a learned classification task: the filter is trained on labelled messages and predicts a category. It is narrow AI embedded in routine work.","Incorrect. A spreadsheet macro replays recorded steps exactly as specified. There is no learning or prediction involved.","Incorrect. A human checklist is a procedure followed by a person. No automated system is classifying or predicting anything."]},{"q":"Which set of everyday functions most commonly uses narrow AI?","opts":["Password hashing, file compression, and disk defragmentation. This is a common misconception rather than the accurate position.","Spreadsheet formulas, file copying, and document printing.","Search ranking, route navigation, and product recommendations.","Screen brightness, keyboard mapping, and volume control."],"ans":2,"exp":"Correct. Search ranking, navigation and recommendations are all learned prediction tasks running continuously, which is why the syllabus states most professionals are already daily AI users.","why":["Incorrect. These are algorithmic and deterministic. Hashing, compression and defragmentation follow fixed procedures.","Incorrect. These are deterministic operations. They execute exactly as defined with no learned component.","Correct. Search ranking, navigation and recommendations are all learned prediction tasks running continuously, which is why the syllabus states most professionals are already daily AI users.","Incorrect. These are hardware and driver settings. They involve no prediction or learning."]},{"q":"Why does the syllabus stress that most professionals are already daily AI users?","opts":["It confirms that everyday AI tools are more capable than specialist ones. This confuses a related concept with the one being tested.","It proves that existing AI use is always safe and requires no oversight.","It shows that AI use is limited to large organisations with data teams.","It replaces the idea that AI is a specialist tool for technical staff only."],"ans":3,"exp":"Correct. The framing corrects a common misconception. AI is not a distant specialism; it is already embedded in ordinary tools, so the question is how to use it well, not whether to start.","why":["Incorrect. Generality of use says nothing about capability. A spam filter is not more capable than a specialist diagnostic model.","Incorrect. Ubiquity is not safety. Everyday AI still produces errors and still requires the verification habit.","Incorrect. The opposite is true. Everyday AI appears in consumer tools used by individuals and small businesses, not only large enterprises.","Correct. The framing corrects a common misconception. AI is not a distant specialism; it is already embedded in ordinary tools, so the question is how to use it well, not whether to start."]},{"q":"A simple explanation of how an AI tool works is given to a non-technical audience. What is the correct professional view of that explanation?","opts":["A simple explanation can still be accurate; simple does not mean wrong.","A simple explanation is necessarily inaccurate and should be avoided.","A simple explanation is only acceptable if the audience cannot read.","A simple explanation should always be replaced with the full mathematics."],"ans":0,"exp":"Correct. The syllabus makes this explicit: 'simple does not equal wrong'. An accurate non-mathematical model is achievable and is exactly what Foundation level requires.","why":["Correct. The syllabus makes this explicit: 'simple does not equal wrong'. An accurate non-mathematical model is achievable and is exactly what Foundation level requires.","Incorrect. Simplification is not the same as distortion. The skill is simplifying without introducing falsehood.","Incorrect. Audience literacy is not the criterion. Accuracy is the criterion, at whatever level of detail the audience needs.","Incorrect. The mathematics is explicitly outside the syllabus scope. Replacing a clear explanation with mathematics would be both unnecessary and unhelpful."]},{"q":"Which statement about AI capability is accurate?","opts":["AI is conscious in a limited form once it reaches sufficient scale.","AI is not conscious, not infallible, and not magic.","AI is infallible on factual questions but weak on creative ones.","AI is essentially magic and cannot be explained in ordinary language."],"ans":1,"exp":"Correct. This is the syllabus's triple negative and it is deliberately blunt. AI has no awareness, makes mistakes, and is a describable technology.","why":["Incorrect. Scale does not produce consciousness. No AI system has awareness, whatever its size or apparent fluency.","Correct. This is the syllabus's triple negative and it is deliberately blunt. AI has no awareness, makes mistakes, and is a describable technology.","Incorrect. Infallibility on facts is precisely the opposite of the truth. Confident factual errors are the signature failure mode.","Incorrect. The technology is fully describable in ordinary language, and the syllabus requires exactly that description. 'Magic' is a framing to reject."]}];
+var PASS = 70;
+var L = ["A","B","C","D"];
+var cur = 0, answered = [], correct = [], submitted = false;
+
+// Randomise question order on every attempt so the sequence cannot be memorised
+// from a screenshot. Uses the same RNG discipline as the accessible quiz standard.
+(function shuffleQuestions(){
+  var seed = Date.now() % 2147483647;
+  function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = Q.length - 1; i > 0; i--){
+    var j = Math.floor(rnd() * (i + 1));
+    var t = Q[i]; Q[i] = Q[j]; Q[j] = t;
+  }
+})();
+
+// --- Copy / cut / paste attenuation -------------------------------------------------
+// Assessment integrity: discourage copying questions out and pasting answers in.
+// This is a deterrent, NOT a security control, a determined user can defeat it via
+// devtools. It stops casual text harvesting and pasted-in answers during a sitting.
+(function blockClipboard(){
+  function stop(e){
+    e.preventDefault();
+    showToast('Copying, cutting and pasting are disabled during this assessment.');
+    return false;
+  }
+  ['copy','cut','paste','contextmenu'].forEach(function(evt){
+    document.addEventListener(evt, stop, true);
+  });
+  // Disable text selection inside the question and analysis areas only, so that
+  // the skip link and buttons remain fully keyboard accessible.
+  var style = document.createElement('style');
+  style.textContent = '#qholder, #results { -webkit-user-select:none; -moz-user-select:none;'
+                    + ' -ms-user-select:none; user-select:none; }';
+  document.head.appendChild(style);
+})();
+
+function showToast(msg){
+  var t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+var qlen = Q.length;
+for (var i = 0; i < qlen; i++){ answered.push(false); correct.push(false); }
+
+function el(id){ return document.getElementById(id); }
+
+function render(){
+  var q = Q[cur];
+  var h = '<h2 class="qtext" id="qt">' + q.q + '</h2>';
+  h += '<div role="radiogroup" aria-labelledby="qt">';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<button class="opt" type="button" role="radio" aria-checked="false" '
+       + 'data-q="' + cur + '" data-o="' + j + '" id="o' + cur + '_' + j + '">'
+       + '<span class="opt-letter">' + L[j] + '.</span>'
+       + '<span class="op-text">' + q.opts[j] + '</span>'
+       + '<span class="tag" id="t' + cur + '_' + j + '"></span></button>';
+  }
+  h += '</div><div id="ex' + cur + '"></div>';
+  el('qholder').innerHTML = h;
+  var btns = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < btns.length; k++){
+    btns[k].addEventListener('click', onPick);
+  }
+  var last = (cur === qlen - 1);
+  el('next').style.display = last ? 'none' : '';
+  el('submit').style.display = last ? '' : 'none';
+  el('next').disabled = !answered[cur];
+  el('submit').disabled = !answered[cur];
+  updateBar();
+}
+
+function onPick(e){
+  var b = e.currentTarget;
+  var qi = parseInt(b.getAttribute('data-q'), 10);
+  var oi = parseInt(b.getAttribute('data-o'), 10);
+  if (answered[qi]) return;
+  answered[qi] = true;
+  var q = Q[qi];
+  var isRight = (oi === q.ans);
+  correct[qi] = isRight;
+  var all = el('qholder').querySelectorAll('.opt');
+  for (var k = 0; k < all.length; k++){
+    var kq = parseInt(all[k].getAttribute('data-q'), 10);
+    var ko = parseInt(all[k].getAttribute('data-o'), 10);
+    if (kq !== qi) continue;
+    all[k].disabled = true;
+    all[k].setAttribute('aria-checked', ko === oi ? 'true' : 'false');
+    var tg = el('t' + kq + '_' + ko);
+    if (ko === q.ans){
+      all[k].classList.add('correct');
+      if (tg) tg.textContent = ko === oi ? '✓ Correct' : '✓ This was correct';
+      if (tg) tg.className = 'tag correct';
+    } else if (ko === oi){
+      all[k].classList.add('wrong');
+      if (tg) tg.textContent = '✗ Your answer';
+      if (tg) tg.className = 'tag wrong';
+    }
+  }
+  renderAnalysis(qi);
+  var done = 0;
+  for (var m = 0; m < qlen; m++){ if (answered[m]) done++; }
+  el('running').textContent = 'Score: ' + tally() + ' / ' + done;
+  el('next').disabled = false;
+  el('submit').disabled = false;
+  updateBar();
+}
+
+function renderAnalysis(qi){
+  var q = Q[qi];
+  var h = '<div class="analysis"><h3>Why each option is right or wrong</h3>';
+  h += '<p class="why good">Correct answer: ' + L[q.ans] + '. '
+     + q.opts[q.ans] + '</p><p>' + q.exp + '</p>';
+  for (var j = 0; j < q.opts.length; j++){
+    h += '<p><span class="why">' + L[j] + '.</span> ' + q.why[j] + '</p>';
+  }
+  h += '</div>';
+  el('ex' + qi).innerHTML = h;
+}
+
+function tally(){
+  var n = 0;
+  for (var i = 0; i < qlen; i++){ if (correct[i]) n++; }
+  return n;
+}
+
+function updateBar(){
+  el('counter').textContent = 'Question ' + (cur + 1) + ' of ' + qlen;
+  var pct = Math.round(((cur + 1) / qlen) * 100);
+  el('pinner').style.width = pct + '%';
+  var pb = el('pbar');
+  if (pb){ pb.setAttribute('aria-valuenow', String(cur + 1)); }
+}
+
+el('next').addEventListener('click', function(){
+  if (cur < qlen - 1){ cur++; render(); }
+});
+el('submit').addEventListener('click', function(){ showResults(false); });
+
+function mark(){
+  var c = tally();
+  var p = Math.round((c / qlen) * 100);
+  el('pct').textContent = p + '%';
+  el('ncorrect').textContent = c;
+  el('nwrong').textContent = qlen - c;
+  el('ntotal').textContent = qlen;
+  var g = el('gauge');
+  var pass = (p >= PASS);
+  g.style.background = pass ? '#dff3e1' : '#fbe3e3';
+  g.style.border = '8px solid ' + (pass ? '#2e7d32' : '#c62828');
+  el('verdictlbl').textContent = pass ? 'PASS' : 'NOT YET';
+  el('verdictlbl').style.color = pass ? '#2e7d32' : '#c62828';
+  el('pct').style.color = pass ? '#2e7d32' : '#c62828';
+  el('dignote').textContent = pass
+    ? 'You have met the pass standard for this section. Revisit any missed items below, then move on.'
+    : 'Below the pass standard of ' + PASS + '%. Review each missed item below and retake when ready.';
+  var ul = el('missed');
+  ul.innerHTML = '';
+  var missed = 0;
+  for (var i = 0; i < qlen; i++){
+    if (!correct[i]){
+      missed++;
+      var li = document.createElement('li');
+      li.style.marginBottom = '8px';
+      li.textContent = Q[i].q + ', correct: ' + L[Q[i].ans] + '. ' + Q[i].opts[Q[i].ans];
+      ul.appendChild(li);
+    }
+  }
+  if (missed === 0){
+    var li2 = document.createElement('li');
+    li2.textContent = 'No missed items.';
+    ul.appendChild(li2);
+  }
+}
+
+function showResults(force){
+  if (submitted && !force) return;
+  submitted = true;
+  mark();
+  el('quiz').style.display = 'none';
+  el('results').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+el('restart').addEventListener('click', function(){
+  var p = window.prompt('Enter supervisor passcode to reset this assessment:');
+  if (p !== '1234'){
+    if (p !== null){ window.alert('Incorrect passcode. Assessment not reset.'); }
+    return;
+  }
+  location.reload();
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' && !answered[cur] === false && cur < qlen - 1){
+    e.preventDefault(); cur++; render();
+  }
+});
+
+// ---- Assessment integrity guard ----
+// Deterrent only: browser menus can bypass keyboard blocks and the HTML source
+// always contains the questions. Pair with invigilation for real integrity.
+(function integrityGuard(){
+  var tc = null;
+  function toast(msg){
+    var t = el('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    if (tc) clearTimeout(tc);
+    tc = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function block(e, msg){
+    e.preventDefault();
+    e.stopPropagation();
+    toast(msg || 'Copying is disabled on this assessment.');
+    return false;
+  }
+  document.addEventListener('contextmenu', function(e){ block(e); });
+  document.addEventListener('copy', function(e){ block(e); });
+  document.addEventListener('cut', function(e){ block(e); });
+  document.addEventListener('dragstart', function(e){ block(e, 'Dragging is disabled.'); });
+  document.addEventListener('selectstart', function(e){
+    var n = e.target;
+    while (n && n !== document.body){
+      if (n.id === 'qholder' || n.id === 'results' ||
+          (n.classList && (n.classList.contains('opt') || n.classList.contains('analysis')))){
+        block(e, 'Selecting question text is disabled.');
+        return;
+      }
+      n = n.parentNode;
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === 'c' || k === 'x' || k === 'a' || k === 'u' || k === 's' || k === 'p')){
+      block(e); return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')){
+      block(e, 'Developer tools are disabled.'); return;
+    }
+    if (e.key === 'F12'){ block(e, 'Developer tools are disabled.'); }
+  }, true);
+})();
+
+render();
+</script>
+<script>
+(function () {
+  function native(){ return typeof window.Capacitor!=='undefined' && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform(); }
+  function setup(){
+    if(!native()){return;}
+    var App = window.Capacitor.Plugins && window.Capacitor.Plugins.App; if(!App){return;}
+    var t=null,b=0;
+    function toast(m){ if(!t){t=document.createElement('div'); t.className='app-toast'; t.setAttribute('role','status'); document.body.appendChild(t);} t.textContent=m; t.classList.add('show'); clearTimeout(t._z); t._z=setTimeout(function(){t.classList.remove('show');},2200); }
+    App.addListener('backButton', function(info){ var cb=info&&info.canGoBack;
+      if(cb){ if(window.history.length>1){window.history.back();} else {window.location.href=window.location.origin+'/';} return; }
+      var n=Date.now(); if(n-b<2200){App.exitApp(); return;} b=n; toast('Press back again to exit');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
+})();
+</script>
+<footer role="contentinfo" style="text-align:center;padding:18px 20px;border-top:2px solid var(--line,#c9d4e4);margin-top:30px;color:var(--navy,#002b5c);font-size:.9rem">
+  <p>&copy; 2026 Billy Forrest</p>
+</footer>
+</body>
+</html>
