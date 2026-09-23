@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Architecture and segmentation, the appliance stack — firewalls, IDS/IPS, proxies, WAF and NAC — secure remote access with VPN and ZTNA, and the secure protocol toolkit that carries traffic safely."/>
+  <title>Session 8: Enterprise Network Security: Firewalls, IDS, IPS, VPNs &amp; Secure Protocols, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 8</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 8 of 12</span>
+    <h1>Enterprise Network Security: Firewalls, IDS, IPS, VPNs &amp; Secure Protocols</h1>
+    <p class="lede">Architecture and segmentation, the appliance stack — firewalls, IDS/IPS, proxies, WAF and NAC — secure remote access with VPN and ZTNA, and the secure protocol toolkit that carries traffic safely.</p>
+    <div class="pills">
+<span class="pill">8A</span><span class="pill">8B</span><span class="pill">8C</span><span class="pill">8D</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-08-enterprise-network-security.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Describe tiered, spine-leaf and SMB network architectures and where each fits, including redundancy and control drivers.</li><li>Explain VLANs, DMZ and microsegmentation as containment controls, and the principle of least connectivity.</li><li>Classify security appliances: firewall (stateless, stateful, NGFW, UTM), IDS/IPS, proxy, WAF, load balancer, NAC.</li><li>Compare IDS and IPS, including placement, signature versus anomaly detection, deployment models and tuning.</li><li>Explain NAC posture checking — antivirus status, patches, credentials — and its allow/quarantine/deny outcomes.</li><li>Describe VPN types — site-to-site, remote access, client-based, SSL VPN, split tunnel — and when each is used.</li><li>Explain ZTNA and SASE and the shift from location-based to identity- and posture-based trust.</li><li>Describe TLS versions, cipher suites, perfect forward secrecy, and the certificate validation steps that defeat man-in-the-middle attacks.</li><li>State the jobs of TLS/HTTPS, SSH, IPsec, S/MIME and DNSSEC, and of the secure file transfer methods.</li><li>Explain RDP risk and the controls — including jump servers and bastion hosts — that make remote access safe.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-08-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>8A — Architecture</h3>
+<p>Tiered (core/distribution/access), spine-leaf (data-centre fabric) and SMB (flat) models. Segmentation is containment: VLANs, the DMZ with twin firewalls, and microsegmentation confine a compromise. Least connectivity limits connections to what is necessary. The distribution layer enforces policy; the core only transports; redundancy removes single points of failure.</p>
+<h3>8B — Security appliances</h3>
+<p>Firewalls: stateless (per-packet), stateful (state table, connection-aware), NGFW (application-aware with deep packet inspection), UTM (all-in-one). IDS detects and alerts; IPS blocks inline; signature detection catches known attacks while anomaly detection finds deviations from a baseline. Proxy forwards/filters/caches and hides topology; WAF protects web apps; load balancers distribute with health checks; NAC enforces posture — allow, quarantine, deny — based on antivirus status, patches and credentials.</p>
+<h3>8C — Secure remote access</h3>
+<p>VPN types: site-to-site (often IPsec tunnel mode), remote access, client-based (often IPsec), SSL VPN (browser/TLS), split tunnel. RDP is high-risk — MFA, allowlists, patching, monitoring. Jump servers and bastion hosts give hardened administrative entry. ZTNA verifies per request; SASE delivers ZTNA + SD-WAN as a service.</p>
+<h3>8D — Secure protocols</h3>
+<p>TLS 1.2/1.3 current — SSL and TLS 1.0/1.1 deprecated; cipher suites; PFS. HTTPS = HTTP over TLS; validate chain, hostname, expiry, revocation against a trusted CA to defeat man-in-the-middle; HSTS. Toolkit: TLS/HTTPS for web, SSH/SFTP for admin and transfer, IPsec for VPNs, S/MIME for email, DNSSEC for DNS integrity, FTPS for secure file transfer.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-07-identity-access.html">&#8592; Session 7</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-09-endpoint-application-cloud.html">Session 9 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

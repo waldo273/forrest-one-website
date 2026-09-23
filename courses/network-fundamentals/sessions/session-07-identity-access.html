@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Authentication factors and password concepts, multifactor and biometric authentication, hard and soft tokens, account policies and authorisation, and single sign-on with federated identity."/>
+  <title>Session 7: Identity &amp; Access Management, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 7</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 7 of 12</span>
+    <h1>Identity &amp; Access Management</h1>
+    <p class="lede">Authentication factors and password concepts, multifactor and biometric authentication, hard and soft tokens, account policies and authorisation, and single sign-on with federated identity.</p>
+    <div class="pills">
+<span class="pill">4A</span><span class="pill">4B</span><span class="pill">4C</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-07-identity-access.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Name the authentication factors: something you know, have, are/do, and somewhere you are.</li><li>Describe password concepts: length and complexity, aging, reuse, NIST guidance, and password hints as a vector.</li><li>Explain password managers: vault, generation, secure filling, form factors.</li><li>Define multifactor authentication and identify the trap of combining two factors of the same type.</li><li>Describe biometric authentication, including FAR and FRR.</li><li>Compare hard tokens (smart card, OTP, FIDO/U2F, TOTP) and soft tokens (SMS, push, authenticator apps), and explain passwordless authentication.</li><li>Describe account types and account policies: provisioning and the user lifecycle, lockout, time-of-day restrictions, auditing, and identity governance.</li><li>Explain authorisation models: permissions, least privilege, RBAC and ABAC, and privileged access management with just-in-time access.</li><li>Explain single sign-on and its concentration risk, and how directory services underpin it.</li><li>Explain federated identity: identity provider, service provider, and the protocols SAML, OAuth 2.0, OpenID Connect, LDAP and Kerberos.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-07-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>4A — Authentication</h3>
+<p>Factors: know, have, are/do, somewhere. MFA requires different categories — password+PIN is one factor. Passwords: length over complexity, no hints, managers for uniqueness. Biometrics: FAR and FRR trade off. Hard tokens (smart card, OTP, FIDO) resist phishing; soft tokens (SMS, push, apps) are convenient but some are interceptable. Passwordless uses authenticator-held keys.</p>
+<h3>4B — Account policies &amp; authorisation</h3>
+<p>Account types: user, privileged, service, shared, guest. Provisioning manages the user lifecycle — onboard, modify on role change, offboard promptly. Policies: lockout, time-of-day, auditing. Authorisation: permissions, least privilege, RBAC (roles), ABAC (attributes). Privileged accounts need PAM: just-in-time access, password vaulting and session recording. Identity governance reviews access, enforces policy and audits.</p>
+<h3>4C — SSO &amp; federation</h3>
+<p>SSO: one authentication, many apps — removes password fatigue but concentrates risk, mitigated by MFA and monitoring. Directory services (Active Directory, LDAP) are the source of truth for identities. Federation: IdP authenticates and issues a token, SP trusts the assertion. Protocols: SAML (assertions), OAuth 2.0 (authorisation), OIDC (identity on OAuth), LDAP (directory), Kerberos (tickets).</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-06-cryptography.html">&#8592; Session 6</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-08-enterprise-network-security.html">Session 8 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

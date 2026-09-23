@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Symmetric and asymmetric encryption, hashing and digital signatures; the public key infrastructure of certificates, authorities and revocation; and the practical solutions for data at rest, in transit and in use."/>
+  <title>Session 6: Cryptography &amp; Public Key Infrastructure, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 6</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 6 of 12</span>
+    <h1>Cryptography &amp; Public Key Infrastructure</h1>
+    <p class="lede">Symmetric and asymmetric encryption, hashing and digital signatures; the public key infrastructure of certificates, authorities and revocation; and the practical solutions for data at rest, in transit and in use.</p>
+    <div class="pills">
+<span class="pill">3A</span><span class="pill">3B</span><span class="pill">3C</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-06-cryptography.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Explain symmetric encryption: one shared key, fast, suitable for bulk data, with a key-distribution problem; recognise AES and its 128, 192 and 256-bit key sizes.</li><li>Explain asymmetric encryption: public/private key pairs, with the public key easy to distribute and the private key secret; recognise RSA and ECC.</li><li>Explain key length and keyspace, and why longer keys resist brute force.</li><li>Describe hashing: one-way, fixed-length digests with anti-collision and avalanche properties, used for integrity and password storage (SHA-256 or better; MD5 and SHA-1 are broken).</li><li>Explain digital signatures: hashing plus the signer's private key, providing integrity, authentication and non-repudiation.</li><li>Describe PKI: certificate authorities, registration authorities, X.509 digital certificates, root of trust and chains.</li><li>Explain the certificate signing request flow and subject name attributes (CN versus SAN).</li><li>Describe certificate revocation via CRL and OCSP, and the certificate lifecycle.</li><li>Describe key management: lifecycle, TPM and HSM cryptoprocessors, and key escrow with M-of-N control.</li><li>Match cryptographic solutions to data states: at rest, in transit and in use.</li><li>Explain salting and key stretching, perfect forward secrecy, blockchain and obfuscation techniques (steganography, tokenisation, data masking, code obfuscation).</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-06-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>3A — Cryptographic algorithms</h3>
+<p>Symmetric: one key, fast, bulk data, distribution problem. AES is the standard, with 128, 192 or 256-bit keys. Asymmetric: key pairs, solves distribution, slower, small payloads. RSA rests on factoring difficulty; ECC reaches similar strength with smaller keys, ideal for mobile and IoT. Key length: longer keys, larger keyspace, stronger against brute force. Hashing: one-way, fixed length, anti-collision and avalanche — integrity, not secrecy; SHA-256 or better, as MD5 and SHA-1 are broken. Digital signatures: hash + private key, verified with public key — integrity, authentication, non-repudiation.</p>
+<h3>3B — Public key infrastructure</h3>
+<p>CAs issue X.509 certificates binding public keys to identities; RAs verify identities before issuance. Trust flows from self-signed roots through intermediate CAs to leaf certificates, and trusting the root vouches for the whole chain. CSRs carry the public key (never the private key). CN is legacy; SAN is modern. Revocation: CRL lists vs OCSP real-time queries, part of the lifecycle of issuance, renewal, revocation and expiration. Key management: lifecycle, TPM/HSM cryptoprocessors, escrow with M-of-N control.</p>
+<h3>3C — Cryptographic solutions</h3>
+<p>Data at rest: full disk, file and database encryption. Data in transit: transport encryption (TLS, VPN) with perfect forward secrecy — an asymmetric handshake exchanges a symmetric session key, and ephemeral keys protect past traffic. Data in use: processed in memory. Passwords: salt + key stretching. Blockchain: blocks chained by hashes, tamper-evident. Obfuscation: steganography (least significant bits of images), tokenisation, data masking, code obfuscation.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-05-threats.html">&#8592; Session 5</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-07-identity-access.html">Session 7 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

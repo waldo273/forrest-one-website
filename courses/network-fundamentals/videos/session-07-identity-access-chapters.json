@@ -1,0 +1,31 @@
+{
+  "session": 7,
+  "deck": "Identity & Access Management",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Authentication & the Factors",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Account Policies & Authorisation",
+      "start": 189.9
+    },
+    {
+      "num": 3,
+      "title": "Single Sign-On & Federation",
+      "start": 264.3
+    },
+    {
+      "num": 4,
+      "title": "Exam Alignment",
+      "start": 345.3
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 397.3
+    }
+  ]
+}

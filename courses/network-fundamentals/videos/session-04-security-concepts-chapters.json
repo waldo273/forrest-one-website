@@ -1,0 +1,31 @@
+{
+  "session": 4,
+  "deck": "Fundamental Security Concepts",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "The CIA Triad & Non-Repudiation",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Security Controls",
+      "start": 152.8
+    },
+    {
+      "num": 3,
+      "title": "Frameworks & Gap Analysis",
+      "start": 236.7
+    },
+    {
+      "num": 4,
+      "title": "Roles, Responsibilities & Principles",
+      "start": 303.4
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 396.1
+    }
+  ]
+}

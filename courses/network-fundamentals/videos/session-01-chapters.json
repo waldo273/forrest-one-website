@@ -1,0 +1,31 @@
+{
+  "session": 1,
+  "deck": "Network Foundations: Networking Models & IP Addressing",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Models & the Journey of Data",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "IPv4 Addressing & Subnetting",
+      "start": 133.1
+    },
+    {
+      "num": 3,
+      "title": "VLSM & Security Zones",
+      "start": 236.5
+    },
+    {
+      "num": 4,
+      "title": "IPv6 Addressing",
+      "start": 306.5
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 383.3
+    }
+  ]
+}

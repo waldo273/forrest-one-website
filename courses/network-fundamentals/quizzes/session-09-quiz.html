@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 9 Quiz</title>
+<style>
+:root{--red:#A81C1C;--red-d:#7F1414;--red-l:#C22828;--ink:#141414;--panel:#171717;
+--card:#1C1C1C;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#3A3A3A;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#F3D9D9}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#C62828;background:#331414}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#331414;border:1px solid #C62828;color:#F3D9D9}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#F0A5A5}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #262626 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <img src="data:image/png;base64,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" alt="MY CYBER ACADEMY" style="height:30px;"/>
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">MY CYBER ACADEMY</span>
+</div>
+
+<div id="start" class="card">
+  <div class="start-ico">&#129302;</div>
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 9 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Endpoint, Application, Cloud &amp; Virtualisation Security — interactive learning tool. Each question is linked to the syllabus domain and area it tests (e.g. 4.3 · Few-shot Prompting). Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 9 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "9A", "a": "Endpoint Security", "c": 2, "q": "Which endpoint control allows only approved software to run?", "o": ["Blocklisting", "Signature updates", "Allowlisting", "Port scanning"], "x": ["Blocklisting denies known bad software but misses unknowns.", "Signatures detect known malware; they do not gate execution.", "Allowlisting permits only approved software — unknown malware cannot run.", "Port scanning is reconnaissance, not a control."]}, {"d": "9A", "a": "Endpoint Security", "c": 0, "q": "A zero-day exploit evades the antivirus. Which additional control catches it?", "o": ["Behaviour-based EDR", "More signatures", "Faster scans", "Longer passwords overall"], "x": ["EDR behaviour monitoring catches unknown threats that signatures miss.", "A zero-day has no signature to add.", "Scan speed does not improve detection of unknowns.", "Passwords are an identity control, not malware detection."]}, {"d": "9A", "a": "Endpoint Security", "c": 3, "q": "Which MDM feature protects data if a device is lost or stolen?", "o": ["Screen brightness", "Remote wipe", "App icons", "Battery alerts"], "x": ["Cosmetic settings do not protect data.", "Remote wipe erases the device, protecting corporate data in transit or at rest.", "Icons are cosmetic.", "Battery alerts do not protect data."]}, {"d": "9A", "a": "Endpoint Security", "c": 1, "q": "A BYOD phone carries both personal apps and corporate mail. Which design separates them?", "o": ["One flat profile", "Containers", "Rooting the device", "Shared accounts"], "x": ["A flat profile mixes work and personal data.", "Containers isolate work data from personal apps on the same device.", "Rooting reduces security.", "Shared accounts are an identity anti-pattern."]}, {"d": "9A", "a": "Endpoint Security", "c": 2, "q": "Full disk encryption primarily protects:", "o": ["Network traffic", "CPU performance", "Data at rest", "User passwords"], "x": ["Network traffic is protected by TLS/IPsec.", "Encryption does not speed up the CPU.", "Full disk encryption keeps stored data unreadable without the key.", "Passwords are handled by the OS authentication layer."]}, {"d": "9B", "a": "Application Lifecycle", "c": 0, "q": "What does shift left mean in the SDLC?", "o": ["Security from the first design", "Security only at release overall", "Testing after deployment", "Patching after incidents"], "x": ["Shift left brings security into design and build, not the end.", "That is the old model shift left replaces.", "Shift left happens before deployment.", "Patching is reactive, not shift left."]}, {"d": "9B", "a": "Application Lifecycle", "c": 3, "q": "Which test analyses source code for vulnerabilities?", "o": ["DAST", "Penetration test", "Fuzzing", "SAST"], "x": ["DAST tests the running application.", "Penetration testing is black-box against a live system.", "Fuzzing feeds malformed input at runtime.", "SAST — static application security testing — analyses source code."]}, {"d": "9B", "a": "Application Lifecycle", "c": 1, "q": "DevSecOps embeds security into:", "o": ["The annual audit", "The CI/CD pipeline", "The help desk", "The marketing site overall"], "x": ["Audits are periodic, not continuous.", "DevSecOps runs security checks inside the CI/CD pipeline.", "The help desk handles incidents, not build security.", "Marketing is not a build pipeline."]}, {"d": "9C", "a": "Application Attacks", "c": 2, "q": "A login field accepts ' OR 1=1 — which attack is this?", "o": ["Cross-site scripting", "Buffer overflow", "SQL injection", "Directory traversal"], "x": ["XSS injects script into a browser, not a query.", "Buffer overflow overwrites memory, not queries.", "The input alters the SQL query — classic SQL injection.", "Traversal escapes the web root with dot-dot-slash."]}, {"d": "9C", "a": "Application Attacks", "c": 0, "q": "Which attack runs attacker script in another user's browser?", "o": ["XSS", "CSRF", "Race condition", "SQL injection"], "x": ["Cross-site scripting executes script in a victim's browser.", "CSRF forges an action on a session; it does not run script.", "Race conditions exploit timing gaps.", "Injection targets queries, not browsers."]}, {"d": "9C", "a": "Application Attacks", "c": 3, "q": "A forged request rides a logged-in user's session. Which attack?", "o": ["XSS", "Buffer overflow", "Phishing", "CSRF"], "x": ["XSS runs script; this is a forged action.", "Overflow targets memory.", "Phishing harvests credentials.", "CSRF — cross-site request forgery — uses the victim's session for a forged action."]}, {"d": "9C", "a": "Application Attacks", "c": 1, "q": "Which fix stops SQL injection at the source?", "o": ["Longer passwords", "Parameterised queries", "Faster hardware", "More verbose logging overall"], "x": ["Passwords do not sanitise input.", "Parameterised queries treat input as data, never as code.", "Speed does not fix the flaw.", "Logging records the attack; it does not stop it."]}, {"d": "9C", "a": "Application Attacks", "c": 2, "q": "Excess input overwrites adjacent memory. Which attack is this?", "o": ["Directory traversal", "Race condition", "Buffer overflow", "CSRF"], "x": ["Traversal escapes directories.", "Race conditions are timing flaws.", "Buffer overflow occurs when input exceeds the allocated buffer.", "CSRF forges session actions."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 3, "q": "In IaaS, who secures the guest operating system?", "o": ["The vendor only", "The cloud provider", "No one", "The customer"], "x": ["The vendor secures the infrastructure, not the guest.", "The provider owns the hypervisor and fabric.", "Someone always owns the guest.", "In IaaS the customer secures the guest OS, apps and data."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 0, "q": "Which service model places the least security burden on the customer?", "o": ["SaaS", "IaaS", "PaaS", "Private cloud"], "x": ["In SaaS the vendor secures nearly everything.", "IaaS leaves the guest to the customer.", "PaaS leaves apps and data to the customer.", "Deployment model does not change the service-model line."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 2, "q": "What is the number one cloud security risk?", "o": ["VM escape", "Misconfiguration", "Ransomware", "DDoS attacks"], "x": ["VM escape is rare and dramatic, not number one.", "Misconfiguration — open buckets, permissive policies — tops cloud incident causes.", "Ransomware is a consequence, not the leading cause.", "DDoS is a denial risk, not the top cause."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 1, "q": "Which tool brokers security policy between users and cloud services?", "o": ["WAF", "CASB", "NAC", "SIEM overall"], "x": ["A WAF protects web apps.", "A CASB — cloud access security broker — sits between users and cloud services.", "NAC checks endpoint posture on the network.", "SIEM aggregates logs."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 3, "q": "Why is the hypervisor a prime attack target?", "o": ["It runs the firewall", "It stores backups", "It issues certificates", "It separates every VM"], "x": ["Firewalls are separate appliances.", "Backups live elsewhere.", "Certificates come from a PKI.", "Compromise the hypervisor and you control every VM on it."]}, {"d": "9D", "a": "Cloud & Virtualisation", "c": 0, "q": "Containers share the host kernel. Which controls isolate them?", "o": ["Namespaces and seccomp", "Firewalls only", "Longer container names overall", "More CPU cores"], "x": ["Namespaces and seccomp constrain what a container can see and do.", "Firewalls filter traffic, not kernel access.", "Naming is cosmetic.", "Cores do not isolate containers."]}, {"d": "9A", "a": "Endpoint Security", "c": 2, "q": "Which practice hardens an endpoint against known vulnerabilities?", "o": ["Disabling updates", "Patch management", "Removing AV", "Shared admin accounts"], "x": ["Disabling updates leaves holes open.", "Patch management closes known vulnerabilities first.", "Removing AV removes a detection layer.", "Shared admin accounts widen the blast radius."]}];
+var order = [], idx = 0, score = 0;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    lab.onclick = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

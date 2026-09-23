@@ -1,0 +1,31 @@
+{
+  "session": 12,
+  "deck": "Governance, Risk, Compliance & Exam Consolidation",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "The Governance Stack",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Risk Management",
+      "start": 96.9
+    },
+    {
+      "num": 3,
+      "title": "Data Classification",
+      "start": 187.4
+    },
+    {
+      "num": 4,
+      "title": "Privacy Law & Sovereignty",
+      "start": 252.4
+    },
+    {
+      "num": 5,
+      "title": "Exam Consolidation",
+      "start": 300.9
+    }
+  ]
+}

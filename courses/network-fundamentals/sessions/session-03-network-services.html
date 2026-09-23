@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="The services that make IP networks usable — DNS, DHCP, NTP and SSH — and the attacks that target each: poisoning, rogue servers, amplification and brute force, with the Kali commands that verify them."/>
+  <title>Session 3: Network Services &amp; the Attack Surface, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 3</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 3 of 12</span>
+    <h1>Network Services &amp; the Attack Surface</h1>
+    <p class="lede">The services that make IP networks usable — DNS, DHCP, NTP and SSH — and the attacks that target each: poisoning, rogue servers, amplification and brute force, with the Kali commands that verify them.</p>
+    <div class="pills">
+<span class="pill">3A</span><span class="pill">3B</span><span class="pill">3C</span><span class="pill">3D</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-03-network-services.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Explain the DNS hierarchy: root, TLD, authoritative and recursive resolvers.</li><li>Name the common DNS record types and their purposes.</li><li>Describe DNS cache poisoning, tunnelling and amplification attacks, and the role of DNSSEC.</li><li>Explain the DHCP DORA process and the T1/T2 lease timers.</li><li>Describe rogue DHCP servers and DHCP starvation, and how DHCP snooping counters them.</li><li>Explain NTP's stratum hierarchy and why accurate time matters to forensics.</li><li>Describe NTP amplification and spoofing, and the mitigations.</li><li>Explain SSH's connection establishment and key-based authentication.</li><li>List the core SSH hardening settings.</li><li>Use dig, ntpq, ss and journalctl to verify services and read evidence on Kali Linux.</li><li>Explain how closing unused services and hardening reduce the attack surface.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-03-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>3A — DNS</h3>
+<p>DNS hierarchy: root, TLD, authoritative, recursive resolver. Record types: A, AAAA, CNAME, MX, NS, TXT, PTR. Attacks: cache poisoning (forged answers redirect users), tunnelling (data inside queries), amplification (spoofed small queries, huge responses). DNSSEC signs responses so forgery fails. Recursive resolvers should be restricted to internal clients — an open resolver is a public amplification tool that widens the attack surface. Distinguish spoofing (forging one reply) from poisoning (planting it in the cache for all users).</p>
+<h3>3B — DHCP</h3>
+<p>DORA: Discover, Offer, Request, Ack. T1 at 50% of lease triggers unicast renewal; T2 at 87.5% triggers broadcast rebind. Attacks: rogue servers assign malicious gateways/DNS (a man-in-the-middle chain); starvation exhausts the pool. Defence: DHCP snooping builds a MAC-to-IP-to-port binding table on the switch, and segmentation contains a rogue server to one segment.</p>
+<h3>3C — NTP</h3>
+<p>Stratum 0 atomic/GPS sources, stratum 1 servers, stratum 2 onward. UDP 123. Attacks: amplification via monlist (up to 100× response), spoofing to shift time. Mitigations: authenticated NTP (NTS), restricted access. Forensic rule: verify clock offset before acquiring evidence — minutes of offset corrupt timelines. Wrong clocks also break Kerberos ticket validation, so accurate time is infrastructure, not a convenience.</p>
+<h3>3D — SSH</h3>
+<p>TCP 22. Key exchange derives a shared session key without transmission. Key-based auth beats passwords — keys are never sent and resist brute force. Hardening: PermitRootLogin no, PasswordAuthentication no, LogLevel VERBOSE, AllowUsers, ClientAliveInterval. Verification: ss -tnp, journalctl -u ssh, grep sshd /var/log/auth.log. Hardening shrinks the attack surface: disabling password auth removes brute force as a threat class, and restricting users denies everyone else.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-02-switching-vlans.html">&#8592; Session 2</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-04-security-concepts.html">Session 4 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

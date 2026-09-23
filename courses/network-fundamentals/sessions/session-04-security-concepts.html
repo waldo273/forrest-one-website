@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="The foundational principles of information security: the CIA triad and non-repudiation, the AAA framework, security control categories and functional types, the NIST Cybersecurity Framework, gap analysis, and the roles and responsibilities that make security governance work."/>
+  <title>Session 4: Fundamental Security Concepts, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 4</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 4 of 12</span>
+    <h1>Fundamental Security Concepts</h1>
+    <p class="lede">The foundational principles of information security: the CIA triad and non-repudiation, the AAA framework, security control categories and functional types, the NIST Cybersecurity Framework, gap analysis, and the roles and responsibilities that make security governance work.</p>
+    <div class="pills">
+<span class="pill">1A</span><span class="pill">1B</span><span class="pill">1C</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-04-security-concepts.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Define confidentiality, integrity and availability, and give a real-world example control for each.</li><li>Explain non-repudiation and how digital signatures and logs provide it.</li><li>Describe the AAA framework: identification, authentication, authorisation and accounting.</li><li>Classify security controls by category (managerial, operational, technical, physical).</li><li>Classify security controls by functional type (preventive, detective, corrective, directive, deterrent, compensating).</li><li>Describe the NIST Cybersecurity Framework functions: identify, protect, detect, respond, recover.</li><li>Explain what a gap analysis measures and why it is valuable.</li><li>Name the key security roles and their responsibilities: CISO/CSO, ISSO, data owner, data custodian, analyst, auditor.</li><li>Explain defence in depth, least privilege, separation of duties, and zero trust.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-04-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>1A — Security concepts</h3>
+<p>The CIA triad is the foundation: confidentiality (read only by authorised persons), integrity (data stored and transferred as intended), availability (accessible when needed). Each pillar has distinct threats and controls: confidentiality is threatened by interception and data theft, protected by encryption and access controls; integrity by unauthorised tampering, protected by hashing and digital signatures; availability by denial of service and hardware failure, protected by redundancy, backups and failover. Non-repudiation adds proof of origin and action via digital signatures and audit logs. The AAA framework sequences access: identify, authenticate, authorise, account — authentication rests on three factors (something you know, have, or are). The NIST CSF functions — identify, protect, detect, respond, recover — structure a whole programme, and gap analysis scores maturity against it.</p>
+<h3>1B — Security controls</h3>
+<p>Controls are classified on two axes. Category: managerial (policies and risk assessments), operational (guard patrols, incident response), technical (firewalls, ACLs, IDS, encryption), physical (locks, fences, cameras, mantraps). Functional type: preventive (blocks before — firewalls, access controls), detective (finds during — IDS, log monitoring), corrective (fixes after — patching, restore), directive (guides behaviour — acceptable use policies), deterrent (discourages — warning banners, visible cameras), compensating (substitutes when a primary control is not feasible — enhanced logging in place of encryption).</p>
+<h3>1C — Roles &amp; principles</h3>
+<p>CISO/CSO owns strategy; ISSO manages day-to-day; data owner is accountable; custodian implements; analyst monitors and responds; auditor verifies independently. Principles: defence in depth (layered controls so no single point of failure), least privilege (only the access needed), separation of duties (no one person controls a critical process alone), zero trust (never trust, always verify; microsegmentation and continuous verification; a design principle, not a product).</p>
+<h3>Memory aids</h3>
+<ul><li>CIA — Read, Unchanged, Accessible: confidentiality is the read side, integrity the change side, availability the access side.</li><li>AAA — I A A A: the user is identified, then authenticated, then authorised, then accounted.</li><li>Controls on two axes: category asks who or what (managerial, operational, technical, physical); type asks when and how it acts (preventive to compensating).</li><li>Non-repudiation means deniable, no: signatures and logs make denial fail.</li><li>Zero trust — never trust, always verify: a design principle, not a product.</li></ul>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-03-network-services.html">&#8592; Session 3</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-05-threats.html">Session 5 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

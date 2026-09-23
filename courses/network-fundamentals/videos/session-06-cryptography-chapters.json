@@ -1,0 +1,31 @@
+{
+  "session": 6,
+  "deck": "Cryptography & Public Key Infrastructure",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "The Lock and Key of the Digital World",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Public Key Infrastructure",
+      "start": 164.9
+    },
+    {
+      "num": 3,
+      "title": "Cryptographic Solutions",
+      "start": 311.1
+    },
+    {
+      "num": 4,
+      "title": "Exam Alignment",
+      "start": 443.3
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 498.2
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "session": 3,
+  "deck": "Network Services & the Attack Surface",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "The Services & the Attack Surface",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "DNS \u2014 the Internet's Directory",
+      "start": 66.9
+    },
+    {
+      "num": 3,
+      "title": "DHCP \u2014 Automatic Addressing",
+      "start": 148.1
+    },
+    {
+      "num": 4,
+      "title": "NTP & SSH \u2014 Time and the Doorway",
+      "start": 203.5
+    },
+    {
+      "num": 5,
+      "title": "Verification & Consolidation",
+      "start": 300.4
+    }
+  ]
+}

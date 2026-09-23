@@ -1,0 +1,31 @@
+{
+  "session": 9,
+  "deck": "Endpoint, Application, Cloud & Virtualisation Security",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Endpoint Security",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "The Application Lifecycle",
+      "start": 182.6
+    },
+    {
+      "num": 3,
+      "title": "Application Attacks",
+      "start": 239.0
+    },
+    {
+      "num": 4,
+      "title": "Cloud & Virtualisation",
+      "start": 331.0
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 416.3
+    }
+  ]
+}

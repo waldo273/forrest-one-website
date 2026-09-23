@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Layer 2 in action: MAC addresses and switch forwarding, VLAN segmentation and 802.1Q trunking, Spanning Tree loop prevention — the mechanisms that carry traffic and the controls that keep segments apart."/>
+  <title>Session 2: Switching, VLANs &amp; Network Architectures, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 2</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 2 of 12</span>
+    <h1>Switching, VLANs &amp; Network Architectures</h1>
+    <p class="lede">Layer 2 in action: MAC addresses and switch forwarding, VLAN segmentation and 802.1Q trunking, Spanning Tree loop prevention — the mechanisms that carry traffic and the controls that keep segments apart.</p>
+    <div class="pills">
+<span class="pill">2A</span><span class="pill">2B</span><span class="pill">2C</span><span class="pill">2D</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-02-switching-vlans.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Explain why switches forward frames rather than packets, and name the PDU at layer 2.</li><li>Describe the structure of a MAC address, including the OUI and its forensic value.</li><li>Explain the learn, look up, forward and flood behaviour of a switch forwarding table.</li><li>Describe VLANs and their security purposes, including guest isolation, blast-radius containment and limiting lateral movement.</li><li>Explain 802.1Q tagging, trunk ports and access ports, and the VLAN hopping attacks that target native VLAN misconfiguration.</li><li>Explain the native VLAN risk and best-practice mitigations: move VLAN 1, prune unused VLANs and restrict trunk allowed lists.</li><li>Describe the switching-loop problem and how STP solves it.</li><li>Explain root bridge election, root ports and STP port states.</li><li>Describe STP attacks and the defensive features BPDU Guard, Root Guard and port security.</li><li>Map network segments to security zones, including the DMZ concept with external and internal firewalls, and explain microsegmentation.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-02-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>2A — Layer 2 switching</h3>
+<p>Switches forward frames at layer 2 using MAC addresses. On receipt: learn the source MAC and port, look up the destination, forward to the matching port — or flood if unknown. Broadcasts always flood. CAM-table overflow (MAC flooding) degrades a switch into hub mode, letting an attacker see all frames on the segment.</p>
+<h3>2B — VLANs &amp; trunking</h3>
+<p>VLANs segment one physical switch into logical broadcast domains — the core containment control. Trunk ports carry tagged frames between switches via 802.1Q; access ports carry one untagged VLAN. Segmentation reduces the attack surface, contains blast radius and blocks lateral movement. The default native VLAN (VLAN 1) is an attack surface — change it, prune unused VLANs and restrict trunk allowed lists. VLAN hopping crosses boundaries by switch spoofing (negotiating a trunk) or double tagging (native VLAN spoof). Microsegmentation takes this further, isolating individual workloads via SDN.</p>
+<h3>2C — Spanning Tree</h3>
+<p>Redundant links create loops; STP blocks redundant ports for a loop-free topology. The root bridge is the lowest bridge ID; each non-root switch picks the lowest-cost root port. Ports are blocking, listening, learning, forwarding or disabled. RSTP (802.1w) converges in seconds. BPDU Guard and Root Guard stop rogue-root attacks, and port security limits MACs per port.</p>
+<h3>2D — Architectures</h3>
+<p>Segments become security zones: DMZ for public services, bracketed by external and internal firewalls with a proxy between; management isolated; workstations separate from servers; unmanaged IoT devices on their own segment. A campus has access, distribution and core layers. Segmentation limits blast radius and blocks lateral movement — containment is an architectural control that the exam treats across Domain 3 and Domain 4.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-01-network-foundations.html">&#8592; Session 1</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-03-network-services.html">Session 3 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "session": 5,
+  "deck": "Threats, Attack Types & Threat Actors",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Know the Adversary",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "The Attack Surface",
+      "start": 203.0
+    },
+    {
+      "num": 3,
+      "title": "The Attack Chain",
+      "start": 311.0
+    },
+    {
+      "num": 4,
+      "title": "Exam Alignment",
+      "start": 359.4
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 402.2
+    }
+  ]
+}

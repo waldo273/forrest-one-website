@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="The language of networks: the OSI and TCP/IP models, encapsulation and port addressing, then the IPv4/IPv6 addressing engine — CIDR, subnetting, VLSM — that security controls such as firewalls, ACLs and segmentation rely on."/>
+  <title>Session 1: Network Foundations: Networking Models &amp; IP Addressing, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 1</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 1 of 12</span>
+    <h1>Network Foundations: Networking Models &amp; IP Addressing</h1>
+    <p class="lede">The language of networks: the OSI and TCP/IP models, encapsulation and port addressing, then the IPv4/IPv6 addressing engine — CIDR, subnetting, VLSM — that security controls such as firewalls, ACLs and segmentation rely on.</p>
+    <div class="pills">
+<span class="pill">1A</span><span class="pill">1B</span><span class="pill">1C</span><span class="pill">1D</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-01-network-foundations.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Name the seven OSI layers and state the role and a representative protocol for each.</li><li>Map the four-layer TCP/IP stack onto the OSI model.</li><li>Describe encapsulation and name the PDU at each layer (segment, packet, frame).</li><li>State the purpose of port, IP and MAC addressing and where each is used.</li><li>Explain IPv4 address structure, including the network/host split and subnet masks.</li><li>Describe classful addressing and why CIDR replaced it.</li><li>Calculate subnet counts and usable hosts using 2^n and 2^h − 2.</li><li>Design a VLSM scheme, allocating largest requirements first without overlap.</li><li>Explain how subnet segmentation acts as a security control by limiting the attack surface and lateral movement.</li><li>Write and shorten IPv6 addresses using the two shorthand rules.</li><li>Distinguish global unicast, link-local, unique local and multicast IPv6 addresses.</li><li>Explain the security risk of dual-stack operation.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-01-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>1A — Network models</h3>
+<p>The OSI model's seven layers are the exam's reference grid: application (7), presentation (6), session (5), transport (4), network (3), data link (2), physical (1). The TCP/IP stack condenses these to four: application (OSI 5–7), transport (4), internet (3), network access (1–2). Encapsulation builds the PDU — data becomes a segment (transport header + port), a packet (IP header), then a frame (Ethernet header + MACs). Firewalls read layer 3/4 fields; WAFs work at layer 7.</p>
+<h3>1B — IPv4 addressing</h3>
+<p>An IPv4 address is 32 bits in four octets, split into network and host portions by the mask. Classful addressing (A–E) wasted space; CIDR lets the boundary fall anywhere. Two formulas carry subnetting: subnets = 2^n (n = borrowed bits); usable hosts = 2^h − 2 (h = host bits). The network and broadcast addresses are never assignable.</p>
+<h3>1C — VLSM</h3>
+<p>VLSM uses different masks inside one network to match real requirements. Always allocate the largest requirement first, and never overlap. In security terms, each subnet becomes a zone: DMZ, internal servers, management, workstations. Segmentation is the blast-radius control: it limits lateral movement, so a compromised workstation cannot reach the server subnet. A DMZ is a buffer between the internal network and the internet, holding only public-facing services and firewalled on both sides. Network attacks such as VLAN hopping and on-path attacks succeed only when this segmentation fails, so an unbroken zone design is itself a defence.</p>
+<h3>1D — IPv6</h3>
+<p>IPv6 is 128 bits in eight hex groups. Shorten by dropping leading zeros and using one double colon for a contiguous zero run. Address types: global unicast (2000::/3), link-local (fe80::/10), unique local (fc00::/7), multicast (ff00::/8). There is no broadcast. Dual-stack operation, running IPv4 and IPv6 together, enlarges the attack surface, because every additional entry point is a way in for an attacker. IPv6 traffic can bypass IPv4-only ACLs, so filter both families.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-02-switching-vlans.html">Session 2 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

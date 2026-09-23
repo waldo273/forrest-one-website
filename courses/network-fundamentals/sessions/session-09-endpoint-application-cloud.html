@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Hardening the hosts, securing the code and defending the shared estate: endpoint protection and management, the SDLC and secure coding, application attacks, and cloud and virtualisation security with shared responsibility."/>
+  <title>Session 9: Endpoint, Application, Cloud &amp; Virtualisation Security, Network Fundamentals, Course Pack</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="../assets/css/app.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+<li><a href="../quizzes.html">Quizzes</a></li>
+<li><a href="../final-exam.html">Final Exam</a></li>
+<li><a href="../notes.html">Student Notes</a></li>
+<li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 9</li></ol></nav>
+  <section class="hero">
+    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 9 of 12</span>
+    <h1>Endpoint, Application, Cloud &amp; Virtualisation Security</h1>
+    <p class="lede">Hardening the hosts, securing the code and defending the shared estate: endpoint protection and management, the SDLC and secure coding, application attacks, and cloud and virtualisation security with shared responsibility.</p>
+    <div class="pills">
+<span class="pill">9A</span><span class="pill">9B</span><span class="pill">9C</span><span class="pill">9D</span>
+    </div>
+  </section>
+  <h2 id="video">Session video</h2>
+  <p class="sub">Narrated walkthrough of this session.</p>
+  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
+    <source src="../videos/session-09-endpoint-application-cloud.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+  </video>
+
+  <h2 id="outcomes">Learning outcomes</h2>
+  <p class="sub">By the end of this session, candidates will be able to:</p>
+  <div class="aims">
+    <ul>
+<li>Describe the endpoint protection stack: AV/EDR, hardening, patching and application control.</li><li>Explain allowlisting versus blocklisting and why allowlisting wins.</li><li>Describe MDM, BYOD models and mobile threats, including remote wipe and containerisation.</li><li>Explain OS security controls: least privilege, secure boot, full disk encryption.</li><li>Describe security in the SDLC: shift left, threat modelling, code review, SAST/DAST.</li><li>Explain DevSecOps and the CI/CD security pipeline.</li><li>Describe SQL injection, XSS, CSRF, buffer overflow, directory traversal and race conditions, and their fixes.</li><li>Explain cloud deployment and service models: IaaS, PaaS, SaaS and public/private/hybrid.</li><li>Explain the shared responsibility model and where the line falls for each service model.</li><li>Describe cloud risks, especially misconfiguration, and the tools that manage them (CASB, posture management).</li><li>Explain virtualisation security: hypervisor attacks, VM escape and container isolation.</li>
+    </ul>
+  </div>
+  <h2 id="resources">Section resources</h2>
+  <p class="sub">One section quiz for this session.</p>
+<ul class="reslist">
+      <li><a class="resbtn" href="../quizzes/session-09-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+    </ul>
+
+  <h2 id="areas">What this session is about</h2>
+  <p class="sub">What this session covers, with teaching notes area by area.</p>
+  <div class="teachnotes">
+<h3>9A — Endpoint security</h3>
+<p>The endpoint stack: AV/EDR (signature plus behaviour), hardening (baseline from CIS benchmarks or vendor guides, patching, disable unused services, ports and default accounts), application control (allowlisting over blocklisting, backed by code signing), MDM (enrol, configure, enforce, wipe) with application vetting and containers for BYOD, and OS controls, least privilege, secure boot, full disk encryption and firmware updates.</p>
+<h3>9B — Application lifecycle</h3>
+<p>Shift left: threat modelling before code, code review at every change, SAST for source and DAST for running apps. Secure coding keeps the code at least privilege, hides errors, and validates all input by whitelisting, sanitisation and boundary checks. DevSecOps puts security in the CI/CD pipeline and scans infrastructure as code, so secure code ships as fast as insecure code.</p>
+<h3>9C — Application attacks</h3>
+<p>SQL injection: input treated as code, fix with parameterised queries and input validation. XSS: script in another user's browser, fix with output encoding; a Web Application Firewall filters web traffic. CSRF: forged action on a session, fix with tokens and same-site cookies. Also buffer overflow, directory traversal and race conditions, mitigated by input validation, least privilege and sandboxing.</p>
+<h3>9D — Cloud &amp; virtualisation</h3>
+<p>Service models: IaaS (you secure everything above the hypervisor), PaaS (you secure the app and its data), SaaS (the vendor secures nearly everything). Deployment models, public, private, hybrid and community, shift the line. Shared responsibility: vendor secures the cloud, you secure what is in it. Misconfiguration is the top cloud risk, managed with CASB and posture management. Virtualisation: the hypervisor is the crown jewel, Type 1 beats Type 2, VM escape is the nightmare, containers share the kernel and need namespaces and seccomp.</p>
+  </div>
+  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-08-enterprise-network-security.html">&#8592; Session 8</a> <a class="navbtn" href="../sessions.html">Sessions</a> <a class="navbtn" href="session-10-vulnerability-management.html">Session 10 &#8594;</a></nav>
+
+</main>
+
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/app.js"></script>
+<footer role="contentinfo">
+  <div class="fwrap">
+    <p>© 2026 Billy Forrest</p>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
+    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+  </div>
+</footer>
+</body>
+</html>

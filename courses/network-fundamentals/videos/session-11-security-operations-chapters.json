@@ -1,0 +1,31 @@
+{
+  "session": 11,
+  "deck": "Security Operations: Monitoring, Incident Response & Forensics",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Monitoring & the IR Lifecycle",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Digital Forensics",
+      "start": 171.1
+    },
+    {
+      "num": 3,
+      "title": "Indicators of Malicious Activity",
+      "start": 290.6
+    },
+    {
+      "num": 4,
+      "title": "Exam Alignment",
+      "start": 382.5
+    },
+    {
+      "num": 5,
+      "title": "Consolidation",
+      "start": 429.9
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "session": 8,
+  "deck": "Enterprise Network Security: Firewalls, IDS, IPS, VPNs & Secure Protocols",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Architecture & Segmentation",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "Secure Remote Access",
+      "start": 215.7
+    },
+    {
+      "num": 3,
+      "title": "The Secure Protocol Toolkit",
+      "start": 311.3
+    },
+    {
+      "num": 4,
+      "title": "Consolidation",
+      "start": 397.7
+    }
+  ]
+}

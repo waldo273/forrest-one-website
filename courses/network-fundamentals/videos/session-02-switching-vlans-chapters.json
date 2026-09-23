@@ -1,0 +1,26 @@
+{
+  "session": 2,
+  "deck": "Switching, VLANs & Network Architectures",
+  "chapters": [
+    {
+      "num": 1,
+      "title": "Layer 2 Switching",
+      "start": 0.0
+    },
+    {
+      "num": 2,
+      "title": "VLANs & Trunking",
+      "start": 135.7
+    },
+    {
+      "num": 3,
+      "title": "Spanning Tree",
+      "start": 877.8
+    },
+    {
+      "num": 4,
+      "title": "Architectures & Consolidation",
+      "start": 971.8
+    }
+  ]
+}
