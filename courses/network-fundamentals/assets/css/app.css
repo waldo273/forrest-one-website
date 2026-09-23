@@ -95,3 +95,14 @@ nav.pager a.navbtn { display: inline-block; background: #A81C1C; color: #fff;
   font-weight: bold; text-decoration: none; padding: 7px 13px; border-radius: 7px;
   font-size: 0.78rem; box-shadow: 0 1px 4px rgba(0,43,92,0.2); }
 nav.pager a.navbtn:active { background: #141414; }
+
+/* ---------- dark mode fixes: glossary/notes text was unreadable -------- */
+/* The term in each definition was hardcoded #141414 (near-black) and the
+   session chip a hardcoded #F3F4F6 — both unreadable on the dark bg. */
+html[data-theme="dark"] .defs p.def strong { color: var(--ink); }
+html[data-theme="dark"] .defs span.area { background: var(--tint); color: var(--accent); }
+html[data-theme="dark"] dl.kv dt { color: var(--ink); }
+html[data-theme="dark"] dl.kv dd { border-left-color: var(--line); }
+html[data-theme="dark"] a.card:active, html[data-theme="dark"] a.card.flash {
+  background: var(--tint) !important; box-shadow: inset 0 0 0 2px var(--accent);
+}
