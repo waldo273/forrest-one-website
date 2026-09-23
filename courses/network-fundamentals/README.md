@@ -69,6 +69,6 @@ from the Sec+revised content modules at `~/Documents/Hermes/Sec+revised/_build/s
 
 ## Notes
 
-- Vendor-neutral. This is an independent training pack, not an official CompTIA
+- Vendor-neutral. This is an independent revision pack, not an official CompTIA
   publication, and it is not endorsed by CompTIA.
 - Footer branding: `© Billy Forrest`.

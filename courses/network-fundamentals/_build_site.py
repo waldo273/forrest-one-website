@@ -133,7 +133,10 @@ NAV = [
     ("glossary.html", "Glossary"),
 ]
 
-def shell(page, title, desc, current, body, rel=""):
+def shell(page, title, desc, current, body, rel="", back=""):
+    backbtn = ""
+    if back:
+        backbtn = '<p class="backrow"><a class="backbtn" href="%s">&#8592; Back to course</a></p>\n\n' % back
     nav = []
     for href, label in NAV:
         cur = ' aria-current="page"' if href == current else ""
@@ -171,7 +174,7 @@ def shell(page, title, desc, current, body, rel=""):
 </header>
 
 <main id="main">
-{body}
+{backbtn}{body}
 </main>
 
 <script src="{rel}assets/js/site.js"></script>
@@ -180,7 +183,7 @@ def shell(page, title, desc, current, body, rel=""):
   <div class="fwrap">
     <p>{FOOTER}</p>
     <p><strong>{COURSE_FULL}.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
-    <p>Training material is original and vendor-neutral. This is an independent training pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+    <p>Training material is original and vendor-neutral. This is an independent revision pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
   </div>
 </footer>
 </body>
@@ -192,7 +195,7 @@ def build_index():
     body = f"""
   <section class="hero">
     <h1>{COURSE}, Course Pack</h1>
-    <p class="lede">A complete training pack for the {COURSE_FULL} course. Twelve sessions, section quizzes, the twelve session videos and a practice paper.</p>
+    <p class="lede">A complete revision pack for the {COURSE_FULL} course. Twelve sessions, section quizzes, the twelve session videos and a practice paper.</p>
     <div class="pills">
       <span class="pill">12 Sessions</span>
       <span class="pill">Network foundation + Security+ core</span>
@@ -216,7 +219,7 @@ def build_index():
   </div>
 """
     return shell("index.html", f"{COURSE}, Course Pack",
-                 f"Complete training pack for the {COURSE_FULL} course: twelve sessions, section quizzes and a practice paper.",
+                 f"Complete revision pack for the {COURSE_FULL} course: twelve sessions, section quizzes and a practice paper.",
                  "index.html", body)
 
 def build_sessions():
@@ -252,7 +255,7 @@ def build_sessions():
   </div>"""
     return shell("sessions.html", "The Twelve Sessions, " + COURSE + ", Course Pack",
                  "All twelve sessions of the Network Fundamentals + Security+ course with their areas, learning outcomes and resources.",
-                 "sessions.html", body)
+                 "sessions.html", body, back="index.html")
 
 def build_session_page(s):
     mod = load_module(s["n"])
@@ -308,7 +311,7 @@ def build_session_page(s):
 """
     return shell("sessions/%s.html" % s["slug"],
                  "Session %d: %s, %s, Course Pack" % (s["n"], s["title"], COURSE),
-                 mod.SUBTITLE, "sessions.html", body, rel="../")
+                 mod.SUBTITLE, "sessions.html", body, rel="../", back="../index.html")
 
 def build_quizzes():
     cards = []
@@ -337,7 +340,7 @@ def build_quizzes():
   </div>"""
     return shell("quizzes.html", "Section Quizzes, " + COURSE + ", Course Pack",
                  "One interactive quiz per session of the Network Fundamentals + Security+ course.",
-                 "quizzes.html", body)
+                 "quizzes.html", body, back="index.html")
 
 def build_notes():
     sections = []
@@ -366,7 +369,7 @@ def build_notes():
   </div>"""
     return shell("notes.html", "Student Notes, " + COURSE + ", Course Pack",
                  "Full student notes for all twelve sessions of the Network Fundamentals + Security+ course.",
-                 "notes.html", body)
+                 "notes.html", body, back="index.html")
 
 def build_glossary():
     terms = []
@@ -391,7 +394,7 @@ def build_glossary():
   </div>"""
     return shell("glossary.html", "Glossary, " + COURSE + ", Course Pack",
                  "Key terms from the Network Fundamentals + Security+ course with the session where each is introduced.",
-                 "glossary.html", body)
+                 "glossary.html", body, back="index.html")
 
 def build_final_exam():
     body = f"""
@@ -413,7 +416,7 @@ def build_final_exam():
   </p>"""
     return shell("final-exam.html", "Final Exam, " + COURSE + ", Course Pack",
                  "Practice paper for the Network Fundamentals + Security+ course.",
-                 "final-exam.html", body)
+                 "final-exam.html", body, back="index.html")
 
 # ---------------------------------------------------------------- build
 def copy_quizzes():
