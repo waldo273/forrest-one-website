@@ -68,9 +68,9 @@ dl.kv { margin:0 0 1em; padding:0; }
 dl.kv dt { font-weight:bold; color:#141414; margin:0.7em 0 0.1em; }
 dl.kv dd { margin:0 0 0.3em; padding-left:0.9em; border-left:3px solid #c9d4e0; }
 .defs { margin:0 0 1em; }
-.defs p.def { margin:0 0 0.75em; }
-.defs p.def strong { color:#141414; }
-.defs span.area { display:inline-block; background:#F3F4F6; color:#A81C1C;
+.defs p.def { margin:0 0 0.75em; color: var(--ink); }
+.defs p.def strong { color: var(--navy); }
+.defs span.area { display:inline-block; background: var(--tint); color: var(--accent);
   border-radius:10px; padding:0 8px; font-size:0.8rem; font-weight:bold; margin-right:4px; }
 .tblprose { margin:0 0 1em; }
 .tblprose p { margin:0 0 0.7em; }

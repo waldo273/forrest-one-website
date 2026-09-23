@@ -147,7 +147,7 @@ def shell(page, title, desc, current, body, rel=""):
   <title>{esc(title)}</title>
   <link rel="icon" type="image/svg+xml" href="{rel}assets/favicon.svg"/>
   <link rel="stylesheet" href="{rel}assets/css/style.css"/>
-  <link rel="stylesheet" href="{rel}assets/css/app.css"/>
+  <link rel="stylesheet" href="{rel}assets/css/app.css?v=2"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
