@@ -137,7 +137,7 @@ def shell(page, title, desc, current, body, rel=""):
     nav = ['<li><a href="/courses/">Courses</a></li>']
     for href, label in NAV:
         cur = ' aria-current="page"' if href == current else ""
-        nav.append('<li><a href="%s%s"%s>%s</a></li>' % (rel, href, cur, label))
+        nav.append('<li><a href="%s%s"%s>%s</a></li>' % (rel, href.replace('.html',''), cur, label))
     return f"""<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -157,7 +157,7 @@ def shell(page, title, desc, current, body, rel=""):
     <div class="brandrow">
       <div class="brand">
         <p class="kicker">{KICKER}</p>
-        <p class="sitebrand"><a href="{rel}index.html">{COURSE}</a></p>
+        <p class="sitebrand"><a href="{rel}index">{COURSE}</a></p>
       </div>
       <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
     </div>
@@ -203,8 +203,8 @@ def build_index():
   <h2 id="start">Start here</h2>
   <p class="sub">Everything you need, in the order you need it.</p>
   <p>
-    <a class="cta" href="sessions.html">Explore the twelve sessions</a>
-    <a class="cta ghost" href="quizzes.html">Take a section quiz</a>
+    <a class="cta" href="sessions">Explore the twelve sessions</a>
+    <a class="cta ghost" href="quizzes">Take a section quiz</a>
   </p>
 
   <div class="note">
@@ -226,7 +226,7 @@ def build_sessions():
         areas = session_areas(mod)
         area_list = "".join("<li>%s &mdash; %s</li>" % (esc(a[0]), esc(a[1])) for a in areas)
         cards.append(f"""
-    <a class="card" href="sessions/{s['slug']}.html">
+    <a class="card" href="sessions/{s['slug']}">
       <span class="weight">Session {s['n']}</span>
       <h2>{esc(s['title'])}</h2>
       <p>{esc(mod.SUBTITLE)}</p>
@@ -265,12 +265,12 @@ def build_session_page(s):
     nxt = SESSIONS[s["n"]] if s["n"] < 12 else None
     pager = []
     if prev:
-        pager.append('<a class="navbtn" href="%s.html">&#8592; Session %d</a>' % (prev["slug"], prev["n"]))
-    pager.append('<a class="navbtn" href="../sessions.html">Sessions</a>')
+        pager.append('<a class="navbtn" href="%s">&#8592; Session %d</a>' % (prev["slug"], prev["n"]))
+    pager.append('<a class="navbtn" href="../sessions">Sessions</a>')
     if nxt:
-        pager.append('<a class="navbtn" href="%s.html">Session %d &#8594;</a>' % (nxt["slug"], nxt["n"]))
+        pager.append('<a class="navbtn" href="%s">Session %d &#8594;</a>' % (nxt["slug"], nxt["n"]))
     body = f"""
-<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session {s['n']}</li></ol></nav>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index">Home</a></li><li><a href="../sessions">Sessions</a></li><li aria-current="page">Session {s['n']}</li></ol></nav>
   <section class="hero">
     <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session {s['n']} of 12</span>
     <h1>{esc(s['title'])}</h1>
@@ -296,7 +296,7 @@ def build_session_page(s):
   <h2 id="resources">Section resources</h2>
   <p class="sub">One section quiz for this session.</p>
 <ul class="reslist">
-      <li><a class="resbtn" href="../quizzes/session-{s['n']:02d}-quiz.html"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+      <li><a class="resbtn" href="../quizzes/session-{s['n']:02d}-quiz"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
     </ul>
 
   <h2 id="areas">What this session is about</h2>
@@ -314,7 +314,7 @@ def build_quizzes():
     cards = []
     for s in SESSIONS:
         cards.append(f"""
-    <a class="card" href="quizzes/session-{s['n']:02d}-quiz.html">
+    <a class="card" href="quizzes/session-{s['n']:02d}-quiz">
       <span class="weight">Session {s['n']}</span>
       <h2>{esc(s['title'])}</h2>
       <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
@@ -408,8 +408,8 @@ def build_final_exam():
   </div>
 
   <p>
-    <a class="cta" href="quizzes/session-01-quiz.html">Start with Session 1</a>
-    <a class="cta ghost" href="sessions.html">Review the sessions</a>
+    <a class="cta" href="quizzes/session-01-quiz">Start with Session 1</a>
+    <a class="cta ghost" href="sessions">Review the sessions</a>
   </p>"""
     return shell("final-exam.html", "Final Exam, " + COURSE + ", Course Pack",
                  "Practice paper for the Network Fundamentals + Security+ course.",
