@@ -65,12 +65,12 @@ a.card { transition: background .08s ease; }
 
 /* Text-block replacements for tables (mobile-first, never overflow) */
 dl.kv { margin:0 0 1em; padding:0; }
-dl.kv dt { font-weight:bold; color:#002b5c; margin:0.7em 0 0.1em; }
-dl.kv dd { margin:0 0 0.3em; padding-left:0.9em; border-left:3px solid #c9d4e0; }
+dl.kv dt { font-weight:bold; color: var(--navy); margin:0.7em 0 0.1em; }
+dl.kv dd { margin:0 0 0.3em; padding-left:0.9em; border-left:3px solid var(--line); }
 .defs { margin:0 0 1em; }
-.defs p.def { margin:0 0 0.75em; }
-.defs p.def strong { color:#002b5c; }
-.defs span.area { display:inline-block; background:#eef3fa; color:#2f6fb5;
+.defs p.def { margin:0 0 0.75em; color: var(--ink); }
+.defs p.def strong { color: var(--navy); }
+.defs span.area { display:inline-block; background: var(--tint); color: var(--accent);
   border-radius:10px; padding:0 8px; font-size:0.8rem; font-weight:bold; margin-right:4px; }
 .tblprose { margin:0 0 1em; }
 .tblprose p { margin:0 0 0.7em; }
@@ -95,3 +95,9 @@ nav.pager a.navbtn { display: inline-block; background: #2f6fb5; color: #fff;
   font-weight: bold; text-decoration: none; padding: 7px 13px; border-radius: 7px;
   font-size: 0.78rem; box-shadow: 0 1px 4px rgba(0,43,92,0.2); }
 nav.pager a.navbtn:active { background: #002b5c; }
+
+/* ---------- dark mode fixes: glossary/notes text was unreadable -------- */
+html[data-theme="dark"] .defs p.def strong { color: var(--ink); }
+html[data-theme="dark"] .defs span.area { background: var(--tint); color: var(--accent); }
+html[data-theme="dark"] dl.kv dt { color: var(--ink); }
+html[data-theme="dark"] dl.kv dd { border-left-color: var(--line); }
