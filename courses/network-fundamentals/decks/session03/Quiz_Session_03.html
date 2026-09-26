@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 3 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 3 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Network Services &amp; the Attack Surface — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 3 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "3A", "a": "DNS", "c": 0, "q": "Which DNS record maps a name to an IPv4 address?", "o": ["A", "AAAA", "CNAME", "MX"], "x": ["An A record maps a name to an IPv4 address.", "AAAA maps to IPv6.", "CNAME is an alias for another name.", "MX names the mail exchange server."]}, {"d": "3A", "a": "DNS", "c": 1, "q": "What is the role of a recursive resolver?", "o": ["It hosts the domain's records", "It queries on behalf of clients", "It signs DNS responses", "It assigns IP addresses to hosts"], "x": ["The authoritative server hosts the records.", "A recursive resolver queries the hierarchy on behalf of clients and caches results.", "DNSSEC signing is separate from resolution.", "DHCP assigns leases."]}, {"d": "3A", "a": "DNS", "c": 3, "q": "Which attack inserts forged DNS responses into a resolver's cache?", "o": ["Amplification attack", "Tunnelling", "Starvation", "Cache poisoning"], "x": ["Amplification uses small queries to draw large responses.", "Tunnelling exfiltrates data inside queries.", "Starvation exhausts DHCP pools, not DNS caches.", "Cache poisoning redirects every client that asks the poisoned resolver."]}, {"d": "3A", "a": "DNS", "c": 2, "q": "What does DNSSEC add to DNS responses?", "o": ["Faster name resolution", "Address compression", "Cryptographic signatures", "Encrypted payloads in transit"], "x": ["DNSSEC does not speed up resolution.", "Compression is a message format feature, not security.", "DNSSEC signs responses so forged answers fail validation.", "DNSSEC authenticates; it does not encrypt the payload."]}, {"d": "3A", "a": "DNS", "c": 0, "q": "Which record type carries SPF and DKIM data?", "o": ["TXT", "PTR overall", "NS", "MX"], "x": ["TXT records carry SPF, DKIM and DMARC text data.", "PTR does reverse lookup — IP to name.", "NS names the authoritative server.", "MX names the mail exchange."]}, {"d": "3A", "a": "DNS", "c": 3, "q": "Which server holds the authoritative records for a domain?", "o": ["The recursive resolver on the client side", "The local cache", "The root server", "The authoritative name server"], "x": ["The recursive resolver queries on the client's behalf.", "The cache stores answers; it does not hold the records.", "The root server points to TLD servers, not domain records.", "The authoritative name server holds the domain's actual records."]}, {"d": "3B", "a": "DHCP", "c": 2, "q": "What does the D in DORA stand for?", "o": ["Delivery overall", "Domain", "Discover", "Draft"], "x": ["Delivery is not a DORA step.", "Domain is a DNS concept.", "DORA is Discover, Offer, Request, Ack — the DHCP process.", "Draft is not a DORA step."]}, {"d": "3B", "a": "DHCP", "c": 1, "q": "At what point in a lease does the client attempt unicast renewal at T1?", "o": ["25% of the lease", "50% of the lease", "75% of the lease", "87.5% of the lease"], "x": ["T1 is not at 25%.", "T1 fires at 50% of the lease — the client renews with its original server.", "T1 is not at 75%.", "That is T2, the rebind timer."]}, {"d": "3B", "a": "DHCP", "c": 3, "q": "What does a rogue DHCP server enable?", "o": ["Faster address assignment overall", "DNS cache flushing", "VLAN tagging", "Man-in-the-middle attacks"], "x": ["Speed is not the attacker's goal.", "A rogue server does not flush DNS caches.", "VLAN tagging is a switch function.", "A rogue server assigns a malicious gateway or DNS, enabling interception."]}, {"d": "3B", "a": "DHCP", "c": 0, "q": "Which attack exhausts the DHCP address pool with spoofed MACs?", "o": ["Starvation", "Poisoning", "Spoofing", "Amplification"], "x": ["DHCP starvation floods Discover messages with fake MACs until the pool is empty.", "Poisoning targets DNS caches.", "Spoofing is the mechanism, not the pool exhaustion.", "Amplification is a DDoS technique."]}, {"d": "3B", "a": "DHCP", "c": 2, "q": "What does DHCP snooping build on the switch?", "o": ["A routing table of the whole network", "A VLAN map", "A MAC-to-IP-to-port binding table", "A DNS cache"], "x": ["Routing tables are layer 3 constructs.", "A VLAN map is not a snooping output.", "DHCP snooping builds bindings that prevent spoofing and rogue offers.", "DNS caches live on resolvers."]}, {"d": "3C", "a": "NTP", "c": 1, "q": "Which port does NTP use?", "o": ["UDP 53", "UDP 123", "TCP port 22", "UDP 67"], "x": ["UDP 53 is DNS.", "NTP operates over UDP port 123.", "TCP 22 is SSH.", "UDP 67 is DHCP."]}, {"d": "3C", "a": "NTP", "c": 3, "q": "What does the stratum of an NTP server indicate?", "o": ["Its encryption strength and algorithm", "Its geographic location", "Its vendor", "Its distance from the time source"], "x": ["Stratum is not about encryption.", "Location is irrelevant.", "Vendor is not a stratum concept.", "Stratum 0 is the atomic/GPS source; stratum 1 syncs directly, and so on."]}, {"d": "3C", "a": "NTP", "c": 0, "q": "Why does NTP amplification work?", "o": ["Small requests draw responses up to 100× larger", "It bypasses firewalls", "It relies on TCP retransmission mechanisms for delivery", "It exploits weak SSH keys"], "x": ["A spoofed monlist request draws a response up to 100× the request size.", "Amplification is about size, not firewall bypass.", "NTP runs over UDP, not TCP.", "SSH keys are unrelated."]}, {"d": "3C", "a": "NTP", "c": 2, "q": "What forensic problem does an NTP-spoofed clock create?", "o": ["Encrypted logs", "Corrupted timelines", "Lost passwords", "Broken VLANs"], "x": ["Encryption is independent of the clock.", "Shifted time misaligns logs, tokens and forensic timelines.", "Passwords are not stored in the clock.", "VLANs are layer 2 constructs."]}, {"d": "3D", "a": "SSH", "c": 1, "q": "Which protocol does SSH replace?", "o": ["SNMP management", "Telnet", "HTTP", "ICMP"], "x": ["SNMP is network management, not remote shell.", "SSH replaces Telnet, which sends credentials in clear text.", "HTTP is web traffic.", "ICMP is control messages."]}, {"d": "3D", "a": "SSH", "c": 3, "q": "How does SSH derive the shared session key?", "o": ["It is sent in the header", "It is stored permanently on the server", "It is chosen by the client", "Diffie-Hellman key exchange"], "x": ["The key is never transmitted.", "It is ephemeral, not stored.", "Both sides derive it jointly.", "Diffie-Hellman lets both sides derive the same key without sending it."]}, {"d": "3D", "a": "SSH", "c": 0, "q": "Which setting forces key-based SSH authentication?", "o": ["PasswordAuthentication no", "PermitRootLogin yes for convenience", "Port 22", "LogLevel QUIET"], "x": ["Disabling password authentication forces public-key auth.", "Permitting root login is the opposite of hardening.", "The port does not affect the auth method.", "QUIET logging hides evidence."]}, {"d": "3D", "a": "SSH", "c": 2, "q": "Which command shows active SSH sessions on a Linux host?", "o": ["dig +short", "ntpq -p", "ss -tnp | grep :22", "cat /etc/resolv.conf"], "x": ["dig resolves names.", "ntpq shows time peers.", "ss -tnp filtered on port 22 lists active SSH connections.", "resolv.conf lists DNS servers."]}, {"d": "3D", "a": "SSH", "c": 1, "q": "What does grep 'Failed password' /var/log/auth.log | wc -l measure?", "o": ["Accepted logins on the host", "Brute-force volume", "DHCP leases", "NTP offset"], "x": ["Accepted logins use grep Accepted.", "Counting failed-password lines measures brute-force attempts against SSH.", "DHCP leases are not in auth.log.", "NTP offset is shown by ntpq."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

@@ -1,25 +1,26 @@
 /* ==========================================================================
-   Network Fundamentals + CompTIA Security+ SY0-701, Course Pack site theme
-   Dark charcoal #141414 + deep red #A81C1C brand. WCAG 2.1 AA.
-   Light-first with a dark mode toggle. AI Foundation layout.
+   Network Fundamentals + CompTIA Security+ SY0-701
+   FOZZIE BEAR theme — bear brown and camo green on warm cream.
+   WCAG 2.1 AA. Light-first with a dark mode toggle.
+   Single source of truth for every page in the pack.
    ========================================================================== */
 
 :root {
-  /* ---- brand ---- */
-  --navy: #141414;
-  --navy-2: #A81C1C;
-  --navy-3: #7F1414;
-  --ink: #111827;
-  --muted: #4B5563;
-  --accent: #A81C1C;
+  /* ---- brand (Fozzie) ---- */
+  --navy: #3a2a1e;
+  --navy-2: #8a4b21;
+  --navy-3: #6d3a19;
+  --ink: #33251b;
+  --muted: #5b6169;
+  --accent: #8a4b21;
 
   /* ---- surfaces ---- */
   --bg: #ffffff;
-  --bg-alt: #F9FAFB;
-  --tint: #F3F4F6;
+  --bg-alt: #f6f0e6;
+  --tint: #f3ece0;
   --card: #ffffff;
-  --line: #D1D5DB;
-  --line-strong: #9CA3AF;
+  --line: #ddd2c2;
+  --line-strong: #c0b2a0;
 
   /* ---- semantic ---- */
   --ok: #2e7d32;
@@ -30,7 +31,7 @@
   --bad-text: #8c1c1c;
   --warn: #8a6100;
   --warn-bg: #fdf3d8;
-  --focus: #A81C1C;
+  --focus: #8a4b21;
 
   --font: "Segoe UI", Arial, "Liberation Sans", Helvetica, sans-serif;
   --mono: "Consolas", "Liberation Mono", monospace;
@@ -40,18 +41,18 @@
 
 /* ---------- dark mode ---------- */
 html[data-theme="dark"] {
-  --navy: #e57373;
-  --navy-2: #f0a0a0;
-  --navy-3: #e57373;
-  --ink: #e8eaed;
-  --muted: #b3bfd0;
-  --accent: #e57373;
-  --bg: #14181f;
-  --bg-alt: #1b212b;
-  --tint: #202836;
-  --card: #1b212b;
-  --line: #33405290;
-  --line-strong: #4a5a72;
+  --navy: #ece3d4;
+  --navy-2: #d99b5f;
+  --navy-3: #c4864d;
+  --ink: #e8e6e5;
+  --muted: #b0aca9;
+  --accent: #d99b5f;
+  --bg: #1b2019;
+  --bg-alt: #232a21;
+  --tint: #26301f;
+  --card: #232a21;
+  --line: #3b4636;
+  --line-strong: #586552;
   --ok: #6bbf73;
   --ok-bg: #14301a;
   --ok-text: #96d69c;
@@ -60,7 +61,7 @@ html[data-theme="dark"] {
   --bad-text: #f0a0a0;
   --warn: #e0b34a;
   --warn-bg: #33280c;
-  --focus: #e57373;
+  --focus: #ffd700;
   --shadow: 0 1px 3px rgba(0, 0, 0, .4);
 }
 
@@ -95,7 +96,7 @@ body {
   text-decoration: none;
 }
 .skip-link:focus { left: 0; }
-html[data-theme="dark"] .skip-link { color: #14181f; }
+html[data-theme="dark"] .skip-link { color: #1b2019; }
 
 :focus-visible {
   outline: 3px solid var(--focus);
@@ -139,12 +140,13 @@ html[data-theme="dark"] .brand .sitebrand { color: var(--navy); }
   font-size: .72rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #e8b4b4;
+  color: #ffb27a;
   font-weight: bold;
   margin: 0 0 8px;
 }
 html[data-theme="dark"] .brand .kicker { color: var(--muted); }
 
+/* ---------- MCA logo in the header ---------- */
 .themebtn {
   background: rgba(255, 255, 255, .14);
   color: #fff;
@@ -182,14 +184,14 @@ html[data-theme="dark"] .mainnav { border-top-color: var(--line); }
 .mainnav a {
   display: block;
   padding: 14px 16px;
-  color: #e8d5d5;
+  color: #f5e2d6;
   text-decoration: none;
   font-size: .93rem;
   font-weight: bold;
   border-bottom: 4px solid transparent;
 }
 .mainnav a:hover { color: #fff; background: rgba(255, 255, 255, .1); }
-.mainnav a[aria-current="page"] { color: #fff; border-bottom-color: #A81C1C; }
+.mainnav a[aria-current="page"] { color: #fff; border-bottom-color: #d99b5f; }
 html[data-theme="dark"] .mainnav a { color: var(--muted); }
 html[data-theme="dark"] .mainnav a:hover { color: var(--navy); background: var(--tint); }
 html[data-theme="dark"] .mainnav a[aria-current="page"] {
@@ -261,7 +263,7 @@ main {
   padding: 5px 14px;
   font-size: .82rem;
   font-weight: bold;
-  color: var(--navy);
+  color: var(--navy-2);
 }
 
 h2 {
@@ -279,7 +281,7 @@ p { margin: 0 0 14px; }
 .crumbs { font-size: .86rem; color: var(--muted); padding: 18px 0 0; }
 .crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .crumbs li { display: flex; gap: 6px; align-items: center; }
-.crumbs li + li::before { content: "›"; color: var(--line-strong); }
+.crumbs li + li::before { content: "\203A"; color: var(--line-strong); }
 .crumbs a { color: var(--navy-2); }
 
 /* ---------- cards ---------- */
@@ -322,6 +324,16 @@ p { margin: 0 0 14px; }
 .card ul { margin: 2px 0 0; padding-left: 20px; font-size: .9rem; }
 .card li { margin-bottom: 5px; }
 .card a { color: var(--navy-2); font-weight: bold; }
+
+/* ---------- card cover thumb ---------- */
+.cardcover {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  margin: 0 0 4px;
+}
 
 /* ---------- resources list ---------- */
 .reslist {
@@ -417,10 +429,10 @@ td a { color: var(--navy-2); }
   border-color: var(--navy);
 }
 .cta.ghost:hover { background: var(--tint); border-color: var(--navy); }
-/* Dark mode: the solid CTA uses a light navy fill, so its text must be dark.
+/* Dark mode: the solid CTA uses a light fill, so its text must be dark.
    The ghost CTA keeps a transparent fill, so its text must stay light --
    hence the higher-specificity rule rather than a blanket [data-theme] colour. */
-html[data-theme="dark"] .cta { color: #14181f; }
+html[data-theme="dark"] .cta { color: #1b2019; }
 html[data-theme="dark"] .cta.ghost { color: var(--navy-2); border-color: var(--navy-2); }
 html[data-theme="dark"] .cta.ghost:hover { background: var(--tint); color: var(--navy); }
 
@@ -493,6 +505,60 @@ details.disc summary:hover { text-decoration: underline; }
 details.disc[open] summary { margin-bottom: 10px; }
 details.disc p, details.disc ul { font-size: .93rem; }
 
+/* ---------- narrated video ---------- */
+.videowrap {
+  margin: 22px 0 26px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.videowrap video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+.videometa {
+  padding: 14px 20px 16px;
+  border-top: 2px solid var(--line);
+}
+.videometa h3 { margin: 0 0 6px; font-size: 1rem; }
+.videometa p { margin: 0; font-size: .9rem; color: var(--muted); }
+.videometa .dur { font-weight: bold; color: var(--accent); }
+.video-pending {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .92rem;
+  font-style: italic;
+}
+/* chapter navigation */
+.chapters { margin: 14px 0 0; }
+.chapters h4 {
+  margin: 0 0 8px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--accent);
+}
+.chapters ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 7px; }
+.chapters button {
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--tint);
+  color: var(--navy-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+.chapters button:hover { background: var(--bg-alt); border-color: var(--line-strong); }
+.chapters button .ts { color: var(--muted); font-weight: normal; margin-left: 6px; }
+
 footer[role="contentinfo"] {
   background: var(--bg-alt);
   border-top: 2px solid var(--line);
@@ -503,12 +569,153 @@ footer[role="contentinfo"] {
 footer .fwrap { max-width: 1080px; margin: 0 auto; }
 footer p { margin: 0 0 8px; }
 footer p:last-child { margin-bottom: 0; }
-
 @media print {
   header[role="banner"] { background: #fff !important; color: #000 !important; }
-  html[data-theme="dark"] { --bg: #fff; --ink: #000; --navy: #002b5c; --card: #fff; }
-  .themebtn, .nav-toggle, .cta, .pager { display: none !important; }
+  html[data-theme="dark"] { --bg: #fff; --ink: #000; --navy: #3a2a1e; --card: #fff; }
+  .themebtn, .nav-toggle, .cta, .pager, .videowrap { display: none !important; }
   .mainnav a { color: #000 !important; }
   .card, .note { break-inside: avoid; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
 }
+
+/* ---- Resources: student notes viewer + MCA fox ---- */
+.notebox{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center;
+  background:var(--card);border:1px solid var(--line,var(--border));border-radius:12px;
+  padding:18px 22px;margin:14px 0 18px}
+.notefox img{width:100%;height:auto;display:block;border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.notetext p{margin:0 0 10px}
+.notetext p:last-child{margin-bottom:0}
+.noteview{position:relative;width:100%;height:78vh;min-height:520px;
+  border:1px solid var(--line,var(--border));border-radius:12px;overflow:hidden;
+  background:var(--panel,var(--card))}
+.noteview iframe{width:100%;height:100%;border:0;display:block}
+@media (max-width:640px){
+  .notebox{grid-template-columns:1fr}
+  .notefox{max-width:190px;margin:0 auto}
+  .noteview{height:62vh;min-height:380px}
+}
+@media print{ .noteview,.notebox{display:none} }
+
+/* ---- Practice exam ---- */
+.quizwrap{max-width:900px;margin:0 auto;padding:0}
+#quiz .qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+#quiz .qdom{background:var(--red,var(--accent));color:#fff;font-size:11px;font-weight:bold;
+  letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+#quiz .qn{color:var(--muted-foreground,var(--muted));font-size:12px}
+#quiz .qtext{color:var(--foreground,var(--text));font-size:16.5px;font-weight:bold;margin-bottom:12px}
+#quiz label.opt{display:block;border:1.5px solid var(--border,var(--line));border-radius:8px;
+  padding:11px 13px;margin-bottom:8px;cursor:pointer}
+#quiz label.opt:hover{border-color:var(--muted-foreground,var(--muted))}
+#quiz label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+#quiz label.opt .ol{vertical-align:middle}
+#quiz label.opt.correct{border-color:#2E7D32;background:#14301A}
+#quiz label.opt.wrong{border-color:#C62828;background:#331414}
+#quiz label.opt.locked{opacity:.72;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#331414;border:1px solid #C62828;color:#F3D9D9}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55;margin:8px 0 0;padding-left:18px}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#F0A5A5;font-weight:bold}
+.progress{height:8px;border-radius:6px;overflow:hidden;margin:14px 0 4px;
+  background:var(--muted,var(--panel))}
+.progress div{height:100%;background:var(--red,var(--accent));width:0%;transition:width .3s}
+.pcount{font-size:12.5px;margin-bottom:10px;color:var(--muted-foreground,var(--muted))}
+.btn{display:inline-block;background:var(--red,var(--accent));color:#fff;border:none;
+  border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid var(--border,var(--line));
+  color:var(--foreground,var(--text))}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge,.gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+  background:conic-gradient(var(--red,var(--accent)) calc(var(--p,0)*1%), rgba(128,128,128,.28) 0);
+  display:flex;align-items:center;justify-content:center}
+.gauge .inner{width:132px;height:132px;border-radius:50%;
+  background:var(--card,var(--panel));display:flex;flex-direction:column;
+  align-items:center;justify-content:center}
+.gauge .pct{font-size:34px;font-weight:bold;color:var(--foreground,var(--text))}
+.gauge .lbl{font-size:11px;color:var(--muted-foreground,var(--muted))}
+.grade{text-align:center;font-size:17px;font-weight:bold;margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted-foreground,var(--muted));margin-bottom:8px}
+#domainbreak{text-align:center;line-height:1.8}
+.revq{border-top:1px solid var(--border,var(--line));padding:14px 0}
+.revq:first-child{border-top:none}
+.revq .qtext{font-size:15.5px}
+.revq ul.expl{list-style:none;padding-left:0;font-size:14px;line-height:1.5}
+.revq ul.expl li{margin-bottom:6px}
+.revq .why-c{color:#2E7D32;font-weight:bold}
+.revq .why-w{color:#C62828;font-weight:bold}
+.revq .muted{color:var(--muted-foreground,var(--muted));opacity:.6}
+
+/* narrower fox panel inside the practice exam start card */
+.notebox.notebox-start{grid-template-columns:150px 1fr;gap:18px;padding:14px 18px;
+  margin:0;background:transparent;border:none}
+.notebox.notebox-start .notetext h3{margin-top:0}
+@media (max-width:640px){
+  .notebox.notebox-start{grid-template-columns:1fr}
+  .notebox.notebox-start .notefox{max-width:150px}
+}
+
+/* hero with the mascot beside the title */
+.herogrid{display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:center}
+.herofox{margin:0}
+.herofox img{width:100%;height:auto;display:block}
+@media (max-width:760px){
+  .herogrid{grid-template-columns:1fr;gap:16px}
+  .herofox{max-width:190px;margin:0 auto}
+}
+
+/* ==========================================================================
+   SOC hero band: the page hero sits on the security operations centre photo
+   with white text, so headings, lede, weight and crumbs all read on dark.
+   The header above it stays plain deep brown, untouched.
+   ========================================================================== */
+.brandlogo { display: block; width: 104px; height: auto; margin: 0 0 8px; }
+footer .flogo { width: 92px; height: auto; margin: 0 0 12px; display: block; }
+
+.hero.hero-soc {
+  position: relative;
+  isolation: isolate;
+  padding: 46px 34px 40px;
+  border-bottom: 3px solid var(--accent);
+  margin: 0 0 26px;
+  border-radius: 0 0 var(--radius) var(--radius);
+  background: #1a1410 url("../img/soc.jpg") no-repeat center 32% / cover;
+}
+/* the shade sits between the photo and the copy, so text contrast is guaranteed */
+.hero.hero-soc::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(24,18,13,.34) 0%, rgba(24,18,13,.70) 100%);
+}
+.hero.hero-soc h1 { color: #fff; }
+.hero.hero-soc .lede { color: #F3ECE2; }
+.hero.hero-soc .sub { color: #E7DCCB; }
+.hero.hero-soc .weight { color: #F0C9A0; }
+.hero.hero-soc .pill {
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  border-color: rgba(255,255,255,.34);
+}
+.hero.hero-soc .pager a, .hero.hero-soc .pager span { color: #fff; }
+.hero.hero-soc .crumbs, .hero.hero-soc .crumbs a { color: #E7DCCB; }
+
+@media (max-width:640px){
+  .hero.hero-soc { padding: 30px 18px 26px; }
+  .brandlogo { width: 78px; }
+}
+
+/* Page head without the SOC band. Used where a page opens straight into content
+   and a full-bleed hero would push the actual material below the fold. */
+.pagehead { margin: 0 0 22px; padding: 4px 0 14px; border-bottom: 1px solid var(--line); }
+.pagehead h1 { margin: 0 0 8px; }
+.pagehead .lede { margin: 0; }
+
+/* Notes box without the mascot image: single full-width text column. */
+.notebox.notebox-nomascot{grid-template-columns:1fr}
+@media (max-width:640px){ .notebox.notebox-nomascot{grid-template-columns:1fr} }

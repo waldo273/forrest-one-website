@@ -1,7 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="UKAIC AI Foundation">
-  <rect width="64" height="64" rx="10" fill="#002b5c"/>
-  <text x="32" y="30" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="bold"
-        fill="#ffffff" text-anchor="middle">AI</text>
-  <text x="32" y="48" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold"
-        fill="#7fb2ea" text-anchor="middle">UKAIC</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#3A2A1E"/>
+  <path d="M20 46V18h7l10 15V18h7v28h-7L27 31v15z" fill="#8A4B21"/>
 </svg>

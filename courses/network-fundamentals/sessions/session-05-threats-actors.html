@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Know the adversary: actor types and motivations, the attack surface, the vulnerability taxonomy, malware and credential attacks, network attacks, and the mitigations that close them."/>
+  <title>Session 05: Threat Actors, Attack Surfaces &amp; Vectors — Network Fundamentals + CompTIA Security+ SY0-701</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <img class="brandlogo" src="../assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals + Security+</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="../scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 05</li></ol></nav>
+  <section class="hero hero-soc">
+    <span class="weight">Session 05 of 12 &middot; Security+ core</span>
+    <h1>Threat Actors, Attack Surfaces &amp; Vectors</h1>
+    <p class="lede">Know the adversary: actor types and motivations, the attack surface, the vulnerability taxonomy, malware and credential attacks, network attacks, and the mitigations that close them.</p>
+    <div class="pills"><span class="pill">5A Threat Actors</span><span class="pill">5B Attack Surface</span><span class="pill">5C Vulnerabilities</span><span class="pill">5D Malware &amp; Credentials</span><span class="pill">5E Network Attacks</span><span class="pill">5F Mitigation</span></div>
+  </section>
+
+  <h2 id="video">Narrated walkthrough</h2>
+  <p class="sub">The whole session, narrated in the course voice with chapter
+    navigation. Use the chapter buttons to jump straight to a topic.</p>
+  <div class="videowrap">
+      <video id="v05" data-video="v05" controls preload="metadata"
+             poster="../assets/img/s05.png"
+             aria-label="Session 05 narrated walkthrough">
+        <source src="../videos/session-05-threats-actors.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        <a href="../videos/session-05-threats-actors.mp4">Download the MP4</a>.
+      </video>
+      <div class="videometa">
+        <h3>Session 05 &middot; narrated walkthrough</h3>
+        <p><span class="dur">36 frames</span>
+           &middot; full session narration in the course voice, with chapter navigation.</p>
+        <div class="chapters" data-for="v05"><ol><button type="button" data-start="0.0">Chapter 1: Know the Adversary<span class="ts">0:00</span></button><button type="button" data-start="161.4">Chapter 2: The Attack Surface<span class="ts">2:41</span></button><button type="button" data-start="349.1">Chapter 3: Vulnerabilities<span class="ts">5:49</span></button><button type="button" data-start="513.7">Chapter 4: Malware and Credential Attacks<span class="ts">8:33</span></button><button type="button" data-start="697.2">Chapter 5: Attacks on the Network<span class="ts">11:37</span></button><button type="button" data-start="923.9">Chapter 6: Mitigation<span class="ts">15:23</span></button></ol></div>
+      </div>
+    </div>
+
+  <h2 id="concepts">Core concepts</h2>
+    <h3>2A - Threat actors</h3>
+      <p>Risk = threat × vulnerability: a threat that exploits a vulnerability creates risk. Actors are compared by behaviour (targeted or opportunistic), source (internal or external), sophistication, resources and funding, and motivation with intent. Types: lone hackers, script kiddies, hacker teams and hacktivists, nation-state actors and APTs, organised crime, competitors, and insiders (malicious and unintentional). Motivations: financial, political or ideological, strategic, and personal.</p><h3>2B - Attack surface &amp; vectors</h3>
+      <p>The attack surface spans hardware, software, networks, processes and human factors, and grows as cloud, mobile and IoT devices are added. Vectors: direct access (USB, console), remote access (VPN, RDP, SSH), wireless and cloud, open ports, lure-based (Trojan, malicious documents, phishing, spear phishing, whaling, smishing, vishing, watering holes), vulnerable software (unpatched systems, misconfigurations, zero-days, unsupported systems, default credentials), and the supply chain (compromised updates, vendor credentials). The attack chain: recon, vector, exploit, act.</p>
+
+  <h2 id="cautions">Practical cautions</h2>
+    <div class="note warn">
+      <h3>Where marks are lost</h3>
+      <ul>
+        <li>Do not call all hackers criminals; white hats are ethical.</li><li>Do not forget unintentional insiders; most insider incidents are accidents.</li><li>Do not use &#x27;APT&#x27; for every advanced attack; persistence and strategy are the point.</li><li>Do not ignore the human vectors; phishing is the most common entry point.</li><li>Do not assume patching fixes everything; unsupported systems and zero-days have no patch.</li><li>Do not treat vulnerability and risk as the same thing; risk needs a threat behind the weakness.</li>
+      </ul>
+    </div>
+
+  <h2 id="tips">Exam tips for Session 05</h2>
+    <div class="note ok">
+      <h3>Security+ alignment</h3>
+      <ul>
+        <li>Scenario questions reward classification; label the actor, the vector and the motivation.</li><li>APT = persistence and strategy, not just sophistication.</li><li>Insider threat includes accidents, not just malice.</li><li>Supply chain is an increasingly tested vector; know the NotPetya update example.</li><li>Know the difference between a vulnerability and a risk; the exam tests the distinction directly.</li><li>Lure-based vectors cover phishing in all its forms, from broad to spear phishing and whaling.</li>
+      </ul>
+    </div>
+
+  <h2 id="terms">Key terms</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:28%">Term</th><th>Definition</th></tr></thead>
+        <tbody><tr><td><strong>Vulnerability</strong></td><td>A weakness in a system, process or design</td></tr><tr><td><strong>Threat</strong></td><td>A person, tool or method that could exploit a vulnerability</td></tr><tr><td><strong>Risk</strong></td><td>The likelihood and impact of a threat exploiting a vulnerability</td></tr><tr><td><strong>Threat actor</strong></td><td>A person or group that poses a threat</td></tr><tr><td><strong>APT</strong></td><td>Advanced persistent threat, long-term and strategic, state-backed or highly resourced</td></tr><tr><td><strong>Script kiddie</strong></td><td>Unskilled attacker using pre-written tools on easy targets</td></tr><tr><td><strong>Hacktivist</strong></td><td>Hacker promoting a political or social cause</td></tr><tr><td><strong>Spear phishing</strong></td><td>Targeted, personalised phishing aimed at a named individual</td></tr><tr><td><strong>Zero day</strong></td><td>A vulnerability unknown to the vendor with no available patch</td></tr><tr><td><strong>False flag</strong></td><td>Techniques that mislead attribution to another entity</td></tr></tbody>
+      </table>
+    </div>
+
+  <h2 id="selfcheck">Self-check</h2>
+    <p class="sub">Answer these from memory before you take the quiz. If you cannot
+      answer one, revisit the matching concept above.</p>
+    <ol>
+      <li>Define vulnerability, threat and risk in one sentence each.</li><li>Name the five attributes used to compare threat actors.</li><li>List five threat actor types and one motivation for each.</li><li>What makes an APT different from a single advanced attack?</li><li>Name six threat vectors and give one example of each.</li><li>What are the four steps of the attack chain?</li><li>Contrast an unpatched-software vector with a supply chain vector, using one real example for each.</li><li>Explain why most insider incidents are not malicious, and name two defences.</li>
+    </ol>
+
+  <h2 id="reading">Further reading</h2>
+    <ul>
+      <li>Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives, objectives 2.1, 2.2 and 2.4.</li><li>NCSC threat reports, real-world actor profiles and motivations.</li><li>MITRE ATT&amp;CK, techniques mapped to actor groups.</li><li>Case write-ups of WannaCry and NotPetya for concrete vector examples.</li>
+    </ul>
+
+  <div class="pager"><a href="session-04-security-concepts.html">&larr; Session 04: Security Controls &amp; Concepts</a><a href="session-06-cryptography-pki.html">Session 06: Cryptography, PKI &amp; Identity &rarr;</a></div>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="fwrap">
+    <img class="flogo" src="../assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

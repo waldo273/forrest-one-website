@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="One interactive quiz per session of the Network Fundamentals + Security+ course."/>
-  <title>Section Quizzes, Network Fundamentals, Course Pack</title>
+  <meta name="description" content="Twelve interactive quizzes covering the whole course."/>
+  <title>Quizzes — Network Fundamentals + CompTIA Security+ SY0-701</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
-  <link rel="stylesheet" href="assets/css/app.css?v=2"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -16,21 +15,23 @@
   <div class="hwrap">
     <div class="brandrow">
       <div class="brand">
-        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
-        <p class="sitebrand"><a href="index">Network Fundamentals</a></p>
+        <img class="brandlogo" src="assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="index.html">Network Fundamentals + Security+</a></p>
       </div>
       <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
     </div>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="mainnav" id="main-nav" aria-label="Main">
       <ul>
-<li><a href="/courses/">Courses</a></li>
-<li><a href="index">Home</a></li>
-<li><a href="sessions">Sessions</a></li>
-<li><a href="quizzes" aria-current="page">Quizzes</a></li>
-<li><a href="final-exam">Final Exam</a></li>
-<li><a href="notes">Student Notes</a></li>
-<li><a href="glossary">Glossary</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sessions.html">Sessions</a></li>
+          <li><a href="scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="quizzes.html" aria-current="page">Quizzes</a></li>
+          <li><a href="final-exam.html">Final Exam</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="resources.html">Resources</a></li>
       </ul>
     </nav>
   </div>
@@ -38,104 +39,134 @@
 
 <main id="main">
 
-
-
-  <section class="hero">
-    <h1>Section Quizzes</h1>
-    <p class="lede">One interactive quiz per session. Twenty questions, immediate feedback, shuffled order.</p>
+  <section class="hero hero-soc">
+    <h1>Quizzes</h1>
+    <p class="lede">Twelve interactive quizzes, twenty questions each, with immediate
+      feedback and shuffled answer positions.</p>
   </section>
 
   <div class="note">
-    <h2>How the quizzes work</h2>
-    <p>Each quiz gives immediate feedback on every answer and explains the distractors as well as the
-      correct option. Questions are shuffled on every load. Aim for seventy percent or better before
-      moving on.</p>
+    <h2>How to use these</h2>
+    <p>The interactive quizzes are for learning: every question explains why the
+      answer is right and why each distractor is wrong. Work a paper after the
+      matching session content and again before the exam.</p>
   </div>
 
   <div class="grid">
-
-    <a class="card" href="quizzes/session-01-quiz">
-      <span class="weight">Session 1</span>
-      <h2>Network Foundations: Networking Models &amp; IP Addressing</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-02-quiz">
-      <span class="weight">Session 2</span>
-      <h2>Switching, VLANs &amp; Network Architectures</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-03-quiz">
-      <span class="weight">Session 3</span>
-      <h2>Network Services &amp; the Attack Surface</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-04-quiz">
-      <span class="weight">Session 4</span>
-      <h2>Fundamental Security Concepts</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-05-quiz">
-      <span class="weight">Session 5</span>
-      <h2>Threats, Attack Types &amp; Threat Actors</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-06-quiz">
-      <span class="weight">Session 6</span>
-      <h2>Cryptography &amp; Public Key Infrastructure</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-07-quiz">
-      <span class="weight">Session 7</span>
-      <h2>Identity &amp; Access Management</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-08-quiz">
-      <span class="weight">Session 8</span>
-      <h2>Enterprise Network Security: Firewalls, IDS, IPS, VPNs &amp; Secure Protocols</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-09-quiz">
-      <span class="weight">Session 9</span>
-      <h2>Endpoint, Application, Cloud &amp; Virtualisation Security</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-10-quiz">
-      <span class="weight">Session 10</span>
-      <h2>Vulnerability Management, Resiliency &amp; Asset Protection</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-11-quiz">
-      <span class="weight">Session 11</span>
-      <h2>Security Operations: Monitoring, IR &amp; Forensics</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
-
-    <a class="card" href="quizzes/session-12-quiz">
-      <span class="weight">Session 12</span>
-      <h2>Governance, Risk, Compliance &amp; Exam Consolidation</h2>
-      <p>Twenty-question interactive quiz with immediate feedback and shuffled questions.</p>
-    </a>
+    <div class="card">
+      <span class="weight">Session 01 &middot; 20 questions</span>
+      <h3>Network Models &amp; IP</h3>
+      <p>The language of networks: the OSI and TCP/IP models, encapsulation and port addressing, the physical and data link layers, media and topologies, then the IPv4 addressing and subnetting that security controls depend on.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_01.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 02 &middot; 20 questions</span>
+      <h3>Switching &amp; Routing</h3>
+      <p>The devices and the paths: switches and routers, cloud networking and routing foundations, route selection, NAT and inter-VLAN routing, VLANs and Spanning Tree, and wireless and physical deployment.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_02.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 03 &middot; 20 questions</span>
+      <h3>Network Services &amp; Ops</h3>
+      <p>The operational core: ports and protocols, documentation and agreements, the life-cycle and controlled change, configuration and monitoring tools, baselines and resilience, and the core services that keep networks usable.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_03.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 04 &middot; 20 questions</span>
+      <h3>Security Controls &amp; Concepts</h3>
+      <p>Why controls exist and how they are classified: control categories and functional types, non-repudiation and authentication factors, accounting and audit trails, zero trust, deception technology, and controlled change.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_04.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 05 &middot; 20 questions</span>
+      <h3>Threat Actors &amp; Vectors</h3>
+      <p>Know the adversary: actor types and motivations, the attack surface, the vulnerability taxonomy, malware and credential attacks, network attacks, and the mitigations that close them.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_05.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 06 &middot; 20 questions</span>
+      <h3>Cryptography, PKI &amp; Identity</h3>
+      <p>The three jobs of cryptography and its vocabulary, integrity and signatures, the certificate and PKI paper trail, identity and access management, and the models that control access.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_06.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 07 &middot; 20 questions</span>
+      <h3>Security Architecture</h3>
+      <p>Designing for trust: architecture and deployment models, compute and edge platforms, secure design principles, data protection and classification, resilience and recovery.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_07.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 08 &middot; 20 questions</span>
+      <h3>Network Security Controls</h3>
+      <p>Defending the network: physical and human controls, segmentation, guest and personal devices, hardening and admission control, key and content control, and trust zones.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_08.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 09 &middot; 20 questions</span>
+      <h3>Network Troubleshooting</h3>
+      <p>Diagnosing the network: troubleshooting methodology, cable and interface faults, wireless and switching faults, routing, filtering and addressing problems, congestion and packet loss, and the troubleshooting toolset.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_09.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 10 &middot; 20 questions</span>
+      <h3>Vulnerability Management</h3>
+      <p>From a known good state: baselines and hardening, mobile and wireless, secure coding and monitoring, the asset life-cycle, vulnerability management, and the monitoring tools that prove it.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_10.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 11 &middot; 20 questions</span>
+      <h3>Security Operations</h3>
+      <p>Running the defence: monitoring and network security devices, endpoint and data controls, identity and automation, incident response, threat hunting and forensic evidence, and log investigation.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_11.html">Open the quiz</a></li>
+      </ul>
+    </div>
+<div class="card">
+      <span class="weight">Session 12 &middot; 20 questions</span>
+      <h3>Governance &amp; Risk</h3>
+      <p>Turning security into behaviour: governance foundations, external obligations and risk identification, risk analysis and treatment, reporting and business impact, compliance, privacy and audit, and assurance and awareness.</p>
+      <ul>
+        <li><a href="quizzes/Quiz_Session_12.html">Open the quiz</a></li>
+      </ul>
+    </div>
   </div>
+
 </main>
 
-<script src="assets/js/site.js"></script>
-<script src="assets/js/app.js"></script>
 <footer role="contentinfo">
   <div class="fwrap">
-    <p>© 2026 Billy Forrest</p>
-    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
-    <p>Training material is original and vendor-neutral. This is an independent revision pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+    <img class="flogo" src="assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
   </div>
 </footer>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

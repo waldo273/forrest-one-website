@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 9 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 9 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Network Troubleshooting &amp; Resilience — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 9 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "9A", "a": "Methodology", "q": "What is the FIRST step of a structured troubleshooting process?", "o": ["Identify the problem and gather information from the user", "Test a theory by making a controlled change", "Escalate the fault to the vendor support desk", "Replace the suspected hardware component before any testing at all"], "c": 0, "x": ["You cannot form a theory until the symptom is pinned down.", "Testing comes after you have a theory to test.", "Escalation is a later step when scope exceeds you.", "Swapping parts before diagnosis is guessing."]}, {"d": "9A", "a": "Methodology", "q": "Why should you change ONE variable at a time when testing?", "o": ["Because most systems reject multiple simultaneous changes", "Otherwise you cannot tell which change fixed the fault", "Because change control forbids more than one edit per day", "Because hardware tolerates only a single restart per hour"], "c": 1, "x": ["Systems rarely reject two changes by design.", "Two changes at once leaves the cause unknown.", "Change windows do not limit edits to one per day.", "Restart frequency is not the reason for this rule."]}, {"d": "9A", "a": "Methodology", "q": "Which record best supports later root cause analysis?", "o": ["A summary that is written only once the fault has been resolved", "An email chain between the technicians involved", "A log of each test performed and its observed result", "A note listing the final replacement part used"], "c": 2, "x": ["A post-hoc summary loses the failed tests.", "Discussion threads are unstructured and lossy.", "Contemporaneous test results show what was ruled out.", "A parts list omits the diagnostic reasoning."]}, {"d": "9B", "a": "Cable & Interface", "q": "A cable run exceeds its rated length. What is the likely result?", "o": ["The link negotiating a faster speed than its rating", "Complete loss of all traffic on the interface instantly", "The switch automatically extending the cable's reach", "Signal degradation causing errors and retransmissions"], "c": 3, "x": ["Excessive length reduces usable speed, not raises it.", "A marginally long link degrades rather than dies.", "No switch can extend the physical reach of a cable.", "Attenuation raises error rates well before total failure."]}, {"d": "9B", "a": "Cable & Interface", "q": "Which symptom points to a duplex mismatch on an interface?", "o": ["Late collisions and poor throughput under load", "No link light showing on the port and a completely dead link", "Immediate total loss of power to the switch", "Perfect throughput with no errors at any load"], "c": 0, "x": ["Mismatch shows as collisions and late collisions.", "A dead port is a physical or admin-down fault.", "Duplex settings do not affect switch power.", "A clean link is the absence of the fault."]}, {"d": "9B", "a": "Cable & Interface", "q": "What does a rising CRC error counter on an interface indicate?", "o": ["A software bug inside the routing protocol", "Frames arriving damaged, usually from a physical fault", "An expired management certificate on the device management plane", "Excessive bandwidth consumed by the users"], "c": 1, "x": ["Routing protocol faults do not corrupt frame CRCs.", "CRC failures mean corrupted frames, so look physical.", "Certificates affect sessions, not frame integrity.", "High utilisation is congestion, not corruption."]}, {"d": "9C", "a": "Wireless & Switching", "q": "Users report wireless drops in one area only. Which check comes first?", "o": ["Replace every wireless access point across the entire site", "Reissue the wireless pre-shared key to all users", "Measure signal strength and interference in that area", "Rebuild the virtual local area network addressing"], "c": 2, "x": ["A whole-site swap ignores the localised evidence.", "A key problem would affect all users everywhere.", "Localised symptoms point at coverage or interference.", "Addressing faults do not respect physical location."]}, {"d": "9C", "a": "Wireless & Switching", "q": "Overlapping wireless channels on the same band typically cause:", "o": ["A stronger signal reaching every client", "Automatic encryption of the wireless traffic", "The band switching itself to a different frequency", "Co-channel interference and reduced throughput"], "c": 3, "x": ["Interference degrades the signal rather than boosting it.", "Encryption is configured separately from channels.", "Bands do not relocate themselves to avoid overlap.", "Overlapping channels contend and throughput falls."]}, {"d": "9C", "a": "Wireless & Switching", "q": "Spanning Tree is failing to converge. What is the likely effect?", "o": ["Broadcast storms and flooded frames across the network", "Wireless clients being disconnected from their access points", "Encrypted tunnels failing to renegotiate their keys", "Dynamic addressing leases expiring before they are renewed"], "c": 0, "x": ["Without convergence, loops persist and frames flood.", "Wireless association does not depend on Spanning Tree.", "Key renegotiation is unaffected by layer 2 loops.", "Lease expiry is a server-side timer, not a loop effect."]}, {"d": "9C", "a": "Wireless & Switching", "q": "A trunk link carries traffic for several VLANs. An untagged frame is:", "o": ["Dropped silently by the switch without any record", "Assigned to the trunk's native virtual local area network", "Broadcast to every virtual local area network on the trunk", "Duplicated onto each virtual local area network in turn"], "c": 1, "x": ["They are not dropped, they are classified as native.", "Untagged frames on a trunk fall to the native VLAN.", "Flooding every VLAN would break the segmentation.", "Duplication does not happen on a normal trunk."]}, {"d": "9D", "a": "Routing & Addressing", "q": "A host can reach local peers but nothing on other subnets. Check first:", "o": ["The wireless channel selected on the access point", "The hard disk space available on the host machine", "The default gateway address configured on the host", "The screen resolution that has been configured on the host machine"], "c": 2, "x": ["The channel affects wireless link quality, not routing.", "Disk space does not influence packet forwarding.", "Local works, remote fails: the gateway is the suspect.", "Display settings are unrelated to network reach."]}, {"d": "9D", "a": "Routing & Addressing", "q": "A duplicate IP address is suspected on the network. What is the symptom?", "o": ["Complete and permanent silence from the address", "Faster throughput because two hosts share the load", "Automatic reassignment of the duplicate address by the router itself", "Intermittent connectivity as two hosts answer for one address"], "c": 3, "x": ["A clash causes intermittent, not permanent, failure.", "Duplicates never increase usable bandwidth.", "Routers do not detect and reassign duplicates.", "Two claimants produce intermittent, confusing behaviour."]}, {"d": "9D", "a": "Routing & Addressing", "q": "An access control list denies legitimate traffic. How is this diagnosed?", "o": ["Review the list order and hit counts on each entry", "Replace the router that holds the access control list", "Disable the list entirely and leave the network open", "Change every workstation to a static IP address"], "c": 0, "x": ["Order matters: an earlier permit or deny wins.", "Replacing hardware will not change list logic.", "Removing all filtering fixes nothing safely.", "Addressing changes do not alter ACL evaluation."]}, {"d": "9D", "a": "Routing & Addressing", "q": "Clients receive no address from the dynamic host server. Check first:", "o": ["The clock battery fitted inside each of those client computers", "Whether the scope still has addresses available to lease", "The monitor refresh settings on the affected clients", "The number of printer drivers installed on the server"], "c": 1, "x": ["A host clock does not stop lease allocation.", "An exhausted scope fails for every client at once.", "Display refresh settings are unrelated to addressing.", "Printer drivers have no bearing on address leases."]}, {"d": "9E", "a": "Congestion & Loss", "q": "Latency is low but throughput is poor. What does this suggest?", "o": ["The physical distance between the endpoints is too short", "The encryption keys are expiring too frequently", "Packet loss forcing retransmissions of the same data", "The addressing scheme has been configured incorrectly"], "c": 2, "x": ["Short distance improves throughput, it does not harm it.", "Key expiry affects sessions, not sustained throughput.", "Retransmission wastes capacity while delay stays low.", "Addressing faults usually break reachability outright."]}, {"d": "9E", "a": "Congestion & Loss", "q": "Which tool best shows whether a link is saturated at peak times?", "o": ["A single ping run once during a quiet period", "A list of every user account on the domain", "The physical length of the cable run that is involved in this path", "Interface utilisation graphs sampled over the working day"], "c": 3, "x": ["One quiet-period ping says nothing about peak load.", "User account lists do not measure link traffic.", "Cable length is a fixed physical property.", "Utilisation over time reveals peak saturation."]}, {"d": "9E", "a": "Congestion & Loss", "q": "Where should you capture traffic to prove a congestion claim?", "o": ["A port that mirrors the link under investigation", "Any port on a completely different switch nearby", "The management interface of the wireless controller", "The console port of the core router during a restart"], "c": 0, "x": ["The capture must see the traffic in question.", "An unrelated switch sees unrelated traffic.", "The controller's own traffic is not the claim.", "A console port carries no user data traffic."]}, {"d": "9F", "a": "Toolset", "q": "Which command tests reachability and reports each hop along the path?", "o": ["A name lookup against the configured resolver", "A trace route to the destination host", "A lease renewal request sent to the address server", "A certificate chain check on the remote service"], "c": 1, "x": ["A lookup resolves names, it does not show the path.", "Tracing reveals each hop, so it localises the failure.", "A lease renewal concerns addressing, not the path.", "Certificate validation does not list network hops."]}, {"d": "9F", "a": "Toolset", "q": "What does a port scan against a host establish during diagnosis?", "o": ["How much bandwidth the host is actually able to sustain under load", "Whether the host's disk is encrypted at rest", "Which services are listening and reachable on that host", "The physical location of the host on the campus"], "c": 2, "x": ["A port scan measures availability, not throughput.", "Disk encryption is not visible to a port scan.", "Reachable listening ports confirm service exposure.", "Location is not discoverable by scanning ports."]}, {"d": "9F", "a": "Toolset", "q": "Which combination gives both a cable test and a live traffic capture?", "o": ["A name resolver and an address lease server", "A configuration backup tool and a patch server", "An antivirus console and a disk imaging tool", "A cable certifier and a protocol analyser"], "c": 3, "x": ["Both of those are services, not diagnostic tools.", "Neither of those inspects cables or live traffic.", "Both work above the layer being investigated.", "One proves the physical link, the other sees the frames."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

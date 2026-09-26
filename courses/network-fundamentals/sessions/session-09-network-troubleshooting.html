@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Diagnosing the network: troubleshooting methodology, cable and interface faults, wireless and switching faults, routing, filtering and addressing problems, congestion and packet loss, and the troubleshooting toolset."/>
+  <title>Session 09: Network Troubleshooting &amp; Resilience — Network Fundamentals + CompTIA Security+ SY0-701</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <img class="brandlogo" src="../assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals + Security+</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="../scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 09</li></ol></nav>
+  <section class="hero hero-soc">
+    <span class="weight">Session 09 of 12 &middot; Security architecture</span>
+    <h1>Network Troubleshooting &amp; Resilience</h1>
+    <p class="lede">Diagnosing the network: troubleshooting methodology, cable and interface faults, wireless and switching faults, routing, filtering and addressing problems, congestion and packet loss, and the troubleshooting toolset.</p>
+    <div class="pills"><span class="pill">9A Methodology</span><span class="pill">9B Cable &amp; Interface Faults</span><span class="pill">9C Wireless &amp; Switching</span><span class="pill">9D Routing &amp; Addressing</span><span class="pill">9E Congestion &amp; Loss</span><span class="pill">9F Toolset</span></div>
+  </section>
+
+  <h2 id="video">Narrated walkthrough</h2>
+  <p class="sub">The whole session, narrated in the course voice with chapter
+    navigation. Use the chapter buttons to jump straight to a topic.</p>
+  <div class="videowrap">
+      <video id="v09" data-video="v09" controls preload="metadata"
+             poster="../assets/img/s09.png"
+             aria-label="Session 09 narrated walkthrough">
+        <source src="../videos/session-09-network-troubleshooting.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        <a href="../videos/session-09-network-troubleshooting.mp4">Download the MP4</a>.
+      </video>
+      <div class="videometa">
+        <h3>Session 09 &middot; narrated walkthrough</h3>
+        <p><span class="dur">36 frames</span>
+           &middot; full session narration in the course voice, with chapter navigation.</p>
+        <div class="chapters" data-for="v09"><ol><button type="button" data-start="0.0">Chapter 1: Troubleshooting Methodology<span class="ts">0:00</span></button><button type="button" data-start="142.1">Chapter 2: Cable, Connector and Interface Faults<span class="ts">2:22</span></button><button type="button" data-start="348.5">Chapter 3: Wireless and Switching Faults<span class="ts">5:48</span></button><button type="button" data-start="531.0">Chapter 4: Routing, Filtering and Addressing<span class="ts">8:51</span></button><button type="button" data-start="745.9">Chapter 5: Congestion, Latency and Packet Loss<span class="ts">12:25</span></button><button type="button" data-start="898.6">Chapter 6: The Troubleshooting Toolset<span class="ts">14:58</span></button></ol></div>
+      </div>
+    </div>
+
+  <h2 id="concepts">Core concepts</h2>
+    <h3>9A - Endpoint security</h3>
+      <p>The endpoint stack: AV/EDR (signature plus behaviour), hardening (baseline from CIS benchmarks or vendor guides, patching, disable unused services, ports and default accounts), application control (allowlisting over blocklisting, backed by code signing), MDM (enrol, configure, enforce, wipe) with application vetting and containers for BYOD, and OS controls, least privilege, secure boot, full disk encryption and firmware updates.</p><h3>9B - Application lifecycle</h3>
+      <p>Shift left: threat modelling before code, code review at every change, SAST for source and DAST for running apps. Secure coding keeps the code at least privilege, hides errors, and validates all input by whitelisting, sanitisation and boundary checks. DevSecOps puts security in the CI/CD pipeline and scans infrastructure as code, so secure code ships as fast as insecure code.</p><h3>9C - Application attacks</h3>
+      <p>SQL injection: input treated as code, fix with parameterised queries and input validation. XSS: script in another user&#x27;s browser, fix with output encoding; a Web Application Firewall filters web traffic. CSRF: forged action on a session, fix with tokens and same-site cookies. Also buffer overflow, directory traversal and race conditions, mitigated by input validation, least privilege and sandboxing.</p><h3>9D - Cloud &amp; virtualisation</h3>
+      <p>Service models: IaaS (you secure everything above the hypervisor), PaaS (you secure the app and its data), SaaS (the vendor secures nearly everything). Deployment models, public, private, hybrid and community, shift the line. Shared responsibility: vendor secures the cloud, you secure what is in it. Misconfiguration is the top cloud risk, managed with CASB and posture management. Virtualisation: the hypervisor is the crown jewel, Type 1 beats Type 2, VM escape is the nightmare, containers share the kernel and need namespaces and seccomp.</p>
+
+  <h2 id="cautions">Practical cautions</h2>
+    <div class="note warn">
+      <h3>Where marks are lost</h3>
+      <ul>
+        <li>Do not rely on antivirus alone, signatures miss unknown threats.</li><li>Do not choose blocklisting over allowlisting for unknown threats.</li><li>Do not skip input validation, every field is a potential injection point.</li><li>Do not confuse XSS (hijacks the browser) with CSRF (hijacks the action).</li><li>Do not assume the cloud vendor secures your data and configuration.</li><li>Do not assume private cloud has no shared responsibility, duties are still divided.</li><li>Do not treat all hypervisors as equal, a Type 1 bare-metal hypervisor is safer than Type 2.</li><li>Do not treat containers as perfectly isolated, they share the kernel.</li>
+      </ul>
+    </div>
+
+  <h2 id="tips">Exam tips for Session 09</h2>
+    <div class="note ok">
+      <h3>Security+ alignment</h3>
+      <ul>
+        <li>Match the attack to the fix: injection to parameterised queries; XSS to output encoding; CSRF to tokens.</li><li>The shared responsibility line is a favourite scenario, so know IaaS, PaaS, SaaS and the deployment models.</li><li>Allowlisting versus blocklisting is a direct distinction; code signing verifies origin.</li><li>Misconfiguration, not exotic attacks, is the number one cloud risk.</li><li>Know the three data states, at rest, in transit and in use, and the control for each.</li><li>Type 1 versus Type 2 hypervisor security is a recurring exam point.</li>
+      </ul>
+    </div>
+
+  <h2 id="terms">Key terms</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:28%">Term</th><th>Definition</th></tr></thead>
+        <tbody><tr><td><strong>EDR</strong></td><td>Endpoint detection and response, behaviour-based monitoring</td></tr><tr><td><strong>Allowlisting</strong></td><td>Only pre-approved software runs, blocks unknown malware</td></tr><tr><td><strong>Blocklisting</strong></td><td>Known bad software is denied, misses unknowns</td></tr><tr><td><strong>Code signing</strong></td><td>Verifies software origin and integrity before execution</td></tr><tr><td><strong>Secure baseline</strong></td><td>A documented secure configuration from a known state</td></tr><tr><td><strong>CIS benchmark</strong></td><td>Consensus security configuration guidance from CIS</td></tr><tr><td><strong>MDM</strong></td><td>Mobile device management, enrol, configure, enforce, wipe</td></tr><tr><td><strong>BYOD</strong></td><td>Bring your own device, corporate data on personal devices</td></tr><tr><td><strong>Application vetting</strong></td><td>Assessing and approving apps before corporate install</td></tr><tr><td><strong>Secure boot</strong></td><td>Verified boot chain blocks tampered firmware</td></tr><tr><td><strong>Firmware update</strong></td><td>Patching below the operating system</td></tr><tr><td><strong>Shift left</strong></td><td>Security from the first design, not the last test</td></tr><tr><td><strong>Threat modelling</strong></td><td>Finding the attack surface before code exists</td></tr><tr><td><strong>SAST / DAST</strong></td><td>Source analysis / running-application testing</td></tr><tr><td><strong>DevSecOps</strong></td><td>Security in the CI/CD pipeline, not a release gate</td></tr><tr><td><strong>Input validation</strong></td><td>Whitelisting, sanitisation and boundary checks</td></tr><tr><td><strong>SQL injection</strong></td><td>User input treated as part of the query</td></tr><tr><td><strong>XSS</strong></td><td>Attacker script runs in another user&#x27;s browser</td></tr><tr><td><strong>CSRF</strong></td><td>Forged request rides a victim&#x27;s session</td></tr><tr><td><strong>Sandboxing</strong></td><td>Isolating code to contain any compromise</td></tr><tr><td><strong>Buffer overflow</strong></td><td>Excess input overwrites memory</td></tr><tr><td><strong>Directory traversal</strong></td><td>Dot dot slash escapes the web root</td></tr><tr><td><strong>IaaS / PaaS / SaaS</strong></td><td>Infrastructure / platform / software as a service</td></tr><tr><td><strong>Community cloud</strong></td><td>Shared by organisations with common needs</td></tr><tr><td><strong>Shared responsibility</strong></td><td>Vendor secures the cloud; you secure what is in it</td></tr><tr><td><strong>CASB</strong></td><td>Cloud access security broker</td></tr><tr><td><strong>Hypervisor</strong></td><td>Type 1 bare metal or Type 2 hosted, separates the VMs</td></tr><tr><td><strong>VM escape</strong></td><td>Breaking out of the guest into the hypervisor host</td></tr></tbody>
+      </table>
+    </div>
+
+  <h2 id="selfcheck">Self-check</h2>
+    <p class="sub">Answer these from memory before you take the quiz. If you cannot
+      answer one, revisit the matching concept above.</p>
+    <ol>
+      <li>Name the five layers of the endpoint protection stack.</li><li>Why does allowlisting beat blocklisting, and what does code signing add?</li><li>What is the difference between XSS and CSRF?</li><li>Which fix stops SQL injection, and what is the role of input validation?</li><li>Where does the shared responsibility line fall for IaaS versus SaaS?</li><li>Name the four cloud deployment models and how they shift responsibility.</li><li>What is VM escape, and why is a Type 1 hypervisor safer than Type 2?</li><li>Name the three data states and the control that protects each.</li>
+    </ol>
+
+  <h2 id="reading">Further reading</h2>
+    <ul>
+      <li>OWASP Top 10, the application security risks catalogue.</li><li>NIST SP 800-218, Secure Software Development Framework (SSDF).</li><li>NIST SP 800-190, application container security guide.</li><li>CIS Benchmarks, consensus security configuration guidance.</li><li>CompTIA Security+ SY0-701 Exam Objectives, Domain 3 (Security Architecture).</li>
+    </ul>
+
+  <div class="pager"><a href="session-08-enterprise-network-security.html">&larr; Session 08: Network Security Controls</a><a href="session-10-vulnerability-management.html">Session 10: Vulnerability Management &rarr;</a></div>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="fwrap">
+    <img class="flogo" src="../assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

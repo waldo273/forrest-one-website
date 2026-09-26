@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 5 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 5 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Threats, Attack Types &amp; Threat Actors — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 5 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "2.1", "a": "Threat Actors", "c": 1, "q": "A vulnerability becomes a risk when:", "o": ["It is documented in a report", "A threat can exploit it", "It costs money to fix", "It exists on a server"], "x": ["Documentation does not create risk.", "Risk is the combination of a weakness and a threat that could exploit it.", "Cost of remediation is a management concern, not the definition of risk.", "Location does not create risk; exposure to a threat does."]}, {"d": "2.1", "a": "Threat Actors", "c": 3, "q": "Which attribute distinguishes an internal threat actor?", "o": ["Higher technical sophistication", "A political motivation base", "Greater financial funding", "Holds authorised access"], "x": ["Sophistication varies across both internal and external actors.", "Motivation is not the defining attribute of origin.", "Funding varies; it does not define origin.", "Source is the origin attribute — internal actors have or had authorised access, which makes them harder to detect."]}, {"d": "2.1", "a": "Threat Actors", "c": 0, "q": "A script kiddie is best described as:", "o": ["An unskilled attacker using pre-written tools", "A state-sponsored espionage team", "An insider with authorised access", "A hacker promoting a political or social cause"], "x": ["Script kiddies lack deep technical knowledge and rely on tools written by others.", "That is a nation-state actor or APT.", "That is an internal threat actor.", "That is a hacktivist."]}, {"d": "2.1", "a": "Threat Actors", "c": 2, "q": "What defines an advanced persistent threat (APT)?", "o": ["A single highly visible attack", "Attacks using only commodity hacker tools overall", "Long-term, stealthy, strategic operations", "Purely financial motivation"], "x": ["APTs are persistent, not single strikes.", "APTs typically develop advanced, custom capabilities.", "APTs conduct long-term, targeted attacks that remain undetected while pursuing strategic objectives.", "APT motivation is usually strategic or geopolitical, not purely financial."]}, {"d": "2.1", "a": "Threat Actors", "c": 1, "q": "Hacktivists are primarily motivated by:", "o": ["Financial extortion", "Political or social causes", "Personal revenge", "Intellectual property theft"], "x": ["Financial gain drives organised crime.", "Hacktivists use cyber means to promote a political or social cause.", "Revenge is a personal motivation, not hacktivism.", "IP theft drives competitors and espionage actors."]}, {"d": "2.1", "a": "Threat Actors", "c": 3, "q": "An employee who clicks a phishing link and causes a breach is what type of insider?", "o": ["A malicious insider", "A nation-state agent abroad", "Script kiddie", "Unintentional insider"], "x": ["The employee intended no harm.", "The employee is not an external state actor.", "This is not about skill level.", "Unintentional insiders cause harm through weak adherence to policy, lack of training or simple mistakes."]}, {"d": "2.1", "a": "Threat Actors", "c": 0, "q": "False-flag operations are used by sophisticated actors to:", "o": ["Mislead attribution elsewhere", "Increase the attack speed", "Avoid the financial cost", "Improve the patch management cycle"], "x": ["False-flag techniques make attacks appear to originate from someone else, complicating attribution.", "False flags are about deception of origin, not speed.", "Cost is unrelated to the technique.", "Patching is a defensive practice, not an attacker tactic."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 2, "q": "The attack surface includes:", "o": ["Only internet facing public web servers today", "Only the physical premises", "Physical, network, application and human", "Only unpatched legacy software"], "x": ["Internet-facing servers are one part, not the whole surface.", "Physical access is one dimension only.", "The attack surface spans physical access points, network infrastructure, applications and human factors.", "Unpatched software is one vector class, not the full surface."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 1, "q": "Which of the following is a remote access vector?", "o": ["USB drive insertion", "RDP into a server", "Console cable connection", "Fence climbing"], "x": ["USB insertion is a direct-access vector.", "Remote administration tools such as RDP, SSH and VPN are remote-access vectors.", "Console access is direct, not remote.", "Fence climbing is a physical vector, not a remote-access path."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 3, "q": "A Trojan horse delivers malware by:", "o": ["Exploiting an unpatched public web server", "Guessing the default passwords", "Sending phishing emails to staff", "Hiding inside a benign program"], "x": ["That is a vulnerable-software exploit, not a Trojan.", "That is a default-credential vector.", "That is phishing.", "A Trojan is a malicious program concealed within a benign one — a lure-based vector."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 0, "q": "A watering hole attack works by:", "o": ["Compromising sites the target visits", "Flooding the network with heavy traffic", "Brute forcing user passwords", "Cloning a legitimate mobile app"], "x": ["Watering holes compromise websites the target regularly visits, waiting for them to arrive.", "Traffic flooding is a DoS technique, not a watering hole.", "Password brute force is a credential attack.", "App cloning is a different vector class."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 2, "q": "Unsupported, end-of-life software is a serious vector because:", "o": ["It runs faster than supported versions", "It consumes more bandwidth", "It receives no security patches", "It is difficult to licence"], "x": ["Performance is irrelevant to the risk.", "Bandwidth use is not the issue.", "End-of-life software receives no patches, so every known vulnerability remains exploitable forever.", "Licensing is an administrative matter, not the security risk."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 1, "q": "Unchanged factory passwords on network devices are a vector because:", "o": ["They are hard to remember at all", "Defaults are public knowledge", "They expire far too quickly now", "They block all remote access"], "x": ["Memorability is not the security issue.", "Default credentials are publicly known — attackers try them first on routers, switches and cameras.", "Defaults typically do not expire at all.", "Defaults often enable remote access, which is part of the problem."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 3, "q": "A software supply chain attack works by:", "o": ["Phishing the vendor's own customers directly", "DDoS attack against the vendor", "Stealing the vendor's credentials", "Code injected into a product you trust"], "x": ["Phishing customers is a direct attack, not supply chain.", "DDoS disrupts availability; it does not inject code.", "Credential theft against the vendor is a step, but the defining trait is the compromised product.", "Supply chain attacks inject malicious code into products or updates that victims trust and install."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 0, "q": "The correct order of the attack chain is:", "o": ["Recon, vector, exploit, act", "Exploit, recon, act, vector overall", "Vector, act, recon, exploit", "Act, exploit, vector, recon"], "x": ["The attacker maps the surface, chooses a path, triggers the weakness, then achieves the goal.", "Reconnaissance comes before exploitation.", "The vector is chosen after recon, not before.", "The goal is achieved last, not first."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 2, "q": "Malicious documents spread malware through:", "o": ["Open network ports exposed on hosts", "Default device credentials", "Macros and scripting payloads", "Weak wireless encryption"], "x": ["Open ports are a direct/network vector.", "Default credentials are a device-configuration vector.", "Malicious documents carry macro and scripting payloads that run when the file is opened — a lure-based vector.", "Wireless weakness is a network vector."]}, {"d": "2.2", "a": "Attack Surface & Vectors", "c": 2, "q": "Which of the following is a wireless or cloud vector?", "o": ["Console cable connections to switches", "USB drives left in the car park", "A misconfigured cloud storage bucket", "Paper documents left in the bin"], "x": ["Console access is a direct physical vector.", "USB is a direct-access vector, not wireless or cloud.", "Misconfigured cloud services are explicitly listed among wireless and cloud vectors.", "Paper is a physical vector."]}, {"d": "2.1", "a": "Threat Actors", "c": 3, "q": "Organised crime groups are best characterised by:", "o": ["Political objectives and aims", "Ethical disclosure of software flaws today", "State sponsorship backing", "Profit-driven across jurisdictions"], "x": ["Political objectives fit hacktivists and nation-states.", "Ethical disclosure is a white-hat practice.", "State sponsorship defines nation-state actors.", "Organised crime is profit-driven — fraud, extortion and illicit markets — often operating across legal jurisdictions."]}, {"d": "2.1", "a": "Threat Actors", "c": 0, "q": "Competitors conducting cyber espionage most often target:", "o": ["Intellectual property and trade secrets", "Personal social media user accounts online", "Public holiday schedules", "Employee cafeteria menus"], "x": ["Competitors steal IP and trade secrets for commercial advantage.", "Personal accounts are not the commercial target.", "Public schedules have no competitive value.", "Cafeteria menus are not espionage targets."]}, {"d": "2.1", "a": "Threat Actors", "c": 1, "q": "Which motivation most often drives ransomware operators?", "o": ["Political protest", "Financial extortion", "Personal curiosity", "Geopolitical advantage"], "x": ["Political protest fits hacktivists.", "Ransomware is a financial-extortion business — payment in exchange for decryption.", "Curiosity is a lone-hacker motivation.", "Geopolitical advantage fits nation-state actors."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

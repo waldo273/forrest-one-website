@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 11 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 11 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Security Operations: Monitoring, Incident Response &amp; Forensics — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 11 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "11.1", "a": "Monitoring & Alerting", "c": 2, "q": "A baseline in monitoring is:", "o": ["The alert threshold value set", "The backup schedule", "The normal behaviour profile", "The incident plan"], "x": ["Thresholds are set relative to the baseline.", "Backups are availability.", "The baseline defines what normal looks like — deviations are then meaningful.", "The plan is for response, not detection."]}, {"d": "11.1", "a": "Monitoring & Alerting", "c": 0, "q": "Alert fatigue is dangerous because:", "o": ["Real alerts get ignored", "It slows the network down", "It uses more storage", "It disables logging"], "x": ["When alarms flood, analysts tune out — genuine incidents are missed.", "Performance is unaffected.", "Storage is trivial.", "Logging continues; attention does not."]}, {"d": "11.1", "a": "Monitoring & Alerting", "c": 3, "q": "NetFlow data provides:", "o": ["Full packet payload data", "Encryption key values", "User password hashes", "Conversation summaries"], "x": ["Payloads are packet capture.", "Keys never appear in flow data.", "Passwords are not logged in flow.", "Flow data summarises conversations — who talked to whom, how much, for how long."]}, {"d": "11.1", "a": "Monitoring & Alerting", "c": 1, "q": "Thresholds should be set to:", "o": ["Zero to catch everything now please", "Alert on meaningful deviations", "Match the backup window size", "Ignore all traffic"], "x": ["Zero thresholds flood with noise.", "Thresholds trigger only on deviations that matter — signal over noise.", "Backups are unrelated.", "Ignoring traffic removes detection."]}, {"d": "11.2", "a": "Incident Response", "c": 2, "q": "The first phase of the IR lifecycle is:", "o": ["Containment overall", "Detection", "Preparation", "Recovery"], "x": ["Containment comes after detection.", "Detection depends on prepared tools and plans.", "Preparation — plans, tools, trained people — happens before any incident.", "Recovery is near the end."]}, {"d": "11.2", "a": "Incident Response", "c": 0, "q": "Containment's main purpose is:", "o": ["Stopping the spread", "Deleting the logs", "Rebuilding the network", "Writing the report"], "x": ["Containment isolates and segments — the damage stops growing.", "Deleting logs destroys evidence.", "Rebuilding is recovery.", "The report comes at lessons learned."]}, {"d": "11.2", "a": "Incident Response", "c": 3, "q": "A drawback of immediate containment is:", "o": ["Higher bandwidth use", "Longer password reset times", "Slower user logins", "It may alert the adversary"], "x": ["Bandwidth is not the concern.", "Passwords are unrelated.", "Logins are unaffected.", "Isolating systems can tip off the attacker, who may destroy evidence or accelerate."]}, {"d": "11.2", "a": "Incident Response", "c": 1, "q": "Eradication removes:", "o": ["The backup tape sets", "The cause of the incident", "The monitoring tool fleet overall", "The evidence copies"], "x": ["Tapes are part of recovery.", "Eradication removes malware, revokes compromised credentials and closes the hole.", "Monitoring continues — intensified after the incident.", "Evidence is preserved."]}, {"d": "11.2", "a": "Incident Response", "c": 2, "q": "Recovery should restore systems from:", "o": ["The internet", "Any available media", "Validated backups", "The infected drives"], "x": ["Downloads are not recovery.", "Unvalidated media may be tainted.", "Validated, clean backups, with integrity verified after restore.", "Infected drives carry the cause forward."]}, {"d": "11.3", "a": "Forensics", "c": 0, "q": "A chain of custody documents:", "o": ["Every evidence handling", "The attacker's identity now", "The network design maps", "The patch history log"], "x": ["Who handled the evidence, when, and what changed — every handover signed.", "Attribution is analysis, not custody.", "Network design is unrelated.", "Patching is remediation."]}, {"d": "11.3", "a": "Forensics", "c": 3, "q": "Broken chain of custody means the evidence:", "o": ["Becomes encrypted data", "Is automatically deleted now", "Loses its relevance", "May be ruled inadmissible"], "x": ["Custody does not affect encryption.", "Nothing is deleted.", "Relevance is a separate question.", "If provenance cannot be proven, courts may reject the evidence entirely."]}, {"d": "11.3", "a": "Forensics", "c": 1, "q": "In order of volatility, the most volatile data is:", "o": ["Hard disk file content blocks", "CPU registers and cache", "Network log records", "Backup tape media"], "x": ["Disk survives longer.", "Registers and cache vanish in nanoseconds — capture them first.", "Logs persist on servers.", "Tapes are offline and stable."]}, {"d": "11.3", "a": "Forensics", "c": 2, "q": "A forensic image is:", "o": ["A photograph of the drive", "A compressed archive", "A bit-for-bit copy", "A logical file copy"], "x": ["Photography is not imaging.", "Compression may alter structure.", "Bit-for-bit imaging preserves every sector, including deleted and hidden data.", "Logical copies miss deleted areas."]}, {"d": "11.3", "a": "Forensics", "c": 0, "q": "Hashing the forensic image proves:", "o": ["Integrity — nothing changed", "The file's market value", "The attacker's identity here", "The disk's age"], "x": ["Matching hashes prove the image matches the original and was not altered.", "Value is not measurable by hash.", "Attribution comes from analysis.", "Age is metadata."]}, {"d": "11.3", "a": "Forensics", "c": 3, "q": "File carving recovers:", "o": ["Passwords from memory dumps today", "Network capture file data", "Deleted user account data sets", "Raw disk files, no filesystem"], "x": ["Memory analysis is a different technique.", "Captures are network evidence.", "Accounts are directory data.", "Carving finds file signatures on raw disk — even when the filesystem is gone."]}, {"d": "11.4", "a": "Indicators", "c": 1, "q": "A botnet is indicated by:", "o": ["Defragmented disk events now", "Command-and-control traffic", "Empty email inbox folders", "Low CPU usage levels seen"], "x": ["Disks are storage housekeeping.", "Infected members beacon to C2 servers and act in concert.", "Mailboxes are unrelated.", "Botnets consume CPU, not reduce it."]}, {"d": "11.4", "a": "Indicators", "c": 2, "q": "Impossible travel describes:", "o": ["A faster VPN service now", "A longer commute time daily overall", "Logins impossibly far apart", "A failed backup run"], "x": ["VPN speed is performance.", "Commutes are physical.", "Two logins in locations that cannot be reached in the elapsed time — a credential-red flag.", "Backups are availability."]}, {"d": "11.4", "a": "Indicators", "c": 0, "q": "Regular small connections to an unknown host suggest:", "o": ["A C2 beacon", "A backup job", "A firmware update", "A video stream"], "x": ["Periodic small traffic to an external host is the classic command-and-control heartbeat.", "Backups target known destinations.", "Updates come from vendor hosts.", "Streaming is high volume, not small."]}, {"d": "11.4", "a": "Indicators", "c": 3, "q": "Ransomware is most clearly indicated by:", "o": ["Open network ports", "Long system uptimes", "New user account creation events", "File renames plus ransom notes"], "x": ["Ports are network posture.", "Uptime is operational.", "Accounts are IAM events.", "Encrypted file renames, .locked extensions and ransom notes are the signature."]}, {"d": "11.4", "a": "Indicators", "c": 1, "q": "Privilege escalation as an indicator appears when:", "o": ["Disks defragment daily", "Unexpected rights gained", "Emails are auto-archived overall", "Printers queue jobs"], "x": ["Defragmentation is maintenance.", "An account suddenly gaining admin rights it never had is a classic escalation signal.", "Archiving is normal.", "Printer queues are operational."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

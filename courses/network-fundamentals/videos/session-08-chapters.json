@@ -1,0 +1,38 @@
+{
+ "session": 8,
+ "slug": "session-08-enterprise-network-security",
+ "duration": 1073.4,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: The Physical and Human Layer",
+   "frame": 1
+  },
+  {
+   "start": 209.9,
+   "title": "Chapter 2: Segmenting the Network",
+   "frame": 8
+  },
+  {
+   "start": 394.6,
+   "title": "Chapter 3: Guests and Personal Devices",
+   "frame": 14
+  },
+  {
+   "start": 531.2,
+   "title": "Chapter 4: Hardening and Admission Control",
+   "frame": 19
+  },
+  {
+   "start": 747.5,
+   "title": "Chapter 5: Keys and Content Control",
+   "frame": 26
+  },
+  {
+   "start": 915.5,
+   "title": "Chapter 6: Trust Zones and Consolidation",
+   "frame": 32
+  }
+ ]
+}

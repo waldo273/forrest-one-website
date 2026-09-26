@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 7 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 7 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Security Architecture &amp; Data Protection — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 7 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "7A", "a": "Architecture Models", "q": "Which cost pattern is typical of on-premises architecture?", "o": ["Large upfront capital spend with ongoing upkeep", "Usage-based billing that rises with tenant demand", "No hardware cost at all, only a monthly fee", "Costs that end once the equipment is installed"], "c": 0, "x": ["On-premises means buying the kit and then paying to run it.", "Usage-based billing is the cloud model, not on-premises.", "Hardware, power and staff are all real on-premises costs.", "Upkeep, licensing and refresh continue after install."]}, {"d": "7A", "a": "Architecture Models", "q": "Which deployment model gives one organisation exclusive use of the infrastructure?", "o": ["A public cloud shared between many unrelated tenants", "A private cloud dedicated to a single organisation", "A community cloud used by a shared sector group", "A hybrid cloud that spans several different models"], "c": 1, "x": ["Public cloud is shared between many unrelated tenants.", "Private means one tenant, whether run on site or hosted.", "Community cloud is shared, just within a defined sector.", "Hybrid describes a mix of models, not exclusivity."]}, {"d": "7A", "a": "Architecture Models", "q": "Under IaaS, which layer stays the customer's responsibility?", "o": ["The physical host and the hypervisor beneath it", "The data centre power, cooling and physical access", "The operating system and all of its patching", "The network fabric that connects the physical hosts"], "c": 2, "x": ["The provider owns the physical host and hypervisor in IaaS.", "Power and cooling belong to the provider's data centre.", "IaaS stops below the OS, so the guest OS is yours to patch.", "The underlying network fabric is provider-managed."]}, {"d": "7A", "a": "Architecture Models", "q": "Which statement correctly describes the shared responsibility model?", "o": ["The provider secures every workload that the customer chooses to deploy", "The customer secures the physical hosts and the provider secures the data", "Both parties split every single task equally with no defined boundary", "The provider secures the platform, the customer secures their use of it"], "c": 3, "x": ["Workloads and their configuration are the customer's job.", "The provider owns the hosts; the customer owns their data.", "The split is defined by model, not split evenly.", "The split is security OF the cloud versus security IN it."]}, {"d": "7B", "a": "Compute & Edge", "q": "Which component must be secured first on a virtualised host?", "o": ["The hypervisor that runs every guest machine", "Each individual guest operating system in turn", "The vendor management console and nothing else", "The backup agent that is installed on each guest"], "c": 0, "x": ["Compromise the hypervisor and every guest is exposed.", "Guests matter, but the hypervisor is the shared foundation.", "The console is one path in, not the whole foundation.", "A backup agent is a single guest-level component."]}, {"d": "7B", "a": "Compute & Edge", "q": "How does container isolation differ from virtual machine isolation?", "o": ["Containers emulate hardware while virtual machines share libraries", "Containers share the host kernel, virtual machines do not", "Containers require a hypervisor while virtual machines do not need one", "Containers cannot be isolated from one another under any configuration"], "c": 1, "x": ["Containers do not emulate hardware; VMs do.", "A shared kernel means a kernel flaw crosses container borders.", "It is the reverse: VMs need a hypervisor, containers do not.", "Namespaces and cgroups do isolate containers."]}, {"d": "7B", "a": "Compute & Edge", "q": "What is the main security trade-off in serverless computing?", "o": ["More servers to patch but far easier host auditing overall", "No execution limits at all but full control of the operating system", "Less infrastructure to manage but less runtime visibility", "Cheaper storage but the provider holds every encryption key used"], "c": 2, "x": ["Serverless removes servers; it does not add them to patch.", "Execution is short-lived and the OS is not yours.", "You hand off patching and lose sight of the runtime.", "Storage cost and key custody are separate matters."]}, {"d": "7B", "a": "Compute & Edge", "q": "Why do industrial control systems often resist normal patching cycles?", "o": ["Vendors never issue any patches for industrial equipment", "The devices run standard operating systems without vendor limits", "Patching is pointless because the networks are always air-gapped", "Availability of live plant matters more than rapid patching"], "c": 3, "x": ["Patches exist; the constraint is the outage to apply them.", "Many run old, embedded and vendor-locked systems.", "Air gaps are rare and are bridged when they exist.", "Taking plant down to patch can outweigh the risk patched."]}, {"d": "7C", "a": "Secure Design", "q": "What risk does infrastructure as code introduce?", "o": ["Misconfiguration can be deployed at scale, very quickly", "Manual configuration changes become far more common than before", "Environments can no longer be rebuilt from a written definition", "Secrets are always committed directly inside the source file"], "c": 0, "x": ["A bad definition propagates to every environment it builds.", "It replaces manual changes with a repeatable definition.", "Rebuildability from code is the whole point of it.", "Secrets are a risk, but they can be kept out of the code."]}, {"d": "7C", "a": "Secure Design", "q": "Which design principle limits the blast radius of a compromise?", "o": ["Granting broad access so support work is quicker to perform", "Segmenting the network by trust level and function", "Centralising every service onto one flat internal network", "Relying on a single strong firewall at the network perimeter"], "c": 1, "x": ["Broad access is what turns one breach into many.", "Segmentation stops lateral movement between zones.", "A flat network gives an attacker the whole estate.", "A single perimeter fails once anything is inside it."]}, {"d": "7C", "a": "Secure Design", "q": "Which control protects data in transit across an untrusted network?", "o": ["A file integrity hash held on the sending host", "A backup copy stored in a separate region", "An encrypted tunnel between the two endpoints", "A classification label applied to the file"], "c": 2, "x": ["A hash proves integrity, it does not conceal content.", "A backup copy is data at rest, not in transit.", "Encryption on the wire defeats interception in transit.", "A label drives handling; it does not encrypt anything."]}, {"d": "7C", "a": "Secure Design", "q": "When choosing a security control, which factor matters most?", "o": ["The number of features printed on the vendor sheet", "Whether it is the newest product in its category", "Whether competitors have already deployed the same tool", "The risk it addresses and what it costs to run"], "c": 3, "x": ["Feature counts do not map to the risk being treated.", "Novelty is not a measure of effectiveness.", "Peer adoption is not evidence of fit for your risk.", "Controls are justified by the risk they reduce."]}, {"d": "7D", "a": "Data Protection", "q": "Data described as 'in use' is data that is:", "o": ["Being processed in memory by an application", "Held on disk inside an encrypted volume", "Moving across a network between two separate hosts", "Archived to tape in an offsite vault"], "c": 0, "x": ["In use means actively loaded and processed in memory.", "On disk, encrypted or not, is the at-rest state.", "Moving between hosts is the in-transit state.", "Archived to tape is at rest, just on another medium."]}, {"d": "7D", "a": "Data Protection", "q": "What is the main purpose of a data classification scheme?", "o": ["Reducing the total volume of data being stored", "Driving how data is handled and protected", "Encrypting every file automatically at the storage layer", "Recording who created each file and when they did so"], "c": 1, "x": ["Classification does not by itself remove data.", "The label decides the handling and protection rules.", "It sets policy; the encryption is a separate control.", "Authorship metadata is not what classification is for."]}, {"d": "7D", "a": "Data Protection", "q": "Which control best protects data at rest on a stolen laptop?", "o": ["A firewall running on the device interface", "An intrusion detection agent on the host", "Full disk encryption using a strong key", "A VPN client preconfigured on the machine"], "c": 2, "x": ["A host firewall filters traffic, it does not seal the disk.", "An IDS agent detects activity on a running system.", "Without the key the disk contents stay unreadable.", "A VPN protects transit, not the stored contents."]}, {"d": "7D", "a": "Data Protection", "q": "Which method is acceptable for disposing of media holding sensitive data?", "o": ["Deleting the files and then emptying the recycle bin", "Running a quick format over the drive exactly once", "Locking the media away in a cabinet indefinitely", "Crypto-shredding or verified physical destruction"], "c": 3, "x": ["File deletion removes references, not the data blocks.", "A quick format leaves the previous content recoverable.", "Storage is not disposal; the data remains intact.", "Destroy the key or the medium itself and the data is gone."]}, {"d": "7E", "a": "Resilience & Recovery", "q": "Which configuration removes a single point of failure?", "o": ["Redundant components paired in active and passive roles", "One powerful server fitted with a fast disk array", "A single network link with double the bandwidth", "Hourly backups written to the same server's own local disk"], "c": 0, "x": ["A second component takes over if the first fails.", "One server is one point of failure however fast it is.", "One link is still a single path for all traffic.", "Backups on the same server die with that server."]}, {"d": "7E", "a": "Resilience & Recovery", "q": "Which alternate site can run workloads with no setup time?", "o": ["A warm site with power and network only", "A hot site kept fully mirrored and ready", "A cold site with floor space and cabling", "A reciprocal agreement with a partner firm"], "c": 1, "x": ["A warm site needs hardware installed before it runs.", "A hot site is live and mirrored, so it takes over at once.", "A cold site is empty space needing everything.", "Reciprocal arrangements are informal and unguaranteed."]}, {"d": "7E", "a": "Resilience & Recovery", "q": "What does recovery point objective define?", "o": ["How long the restore operation may take to finish", "How often a full backup must be tested for integrity", "How much data loss the business can tolerate", "How many backup copies must be held at an offsite location"], "c": 2, "x": ["Restore duration is the recovery TIME objective.", "Test frequency is a process choice, not the RPO.", "RPO sets the maximum acceptable data loss, so it sets backup frequency.", "Copy counts relate to the 3-2-1 rule, not the RPO."]}, {"d": "7E", "a": "Resilience & Recovery", "q": "Which control protects against a prolonged mains power failure?", "o": ["A surge protector fitted at the main supply", "An uninterruptible power supply covering only short outages", "A second power supply inside each server chassis", "A generator with fuel and a tested start sequence"], "c": 3, "x": ["Surge protection guards against spikes, not an outage.", "A UPS battery covers minutes, not hours.", "Dual supplies protect against one PSU failing, not mains.", "Only a generator sustains a load through a long outage."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

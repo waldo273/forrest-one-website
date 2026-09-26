@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Designing for trust: architecture and deployment models, compute and edge platforms, secure design principles, data protection and classification, resilience and recovery."/>
+  <title>Session 07: Security Architecture &amp; Data Protection — Network Fundamentals + CompTIA Security+ SY0-701</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header role="banner">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="brand">
+        <img class="brandlogo" src="../assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals + Security+</a></p>
+      </div>
+      <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="mainnav" id="main-nav" aria-label="Main">
+      <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="../scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+          <li><a href="../resources.html">Resources</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 07</li></ol></nav>
+  <section class="hero hero-soc">
+    <span class="weight">Session 07 of 12 &middot; Security+ core</span>
+    <h1>Security Architecture &amp; Data Protection</h1>
+    <p class="lede">Designing for trust: architecture and deployment models, compute and edge platforms, secure design principles, data protection and classification, resilience and recovery.</p>
+    <div class="pills"><span class="pill">7A Architecture Models</span><span class="pill">7B Compute &amp; Edge</span><span class="pill">7C Secure Design</span><span class="pill">7D Data Protection</span><span class="pill">7E Resilience &amp; Recovery</span></div>
+  </section>
+
+  <h2 id="video">Narrated walkthrough</h2>
+  <p class="sub">The whole session, narrated in the course voice with chapter
+    navigation. Use the chapter buttons to jump straight to a topic.</p>
+  <div class="videowrap">
+      <video id="v07" data-video="v07" controls preload="metadata"
+             poster="../assets/img/s07.png"
+             aria-label="Session 07 narrated walkthrough">
+        <source src="../videos/session-07-security-architecture.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        <a href="../videos/session-07-security-architecture.mp4">Download the MP4</a>.
+      </video>
+      <div class="videometa">
+        <h3>Session 07 &middot; narrated walkthrough</h3>
+        <p><span class="dur">36 frames</span>
+           &middot; full session narration in the course voice, with chapter navigation.</p>
+        <div class="chapters" data-for="v07"><ol><button type="button" data-start="0.0">Chapter 1: Architecture Models<span class="ts">0:00</span></button><button type="button" data-start="177.2">Chapter 2: Compute and Edge Platforms<span class="ts">2:57</span></button><button type="button" data-start="379.6">Chapter 3: Secure Design<span class="ts">6:19</span></button><button type="button" data-start="565.5">Chapter 4: Data Protection<span class="ts">9:25</span></button><button type="button" data-start="779.8">Chapter 5: Resilience and Recovery<span class="ts">12:59</span></button><button type="button" data-start="966.3">Chapter 6: Consolidation<span class="ts">16:06</span></button></ol></div>
+      </div>
+    </div>
+
+  <h2 id="concepts">Core concepts</h2>
+    <h3>4A - Authentication</h3>
+      <p>Factors: know, have, are/do, somewhere. MFA requires different categories - password+PIN is one factor. Passwords: length over complexity, no hints, managers for uniqueness. Biometrics: FAR and FRR trade off. Hard tokens (smart card, OTP, FIDO) resist phishing; soft tokens (SMS, push, apps) are convenient but some are interceptable. Passwordless uses authenticator-held keys.</p><h3>4B - Account policies &amp; authorisation</h3>
+      <p>Account types: user, privileged, service, shared, guest. Provisioning manages the user lifecycle - onboard, modify on role change, offboard promptly. Policies: lockout, time-of-day, auditing. Authorisation: permissions, least privilege, RBAC (roles), ABAC (attributes). Privileged accounts need PAM: just-in-time access, password vaulting and session recording. Identity governance reviews access, enforces policy and audits.</p><h3>4C - SSO &amp; federation</h3>
+      <p>SSO: one authentication, many apps - removes password fatigue but concentrates risk, mitigated by MFA and monitoring. Directory services (Active Directory, LDAP) are the source of truth for identities. Federation: IdP authenticates and issues a token, SP trusts the assertion. Protocols: SAML (assertions), OAuth 2.0 (authorisation), OIDC (identity on OAuth), LDAP (directory), Kerberos (tickets).</p>
+
+  <h2 id="cautions">Practical cautions</h2>
+    <div class="note warn">
+      <h3>Where marks are lost</h3>
+      <ul>
+        <li>Do not count two knowledge factors as MFA.</li><li>Do not rely on SMS as a strong second factor - it is interceptable.</li><li>Do not force password expiry without reason - NIST favours length.</li><li>Do not give service accounts more privilege than the service needs.</li><li>Do not leave departed staff accounts active - offboard promptly.</li><li>Do not expose privileged accounts without PAM - use JIT and vaulting.</li><li>Do not deploy SSO without MFA and compromise-recovery plans.</li>
+      </ul>
+    </div>
+
+  <h2 id="tips">Exam tips for Session 07</h2>
+    <div class="note ok">
+      <h3>Security+ alignment</h3>
+      <ul>
+        <li>Factor categories are the most tested IAM concept - classify before answering.</li><li>The exam pairs: RBAC/ABAC, FAR/FRR, hard/soft tokens, IdP/SP.</li><li>NIST password guidance: length, no forced periodic expiry, no common passwords.</li><li>Know the user lifecycle: provisioning, role changes and offboarding.</li><li>PAM concepts - JIT access, password vaulting, session recording - are examinable.</li><li>SAML, OAuth and OIDC roles are recognition items - know which does what.</li>
+      </ul>
+    </div>
+
+  <h2 id="terms">Key terms</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:28%">Term</th><th>Definition</th></tr></thead>
+        <tbody><tr><td><strong>Knowledge factor</strong></td><td>Something you know — password, PIN</td></tr><tr><td><strong>Ownership factor</strong></td><td>Something you have — token, smart card, phone</td></tr><tr><td><strong>Biometric factor</strong></td><td>Something you are/do — fingerprint, face, voice</td></tr><tr><td><strong>MFA</strong></td><td>Multifactor authentication — factors from different categories</td></tr><tr><td><strong>FRR / FAR</strong></td><td>False Rejection Rate (Type I) / False Acceptance Rate (Type II)</td></tr><tr><td><strong>FIDO / U2F</strong></td><td>Phishing-resistant hardware security keys</td></tr><tr><td><strong>Passwordless</strong></td><td>Authenticator-held private key plus presence gesture</td></tr><tr><td><strong>RBAC</strong></td><td>Role-based access control — permissions via roles</td></tr><tr><td><strong>ABAC</strong></td><td>Attribute-based access control — user/resource/environment attributes</td></tr><tr><td><strong>SSO</strong></td><td>Single sign-on — one authentication, many applications</td></tr><tr><td><strong>IdP / SP</strong></td><td>Identity provider / service provider in federation</td></tr><tr><td><strong>Directory service</strong></td><td>Central identity store — Active Directory, LDAP</td></tr><tr><td><strong>Provisioning</strong></td><td>Creating, modifying and removing accounts through the user lifecycle</td></tr><tr><td><strong>PAM</strong></td><td>Privileged access management — protects admin accounts</td></tr><tr><td><strong>JIT access</strong></td><td>Just-in-time access — elevated rights granted only when needed</td></tr><tr><td><strong>Identity governance</strong></td><td>Access reviews, policy enforcement and audit</td></tr><tr><td><strong>SAML / OAuth / OIDC</strong></td><td>Assertion protocol / authorisation framework / identity layer</td></tr></tbody>
+      </table>
+    </div>
+
+  <h2 id="selfcheck">Self-check</h2>
+    <p class="sub">Answer these from memory before you take the quiz. If you cannot
+      answer one, revisit the matching concept above.</p>
+    <ol>
+      <li>Name the four authentication factor categories.</li><li>Why is password plus PIN not MFA?</li><li>What are FAR and FRR, and how do they trade off?</li><li>Give one example each of a hard and a soft token.</li><li>What is the difference between RBAC and ABAC?</li><li>What is provisioning, and why is prompt offboarding important?</li><li>Why does SSO concentrate risk, and what mitigates it?</li>
+    </ol>
+
+  <h2 id="reading">Further reading</h2>
+    <ul>
+      <li>Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - IAM objectives.</li><li>NIST SP 800-63B - digital identity guidelines (password and MFA guidance).</li><li>NCSC password guidance for organisations.</li>
+    </ul>
+
+  <div class="pager"><a href="session-06-cryptography-pki.html">&larr; Session 06: Cryptography, PKI &amp; Identity</a><a href="session-08-enterprise-network-security.html">Session 08: Network Security Controls &rarr;</a></div>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="fwrap">
+    <img class="flogo" src="../assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

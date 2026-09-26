@@ -1,0 +1,38 @@
+{
+ "session": 10,
+ "slug": "session-10-vulnerability-management",
+ "duration": 1138.2,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Building from a Known Good State",
+   "frame": 1
+  },
+  {
+   "start": 221.6,
+   "title": "Chapter 2: Mobile Devices and Wireless",
+   "frame": 8
+  },
+  {
+   "start": 399.0,
+   "title": "Chapter 3: Applications and Monitoring",
+   "frame": 13
+  },
+  {
+   "start": 575.8,
+   "title": "Chapter 4: The Asset Lifecycle",
+   "frame": 19
+  },
+  {
+   "start": 754.2,
+   "title": "Chapter 5: Vulnerability Management",
+   "frame": 25
+  },
+  {
+   "start": 978.6,
+   "title": "Chapter 6: Monitoring Tools and Technologies",
+   "frame": 32
+  }
+ ]
+}

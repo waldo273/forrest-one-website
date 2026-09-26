@@ -1,0 +1,576 @@
+{
+ "1": {
+  "count": 35,
+  "deck": "Network Foundations: Networking Models & IP Addressing",
+  "session": "Session 1 · Network Foundations",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "The Language of Networks",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 3,
+    "tpl": "chapter",
+    "title": "The OSI Model",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 7,
+    "tpl": "chapter",
+    "title": "Physical and Data Link",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Network, Transport and Above",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 19,
+    "tpl": "chapter",
+    "title": "Media and Topologies",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 26,
+    "tpl": "chapter",
+    "title": "IPv4 Addressing and Subnetting",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "2": {
+  "count": 36,
+  "deck": "Switching, VLANs & Network Architectures",
+  "session": "Session 2 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Network Infrastructure Devices",
+    "num": 1,
+    "of": 5
+   },
+   {
+    "idx": 6,
+    "tpl": "chapter",
+    "title": "Cloud Networking and Routing Foundations",
+    "num": 2,
+    "of": 5
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Route Selection, Translation and Inter-Vlan Routing",
+    "num": 3,
+    "of": 5
+   },
+   {
+    "idx": 20,
+    "tpl": "chapter",
+    "title": "Vlans, Switching and Spanning Tree",
+    "num": 4,
+    "of": 5
+   },
+   {
+    "idx": 27,
+    "tpl": "chapter",
+    "title": "Wireless and Physical Deployment",
+    "num": 5,
+    "of": 5
+   }
+  ]
+ },
+ "3": {
+  "count": 36,
+  "deck": "Network Services & the Attack Surface",
+  "session": "Session 3 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Ports, Protocols and Traffic Types",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 5,
+    "tpl": "chapter",
+    "title": "Documentation, Agreements and Surveys",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 11,
+    "tpl": "chapter",
+    "title": "Life-Cycle and Controlled Change",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 16,
+    "tpl": "chapter",
+    "title": "Configuration and Monitoring Tools",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 21,
+    "tpl": "chapter",
+    "title": "Baselines, Logs and Resilience",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 28,
+    "tpl": "chapter",
+    "title": "Core Services and Remote Access",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "4": {
+  "count": 36,
+  "deck": "Fundamental Security Concepts",
+  "session": "Session 4 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Why Controls Exist",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 5,
+    "tpl": "chapter",
+    "title": "Classifying Controls by Category",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 10,
+    "tpl": "chapter",
+    "title": "What Each Control Type Does",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 16,
+    "tpl": "chapter",
+    "title": "Proving Identity and Keeping Records",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 22,
+    "tpl": "chapter",
+    "title": "Accounting and Zero Trust",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 27,
+    "tpl": "chapter",
+    "title": "Deception and Change Control",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "5": {
+  "count": 36,
+  "deck": "Threats, Attack Types & Threat Actors",
+  "session": "Session 5 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Know the Adversary",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 5,
+    "tpl": "chapter",
+    "title": "The Attack Surface",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 11,
+    "tpl": "chapter",
+    "title": "Vulnerabilities",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 16,
+    "tpl": "chapter",
+    "title": "Malware and Credential Attacks",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 22,
+    "tpl": "chapter",
+    "title": "Attacks on the Network",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 29,
+    "tpl": "chapter",
+    "title": "Mitigation",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "6": {
+  "count": 36,
+  "deck": "Cryptography & Public Key Infrastructure",
+  "session": "Session 6 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "The Three Jobs and the Security Vocabulary",
+    "num": 1,
+    "of": 5
+   },
+   {
+    "idx": 6,
+    "tpl": "chapter",
+    "title": "Integrity, Signatures and Trust",
+    "num": 2,
+    "of": 5
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Cryptographic Applications and the Paper Trail",
+    "num": 3,
+    "of": 5
+   },
+   {
+    "idx": 20,
+    "tpl": "chapter",
+    "title": "Identity and Access Management",
+    "num": 4,
+    "of": 5
+   },
+   {
+    "idx": 27,
+    "tpl": "chapter",
+    "title": "Controlling Access",
+    "num": 5,
+    "of": 5
+   }
+  ]
+ },
+ "7": {
+  "count": 36,
+  "deck": "Identity & Access Management",
+  "session": "Session 7 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Architecture Models",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 6,
+    "tpl": "chapter",
+    "title": "Compute and Edge Platforms",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Secure Design",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 19,
+    "tpl": "chapter",
+    "title": "Data Protection",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 26,
+    "tpl": "chapter",
+    "title": "Resilience and Recovery",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 32,
+    "tpl": "chapter",
+    "title": "Consolidation",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "8": {
+  "count": 36,
+  "deck": "Enterprise Network Security: Firewalls, IDS, IPS, VPNs & Secure Protocols",
+  "session": "Session 8 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "The Physical and Human Layer",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 7,
+    "tpl": "chapter",
+    "title": "Segmenting the Network",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Guests and Personal Devices",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 18,
+    "tpl": "chapter",
+    "title": "Hardening and Admission Control",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 25,
+    "tpl": "chapter",
+    "title": "Keys and Content Control",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 31,
+    "tpl": "chapter",
+    "title": "Trust Zones and Consolidation",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "9": {
+  "count": 36,
+  "deck": "Endpoint, Application, Cloud & Virtualisation Security",
+  "session": "Session 9 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Troubleshooting Methodology",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 5,
+    "tpl": "chapter",
+    "title": "Cable, Connector and Interface Faults",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 12,
+    "tpl": "chapter",
+    "title": "Wireless and Switching Faults",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 18,
+    "tpl": "chapter",
+    "title": "Routing, Filtering and Addressing",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 25,
+    "tpl": "chapter",
+    "title": "Congestion, Latency and Packet Loss",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 30,
+    "tpl": "chapter",
+    "title": "The Troubleshooting Toolset",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "10": {
+  "count": 36,
+  "deck": "Vulnerability Management, Resiliency & Asset Protection",
+  "session": "Session 10 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Building from a Known Good State",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 7,
+    "tpl": "chapter",
+    "title": "Mobile Devices and Wireless",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 12,
+    "tpl": "chapter",
+    "title": "Applications and Monitoring",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 18,
+    "tpl": "chapter",
+    "title": "The Asset Lifecycle",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 24,
+    "tpl": "chapter",
+    "title": "Vulnerability Management",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 31,
+    "tpl": "chapter",
+    "title": "Monitoring Tools and Technologies",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "11": {
+  "count": 36,
+  "deck": "Security Operations: Monitoring, Incident Response & Forensics",
+  "session": "Session 11 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Monitoring and Network Security Devices",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 7,
+    "tpl": "chapter",
+    "title": "Endpoint and Data Controls",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 13,
+    "tpl": "chapter",
+    "title": "Identity, Access and Automation",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 20,
+    "tpl": "chapter",
+    "title": "Incident Response",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 25,
+    "tpl": "chapter",
+    "title": "Threat Hunting and Forensic Evidence",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 30,
+    "tpl": "chapter",
+    "title": "Logs, Investigation and Consolidation",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ },
+ "12": {
+  "count": 36,
+  "deck": "Governance, Risk, Compliance & Exam Consolidation",
+  "session": "Session 12 · Security+ SY0-701 (revised)",
+  "marks": [
+   {
+    "idx": 0,
+    "tpl": "chapter",
+    "title": "Governance Foundations",
+    "num": 1,
+    "of": 6
+   },
+   {
+    "idx": 6,
+    "tpl": "chapter",
+    "title": "External Obligations and Risk Identification",
+    "num": 2,
+    "of": 6
+   },
+   {
+    "idx": 12,
+    "tpl": "chapter",
+    "title": "Risk Analysis, Registers and Treatment",
+    "num": 3,
+    "of": 6
+   },
+   {
+    "idx": 17,
+    "tpl": "chapter",
+    "title": "Risk Reporting, Business Impact and Vendors",
+    "num": 4,
+    "of": 6
+   },
+   {
+    "idx": 23,
+    "tpl": "chapter",
+    "title": "Compliance, Privacy and Audit",
+    "num": 5,
+    "of": 6
+   },
+   {
+    "idx": 28,
+    "tpl": "chapter",
+    "title": "Assurance, Testing and Awareness",
+    "num": 6,
+    "of": 6
+   }
+  ]
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "session": 4,
+ "slug": "session-04-security-concepts",
+ "duration": 1126.0,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Why Controls Exist",
+   "frame": 1
+  },
+  {
+   "start": 155.6,
+   "title": "Chapter 2: Classifying Controls by Category",
+   "frame": 6
+  },
+  {
+   "start": 316.5,
+   "title": "Chapter 3: What Each Control Type Does",
+   "frame": 11
+  },
+  {
+   "start": 503.9,
+   "title": "Chapter 4: Proving Identity and Keeping Records",
+   "frame": 17
+  },
+  {
+   "start": 685.9,
+   "title": "Chapter 5: Accounting and Zero Trust",
+   "frame": 23
+  },
+  {
+   "start": 849.9,
+   "title": "Chapter 6: Deception and Change Control",
+   "frame": 28
+  }
+ ]
+}

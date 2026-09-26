@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="The services that make IP networks usable — DNS, DHCP, NTP and SSH — and the attacks that target each: poisoning, rogue servers, amplification and brute force, with the Kali commands that verify them."/>
-  <title>Session 3: Network Services &amp; the Attack Surface, Network Fundamentals, Course Pack</title>
+  <meta name="description" content="The operational core: ports and protocols, documentation and agreements, the life-cycle and controlled change, configuration and monitoring tools, baselines and resilience, and the core services that keep networks usable."/>
+  <title>Session 03: Network Services, Operations &amp; Troubleshooting — Network Fundamentals + CompTIA Security+ SY0-701</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
   <link rel="stylesheet" href="../assets/css/style.css"/>
-  <link rel="stylesheet" href="../assets/css/app.css?v=2"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -16,83 +15,117 @@
   <div class="hwrap">
     <div class="brandrow">
       <div class="brand">
-        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
-        <p class="sitebrand"><a href="../index">Network Fundamentals</a></p>
+        <img class="brandlogo" src="../assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals + Security+</a></p>
       </div>
       <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
     </div>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="mainnav" id="main-nav" aria-label="Main">
       <ul>
-<li><a href="/courses/">Courses</a></li>
-<li><a href="../index">Home</a></li>
-<li><a href="../sessions" aria-current="page">Sessions</a></li>
-<li><a href="../quizzes">Quizzes</a></li>
-<li><a href="../final-exam">Final Exam</a></li>
-<li><a href="../notes">Student Notes</a></li>
-<li><a href="../glossary">Glossary</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="../scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+          <li><a href="../resources.html">Resources</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="main">
-
-
-
-<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index">Home</a></li><li><a href="../sessions">Sessions</a></li><li aria-current="page">Session 3</li></ol></nav>
-  <section class="hero">
-    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 3 of 12</span>
-    <h1>Network Services &amp; the Attack Surface</h1>
-    <p class="lede">The services that make IP networks usable — DNS, DHCP, NTP and SSH — and the attacks that target each: poisoning, rogue servers, amplification and brute force, with the Kali commands that verify them.</p>
-    <div class="pills">
-<span class="pill">3A</span><span class="pill">3B</span><span class="pill">3C</span><span class="pill">3D</span>
-    </div>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 03</li></ol></nav>
+  <section class="hero hero-soc">
+    <span class="weight">Session 03 of 12 &middot; Network foundation</span>
+    <h1>Network Services, Operations &amp; Troubleshooting</h1>
+    <p class="lede">The operational core: ports and protocols, documentation and agreements, the life-cycle and controlled change, configuration and monitoring tools, baselines and resilience, and the core services that keep networks usable.</p>
+    <div class="pills"><span class="pill">3A Ports &amp; Protocols</span><span class="pill">3B Documentation &amp; Agreements</span><span class="pill">3C Life-Cycle &amp; Change</span><span class="pill">3D Configuration &amp; Monitoring</span><span class="pill">3E Baselines &amp; Resilience</span><span class="pill">3F Core Services</span></div>
   </section>
-  <h2 id="video">Session video</h2>
-  <p class="sub">Narrated walkthrough of this session.</p>
-  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
-    <source src="../videos/session-03-network-services.mp4" type="video/mp4"/>
-    Your browser does not support the video tag.
-  </video>
 
-  <h2 id="outcomes">Learning outcomes</h2>
-  <p class="sub">By the end of this session, candidates will be able to:</p>
-  <div class="aims">
+  <h2 id="video">Narrated walkthrough</h2>
+  <p class="sub">The whole session, narrated in the course voice with chapter
+    navigation. Use the chapter buttons to jump straight to a topic.</p>
+  <div class="videowrap">
+      <video id="v03" data-video="v03" controls preload="metadata"
+             poster="../assets/img/s03.png"
+             aria-label="Session 03 narrated walkthrough">
+        <source src="../videos/session-03-network-services.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        <a href="../videos/session-03-network-services.mp4">Download the MP4</a>.
+      </video>
+      <div class="videometa">
+        <h3>Session 03 &middot; narrated walkthrough</h3>
+        <p><span class="dur">36 frames</span>
+           &middot; full session narration in the course voice, with chapter navigation.</p>
+        <div class="chapters" data-for="v03"><ol><button type="button" data-start="0.0">Chapter 1: Ports, Protocols and Traffic Types<span class="ts">0:00</span></button><button type="button" data-start="146.4">Chapter 2: Documentation, Agreements and Surveys<span class="ts">2:26</span></button><button type="button" data-start="331.2">Chapter 3: Life-Cycle and Controlled Change<span class="ts">5:31</span></button><button type="button" data-start="472.8">Chapter 4: Configuration and Monitoring Tools<span class="ts">7:52</span></button><button type="button" data-start="609.6">Chapter 5: Baselines, Logs and Resilience<span class="ts">10:09</span></button><button type="button" data-start="807.7">Chapter 6: Core Services and Remote Access<span class="ts">13:27</span></button></ol></div>
+      </div>
+    </div>
+
+  <h2 id="concepts">Core concepts</h2>
+    <h3>3A - DNS</h3>
+      <p>DNS hierarchy: root, TLD, authoritative, recursive resolver. Record types: A, AAAA, CNAME, MX, NS, TXT, PTR. Attacks: cache poisoning (forged answers redirect users), tunnelling (data inside queries), amplification (spoofed small queries, huge responses). DNSSEC signs responses so forgery fails. Recursive resolvers should be restricted to internal clients - an open resolver is a public amplification tool that widens the attack surface. Distinguish spoofing (forging one reply) from poisoning (planting it in the cache for all users).</p><h3>3B - DHCP</h3>
+      <p>DORA: Discover, Offer, Request, Ack. T1 at 50% of lease triggers unicast renewal; T2 at 87.5% triggers broadcast rebind. Attacks: rogue servers assign malicious gateways/DNS (a man-in-the-middle chain); starvation exhausts the pool. Defence: DHCP snooping builds a MAC-to-IP-to-port binding table on the switch, and segmentation contains a rogue server to one segment.</p><h3>3C - NTP</h3>
+      <p>Stratum 0 atomic/GPS sources, stratum 1 servers, stratum 2 onward. UDP 123. Attacks: amplification via monlist (up to 100× response), spoofing to shift time. Mitigations: authenticated NTP (NTS), restricted access. Forensic rule: verify clock offset before acquiring evidence - minutes of offset corrupt timelines. Wrong clocks also break Kerberos ticket validation, so accurate time is infrastructure, not a convenience.</p><h3>3D - SSH</h3>
+      <p>TCP 22. Key exchange derives a shared session key without transmission. Key-based auth beats passwords - keys are never sent and resist brute force. Hardening: PermitRootLogin no, PasswordAuthentication no, LogLevel VERBOSE, AllowUsers, ClientAliveInterval. Verification: ss -tnp, journalctl -u ssh, grep sshd /var/log/auth.log. Hardening shrinks the attack surface: disabling password auth removes brute force as a threat class, and restricting users denies everyone else.</p>
+
+  <h2 id="cautions">Practical cautions</h2>
+    <div class="note warn">
+      <h3>Where marks are lost</h3>
+      <ul>
+        <li>Do not run an open recursive DNS resolver - it is a public amplification tool.</li><li>Do not leave the native VLAN or DHCP ports unguarded - both are entry points.</li><li>Do not trust a forensic timeline from a system whose clock was never verified.</li><li>Do not use password authentication for SSH when keys are available.</li><li>Do not ignore unexpected listening ports in ss -tuln - that is how compromise shows.</li><li>Do not let unnecessary services run - each one widens the attack surface.</li>
+      </ul>
+    </div>
+
+  <h2 id="tips">Exam tips for Session 03</h2>
+    <div class="note ok">
+      <h3>Security+ alignment</h3>
+      <ul>
+        <li>DNSSEC stops poisoning; DHCP snooping stops rogue servers - match the control to the attack.</li><li>NTP amplification and DNS amplification are both DDoS scenarios - know the mechanism.</li><li>SSH hardening settings appear in scenario questions - remember PermitRootLogin no.</li><li>The service-port table (22 SSH, 53 DNS, 67/68 DHCP, 123 NTP) is core knowledge.</li><li>Spoofing forges one reply; poisoning plants it in a cache - an exam-favourite distinction.</li><li>Reducing the attack surface is a stated security principle - closing unused services is an example.</li>
+      </ul>
+    </div>
+
+  <h2 id="terms">Key terms</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:28%">Term</th><th>Definition</th></tr></thead>
+        <tbody><tr><td><strong>DNS</strong></td><td>Translates names to addresses — the internet&#x27;s directory</td></tr><tr><td><strong>A / AAAA record</strong></td><td>Name to IPv4 / name to IPv6</td></tr><tr><td><strong>CNAME</strong></td><td>Alias for another name</td></tr><tr><td><strong>MX record</strong></td><td>Mail exchange server for a domain</td></tr><tr><td><strong>TXT record</strong></td><td>SPF, DKIM, DMARC text records</td></tr><tr><td><strong>Cache poisoning</strong></td><td>Forged DNS response inserted into a resolver&#x27;s cache</td></tr><tr><td><strong>DNS tunnelling</strong></td><td>Data exfiltrated inside DNS queries</td></tr><tr><td><strong>DNS amplification</strong></td><td>Small queries drawing large responses — DDoS fuel</td></tr><tr><td><strong>DNSSEC</strong></td><td>Cryptographic signing of DNS responses</td></tr><tr><td><strong>DHCP DORA</strong></td><td>Discover, Offer, Request, Ack — the address assignment process</td></tr><tr><td><strong>T1 / T2 timers</strong></td><td>Lease renewal at 50% / rebind at 87.5%</td></tr><tr><td><strong>Rogue DHCP server</strong></td><td>Unauthorised server assigning malicious settings</td></tr><tr><td><strong>DHCP starvation</strong></td><td>Spoofed MACs exhausting the address pool</td></tr><tr><td><strong>DHCP snooping</strong></td><td>Switch filter trusting only authorised DHCP ports</td></tr><tr><td><strong>NTP</strong></td><td>Network Time Protocol — clock synchronisation, UDP 123</td></tr><tr><td><strong>Stratum</strong></td><td>Distance from the authoritative time source</td></tr><tr><td><strong>SSH</strong></td><td>Encrypted remote access replacing Telnet — TCP 22</td></tr><tr><td><strong>Key-based auth</strong></td><td>Public key stored on the server; private key proves possession</td></tr><tr><td><strong>Attack surface</strong></td><td>The sum of entry points an attacker can use to enter or extract data</td></tr><tr><td><strong>Threat vector</strong></td><td>The path or method an attacker uses to reach the attack surface</td></tr></tbody>
+      </table>
+    </div>
+
+  <h2 id="selfcheck">Self-check</h2>
+    <p class="sub">Answer these from memory before you take the quiz. If you cannot
+      answer one, revisit the matching concept above.</p>
+    <ol>
+      <li>What is the purpose of the T1 timer in DHCP?</li><li>What is the difference between an authoritative DNS server and a recursive resolver?</li><li>How does DNS cache poisoning work, and what stops it?</li><li>How does NTP amplification work?</li><li>Why is key-based SSH authentication more secure than passwords?</li><li>What command shows all listening TCP and UDP services on Linux?</li><li>How does closing unused services reduce the attack surface?</li>
+    </ol>
+
+  <h2 id="reading">Further reading</h2>
     <ul>
-<li>Explain the DNS hierarchy: root, TLD, authoritative and recursive resolvers.</li><li>Name the common DNS record types and their purposes.</li><li>Describe DNS cache poisoning, tunnelling and amplification attacks, and the role of DNSSEC.</li><li>Explain the DHCP DORA process and the T1/T2 lease timers.</li><li>Describe rogue DHCP servers and DHCP starvation, and how DHCP snooping counters them.</li><li>Explain NTP's stratum hierarchy and why accurate time matters to forensics.</li><li>Describe NTP amplification and spoofing, and the mitigations.</li><li>Explain SSH's connection establishment and key-based authentication.</li><li>List the core SSH hardening settings.</li><li>Use dig, ntpq, ss and journalctl to verify services and read evidence on Kali Linux.</li><li>Explain how closing unused services and hardening reduce the attack surface.</li>
-    </ul>
-  </div>
-  <h2 id="resources">Section resources</h2>
-  <p class="sub">One section quiz for this session.</p>
-<ul class="reslist">
-      <li><a class="resbtn" href="../quizzes/session-03-quiz"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+      <li>RFC 1034/1035 - DNS concepts and implementation.</li><li>RFC 2131 - DHCP.</li><li>RFC 5905 - NTPv4.</li><li>RFC 4251 - SSH protocol architecture.</li><li>UK National Cyber Security Centre - network security guidance.</li>
     </ul>
 
-  <h2 id="areas">What this session is about</h2>
-  <p class="sub">What this session covers, with teaching notes area by area.</p>
-  <div class="teachnotes">
-<h3>3A — DNS</h3>
-<p>DNS hierarchy: root, TLD, authoritative, recursive resolver. Record types: A, AAAA, CNAME, MX, NS, TXT, PTR. Attacks: cache poisoning (forged answers redirect users), tunnelling (data inside queries), amplification (spoofed small queries, huge responses). DNSSEC signs responses so forgery fails. Recursive resolvers should be restricted to internal clients — an open resolver is a public amplification tool that widens the attack surface. Distinguish spoofing (forging one reply) from poisoning (planting it in the cache for all users).</p>
-<h3>3B — DHCP</h3>
-<p>DORA: Discover, Offer, Request, Ack. T1 at 50% of lease triggers unicast renewal; T2 at 87.5% triggers broadcast rebind. Attacks: rogue servers assign malicious gateways/DNS (a man-in-the-middle chain); starvation exhausts the pool. Defence: DHCP snooping builds a MAC-to-IP-to-port binding table on the switch, and segmentation contains a rogue server to one segment.</p>
-<h3>3C — NTP</h3>
-<p>Stratum 0 atomic/GPS sources, stratum 1 servers, stratum 2 onward. UDP 123. Attacks: amplification via monlist (up to 100× response), spoofing to shift time. Mitigations: authenticated NTP (NTS), restricted access. Forensic rule: verify clock offset before acquiring evidence — minutes of offset corrupt timelines. Wrong clocks also break Kerberos ticket validation, so accurate time is infrastructure, not a convenience.</p>
-<h3>3D — SSH</h3>
-<p>TCP 22. Key exchange derives a shared session key without transmission. Key-based auth beats passwords — keys are never sent and resist brute force. Hardening: PermitRootLogin no, PasswordAuthentication no, LogLevel VERBOSE, AllowUsers, ClientAliveInterval. Verification: ss -tnp, journalctl -u ssh, grep sshd /var/log/auth.log. Hardening shrinks the attack surface: disabling password auth removes brute force as a threat class, and restricting users denies everyone else.</p>
-  </div>
-  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-02-switching-vlans">&#8592; Session 2</a> <a class="navbtn" href="../sessions">Sessions</a> <a class="navbtn" href="session-04-security-concepts">Session 4 &#8594;</a></nav>
+  <div class="pager"><a href="session-02-switching-vlans.html">&larr; Session 02: Switching &amp; Routing</a><a href="session-04-security-concepts.html">Session 04: Security Controls &amp; Concepts &rarr;</a></div>
 
 </main>
 
-<script src="../assets/js/site.js"></script>
-<script src="../assets/js/app.js"></script>
 <footer role="contentinfo">
   <div class="fwrap">
-    <p>© 2026 Billy Forrest</p>
-    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
-    <p>Training material is original and vendor-neutral. This is an independent revision pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+    <img class="flogo" src="../assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
   </div>
 </footer>
+<script src="../assets/js/site.js"></script>
 </body>
 </html>

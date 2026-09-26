@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 4 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 4 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Fundamental Security Concepts — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 4 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "1.1", "a": "Security Concepts", "c": 0, "q": "Which statement best describes confidentiality?", "o": ["Read only by authorised persons", "Data is always correct and fully up to date", "Systems are available whenever they are needed", "Users cannot deny their past actions at all"], "x": ["Confidentiality means information should only be read by authorised persons — the read-side of the CIA triad.", "Correctness is not a CIA pillar; integrity concerns authorised change, not truth.", "That is availability, not confidentiality.", "That is non-repudiation."]}, {"d": "1.1", "a": "Security Concepts", "c": 2, "q": "A file is modified by an attacker without authorisation. Which pillar is breached?", "o": ["Confidentiality only", "Availability only", "Integrity", "Non-repudiation"], "x": ["Confidentiality concerns unauthorised reading, not modification.", "Availability concerns access to systems, not modification of data.", "Integrity means data is stored and transferred as intended and any modification is authorised — an unauthorised change breaches integrity.", "Non-repudiation concerns denial of actions, not the modification itself."]}, {"d": "1.1", "a": "Security Concepts", "c": 3, "q": "Non-repudiation provides:", "o": ["Faster system recovery after faults occur", "Guaranteed uptime for all services", "Encrypted storage of data at rest", "Proof of who created or modified data"], "x": ["Recovery speed is an availability matter.", "Uptime is an availability matter.", "Encryption protects confidentiality, not proof of origin.", "Non-repudiation means persons cannot deny creating or modifying data — proof of origin and action, typically via signatures and logs."]}, {"d": "1.1", "a": "Security Concepts", "c": 1, "q": "Which mechanism primarily supports non-repudiation?", "o": ["A backup and restore schedule plan", "Digital signatures and audit logs", "A password manager vault", "A firewall rule set in use"], "x": ["Backups support availability and recovery.", "Digital signatures prove origin and audit logs prove actions — together they prevent denial.", "Password managers store credentials; they do not prove actions.", "Firewalls enforce access rules; they do not prove origin."]}, {"d": "1.1", "a": "Security Concepts", "c": 0, "q": "Which order describes the AAA framework?", "o": ["Identify, authenticate, authorise, account", "Authenticate, identify, account, authorise overall", "Authorise, account, identify, authenticate", "Account, authorise, authenticate, identify"], "x": ["The user first claims an identity, proves it, permissions are checked, then usage is logged — identification, authentication, authorisation, accounting.", "The claim of identity comes before proof.", "Authorisation depends on successful authentication.", "Logging happens after access is granted."]}, {"d": "1.1", "a": "Security Concepts", "c": 3, "q": "In AAA, accounting means:", "o": ["Issuing passwords to new users", "Calculating the cost of the system", "Checking permissions before action", "Logging and auditing usage"], "x": ["Issuing passwords is part of authentication management.", "Financial cost is not an AAA step.", "Checking permissions is authorisation.", "Accounting tracks permission usage in logs, and the user cannot prevent this auditing."]}, {"d": "1.1", "a": "Security Concepts", "c": 2, "q": "A gap analysis measures:", "o": ["The speed of the current network links", "The number of open network ports", "Current posture against a framework", "The age of the server hardware"], "x": ["Network speed is a performance measure, not posture.", "Open ports are a vulnerability-scan finding.", "Gap analysis compares the current security posture against a target framework, producing a scored maturity view.", "Hardware age is asset data, not a framework comparison."]}, {"d": "1.1", "a": "Security Concepts", "c": 1, "q": "The five NIST Cybersecurity Framework functions are:", "o": ["Plan, build, run, monitor, retire", "Identify, protect, detect, respond, recover", "Assess, design, deploy, test, audit", "Prevent, block, contain, eradicate, restore overall"], "x": ["That is a system lifecycle, not the CSF.", "The CSF functions are identify, protect, detect, respond and recover.", "That is a project delivery sequence.", "Those resemble incident-response phases, not the CSF."]}, {"d": "1.2", "a": "Security Controls", "c": 0, "q": "A firewall is an example of which control category?", "o": ["Technical", "Managerial", "Operational", "Physical"], "x": ["A firewall is implemented in systems and software — a technical control.", "Managerial controls are policies and oversight.", "Operational controls depend on a person — training, guards.", "Physical controls mediate access to premises and hardware."]}, {"d": "1.2", "a": "Security Controls", "c": 2, "q": "A security policy that staff must follow is which functional type?", "o": ["Deterrent", "Preventive", "Directive", "Corrective"], "x": ["A deterrent psychologically discourages intrusions.", "A preventive control physically or logically restricts access.", "A policy enforces a rule of behaviour — the directive type.", "A corrective control responds after an incident."]}, {"d": "1.2", "a": "Security Controls", "c": 3, "q": "An intrusion detection system operates:", "o": ["Before an attack, blocking access", "After an attack, restoring service", "Only during scheduled maintenance", "During an attack, identifying it"], "x": ["Blocking access is preventive, before the attack.", "Restoring service is corrective, after the attack.", "Maintenance windows are irrelevant to the control type.", "Detective controls identify attempted or successful intrusions — they operate during an attack."]}, {"d": "1.2", "a": "Security Controls", "c": 1, "q": "A visible CCTV camera over the entrance is primarily:", "o": ["Corrective", "Deterrent", "Compensating", "Detective"], "x": ["Corrective controls fix incidents after they occur.", "A visible camera psychologically discourages intrusion — the deterrent type, even though footage is also detective.", "Compensating substitutes for a missing principal control.", "It records (detective), but its visible deterrent effect is the primary functional purpose."]}, {"d": "1.2", "a": "Security Controls", "c": 0, "q": "Your organisation cannot afford biometric readers, so it enforces strong passcodes instead. This is:", "o": ["A compensating control", "A preventive security control", "A directive control", "A deterrent control"], "x": ["A compensating control substitutes for a principal control that cannot be implemented — passcodes stand in for biometrics.", "Preventive describes blocking, not substitution.", "Directive describes enforcing behaviour via policy.", "Deterrent describes psychological discouragement."]}, {"d": "1.3", "a": "Security Principles", "c": 2, "q": "Defence in depth means:", "o": ["One single very strong control", "The same control repeated exactly twice", "Layered controls, no single point of failure", "Moving all security to the network perimeter overall"], "x": ["Defence in depth is about layers, not a single control.", "Repeating the same control does not diversify the layers.", "Defence in depth layers independent controls so no single failure exposes the asset.", "Modern security is distributed, not perimeter-only."]}, {"d": "1.3", "a": "Security Principles", "c": 3, "q": "The principle of least privilege grants users:", "o": ["Every permission available", "Permissions for one day only", "Administrator rights by default", "Only the access they need"], "x": ["Maximum permissions are the opposite of least privilege.", "Duration is not the point; scope is.", "Admin by default violates least privilege.", "Least privilege grants only the access required for the role — nothing more."]}, {"d": "1.3", "a": "Security Principles", "c": 1, "q": "Separation of duties prevents:", "o": ["Network congestion and packet delays today", "One person controlling a critical process", "Password reuse across accounts", "Data at rest exposure in storage media"], "x": ["Congestion is a network design issue.", "Separation of duties ensures no single person controls a critical process end to end — fraud and error need collusion.", "Password reuse is a credential-hygiene issue.", "Data-at-rest exposure is addressed by encryption."]}, {"d": "1.3", "a": "Security Principles", "c": 0, "q": "Which statement about zero trust is correct?", "o": ["It verifies every request, regardless of origin", "It trusts everything inside the corporate network", "It is a firewall product you purchase", "It applies only to cloud hosted services"], "x": ["Zero trust verifies every request whatever its origin — no implicit trust inside the perimeter.", "Implicit trust inside the perimeter is the legacy model zero trust replaces.", "Zero trust is a design principle, not a single product.", "Zero trust applies across on-premises, cloud and hybrid environments."]}, {"d": "1.4", "a": "Roles & Responsibilities", "c": 2, "q": "Who is accountable for a data set's classification and protection?", "o": ["The security analyst", "The data custodian", "The data owner", "The auditor"], "x": ["The analyst monitors and responds to incidents.", "The custodian implements controls; the owner is accountable.", "The data owner is accountable for classification and protection decisions.", "The auditor verifies controls independently."]}, {"d": "1.4", "a": "Roles & Responsibilities", "c": 3, "q": "The day-to-day management of security systems and compliance is typically the responsibility of the:", "o": ["The Chief Executive Officer role", "The data custodian role", "The security auditor function itself overall", "Information Systems Security Officer"], "x": ["The CEO owns the business, not day-to-day security management.", "The custodian implements controls, not programme management.", "The auditor reviews independently rather than managing.", "The ISSO manages day-to-day security systems and compliance — the operational owner of the programme."]}, {"d": "1.4", "a": "Roles & Responsibilities", "c": 1, "q": "An independent review of security controls is performed by the:", "o": ["Data owner", "Auditor", "Network engineer", "Help desk analyst"], "x": ["The owner is accountable for data, not independent review.", "The auditor independently reviews controls and compliance — independence is the point.", "Engineers build and run systems; they do not audit them.", "Help desk staff support users, not audit controls."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

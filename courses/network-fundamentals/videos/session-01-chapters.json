@@ -1,31 +1,38 @@
 {
-  "session": 1,
-  "deck": "Network Foundations: Networking Models & IP Addressing",
-  "chapters": [
-    {
-      "num": 1,
-      "title": "Models & the Journey of Data",
-      "start": 0.0
-    },
-    {
-      "num": 2,
-      "title": "IPv4 Addressing & Subnetting",
-      "start": 133.1
-    },
-    {
-      "num": 3,
-      "title": "VLSM & Security Zones",
-      "start": 236.5
-    },
-    {
-      "num": 4,
-      "title": "IPv6 Addressing",
-      "start": 306.5
-    },
-    {
-      "num": 5,
-      "title": "Consolidation",
-      "start": 383.3
-    }
-  ]
+ "session": 1,
+ "slug": "session-01-network-foundations",
+ "duration": 1043.9,
+ "frames": 35,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: The Language of Networks",
+   "frame": 1
+  },
+  {
+   "start": 79.3,
+   "title": "Chapter 2: The OSI Model",
+   "frame": 4
+  },
+  {
+   "start": 192.7,
+   "title": "Chapter 3: Physical and Data Link",
+   "frame": 8
+  },
+  {
+   "start": 354.7,
+   "title": "Chapter 4: Network, Transport and Above",
+   "frame": 14
+  },
+  {
+   "start": 537.4,
+   "title": "Chapter 5: Media and Topologies",
+   "frame": 20
+  },
+  {
+   "start": 745.7,
+   "title": "Chapter 6: IPv4 Addressing and Subnetting",
+   "frame": 27
+  }
+ ]
 }

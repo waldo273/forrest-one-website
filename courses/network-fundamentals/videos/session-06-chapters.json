@@ -1,0 +1,33 @@
+{
+ "session": 6,
+ "slug": "session-06-cryptography-pki",
+ "duration": 1113.9,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: The Three Jobs and the Security Vocabulary",
+   "frame": 1
+  },
+  {
+   "start": 189.9,
+   "title": "Chapter 2: Integrity, Signatures and Trust",
+   "frame": 7
+  },
+  {
+   "start": 398.3,
+   "title": "Chapter 3: Cryptographic Applications and the Paper Trail",
+   "frame": 14
+  },
+  {
+   "start": 621.4,
+   "title": "Chapter 4: Identity and Access Management",
+   "frame": 21
+  },
+  {
+   "start": 829.4,
+   "title": "Chapter 5: Controlling Access",
+   "frame": 28
+  }
+ ]
+}

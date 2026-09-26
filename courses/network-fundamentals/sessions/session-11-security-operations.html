@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="Alerting and monitoring concepts, the incident response lifecycle, digital forensics and evidence handling, and the indicators of malicious activity across the estate."/>
-  <title>Session 11: Security Operations: Monitoring, IR &amp; Forensics, Network Fundamentals, Course Pack</title>
+  <meta name="description" content="Running the defence: monitoring and network security devices, endpoint and data controls, identity and automation, incident response, threat hunting and forensic evidence, and log investigation."/>
+  <title>Session 11: Security Operations, Monitoring &amp; Forensics — Network Fundamentals + CompTIA Security+ SY0-701</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"/>
   <link rel="stylesheet" href="../assets/css/style.css"/>
-  <link rel="stylesheet" href="../assets/css/app.css?v=2"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -16,83 +15,117 @@
   <div class="hwrap">
     <div class="brandrow">
       <div class="brand">
-        <p class="kicker">Network Fundamentals + CompTIA Security+ SY0-701</p>
-        <p class="sitebrand"><a href="../index">Network Fundamentals</a></p>
+        <img class="brandlogo" src="../assets/fozzie/fozzie_fto_logo.png"
+             alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+        <p class="kicker">TRAINING @ FORREST.ONE &middot; Network &amp; Security Certification Pathway</p>
+        <p class="sitebrand"><a href="../index.html">Network Fundamentals + Security+</a></p>
       </div>
       <button class="themebtn" id="themeToggle" type="button" aria-pressed="false">&#9789; Dark mode</button>
     </div>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
     <nav class="mainnav" id="main-nav" aria-label="Main">
       <ul>
-<li><a href="/courses/">Courses</a></li>
-<li><a href="../index">Home</a></li>
-<li><a href="../sessions" aria-current="page">Sessions</a></li>
-<li><a href="../quizzes">Quizzes</a></li>
-<li><a href="../final-exam">Final Exam</a></li>
-<li><a href="../notes">Student Notes</a></li>
-<li><a href="../glossary">Glossary</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../sessions.html" aria-current="page">Sessions</a></li>
+          <li><a href="../scheme-of-work.html">Scheme of Work</a></li>
+          <li><a href="../quizzes.html">Quizzes</a></li>
+          <li><a href="../final-exam.html">Final Exam</a></li>
+          <li><a href="../glossary.html">Glossary</a></li>
+          <li><a href="../resources.html">Resources</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="main">
-
-
-
-<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index">Home</a></li><li><a href="../sessions">Sessions</a></li><li aria-current="page">Session 11</li></ol></nav>
-  <section class="hero">
-    <span class="weight" style="font-size:.78rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#2f6fb5">Session 11 of 12</span>
-    <h1>Security Operations: Monitoring, IR &amp; Forensics</h1>
-    <p class="lede">Alerting and monitoring concepts, the incident response lifecycle, digital forensics and evidence handling, and the indicators of malicious activity across the estate.</p>
-    <div class="pills">
-<span class="pill">11A</span><span class="pill">11B</span><span class="pill">11C</span><span class="pill">11D</span>
-    </div>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../sessions.html">Sessions</a></li><li aria-current="page">Session 11</li></ol></nav>
+  <section class="hero hero-soc">
+    <span class="weight">Session 11 of 12 &middot; Operations &amp; governance</span>
+    <h1>Security Operations, Monitoring &amp; Forensics</h1>
+    <p class="lede">Running the defence: monitoring and network security devices, endpoint and data controls, identity and automation, incident response, threat hunting and forensic evidence, and log investigation.</p>
+    <div class="pills"><span class="pill">11A Monitoring &amp; Devices</span><span class="pill">11B Endpoint &amp; Data</span><span class="pill">11C Identity &amp; Automation</span><span class="pill">11D Incident Response</span><span class="pill">11E Threat Hunting &amp; Forensics</span><span class="pill">11F Logs &amp; Investigation</span></div>
   </section>
-  <h2 id="video">Session video</h2>
-  <p class="sub">Narrated walkthrough of this session.</p>
-  <video controls preload="metadata" playsinline style="width:100%;max-width:640px;border-radius:8px;display:block" >
-    <source src="../videos/session-11-security-operations.mp4" type="video/mp4"/>
-    Your browser does not support the video tag.
-  </video>
 
-  <h2 id="outcomes">Learning outcomes</h2>
-  <p class="sub">By the end of this session, candidates will be able to:</p>
-  <div class="aims">
+  <h2 id="video">Narrated walkthrough</h2>
+  <p class="sub">The whole session, narrated in the course voice with chapter
+    navigation. Use the chapter buttons to jump straight to a topic.</p>
+  <div class="videowrap">
+      <video id="v11" data-video="v11" controls preload="metadata"
+             poster="../assets/img/s11.png"
+             aria-label="Session 11 narrated walkthrough">
+        <source src="../videos/session-11-security-operations.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+        <a href="../videos/session-11-security-operations.mp4">Download the MP4</a>.
+      </video>
+      <div class="videometa">
+        <h3>Session 11 &middot; narrated walkthrough</h3>
+        <p><span class="dur">36 frames</span>
+           &middot; full session narration in the course voice, with chapter navigation.</p>
+        <div class="chapters" data-for="v11"><ol><button type="button" data-start="0.0">Chapter 1: Monitoring and Network Security Devices<span class="ts">0:00</span></button><button type="button" data-start="233.1">Chapter 2: Endpoint and Data Controls<span class="ts">3:53</span></button><button type="button" data-start="424.3">Chapter 3: Identity, Access and Automation<span class="ts">7:04</span></button><button type="button" data-start="663.9">Chapter 4: Incident Response<span class="ts">11:03</span></button><button type="button" data-start="832.8">Chapter 5: Threat Hunting and Forensic Evidence<span class="ts">13:52</span></button><button type="button" data-start="984.8">Chapter 6: Logs, Investigation and Consolidation<span class="ts">16:24</span></button></ol></div>
+      </div>
+    </div>
+
+  <h2 id="concepts">Core concepts</h2>
+    <h3>11A - Monitoring</h3>
+      <p>Sources: logs (security, system, application, network device, firewall), flow (NetFlow/sFlow), packet capture, sensors, and the SIEM that aggregates and correlates them. Baselines define normal; thresholds alert on deviation; alert fatigue buries real incidents. Pair real-time alerting with trend analysis and tune alerts to cut false positives.</p><h3>11B - Incident response</h3>
+      <p>Six phases: preparation (before!), detection and analysis (confirm, scope, classify, grade severity), containment (evidence trade-off), eradication, recovery (validated restores, intensified monitoring), lessons learned. Classify each incident and set severity low to critical to drive urgency. Close with an after-action review and root cause analysis so the incident cannot recur.</p><h3>11C - Forensics</h3>
+      <p>Evidence must be admissible and lawful to collect (warrant or consent). Chain of custody: every handover documented. Order of volatility: registers, RAM, then disk - memory forensics often reveals what logs miss. Preservation: use write blockers, image and hash before analysis, apply legal hold, retain logs. Techniques: carving, timeline analysis, hash analysis, metadata analysis.</p><h3>11D - Indicators</h3>
+      <p>Malware: viruses, worms, Trojans, ransomware, spyware, rootkits, botnets. Network: port scanning, unusual traffic, data exfiltration, C2 beacons. Application: web log probes, phishing email, privilege escalation, privilege usage at odd hours. Behavioural: repeated failed logins, unusual times, impossible travel, data spikes.</p>
+
+  <h2 id="cautions">Practical cautions</h2>
+    <div class="note warn">
+      <h3>Where marks are lost</h3>
+      <ul>
+        <li>Do not start response at containment - preparation comes first.</li><li>Do not treat every incident alike - classify it and grade its severity.</li><li>Do not skip the after-action review - lessons learned prevent recurrence.</li><li>Do not analyse the original drive - image and hash first.</li><li>Do not collect evidence without authorisation - warrant or consent first.</li><li>Do not ignore the order of volatility - RAM will not wait.</li><li>Do not celebrate &#x27;service restored&#x27; - verify and monitor.</li><li>Do not let alert volume hide the real incident.</li>
+      </ul>
+    </div>
+
+  <h2 id="tips">Exam tips for Session 11</h2>
+    <div class="note ok">
+      <h3>Security+ alignment</h3>
+      <ul>
+        <li>Sequencing is the exam skill - phases and volatility order.</li><li>Chain of custody and order of volatility are guaranteed items.</li><li>Know SIEM aggregation and correlation - monitoring is scenario material.</li><li>Classify incidents and assign severity; the exam rewards this.</li><li>IoCs are scenario-based: read the pattern, name the indicator.</li><li>Alert fatigue and baseline questions are common monitoring items.</li><li>Authorisation (warrant or consent) and write blockers appear in forensic scenarios.</li>
+      </ul>
+    </div>
+
+  <h2 id="terms">Key terms</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:28%">Term</th><th>Definition</th></tr></thead>
+        <tbody><tr><td><strong>Baseline</strong></td><td>The &#x27;normal&#x27; traffic and behaviour profile</td></tr><tr><td><strong>Alert fatigue</strong></td><td>Desensitisation from too many alarms</td></tr><tr><td><strong>SIEM</strong></td><td>Aggregates and correlates monitoring sources into one view</td></tr><tr><td><strong>IR lifecycle</strong></td><td>Preparation, detection, containment, eradication, recovery, lessons learned</td></tr><tr><td><strong>Incident classification</strong></td><td>Type — unauthorised access, malware, DoS, data breach</td></tr><tr><td><strong>Severity</strong></td><td>Low to critical — grades the urgency of response</td></tr><tr><td><strong>Containment</strong></td><td>Stopping the spread — isolate and segment</td></tr><tr><td><strong>Eradication</strong></td><td>Removing the cause from the environment</td></tr><tr><td><strong>After-action review</strong></td><td>Post-incident review of what worked, what failed, what changes</td></tr><tr><td><strong>Root cause analysis</strong></td><td>Finding the underlying source so the incident cannot recur</td></tr><tr><td><strong>Order of volatility</strong></td><td>Capture the most volatile data first — RAM before disk</td></tr><tr><td><strong>Imaging</strong></td><td>Bit-for-bit copy — analyse the copy, preserve the original</td></tr><tr><td><strong>Write blocker</strong></td><td>Prevents any change to the original data during examination</td></tr><tr><td><strong>Legal hold</strong></td><td>Preserving records relevant to litigation</td></tr><tr><td><strong>Memory forensics</strong></td><td>Analysing RAM — running processes, open connections, remnants</td></tr><tr><td><strong>File carving</strong></td><td>Recovering files from raw disk without the filesystem</td></tr><tr><td><strong>Metadata analysis</strong></td><td>File creation dates, authorship, modification history</td></tr><tr><td><strong>C2 beacon</strong></td><td>Regular small connections to a command-and-control host</td></tr><tr><td><strong>Impossible travel</strong></td><td>Logins from locations too far apart in time</td></tr></tbody>
+      </table>
+    </div>
+
+  <h2 id="selfcheck">Self-check</h2>
+    <p class="sub">Answer these from memory before you take the quiz. If you cannot
+      answer one, revisit the matching concept above.</p>
+    <ol>
+      <li>Name the six IR lifecycle phases in order.</li><li>What is the evidence trade-off in containment?</li><li>How does incident classification and severity drive the response?</li><li>What does a chain of custody record?</li><li>Put these in capture order: RAM, disk, registers, network connections.</li><li>Why does forensic collection need authorisation, and how do write blockers help?</li><li>Name four malware indicators and four network indicators.</li><li>What is impossible travel, and what does it suggest?</li><li>How does root cause analysis differ from treating the symptom?</li>
+    </ol>
+
+  <h2 id="reading">Further reading</h2>
     <ul>
-<li>Describe monitoring data sources: logs, flow data, packet capture, sensors, and SIEM aggregation and correlation.</li><li>Explain alerting: baselines, thresholds, alert fatigue, real-time alerting versus trend analysis.</li><li>Describe the incident response lifecycle: preparation, detection and analysis, containment, eradication, recovery, lessons learned.</li><li>Classify incidents and assign severity levels to drive response urgency.</li><li>Explain containment strategy and its evidence trade-offs.</li><li>Describe digital forensics basics: evidence types, admissibility, write blockers, preservation-first mindset, authorisation.</li><li>Explain chain of custody and why breaking it makes evidence inadmissible.</li><li>Explain the order of volatility and capture priority, including memory forensics.</li><li>Describe preservation: imaging, hashing, legal hold and log retention.</li><li>Apply forensic techniques: file carving, timeline analysis, hash analysis, metadata analysis.</li><li>Explain after-action review and root cause analysis to prevent recurrence.</li><li>Recognise indicators of malicious activity: malware, network, application and behavioural.</li>
-    </ul>
-  </div>
-  <h2 id="resources">Section resources</h2>
-  <p class="sub">One section quiz for this session.</p>
-<ul class="reslist">
-      <li><a class="resbtn" href="../quizzes/session-11-quiz"><span class="ico" aria-hidden="true">&#10004;</span>Section quiz <span class="status open">Open</span></a></li>
+      <li>Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - Domain 4.</li><li>NIST SP 800-61 - incident handling guide.</li><li>NIST SP 800-86 - forensic techniques and guidelines.</li>
     </ul>
 
-  <h2 id="areas">What this session is about</h2>
-  <p class="sub">What this session covers, with teaching notes area by area.</p>
-  <div class="teachnotes">
-<h3>11A — Monitoring</h3>
-<p>Sources: logs (security, system, application, network device, firewall), flow (NetFlow/sFlow), packet capture, sensors, and the SIEM that aggregates and correlates them. Baselines define normal; thresholds alert on deviation; alert fatigue buries real incidents. Pair real-time alerting with trend analysis and tune alerts to cut false positives.</p>
-<h3>11B — Incident response</h3>
-<p>Six phases: preparation (before!), detection and analysis (confirm, scope, classify, grade severity), containment (evidence trade-off), eradication, recovery (validated restores, intensified monitoring), lessons learned. Classify each incident and set severity low to critical to drive urgency. Close with an after-action review and root cause analysis so the incident cannot recur.</p>
-<h3>11C — Forensics</h3>
-<p>Evidence must be admissible and lawful to collect (warrant or consent). Chain of custody: every handover documented. Order of volatility: registers, RAM, then disk — memory forensics often reveals what logs miss. Preservation: use write blockers, image and hash before analysis, apply legal hold, retain logs. Techniques: carving, timeline analysis, hash analysis, metadata analysis.</p>
-<h3>11D — Indicators</h3>
-<p>Malware: viruses, worms, Trojans, ransomware, spyware, rootkits, botnets. Network: port scanning, unusual traffic, data exfiltration, C2 beacons. Application: web log probes, phishing email, privilege escalation, privilege usage at odd hours. Behavioural: repeated failed logins, unusual times, impossible travel, data spikes.</p>
-  </div>
-  <nav class="pager" aria-label="Page navigation"><a class="navbtn" href="session-10-vulnerability-management">&#8592; Session 10</a> <a class="navbtn" href="../sessions">Sessions</a> <a class="navbtn" href="session-12-governance-risk-compliance">Session 12 &#8594;</a></nav>
+  <div class="pager"><a href="session-10-vulnerability-management.html">&larr; Session 10: Vulnerability Management</a><a href="session-12-governance-risk.html">Session 12: Governance &amp; Risk &rarr;</a></div>
 
 </main>
 
-<script src="../assets/js/site.js"></script>
-<script src="../assets/js/app.js"></script>
 <footer role="contentinfo">
   <div class="fwrap">
-    <p>© 2026 Billy Forrest</p>
-    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong> Twelve sessions: sessions 1&ndash;3 build the network foundation; sessions 4&ndash;12 cover the Security+ core.</p>
-    <p>Training material is original and vendor-neutral. This is an independent revision pack, not an official CompTIA publication, and it is not endorsed by CompTIA.</p>
+    <img class="flogo" src="../assets/fozzie/fozzie_fto_logo.png"
+         alt="Training at Forrest.one bear mascot" width="663" height="1000"/>
+    <p><strong>Network Fundamentals + CompTIA Security+ SY0-701.</strong>
+      Twelve sessions of three hours, delivered as a combined course:
+      sessions 1&ndash;3 build the network foundation, sessions 4&ndash;12 cover the
+      Security+ syllabus.</p>
+    <p>CompTIA and Security+ are trademarks of CompTIA, Inc. This is an independent
+      training pack and is not endorsed by CompTIA. The certification is awarded
+      solely on the basis of passing the examination.</p>
+    <p>Training material is original and vendor-neutral. &copy; Billy Forrest.</p>
   </div>
 </footer>
+<script src="../assets/js/site.js"></script>
 </body>
 </html>

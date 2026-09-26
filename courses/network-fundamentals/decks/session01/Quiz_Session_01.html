@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Network Fundamentals + CompTIA Security+ SY0-701 — Session 1 Quiz</title>
+<style>
+:root{--red:#8A4B21;--red-d:#6D3A19;--red-l:#A35C2B;--ink:#3A2A1E;--panel:#2E2118;
+--card:#33251B;--text:#FFFFFF;--body:#D1D5DB;--muted:#9CA3AF;--faint:#6B7280;--line:#4A3A2C;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Liberation Sans",sans-serif;background:var(--ink);color:var(--body);line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,var(--red-d),var(--red));color:#fff;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.topbar h1{margin:0;font-size:19px;color:#fff}
+.topbar p{margin:4px 0 0;font-size:12.5px;color:#EADFCB}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.qdom{background:var(--red-d);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px;padding:3px 9px;border-radius:12px;text-transform:uppercase}
+.qn{color:var(--muted);font-size:12px}
+.qtext{color:var(--text);font-size:16.5px;font-weight:bold;margin-bottom:12px}
+label.opt{display:block;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:8px;cursor:pointer;background:var(--panel);transition:border-color .15s}
+label.opt:hover{border-color:var(--muted)}
+label.opt input{margin-right:10px;transform:scale(1.15);vertical-align:middle}
+label.opt .ol{vertical-align:middle}
+label.opt.correct{border-color:#2E7D32;background:#14301A}
+label.opt.wrong{border-color:#B4553A;background:#2B2118}
+label.opt.locked{opacity:.62;cursor:default}
+.feedback{display:none;margin-top:12px;border-radius:8px;padding:13px 15px;font-size:14px}
+.feedback.show{display:block}
+.feedback.ok{background:#14301A;border:1px solid #2E7D32;color:#D1E8D5}
+.feedback.bad{background:#2B2118;border:1px solid #B4553A;color:#EADFCB}
+.feedback .ans{font-weight:bold;font-size:14.5px;margin-bottom:6px}
+.feedback .expl{font-size:13.5px;line-height:1.55}
+.feedback .expl li{margin-bottom:5px}
+.feedback .expl .why-c{color:#9BE09B;font-weight:bold}
+.feedback .expl .why-w{color:#DCC4A8}
+.progress{height:8px;background:var(--panel);border-radius:6px;overflow:hidden;margin:14px 0 4px}
+.progress div{height:100%;background:var(--red-l);width:0%;transition:width .3s}
+.pcount{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.btn{display:inline-block;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn:hover{background:var(--red-l)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--body)}
+.hidden{display:none}
+.start-ico{font-size:44px;text-align:center;margin-bottom:8px}
+.results .gauge{width:170px;height:170px;border-radius:50%;margin:14px auto;position:relative;
+background:conic-gradient(var(--red-l) calc(var(--p)*1%), #3D2E22 0);display:flex;align-items:center;justify-content:center}
+.results .gauge .inner{width:132px;height:132px;border-radius:50%;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.results .gauge .pct{font-size:34px;font-weight:bold;color:var(--text)}
+.results .gauge .lbl{font-size:11px;color:var(--muted)}
+.grade{text-align:center;font-size:17px;font-weight:bold;color:var(--text);margin-bottom:6px}
+.sumline{text-align:center;color:var(--muted);margin-bottom:18px}
+.actions{text-align:center}
+footer.quizfoot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
+.skip{margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="color:var(--muted);font-size:11.5px;letter-spacing:2px;text-transform:uppercase;">TRAINING @ FORREST.ONE</span>
+</div>
+
+<div id="start" class="card">
+  <h1 style="color:#fff;margin:0 0 6px;font-size:22px;">Session 1 Knowledge Quiz</h1>
+  <p style="margin:0 0 14px;">Network Foundations: TCP/IP Model &amp; IP Addressing — interactive learning tool. Each question is tagged with the session area it tests. Answer, then read the per-option explanation and the correct answer before moving on.</p>
+  <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Learning tool · immediate feedback · no score pressure. Questions are shuffled on every attempt.</p>
+  <button class="btn" onclick="startQuiz()">Begin quiz</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div class="progress"><div id="bar"></div></div>
+  <div class="pcount" id="pcount">Question 1 of N</div>
+  <div class="card">
+    <div class="qhead"><span class="qdom" id="qdom">Domain</span><span class="qn" id="qn">1 / N</span></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="feedback" id="fb"></div>
+  </div>
+  <button class="btn" id="next" onclick="nextQ()" style="display:none;">Next question &rarr;</button>
+  <button class="btn ghost" id="restart2" onclick="restart()" style="display:none;">Restart</button>
+</div>
+
+<div id="results" class="card hidden">
+  <h1 style="color:#fff;margin:0 0 6px;text-align:center;">Quiz complete</h1>
+  <div class="results"><div class="gauge" id="gauge"><div class="inner"><div class="pct" id="pct"></div><div class="lbl">correct</div></div></div></div>
+  <div class="grade" id="grade"></div>
+  <div class="sumline" id="sum"></div>
+  <div class="actions">
+    <button class="btn" onclick="restart()">Try again</button>
+  </div>
+</div>
+
+<footer class="quizfoot">Network Fundamentals + CompTIA Security+ SY0-701 · Session 1 · © Billy Forrest</footer>
+</div>
+
+<script>
+var Q = [{"d": "1A", "a": "Network Models", "c": 0, "q": "Which OSI layer is responsible for logical addressing and routing?", "o": ["Network", "Data Link", "Transport", "Session"], "x": ["Layer 3 (Network) handles logical addressing and routing — IP lives here.", "Data Link (layer 2) handles frames and MAC addresses.", "Transport (layer 4) handles end-to-end delivery and ports.", "Session (layer 5) manages dialog control between hosts."]}, {"d": "1A", "a": "Network Models", "c": 2, "q": "At which OSI layer does a switch primarily operate?", "o": ["Layer 1 overall", "Layer 4", "Layer 2", "Layer 3"], "x": ["Layer 1 (Physical) is the wire — a hub works there, not a switch.", "Layer 4 (Transport) handles ports and segmentation, not switching.", "A switch forwards frames at Layer 2 (Data Link) using MAC addresses.", "Layer 3 (Network) routing is the work of routers, not switches."]}, {"d": "1A", "a": "Network Models", "c": 1, "q": "In the TCP/IP stack, which layer maps to OSI layers 5–7?", "o": ["Internet", "Application", "Transport", "Network Access"], "x": ["The Internet layer maps to OSI layer 3.", "The Application layer of TCP/IP covers OSI layers 5–7.", "Transport maps to OSI layer 4.", "Network Access maps to OSI layers 1–2."]}, {"d": "1A", "a": "Network Models", "c": 0, "q": "What is the protocol data unit at the transport layer?", "o": ["Segment", "Data Link frame", "Packet", "Bit"], "x": ["The transport layer produces a segment — data plus the TCP/UDP header with ports.", "A frame is the layer 2 PDU with Ethernet headers and MACs.", "A packet is the layer 3 PDU with the IP header.", "A bit is the layer 1 unit on the wire."]}, {"d": "1A", "a": "Network Models", "c": 3, "q": "A firewall rule blocks port 443. Which layer is being controlled?", "o": ["Physical", "Network", "Data Link overall", "Transport"], "x": ["Physical (layer 1) concerns bits on the wire, not ports.", "Network (layer 3) is IP addressing — port numbers are not there.", "Data Link (layer 2) concerns frames and MACs.", "Ports belong to the Transport layer (4) — TCP or UDP."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 2, "q": "How many bits are in an IPv4 address?", "o": ["16", "64", "32", "128"], "x": ["16 bits is not a standard address length.", "64 bits is not an IPv4 address length.", "IPv4 is 32 bits — four octets of 8 bits, written dotted-decimal.", "128 bits is IPv6, not IPv4."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 1, "q": "What is the network address of 172.16.5.100 with mask 255.255.0.0?", "o": ["172.16.5.0", "172.16.0.0", "172.0.0.0", "172.16.5.100"], "x": ["172.16.5.0 is the network if the mask were /24.", "The /16 mask keeps the first two octets: network 172.16.0.0.", "172.0.0.0 would require a /8 mask.", "That is the host address itself, not the network."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 3, "q": "How many usable host addresses does a /26 subnet provide?", "o": ["30", "64", "126", "62"], "x": ["30 is the usable count for a /27.", "64 is the total address count — two are reserved.", "126 is the usable count for a /25.", "A /26 leaves 6 host bits: 2^6 − 2 = 62 usable hosts."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 2, "q": "What is the CIDR notation for subnet mask 255.255.255.240?", "o": ["/24 overall", "/26", "/28", "/30"], "x": ["/24 is 255.255.255.0.", "/26 is 255.255.255.192.", "240 is 11110000 — four bits set in the fourth octet: 24 + 4 = /28.", "/30 is 255.255.255.252."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 1, "q": "You borrow 2 host bits from a /24 network. What do you get?", "o": ["2 subnets of 126 hosts", "4 subnets of 62 hosts", "4 subnets of 30 hosts", "8 subnets of 30 hosts"], "x": ["Borrowing 1 bit gives 2 subnets of 126 hosts.", "2^2 = 4 subnets; 2^6 − 2 = 62 usable hosts per /26 subnet.", "30 hosts would need 3 borrowed bits.", "8 subnets requires borrowing 3 bits."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 0, "q": "What is the network address of host 192.168.10.50/28?", "o": ["192.168.10.48", "192.168.10.50 overall", "192.168.10.64", "192.168.10.32"], "x": ["A /28 has block size 16: 50 ÷ 16 = 3.125, so the network is 3 × 16 = .48.", ".50 is the host address itself.", ".64 is the start of the next block.", ".32 is the start of the previous block."]}, {"d": "1C", "a": "VLSM", "c": 3, "q": "In a VLSM design, which requirement should be allocated first?", "o": ["The smallest requirement", "Alphabetically", "In order of importance", "The largest requirement"], "x": ["Smallest-first fragments the space and strands large segments.", "Alphabetical order has no addressing logic.", "Importance is a business call, not an addressing rule.", "Allocate largest to smallest so the biggest subnets get contiguous space."]}, {"d": "1C", "a": "VLSM", "c": 1, "q": "How many usable host addresses does a /30 subnet provide?", "o": ["4", "2", "6", "30"], "x": ["4 is the total address count in a /30 — two of those are reserved.", "A /30 leaves 2 host bits: 2^2 − 2 = 2 usable hosts — the point-to-point link mask.", "6 is the usable count for a /29.", "30 is the usable count for a /27."]}, {"d": "1C", "a": "VLSM", "c": 0, "q": "A segment needs 14 usable hosts. Which is the smallest mask that fits?", "o": ["/28", "/29 overall", "/27", "/26"], "x": ["A /28 gives 2^4 − 2 = 14 usable hosts exactly.", "A /29 gives only 6 usable hosts — too small.", "A /27 gives 30 — it fits but wastes 16 addresses.", "A /26 gives 62 — it fits but wastes far more."]}, {"d": "1D", "a": "IPv6", "c": 2, "q": "How many bits are in an IPv6 address?", "o": ["32", "64", "128", "256 overall"], "x": ["32 bits is IPv4.", "64 bits is the interface identifier half of an IPv6 address, not the whole.", "IPv6 uses 128-bit addresses in eight groups of four hex digits.", "256 bits is not a standard address length."]}, {"d": "1D", "a": "IPv6", "c": 3, "q": "Which is the correctly shortened form of 2001:0db8:0000:0000:0000:8a2e:0370:7334?", "o": ["2001:0db8:0000:0000:0000:8a2e:0370:7334", "2001:0db8::8a2e:0370:7334", "2001:db8::8a2e:370:7334:0", "2001:db8::8a2e:370:7334"], "x": ["This drops leading zeros but never applies the double colon.", "0db8 and 0370 still carry leading zeros.", "The trailing :0 invents a ninth group — the run is in the middle.", "Leading zeros are dropped and one contiguous zero run becomes ::."]}, {"d": "1D", "a": "IPv6", "c": 1, "q": "Which IPv6 prefix is link-local and never routed beyond its subnet?", "o": ["2000::/3", "fe80::/10", "fc00::/7", "ff00::/8 multicast"], "x": ["2000::/3 is global unicast, routable on the public internet.", "fe80::/10 is link-local — auto-assigned and confined to the local subnet.", "fc00::/7 is unique local, the private analogue of RFC 1918.", "ff00::/8 is multicast."]}, {"d": "1D", "a": "IPv6", "c": 0, "q": "IPv6 has no broadcast addresses. What replaces broadcast?", "o": ["Multicast", "Anycast", "Unicast", "Link-local"], "x": ["Broadcast functionality is replaced by multicast (ff00::/8) in IPv6.", "Anycast sends to one of a group, not to all.", "Unicast is one-to-one delivery, always present.", "Link-local is an address scope, not a delivery method."]}, {"d": "1D", "a": "IPv6", "c": 2, "q": "Why does dual-stack operation concern a security analyst?", "o": ["It halves the available network bandwidth", "It disables encryption", "IPv6 can bypass IPv4-only ACLs", "It prevents DHCP leases"], "x": ["Dual-stack does not halve bandwidth.", "Encryption is independent of the address family.", "IPv6 traffic can pass through IPv4-only filters — a quiet door for attackers.", "DHCP leases are unaffected by running both stacks."]}, {"d": "1B", "a": "IPv4 Addressing", "c": 3, "q": "Which address can never be assigned to a host in a subnet?", "o": ["The first usable host address", "The router interface", "Any address above .100", "The broadcast address"], "x": ["The first usable host address is normally the default gateway.", "A router interface is a valid host assignment.", "Addresses above .100 are valid unless the mask excludes them.", "The broadcast address reaches all hosts and is never assigned."]}];
+var order = [], idx = 0, score = 0, answered = false;
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function startQuiz(){
+  order = shuffle(Q.map(function(_,i){return i;}));
+  idx = 0; score = 0; answered = false;
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  render();
+}
+function render(){
+  answered = false;
+  var qi = order[idx], q = Q[qi];
+  document.getElementById('bar').style.width = (idx/Q.length*100)+'%';
+  document.getElementById('pcount').textContent = 'Question '+(idx+1)+' of '+Q.length;
+  document.getElementById('qn').textContent = (idx+1)+' / '+Q.length;
+  document.getElementById('qdom').textContent = 'Domain '+q.d+' · '+q.a;
+  document.getElementById('qtext').textContent = q.q;
+  var o = document.getElementById('opts');
+  o.innerHTML = '';
+  q.o.forEach(function(t,i){
+    var lab = document.createElement('label');
+    lab.className = 'opt';
+    lab.innerHTML = '<input type="radio" name="ans" value="'+i+'"/><span class="ol">'+t+'</span>';
+    // Bind to the radio change event, not the label click: a label click also
+    // dispatches a click on the input it wraps, so a label handler fires twice
+    // per user click and double-counts the score.
+    lab.querySelector('input').onchange = (function(li){ return function(){ select(li); }; })(i);
+    o.appendChild(lab);
+  });
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('next').style.display = 'none';
+  document.getElementById('restart2').style.display = 'none';
+}
+function select(sel){
+  if(answered){ return; }
+  answered = true;
+  var q = Q[order[idx]];
+  var labels = document.querySelectorAll('#opts label.opt');
+  labels[q.c].classList.add('correct','locked');
+  if(sel !== q.c){ labels[sel].classList.add('wrong','locked'); }
+  labels.forEach(function(l){ l.classList.add('locked'); l.style.cursor='default'; });
+  var ok = (sel === q.c);
+  if(ok) score++;
+  var fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  var exp = '<div class="ans">' + (ok ? '&#10004; Correct' : '&#10008; Incorrect') +
+            ' &mdash; the correct answer is <span style="color:#fff;">'+q.o[q.c]+'</span>.</div><ul class="expl">';
+  q.x.forEach(function(e,i){
+    var good = (i === q.c);
+    exp += '<li><span class="'+(good?'why-c':'why-w')+'">'+(good?'Correct: ':'Incorrect: ')+'</span>'+e+'</li>';
+  });
+  exp += '</ul>';
+  fb.innerHTML = exp;
+  document.getElementById('next').style.display = 'inline-block';
+  if(idx === Q.length-1){
+    document.getElementById('next').textContent = 'See results';
+  }
+}
+function nextQ(){
+  if(idx === Q.length-1){ showResults(); return; }
+  idx++; render();
+}
+function showResults(){
+  document.getElementById('quiz').classList.add('hidden');
+  var r = document.getElementById('results');
+  r.classList.remove('hidden');
+  var p = Math.round(score/Q.length*100);
+  document.getElementById('gauge').style.setProperty('--p', p);
+  document.getElementById('pct').textContent = p + '%';
+  var g = document.getElementById('grade');
+  if(p >= 90){ g.textContent = 'Excellent — you have this session mastered.'; }
+  else if(p >= 70){ g.textContent = 'Good — you are exam-ready for this domain.'; }
+  else if(p >= 50){ g.textContent = 'Fair — revisit the areas you missed and retry.'; }
+  else { g.textContent = 'Needs improvement — re-read the session notes, then retry.'; }
+  document.getElementById('sum').textContent = score + ' out of ' + Q.length + ' correct · coverage: ' +
+    Q.map(function(q){ return q.d; }).filter(function(d,i,a){ return a.indexOf(d)===i; }).join(', ');
+}
+function restart(){
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('quiz').classList.add('hidden');
+  var s = document.getElementById('start');
+  s.classList.remove('hidden');
+}
+</script>
+</body>
+</html>
