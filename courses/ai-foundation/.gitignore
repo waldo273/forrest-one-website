@@ -10,3 +10,7 @@ playwright-report/
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Local archives — never publish
+videos/_previous/
+*.bak-*
