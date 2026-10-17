@@ -205,6 +205,33 @@
     .status-pill.on { color: var(--ok, #4ade80); border-color: rgba(74, 222, 128, 0.4); }
     .status-pill.on .dot { background: #4ade80; }
 
+    /* ─── Lab address table ─── */
+    .addr-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-card); }
+    table.addr {
+      width: 100%; border-collapse: collapse; min-width: 640px;
+      font-size: 0.92rem;
+    }
+    table.addr th, table.addr td {
+      text-align: left; padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    table.addr thead th {
+      background: var(--bg-alt); color: var(--text); font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    table.addr tbody tr:last-child td { border-bottom: none; }
+    table.addr tbody tr:hover { background: var(--bg-alt); }
+    table.addr td.role { color: var(--text-dim); }
+    table.addr td.role strong { color: var(--text); display: block; font-size: 0.95rem; }
+    table.addr code, table.addr .mono {
+      font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--text);
+      background: var(--bg-alt); border: 1px solid var(--border); border-radius: 6px;
+      padding: 0.15rem 0.45rem; white-space: nowrap;
+    }
+    table.addr a { font-family: 'Courier New', monospace; font-size: 0.9rem; }
+    .port-list { color: var(--text-dim); font-size: 0.85rem; margin-top: 0.35rem; }
+    .addr-note { max-width: 860px; margin: 1.5rem auto 0; color: var(--text-muted); font-size: 0.88rem; text-align: center; }
+
     /* ─── Footer ─── */
     footer {
       text-align: center; padding: 4rem 2rem;
@@ -340,6 +367,47 @@
         <p>Every lab is designed around the core certification skill: evidence-based assessment. Record your findings, correlate scanners with manual probes, and produce a professional report.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="addresses" class="bg-alt">
+  <div class="container">
+    <h2>One Desktop, <span class="highlight">Every Lab Inside It</span></h2>
+    <p style="text-align:center; color:var(--text-dim); max-width:800px; margin:0 auto 2.5rem;">
+      The labs run <strong>inside the Kali desktop</strong>, not on separate machines. Open the desktop and every target is already there — reachable by name, with the practice evidence mounted and the toolset installed. Nothing to configure, no addresses to remember.
+    </p>
+    <div class="addr-wrap">
+      <table class="addr">
+        <thead>
+          <tr>
+            <th>What you open</th>
+            <th>Address</th>
+            <th>What is inside</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="role"><strong>Kali lab desktop</strong>kali-desktop</td>
+            <td><a href="https://10.10.0.4:6901/" target="_blank" rel="noopener">https://10.10.0.4:6901</a><br><span class="mono" style="display:inline-block;margin-top:0.4rem;">https://10.10.0.6:8040</span></td>
+            <td>A full Kali rolling desktop over HTTPS (self-signed certificate, no login). It lands on the <strong>Lab Navigator</strong> page, and the whole lab is inside it:
+              <span class="port-list">target <span class="mono">cpsa-target</span> (FTP 21 · SSH 22 · Telnet 23 · SMTP 25 · HTTP 80 · rpcbind 111 · NFS 2049 · portal 8081) · victim <span class="mono">cpia-victim</span> (SSH 22 · HTTP 8080) · eight vulnerable apps by name (<span class="mono">dvwa</span>, <span class="mono">juice-shop</span>, <span class="mono">webgoat</span>, <span class="mono">sqli-labs</span>, <span class="mono">nodegoat</span>, <span class="mono">bwapp</span>, <span class="mono">vampi</span>) · practice evidence in <span class="mono">~/artifacts</span> and report space in <span class="mono">~/work</span></span></td>
+          </tr>
+          <tr>
+            <td class="role"><strong>Moodle course site</strong>aif-moodle</td>
+            <td><a href="http://10.10.0.5/" target="_blank" rel="noopener">http://10.10.0.5</a></td>
+            <td>Moodle, hosting the AI Foundation course for learners on the lab network.
+              <span class="port-list">ports: 80, 8080</span></td>
+          </tr>
+          <tr>
+            <td class="role"><strong>Lab console</strong>host</td>
+            <td><a href="http://10.10.0.6:8020/" target="_blank" rel="noopener">http://10.10.0.6:8020</a><br><a href="http://10.10.0.6:8001/" target="_blank" rel="noopener">http://10.10.0.6:8001</a></td>
+            <td>Guides, doc pack, exercise sheets, browser terminals and the incident reset button, plus the eight-app pack on ports 8001–8009 for anyone working from the host rather than the desktop.
+              <span class="port-list">evidence servers: 8010 (CPIA) · 8030 (CPSA) · Nessus: 8834</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="addr-note">Everything above needs the lab running on the host — the labs are not hosted on this website. The Kali desktop is the intended way in: it is attached to the lab's Docker networks, so its targets and apps answer by name (<span class="mono">cpsa-target</span>, <span class="mono">cpia-victim</span>, <span class="mono">dvwa</span> …) and the evidence folders are mounted read-only.</p>
   </div>
 </section>
 
