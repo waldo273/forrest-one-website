@@ -296,10 +296,10 @@
     <div class="access-note" style="margin-top:2.5rem;">
       <span class="status-pill" id="labStatus"><span class="dot"></span>Checking lab console…</span>
       <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
-      <span class="lab-url">http://172.16.0.100:8020</span>
+      <span class="lab-url">http://10.10.0.6:8020</span>
       <p>The console has three tabs — <strong>/cpia</strong> for intrusion analysis, <strong>/cpsa</strong> for security assessment, and <strong>/kali</strong> for a full Kali desktop — each with in-browser terminals and a doc pack.</p>
       <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website — the button opens the console on your network.</p>
-      <p><a href="http://172.16.0.100:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open the Lab Console</a></p>
+      <p><a href="http://10.10.0.6:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open the Lab Console</a></p>
     </div>
   </div>
 </section>
@@ -331,7 +331,7 @@
         <span class="icon">&#x1F50D;</span>
         <h3>Nessus — Vulnerability Scanner</h3>
         <p>Tenable Nessus (Docker, online) for credentialed and unauthenticated scanning of the lab range. Reachable over HTTPS at its own address on the network.</p>
-        <p style="margin-top:1rem;"><a href="https://172.16.0.100:8834/" class="btn btn-primary" target="_blank" rel="noopener">Open Nessus</a></p>
+        <p style="margin-top:1rem;"><a href="https://10.10.0.6:8834/" class="btn btn-primary" target="_blank" rel="noopener">Open Nessus</a></p>
       </div>
       <div class="lab-card">
         <span class="pillar-tag">Evidence-Based</span>
@@ -417,7 +417,7 @@
       pill.innerHTML = '<span class="dot"></span> Lab console offline (start the lab)';
     };
     // A lightweight reachability probe to the console host (no cross-origin read).
-    img.src = 'http://172.16.0.100:8020/favicon.ico?' + Date.now();
+    img.src = 'http://10.10.0.6:8020/favicon.ico?' + Date.now();
   })();
 </script>
 
