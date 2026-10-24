@@ -1,0 +1,38 @@
+{
+ "session": 12,
+ "slug": "session-12-governance-risk",
+ "duration": 1153.5,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Governance Foundations",
+   "frame": 1
+  },
+  {
+   "start": 200.8,
+   "title": "Chapter 2: External Obligations and Risk Identification",
+   "frame": 7
+  },
+  {
+   "start": 401.4,
+   "title": "Chapter 3: Risk Analysis, Registers and Treatment",
+   "frame": 13
+  },
+  {
+   "start": 547.5,
+   "title": "Chapter 4: Risk Reporting, Business Impact and Vendors",
+   "frame": 18
+  },
+  {
+   "start": 740.9,
+   "title": "Chapter 5: Compliance, Privacy and Audit",
+   "frame": 24
+  },
+  {
+   "start": 900.6,
+   "title": "Chapter 6: Assurance, Testing and Awareness",
+   "frame": 29
+  }
+ ]
+}

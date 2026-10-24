@@ -1,0 +1,38 @@
+{
+ "session": 9,
+ "slug": "session-09-network-troubleshooting",
+ "duration": 1070.3,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Troubleshooting Methodology",
+   "frame": 1
+  },
+  {
+   "start": 142.1,
+   "title": "Chapter 2: Cable, Connector and Interface Faults",
+   "frame": 6
+  },
+  {
+   "start": 348.5,
+   "title": "Chapter 3: Wireless and Switching Faults",
+   "frame": 13
+  },
+  {
+   "start": 531.0,
+   "title": "Chapter 4: Routing, Filtering and Addressing",
+   "frame": 19
+  },
+  {
+   "start": 745.9,
+   "title": "Chapter 5: Congestion, Latency and Packet Loss",
+   "frame": 26
+  },
+  {
+   "start": 898.6,
+   "title": "Chapter 6: The Troubleshooting Toolset",
+   "frame": 31
+  }
+ ]
+}

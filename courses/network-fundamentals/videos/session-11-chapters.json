@@ -1,0 +1,38 @@
+{
+ "session": 11,
+ "slug": "session-11-security-operations",
+ "duration": 1167.7,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Monitoring and Network Security Devices",
+   "frame": 1
+  },
+  {
+   "start": 233.1,
+   "title": "Chapter 2: Endpoint and Data Controls",
+   "frame": 8
+  },
+  {
+   "start": 424.3,
+   "title": "Chapter 3: Identity, Access and Automation",
+   "frame": 14
+  },
+  {
+   "start": 663.9,
+   "title": "Chapter 4: Incident Response",
+   "frame": 21
+  },
+  {
+   "start": 832.8,
+   "title": "Chapter 5: Threat Hunting and Forensic Evidence",
+   "frame": 26
+  },
+  {
+   "start": 984.8,
+   "title": "Chapter 6: Logs, Investigation and Consolidation",
+   "frame": 31
+  }
+ ]
+}

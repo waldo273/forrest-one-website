@@ -1,0 +1,33 @@
+{
+ "session": 2,
+ "slug": "session-02-switching-vlans",
+ "duration": 1121.9,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Network Infrastructure Devices",
+   "frame": 1
+  },
+  {
+   "start": 189.7,
+   "title": "Chapter 2: Cloud Networking and Routing Foundations",
+   "frame": 7
+  },
+  {
+   "start": 403.9,
+   "title": "Chapter 3: Route Selection, Translation and Inter-Vlan Routing",
+   "frame": 14
+  },
+  {
+   "start": 622.0,
+   "title": "Chapter 4: Vlans, Switching and Spanning Tree",
+   "frame": 21
+  },
+  {
+   "start": 839.2,
+   "title": "Chapter 5: Wireless and Physical Deployment",
+   "frame": 28
+  }
+ ]
+}

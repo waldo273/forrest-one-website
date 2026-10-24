@@ -1,0 +1,1082 @@
+{
+ "OSI model": {
+  "defn": "Seven layers organising network communication, from physical to application",
+  "session": 1,
+  "area": ""
+ },
+ "TCP/IP stack": {
+  "defn": "Four-layer model: application, transport, internet, network access",
+  "session": 1,
+  "area": ""
+ },
+ "Encapsulation": {
+  "defn": "Each layer adds its header as data travels down the stack",
+  "session": 1,
+  "area": ""
+ },
+ "PDU": {
+  "defn": "Protocol data unit — segment (layer 4), packet (layer 3), frame (layer 2)",
+  "session": 1,
+  "area": ""
+ },
+ "Port": {
+  "defn": "Transport-layer address, e.g. 443 for HTTPS, 53 for DNS",
+  "session": 1,
+  "area": ""
+ },
+ "MAC address": {
+  "defn": "Physical address burned into the interface, used at layer 2",
+  "session": 1,
+  "area": ""
+ },
+ "Subnet mask": {
+  "defn": "Marks the network/host boundary in an IPv4 address",
+  "session": 1,
+  "area": ""
+ },
+ "CIDR": {
+  "defn": "Classless notation — the /n count of network bits",
+  "session": 1,
+  "area": ""
+ },
+ "VLSM": {
+  "defn": "Variable subnet masks within one major network, largest first",
+  "session": 1,
+  "area": ""
+ },
+ "Network address": {
+  "defn": "First address of a range — identifies the subnet, never assigned",
+  "session": 1,
+  "area": ""
+ },
+ "Broadcast address": {
+  "defn": "Last address of a range — reaches all hosts, never assigned",
+  "session": 1,
+  "area": ""
+ },
+ "Global unicast": {
+  "defn": "IPv6 public address, 2000::/3",
+  "session": 1,
+  "area": ""
+ },
+ "Link-local": {
+  "defn": "IPv6 address valid on its subnet only, fe80::/10",
+  "session": 1,
+  "area": ""
+ },
+ "Unique local": {
+  "defn": "IPv6 private address, fc00::/7",
+  "session": 1,
+  "area": ""
+ },
+ "Dual-stack": {
+  "defn": "Running IPv4 and IPv6 together — doubles the attack surface",
+  "session": 1,
+  "area": ""
+ },
+ "Frame": {
+  "defn": "Layer 2 PDU — Ethernet headers plus payload",
+  "session": 2,
+  "area": ""
+ },
+ "Forwarding table": {
+  "defn": "Switch's learned map of MAC addresses to ports",
+  "session": 2,
+  "area": ""
+ },
+ "Unknown unicast flooding": {
+  "defn": "Frame sent to all ports but the source when the destination is unknown",
+  "session": 2,
+  "area": ""
+ },
+ "VLAN": {
+  "defn": "Logical broadcast domain carved out of a physical switch",
+  "session": 2,
+  "area": ""
+ },
+ "Trunk port": {
+  "defn": "Carries many tagged VLANs between switches",
+  "session": 2,
+  "area": ""
+ },
+ "Access port": {
+  "defn": "Carries one untagged VLAN to an endpoint",
+  "session": 2,
+  "area": ""
+ },
+ "802.1Q tag": {
+  "defn": "4-byte header with the 12-bit VLAN ID",
+  "session": 2,
+  "area": ""
+ },
+ "Native VLAN": {
+  "defn": "Untagged VLAN on a trunk — VLAN 1 by default, a known risk",
+  "session": 2,
+  "area": ""
+ },
+ "VLAN hopping": {
+  "defn": "Attack crossing VLAN boundaries: switch spoofing or double tagging",
+  "session": 2,
+  "area": ""
+ },
+ "Switch spoofing": {
+  "defn": "Attacker negotiates a trunk port to reach many VLANs",
+  "session": 2,
+  "area": ""
+ },
+ "Double tagging": {
+  "defn": "Native VLAN spoof that carries a frame into another VLAN",
+  "session": 2,
+  "area": ""
+ },
+ "CAM table": {
+  "defn": "Switch's forwarding table; overflow (MAC flooding) degrades it to hub mode",
+  "session": 2,
+  "area": ""
+ },
+ "Microsegmentation": {
+  "defn": "Granular segmentation isolating individual workloads, often via SDN",
+  "session": 2,
+  "area": ""
+ },
+ "STP": {
+  "defn": "IEEE 802.1D — blocks redundant ports to prevent loops",
+  "session": 2,
+  "area": ""
+ },
+ "Root bridge": {
+  "defn": "Switch with the lowest bridge ID (priority + MAC)",
+  "session": 2,
+  "area": ""
+ },
+ "BPDU Guard": {
+  "defn": "Shuts down a port that receives BPDUs on an access port",
+  "session": 2,
+  "area": ""
+ },
+ "Root Guard": {
+  "defn": "Prevents a port from becoming a root port",
+  "session": 2,
+  "area": ""
+ },
+ "DMZ": {
+  "defn": "Segment hosting public-facing services, isolated from internal",
+  "session": 2,
+  "area": ""
+ },
+ "Blast radius": {
+  "defn": "The extent of damage a compromise can reach — limited by segmentation",
+  "session": 2,
+  "area": ""
+ },
+ "DNS": {
+  "defn": "Translates names to addresses — the internet's directory",
+  "session": 3,
+  "area": ""
+ },
+ "A / AAAA record": {
+  "defn": "Name to IPv4 / name to IPv6",
+  "session": 3,
+  "area": ""
+ },
+ "CNAME": {
+  "defn": "Alias for another name",
+  "session": 3,
+  "area": ""
+ },
+ "MX record": {
+  "defn": "Mail exchange server for a domain",
+  "session": 3,
+  "area": ""
+ },
+ "TXT record": {
+  "defn": "SPF, DKIM, DMARC text records",
+  "session": 3,
+  "area": ""
+ },
+ "Cache poisoning": {
+  "defn": "Forged DNS response inserted into a resolver's cache",
+  "session": 3,
+  "area": ""
+ },
+ "DNS tunnelling": {
+  "defn": "Data exfiltrated inside DNS queries",
+  "session": 3,
+  "area": ""
+ },
+ "DNS amplification": {
+  "defn": "Small queries drawing large responses — DDoS fuel",
+  "session": 3,
+  "area": ""
+ },
+ "DNSSEC": {
+  "defn": "Cryptographic signing of DNS responses",
+  "session": 3,
+  "area": ""
+ },
+ "DHCP DORA": {
+  "defn": "Discover, Offer, Request, Ack — the address assignment process",
+  "session": 3,
+  "area": ""
+ },
+ "T1 / T2 timers": {
+  "defn": "Lease renewal at 50% / rebind at 87.5%",
+  "session": 3,
+  "area": ""
+ },
+ "Rogue DHCP server": {
+  "defn": "Unauthorised server assigning malicious settings",
+  "session": 3,
+  "area": ""
+ },
+ "DHCP starvation": {
+  "defn": "Spoofed MACs exhausting the address pool",
+  "session": 3,
+  "area": ""
+ },
+ "DHCP snooping": {
+  "defn": "Switch filter trusting only authorised DHCP ports",
+  "session": 3,
+  "area": ""
+ },
+ "NTP": {
+  "defn": "Network Time Protocol — clock synchronisation, UDP 123",
+  "session": 3,
+  "area": ""
+ },
+ "Stratum": {
+  "defn": "Distance from the authoritative time source",
+  "session": 3,
+  "area": ""
+ },
+ "SSH": {
+  "defn": "Encrypted remote access replacing Telnet — TCP 22",
+  "session": 3,
+  "area": ""
+ },
+ "Key-based auth": {
+  "defn": "Public key stored on the server; private key proves possession",
+  "session": 3,
+  "area": ""
+ },
+ "Attack surface": {
+  "defn": "The sum of entry points an attacker can use to enter or extract data",
+  "session": 3,
+  "area": ""
+ },
+ "Threat vector": {
+  "defn": "The path or method an attacker uses to reach the attack surface",
+  "session": 3,
+  "area": ""
+ },
+ "Confidentiality": {
+  "defn": "Information should only be read by authorised persons",
+  "session": 4,
+  "area": ""
+ },
+ "Integrity": {
+  "defn": "Data is stored and transferred as intended; modification requires authorisation",
+  "session": 4,
+  "area": ""
+ },
+ "Availability": {
+  "defn": "Information is accessible to those authorised to view or modify it",
+  "session": 4,
+  "area": ""
+ },
+ "Non-repudiation": {
+  "defn": "Persons cannot deny creating or modifying data — proof of origin and action",
+  "session": 4,
+  "area": ""
+ },
+ "AAA": {
+  "defn": "Identification, authentication, authorisation, accounting",
+  "session": 4,
+  "area": ""
+ },
+ "Gap analysis": {
+  "defn": "Comparing current security posture against a target framework to find gaps",
+  "session": 4,
+  "area": ""
+ },
+ "Managerial control": {
+  "defn": "Oversight — policies and risk assessments",
+  "session": 4,
+  "area": ""
+ },
+ "Operational control": {
+  "defn": "Depends on a person to implement — training, guards",
+  "session": 4,
+  "area": ""
+ },
+ "Technical control": {
+  "defn": "Implemented in systems and software — firewalls, encryption",
+  "session": 4,
+  "area": ""
+ },
+ "Physical control": {
+  "defn": "Mediates access to premises and hardware — locks, cameras",
+  "session": 4,
+  "area": ""
+ },
+ "Preventive / detective / corrective": {
+  "defn": "Operates before / during / after an attack",
+  "session": 4,
+  "area": ""
+ },
+ "Directive / deterrent / compensating": {
+  "defn": "Enforces behaviour / discourages / substitutes",
+  "session": 4,
+  "area": ""
+ },
+ "Defence in depth": {
+  "defn": "Layered controls so no single point of failure",
+  "session": 4,
+  "area": ""
+ },
+ "Least privilege": {
+  "defn": "Users receive only the access they need",
+  "session": 4,
+  "area": ""
+ },
+ "Zero trust": {
+  "defn": "Verify every request — never trust implicitly",
+  "session": 4,
+  "area": ""
+ },
+ "Vulnerability": {
+  "defn": "A weakness in a system, process or design",
+  "session": 5,
+  "area": ""
+ },
+ "Threat": {
+  "defn": "A person, tool or method that could exploit a vulnerability",
+  "session": 5,
+  "area": ""
+ },
+ "Risk": {
+  "defn": "The likelihood and impact of a threat exploiting a vulnerability",
+  "session": 5,
+  "area": ""
+ },
+ "Threat actor": {
+  "defn": "A person or group that poses a threat",
+  "session": 5,
+  "area": ""
+ },
+ "APT": {
+  "defn": "Advanced persistent threat, long-term and strategic, state-backed or highly resourced",
+  "session": 5,
+  "area": ""
+ },
+ "Script kiddie": {
+  "defn": "Unskilled attacker using pre-written tools on easy targets",
+  "session": 5,
+  "area": ""
+ },
+ "Hacktivist": {
+  "defn": "Hacker promoting a political or social cause",
+  "session": 5,
+  "area": ""
+ },
+ "Spear phishing": {
+  "defn": "Targeted, personalised phishing aimed at a named individual",
+  "session": 5,
+  "area": ""
+ },
+ "Zero day": {
+  "defn": "A vulnerability unknown to the vendor with no available patch",
+  "session": 5,
+  "area": ""
+ },
+ "False flag": {
+  "defn": "Techniques that mislead attribution to another entity",
+  "session": 5,
+  "area": ""
+ },
+ "Symmetric encryption": {
+  "defn": "One shared secret key encrypts and decrypts — fast, for bulk data",
+  "session": 6,
+  "area": ""
+ },
+ "AES": {
+  "defn": "Advanced Encryption Standard — symmetric; key sizes of 128, 192 or 256 bits",
+  "session": 6,
+  "area": ""
+ },
+ "Asymmetric encryption": {
+  "defn": "Public/private key pair — public encrypts, private decrypts",
+  "session": 6,
+  "area": ""
+ },
+ "RSA / ECC": {
+  "defn": "Asymmetric algorithms — RSA on factoring; ECC with smaller keys for constrained devices",
+  "session": 6,
+  "area": ""
+ },
+ "Keyspace": {
+  "defn": "The range of possible key values; longer keys mean larger keyspaces",
+  "session": 6,
+  "area": ""
+ },
+ "Hashing": {
+  "defn": "One-way, fixed-length digest — integrity and password storage; avalanche effect",
+  "session": 6,
+  "area": ""
+ },
+ "Digital signature": {
+  "defn": "Hashing plus the private key — integrity, authentication, non-repudiation",
+  "session": 6,
+  "area": ""
+ },
+ "PKI": {
+  "defn": "Infrastructure that proves the identity of a public key holder",
+  "session": 6,
+  "area": ""
+ },
+ "Certificate authority (CA)": {
+  "defn": "Issues certificates to verified subjects",
+  "session": 6,
+  "area": ""
+ },
+ "Registration authority (RA)": {
+  "defn": "Verifies identities before the CA issues",
+  "session": 6,
+  "area": ""
+ },
+ "X.509": {
+  "defn": "The digital certificate standard",
+  "session": 6,
+  "area": ""
+ },
+ "CN / SAN": {
+  "defn": "Common Name (legacy FQDN) / Subject Alternative Name (modern, wildcards)",
+  "session": 6,
+  "area": ""
+ },
+ "CRL / OCSP": {
+  "defn": "Revocation list / real-time online certificate status protocol",
+  "session": 6,
+  "area": ""
+ },
+ "TPM / HSM": {
+  "defn": "Motherboard cryptoprocessor / dedicated hardware security module",
+  "session": 6,
+  "area": ""
+ },
+ "Perfect forward secrecy": {
+  "defn": "Ephemeral session keys — compromise cannot decrypt past traffic",
+  "session": 6,
+  "area": ""
+ },
+ "Salting / key stretching": {
+  "defn": "Random per-password value / extra hashing rounds against brute force",
+  "session": 6,
+  "area": ""
+ },
+ "Steganography / tokenisation": {
+  "defn": "Concealing in a cover file / substituting data with reversible tokens",
+  "session": 6,
+  "area": ""
+ },
+ "Knowledge factor": {
+  "defn": "Something you know — password, PIN",
+  "session": 7,
+  "area": ""
+ },
+ "Ownership factor": {
+  "defn": "Something you have — token, smart card, phone",
+  "session": 7,
+  "area": ""
+ },
+ "Biometric factor": {
+  "defn": "Something you are/do — fingerprint, face, voice",
+  "session": 7,
+  "area": ""
+ },
+ "MFA": {
+  "defn": "Multifactor authentication — factors from different categories",
+  "session": 7,
+  "area": ""
+ },
+ "FRR / FAR": {
+  "defn": "False Rejection Rate (Type I) / False Acceptance Rate (Type II)",
+  "session": 7,
+  "area": ""
+ },
+ "FIDO / U2F": {
+  "defn": "Phishing-resistant hardware security keys",
+  "session": 7,
+  "area": ""
+ },
+ "Passwordless": {
+  "defn": "Authenticator-held private key plus presence gesture",
+  "session": 7,
+  "area": ""
+ },
+ "RBAC": {
+  "defn": "Role-based access control — permissions via roles",
+  "session": 7,
+  "area": ""
+ },
+ "ABAC": {
+  "defn": "Attribute-based access control — user/resource/environment attributes",
+  "session": 7,
+  "area": ""
+ },
+ "SSO": {
+  "defn": "Single sign-on — one authentication, many applications",
+  "session": 7,
+  "area": ""
+ },
+ "IdP / SP": {
+  "defn": "Identity provider / service provider in federation",
+  "session": 7,
+  "area": ""
+ },
+ "Directory service": {
+  "defn": "Central identity store — Active Directory, LDAP",
+  "session": 7,
+  "area": ""
+ },
+ "Provisioning": {
+  "defn": "Creating, modifying and removing accounts through the user lifecycle",
+  "session": 7,
+  "area": ""
+ },
+ "PAM": {
+  "defn": "Privileged access management — protects admin accounts",
+  "session": 7,
+  "area": ""
+ },
+ "JIT access": {
+  "defn": "Just-in-time access — elevated rights granted only when needed",
+  "session": 7,
+  "area": ""
+ },
+ "Identity governance": {
+  "defn": "Access reviews, policy enforcement and audit",
+  "session": 7,
+  "area": ""
+ },
+ "SAML / OAuth / OIDC": {
+  "defn": "Assertion protocol / authorisation framework / identity layer",
+  "session": 7,
+  "area": ""
+ },
+ "Tiered model": {
+  "defn": "Core (transport) → distribution (policy) → access (endpoints)",
+  "session": 8,
+  "area": ""
+ },
+ "Spine-leaf": {
+  "defn": "Data-centre fabric — every leaf connects to every spine",
+  "session": 8,
+  "area": ""
+ },
+ "Least connectivity": {
+  "defn": "Limit connections to what is necessary",
+  "session": 8,
+  "area": ""
+ },
+ "Stateless firewall": {
+  "defn": "Checks each packet alone — no connection context",
+  "session": 8,
+  "area": ""
+ },
+ "Stateful firewall": {
+  "defn": "State table tracks connections; allows established flows",
+  "session": 8,
+  "area": ""
+ },
+ "NGFW": {
+  "defn": "Next-generation firewall — application-aware, with deep packet inspection",
+  "session": 8,
+  "area": ""
+ },
+ "IDS / IPS": {
+  "defn": "Detect and alert / detect and block inline",
+  "session": 8,
+  "area": ""
+ },
+ "Signature detection": {
+  "defn": "Matches known attack patterns — misses the unknown",
+  "session": 8,
+  "area": ""
+ },
+ "Anomaly detection": {
+  "defn": "Flags deviations from a baseline — finds unknowns, more false positives",
+  "session": 8,
+  "area": ""
+ },
+ "WAF": {
+  "defn": "Web application firewall — protects web apps at layer 7",
+  "session": 8,
+  "area": ""
+ },
+ "NAC": {
+  "defn": "Network access control — endpoint posture before join",
+  "session": 8,
+  "area": ""
+ },
+ "Bastion host": {
+  "defn": "Internet-exposed, hardened host for secure administrative access",
+  "session": 8,
+  "area": ""
+ },
+ "Site-to-site VPN": {
+  "defn": "Tunnel connecting whole networks, often IPsec tunnel mode",
+  "session": 8,
+  "area": ""
+ },
+ "SSL VPN": {
+  "defn": "Browser-based or TLS remote access, no client install",
+  "session": 8,
+  "area": ""
+ },
+ "Split tunnel": {
+  "defn": "Only some traffic traverses the tunnel",
+  "session": 8,
+  "area": ""
+ },
+ "ZTNA": {
+  "defn": "Per-request verification — no implicit network trust",
+  "session": 8,
+  "area": ""
+ },
+ "SASE": {
+  "defn": "ZTNA + SD-WAN delivered as a service",
+  "session": 8,
+  "area": ""
+ },
+ "PFS": {
+  "defn": "Perfect forward secrecy — ephemeral keys, past traffic stays secret",
+  "session": 8,
+  "area": ""
+ },
+ "HSTS": {
+  "defn": "Tells browsers to refuse plaintext connections",
+  "session": 8,
+  "area": ""
+ },
+ "DNS filtering": {
+  "defn": "Blocks access to known malicious or policy-breaking domains",
+  "session": 8,
+  "area": ""
+ },
+ "EDR": {
+  "defn": "Endpoint detection and response, behaviour-based monitoring",
+  "session": 9,
+  "area": ""
+ },
+ "Allowlisting": {
+  "defn": "Only pre-approved software runs, blocks unknown malware",
+  "session": 9,
+  "area": ""
+ },
+ "Blocklisting": {
+  "defn": "Known bad software is denied, misses unknowns",
+  "session": 9,
+  "area": ""
+ },
+ "Code signing": {
+  "defn": "Verifies software origin and integrity before execution",
+  "session": 9,
+  "area": ""
+ },
+ "Secure baseline": {
+  "defn": "A documented secure configuration from a known state",
+  "session": 9,
+  "area": ""
+ },
+ "CIS benchmark": {
+  "defn": "Consensus security configuration guidance from CIS",
+  "session": 9,
+  "area": ""
+ },
+ "MDM": {
+  "defn": "Mobile device management, enrol, configure, enforce, wipe",
+  "session": 9,
+  "area": ""
+ },
+ "BYOD": {
+  "defn": "Bring your own device, corporate data on personal devices",
+  "session": 9,
+  "area": ""
+ },
+ "Application vetting": {
+  "defn": "Assessing and approving apps before corporate install",
+  "session": 9,
+  "area": ""
+ },
+ "Secure boot": {
+  "defn": "Verified boot chain blocks tampered firmware",
+  "session": 9,
+  "area": ""
+ },
+ "Firmware update": {
+  "defn": "Patching below the operating system",
+  "session": 9,
+  "area": ""
+ },
+ "Shift left": {
+  "defn": "Security from the first design, not the last test",
+  "session": 9,
+  "area": ""
+ },
+ "Threat modelling": {
+  "defn": "Finding the attack surface before code exists",
+  "session": 9,
+  "area": ""
+ },
+ "SAST / DAST": {
+  "defn": "Source analysis / running-application testing",
+  "session": 9,
+  "area": ""
+ },
+ "DevSecOps": {
+  "defn": "Security in the CI/CD pipeline, not a release gate",
+  "session": 9,
+  "area": ""
+ },
+ "Input validation": {
+  "defn": "Whitelisting, sanitisation and boundary checks",
+  "session": 9,
+  "area": ""
+ },
+ "SQL injection": {
+  "defn": "User input treated as part of the query",
+  "session": 9,
+  "area": ""
+ },
+ "XSS": {
+  "defn": "Attacker script runs in another user's browser",
+  "session": 9,
+  "area": ""
+ },
+ "CSRF": {
+  "defn": "Forged request rides a victim's session",
+  "session": 9,
+  "area": ""
+ },
+ "Sandboxing": {
+  "defn": "Isolating code to contain any compromise",
+  "session": 9,
+  "area": ""
+ },
+ "Buffer overflow": {
+  "defn": "Excess input overwrites memory",
+  "session": 9,
+  "area": ""
+ },
+ "Directory traversal": {
+  "defn": "Dot dot slash escapes the web root",
+  "session": 9,
+  "area": ""
+ },
+ "IaaS / PaaS / SaaS": {
+  "defn": "Infrastructure / platform / software as a service",
+  "session": 9,
+  "area": ""
+ },
+ "Community cloud": {
+  "defn": "Shared by organisations with common needs",
+  "session": 9,
+  "area": ""
+ },
+ "Shared responsibility": {
+  "defn": "Vendor secures the cloud; you secure what is in it",
+  "session": 9,
+  "area": ""
+ },
+ "CASB": {
+  "defn": "Cloud access security broker",
+  "session": 9,
+  "area": ""
+ },
+ "Hypervisor": {
+  "defn": "Type 1 bare metal or Type 2 hosted, separates the VMs",
+  "session": 9,
+  "area": ""
+ },
+ "VM escape": {
+  "defn": "Breaking out of the guest into the hypervisor host",
+  "session": 9,
+  "area": ""
+ },
+ "Vulnerability scan": {
+  "defn": "Automated discovery of technical weaknesses",
+  "session": 10,
+  "area": ""
+ },
+ "Credentialed scan": {
+  "defn": "Scan using valid credentials to see internal state",
+  "session": 10,
+  "area": ""
+ },
+ "CVSS": {
+  "defn": "Common Vulnerability Scoring System: severity score from base, temporal and environmental metrics",
+  "session": 10,
+  "area": ""
+ },
+ "CVE / NVD": {
+  "defn": "Common Vulnerabilities and Exposures / National Vulnerability Database",
+  "session": 10,
+  "area": ""
+ },
+ "Compensating control": {
+  "defn": "Alternative mitigation when patching is impossible",
+  "session": 10,
+  "area": ""
+ },
+ "Risk acceptance": {
+  "defn": "Documented decision to tolerate a known risk",
+  "session": 10,
+  "area": ""
+ },
+ "Responsible disclosure": {
+  "defn": "Vendor notified and given time before public release",
+  "session": 10,
+  "area": ""
+ },
+ "Rules of engagement": {
+  "defn": "Written authorisation and scope for penetration testing",
+  "session": 10,
+  "area": ""
+ },
+ "RTO": {
+  "defn": "Recovery time objective: how fast to recover",
+  "session": 10,
+  "area": ""
+ },
+ "RPO": {
+  "defn": "Recovery point objective: acceptable data loss",
+  "session": 10,
+  "area": ""
+ },
+ "MTBF": {
+  "defn": "Mean time between failures: a reliability measure",
+  "session": 10,
+  "area": ""
+ },
+ "Load balancer": {
+  "defn": "Distributes traffic across healthy servers",
+  "session": 10,
+  "area": ""
+ },
+ "Failover": {
+  "defn": "Automatic switch to a standby system on failure",
+  "session": 10,
+  "area": ""
+ },
+ "Full backup": {
+  "defn": "Everything, every time: simplest restore",
+  "session": 10,
+  "area": ""
+ },
+ "Incremental backup": {
+  "defn": "Changes since the last backup: slow restore chain",
+  "session": 10,
+  "area": ""
+ },
+ "Differential backup": {
+  "defn": "Changes since the last full backup",
+  "session": 10,
+  "area": ""
+ },
+ "3-2-1 rule": {
+  "defn": "3 copies, 2 media, 1 off-site",
+  "session": 10,
+  "area": ""
+ },
+ "HA cluster": {
+  "defn": "High availability: failover with minimal interruption",
+  "session": 10,
+  "area": ""
+ },
+ "Hot / warm / cold site": {
+  "defn": "Immediate, partial or empty recovery facility",
+  "session": 10,
+  "area": ""
+ },
+ "Mantrap": {
+  "defn": "Controlled double-door entry",
+  "session": 10,
+  "area": ""
+ },
+ "Overwrite / degauss / shred / cryptoshred": {
+  "defn": "Data destruction by replacement, magnetism, physical or cryptographic means",
+  "session": 10,
+  "area": ""
+ },
+ "Chain of custody": {
+  "defn": "Records of asset transfer and disposal",
+  "session": 10,
+  "area": ""
+ },
+ "Asset lifecycle": {
+  "defn": "Acquire, assign, track, retire, destroy",
+  "session": 10,
+  "area": ""
+ },
+ "Baseline": {
+  "defn": "The 'normal' traffic and behaviour profile",
+  "session": 11,
+  "area": ""
+ },
+ "Alert fatigue": {
+  "defn": "Desensitisation from too many alarms",
+  "session": 11,
+  "area": ""
+ },
+ "SIEM": {
+  "defn": "Aggregates and correlates monitoring sources into one view",
+  "session": 11,
+  "area": ""
+ },
+ "IR lifecycle": {
+  "defn": "Preparation, detection, containment, eradication, recovery, lessons learned",
+  "session": 11,
+  "area": ""
+ },
+ "Incident classification": {
+  "defn": "Type — unauthorised access, malware, DoS, data breach",
+  "session": 11,
+  "area": ""
+ },
+ "Severity": {
+  "defn": "Low to critical — grades the urgency of response",
+  "session": 11,
+  "area": ""
+ },
+ "Containment": {
+  "defn": "Stopping the spread — isolate and segment",
+  "session": 11,
+  "area": ""
+ },
+ "Eradication": {
+  "defn": "Removing the cause from the environment",
+  "session": 11,
+  "area": ""
+ },
+ "After-action review": {
+  "defn": "Post-incident review of what worked, what failed, what changes",
+  "session": 11,
+  "area": ""
+ },
+ "Root cause analysis": {
+  "defn": "Finding the underlying source so the incident cannot recur",
+  "session": 11,
+  "area": ""
+ },
+ "Order of volatility": {
+  "defn": "Capture the most volatile data first — RAM before disk",
+  "session": 11,
+  "area": ""
+ },
+ "Imaging": {
+  "defn": "Bit-for-bit copy — analyse the copy, preserve the original",
+  "session": 11,
+  "area": ""
+ },
+ "Write blocker": {
+  "defn": "Prevents any change to the original data during examination",
+  "session": 11,
+  "area": ""
+ },
+ "Legal hold": {
+  "defn": "Preserving records relevant to litigation",
+  "session": 11,
+  "area": ""
+ },
+ "Memory forensics": {
+  "defn": "Analysing RAM — running processes, open connections, remnants",
+  "session": 11,
+  "area": ""
+ },
+ "File carving": {
+  "defn": "Recovering files from raw disk without the filesystem",
+  "session": 11,
+  "area": ""
+ },
+ "Metadata analysis": {
+  "defn": "File creation dates, authorship, modification history",
+  "session": 11,
+  "area": ""
+ },
+ "C2 beacon": {
+  "defn": "Regular small connections to a command-and-control host",
+  "session": 11,
+  "area": ""
+ },
+ "Impossible travel": {
+  "defn": "Logins from locations too far apart in time",
+  "session": 11,
+  "area": ""
+ },
+ "Policy": {
+  "defn": "High-level intent — what must be achieved",
+  "session": 12,
+  "area": ""
+ },
+ "Standard": {
+  "defn": "Mandatory requirements — how to comply",
+  "session": 12,
+  "area": ""
+ },
+ "Procedure": {
+  "defn": "Step-by-step instructions for a task",
+  "session": 12,
+  "area": ""
+ },
+ "Guideline": {
+  "defn": "Recommended practice — flexible",
+  "session": 12,
+  "area": ""
+ },
+ "Regulatory compliance": {
+  "defn": "Required by law — GDPR, PCI DSS",
+  "session": 12,
+  "area": ""
+ },
+ "Industry compliance": {
+  "defn": "Required by sector practice — ISO 27001",
+  "session": 12,
+  "area": ""
+ },
+ "Qualitative risk": {
+  "defn": "Ratings and judgement — high, medium, low",
+  "session": 12,
+  "area": ""
+ },
+ "Quantitative risk": {
+  "defn": "Monetary values — ALE, SLE, ARO",
+  "session": 12,
+  "area": ""
+ },
+ "Avoid / transfer / mitigate / accept": {
+  "defn": "The four risk responses",
+  "session": 12,
+  "area": ""
+ },
+ "Data classification": {
+  "defn": "Public, internal, confidential, restricted",
+  "session": 12,
+  "area": ""
+ },
+ "Data owner / steward / custodian": {
+  "defn": "Accountable / governance / implementation",
+  "session": 12,
+  "area": ""
+ },
+ "GDPR / UK GDPR": {
+  "defn": "EU/UK data protection frameworks",
+  "session": 12,
+  "area": ""
+ },
+ "Data sovereignty": {
+  "defn": "Data is subject to the law where it resides",
+  "session": 12,
+  "area": ""
+ }
+}

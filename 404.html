@@ -36,8 +36,38 @@
   </style>
   <script>
   (function () {
-    try { document.documentElement.setAttribute("data-theme",
-      (localStorage.getItem("tfone-theme") || "") === "light" ? "light" : "dark"); } catch (e) {}
+    var BASE = "/courses/ai-foundation/";
+    var origin = location.origin;
+    var path = (location.pathname || "").split("?")[0];
+
+    function realFile(p) {
+      if (p.charAt(0) !== "/") { return null; }
+      if (p === BASE.slice(0, -1)) { p = BASE; }
+      if (p.indexOf(BASE) !== 0) { return null; }
+      var rel = p.slice(BASE.length);
+      if (rel === "" || rel === "index" || rel === "index.html") { return BASE + "index.html"; }
+      return BASE + rel.replace(/\.html$/, "") + ".html";
+    }
+
+    var page = realFile(path);
+    if (page) {
+      fetch(page, { credentials: "same-origin", cache: "no-cache" })
+        .then(function (r) { if (!r.ok) { throw 0; } return r.text(); })
+        .then(function (html) {
+          document.open("text/html", "replace");
+          document.write(html);
+          document.close();
+          window.scrollTo(0, 0);
+        })
+        .catch(function () {
+          // fall through to the generic 404 below
+          try { document.documentElement.setAttribute("data-theme",
+            (localStorage.getItem("tfone-theme") || "") === "light" ? "light" : "dark"); } catch (e) {}
+        });
+    } else {
+      try { document.documentElement.setAttribute("data-theme",
+        (localStorage.getItem("tfone-theme") || "") === "light" ? "light" : "dark"); } catch (e) {}
+    }
   })();
   </script>
 </head>

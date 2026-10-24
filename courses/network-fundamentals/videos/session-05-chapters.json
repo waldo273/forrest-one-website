@@ -1,0 +1,38 @@
+{
+ "session": 5,
+ "slug": "session-05-threats-actors",
+ "duration": 1140.6,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Know the Adversary",
+   "frame": 1
+  },
+  {
+   "start": 161.4,
+   "title": "Chapter 2: The Attack Surface",
+   "frame": 6
+  },
+  {
+   "start": 349.1,
+   "title": "Chapter 3: Vulnerabilities",
+   "frame": 12
+  },
+  {
+   "start": 513.7,
+   "title": "Chapter 4: Malware and Credential Attacks",
+   "frame": 17
+  },
+  {
+   "start": 697.2,
+   "title": "Chapter 5: Attacks on the Network",
+   "frame": 23
+  },
+  {
+   "start": 923.9,
+   "title": "Chapter 6: Mitigation",
+   "frame": 30
+  }
+ ]
+}

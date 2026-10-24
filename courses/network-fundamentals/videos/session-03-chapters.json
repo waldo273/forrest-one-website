@@ -1,0 +1,38 @@
+{
+ "session": 3,
+ "slug": "session-03-network-services",
+ "duration": 1056.8,
+ "frames": 36,
+ "chapters": [
+  {
+   "start": 0.0,
+   "title": "Chapter 1: Ports, Protocols and Traffic Types",
+   "frame": 1
+  },
+  {
+   "start": 146.4,
+   "title": "Chapter 2: Documentation, Agreements and Surveys",
+   "frame": 6
+  },
+  {
+   "start": 331.2,
+   "title": "Chapter 3: Life-Cycle and Controlled Change",
+   "frame": 12
+  },
+  {
+   "start": 472.8,
+   "title": "Chapter 4: Configuration and Monitoring Tools",
+   "frame": 17
+  },
+  {
+   "start": 609.6,
+   "title": "Chapter 5: Baselines, Logs and Resilience",
+   "frame": 22
+  },
+  {
+   "start": 807.7,
+   "title": "Chapter 6: Core Services and Remote Access",
+   "frame": 29
+  }
+ ]
+}

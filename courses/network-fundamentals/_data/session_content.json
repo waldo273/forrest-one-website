@@ -1,0 +1,609 @@
+{
+ "1": {
+  "concepts": [
+   [
+    "1A - Network models",
+    "The OSI model's seven layers are the exam's reference grid: application (7), presentation (6), session (5), transport (4), network (3), data link (2), physical (1). The TCP/IP stack condenses these to four: application (OSI 5–7), transport (4), internet (3), network access (1–2). Encapsulation builds the PDU - data becomes a segment (transport header + port), a packet (IP header), then a frame (Ethernet header + MACs). Firewalls read layer 3/4 fields; WAFs work at layer 7."
+   ],
+   [
+    "1B - IPv4 addressing",
+    "An IPv4 address is 32 bits in four octets, split into network and host portions by the mask. Classful addressing (A–E) wasted space; CIDR lets the boundary fall anywhere. Two formulas carry subnetting: subnets = 2^n (n = borrowed bits); usable hosts = 2^h − 2 (h = host bits). The network and broadcast addresses are never assignable."
+   ],
+   [
+    "1C - VLSM",
+    "VLSM uses different masks inside one network to match real requirements. Always allocate the largest requirement first, and never overlap. In security terms, each subnet becomes a zone: DMZ, internal servers, management, workstations. Segmentation is the blast-radius control: it limits lateral movement, so a compromised workstation cannot reach the server subnet. A DMZ is a buffer between the internal network and the internet, holding only public-facing services and firewalled on both sides. Network attacks such as VLAN hopping and on-path attacks succeed only when this segmentation fails, so an unbroken zone design is itself a defence."
+   ],
+   [
+    "1D - IPv6",
+    "IPv6 is 128 bits in eight hex groups. Shorten by dropping leading zeros and using one double colon for a contiguous zero run. Address types: global unicast (2000::/3), link-local (fe80::/10), unique local (fc00::/7), multicast (ff00::/8). There is no broadcast. Dual-stack operation, running IPv4 and IPv6 together, enlarges the attack surface, because every additional entry point is a way in for an attacker. IPv6 traffic can bypass IPv4-only ACLs, so filter both families."
+   ]
+  ],
+  "cautions": [
+   "Do not assign the network or broadcast address to a host.",
+   "Do not allocate VLSM smallest-first - it fragments the address space.",
+   "Do not ignore segmentation as a security control: it contains breaches and blocks lateral movement.",
+   "Do not assume a /24 means 254 usable hosts in every context - it is 254 only as one subnet.",
+   "Do not use two double colons in an IPv6 address - one per address only.",
+   "Do not ignore IPv6 traffic in monitoring - it can bypass IPv4-only filters."
+  ],
+  "selfcheck": [
+   "Name the seven OSI layers and one protocol or device for each.",
+   "What is the PDU at layers 4, 3 and 2?",
+   "What is the network address of 192.168.10.50/28?",
+   "How many usable hosts does a /29 subnet provide?",
+   "Convert 255.255.255.240 to CIDR notation.",
+   "Which IPv6 prefix is link-local, and why does that matter for routing?"
+  ],
+  "examtips": [
+   "Know both models and the mapping - CompTIA references OSI layer numbers.",
+   "The subnet formulas (2^n, 2^h − 2) are the fastest marks on the paper.",
+   "Remember IPv6 has no broadcast addresses - multicast replaces them.",
+   "Dual-stack bypass is a genuine Security+ scenario - remember the fix is filtering both families.",
+   "Segmentation is a scored security topic - link subnets to zones, the attack surface and lateral movement."
+  ],
+  "reading": [
+   "RFC 791 - Internet Protocol (IPv4).",
+   "RFC 8200 - IPv6 Specification.",
+   "RFC 4632 - CIDR: An Address Assignment and Aggregation Strategy.",
+   "CompTIA Security+ SY0-701 Exam Objectives - Domain 3 (Security Architecture).",
+   "CompTIA Security+ SY0-701 Exam Objectives - Domain 4 (Security Operations) for network attack mitigation."
+  ]
+ },
+ "2": {
+  "concepts": [
+   [
+    "2A - Layer 2 switching",
+    "Switches forward frames at layer 2 using MAC addresses. On receipt: learn the source MAC and port, look up the destination, forward to the matching port - or flood if unknown. Broadcasts always flood. CAM-table overflow (MAC flooding) degrades a switch into hub mode, letting an attacker see all frames on the segment."
+   ],
+   [
+    "2B - VLANs & trunking",
+    "VLANs segment one physical switch into logical broadcast domains - the core containment control. Trunk ports carry tagged frames between switches via 802.1Q; access ports carry one untagged VLAN. Segmentation reduces the attack surface, contains blast radius and blocks lateral movement. The default native VLAN (VLAN 1) is an attack surface - change it, prune unused VLANs and restrict trunk allowed lists. VLAN hopping crosses boundaries by switch spoofing (negotiating a trunk) or double tagging (native VLAN spoof). Microsegmentation takes this further, isolating individual workloads via SDN."
+   ],
+   [
+    "2C - Spanning Tree",
+    "Redundant links create loops; STP blocks redundant ports for a loop-free topology. The root bridge is the lowest bridge ID; each non-root switch picks the lowest-cost root port. Ports are blocking, listening, learning, forwarding or disabled. RSTP (802.1w) converges in seconds. BPDU Guard and Root Guard stop rogue-root attacks, and port security limits MACs per port."
+   ],
+   [
+    "2D - Architectures",
+    "Segments become security zones: DMZ for public services, bracketed by external and internal firewalls with a proxy between; management isolated; workstations separate from servers; unmanaged IoT devices on their own segment. A campus has access, distribution and core layers. Segmentation limits blast radius and blocks lateral movement - containment is an architectural control that the exam treats across Domain 3 and Domain 4."
+   ]
+  ],
+  "cautions": [
+   "Do not confuse switches (layer 2, frames) with routers (layer 3, packets).",
+   "Do not leave the native VLAN at VLAN 1 - it is a known attack surface.",
+   "Do not assume VLANs make the network faster - they make it segmented.",
+   "Do not confuse BPDU Guard (shuts the port) with Root Guard (stops root takeover).",
+   "Do not ignore unknown-unicast floods in a capture - they may be MAC flooding.",
+   "Do not confuse VLAN hopping methods: switch spoofing negotiates a trunk; double tagging spoofs the native VLAN.",
+   "Do not treat segmentation as only separating departments - it is a lateral movement and blast radius control."
+  ],
+  "selfcheck": [
+   "What three operations does a switch perform when it receives a frame?",
+   "How does unknown unicast forwarding differ from known unicast forwarding?",
+   "What problem does STP solve, and how?",
+   "What is the difference between a trunk port and an access port?",
+   "How can an attacker exploit STP, and which feature stops it?",
+   "Name the two VLAN hopping methods and the mitigations for each.",
+   "How does segmentation limit blast radius and block lateral movement?",
+   "What components bracket a DMZ, and why?"
+  ],
+  "examtips": [
+   "Learn, look up, forward, flood - the switch behaviour sequence is a classic question.",
+   "The native VLAN rule is examinable: move it, prune unused VLANs, restrict trunk allowed lists.",
+   "STP port states and the guard features appear in scenario questions - know which guard does what.",
+   "Segmentation-as-control answers many 'contain the breach' and lateral movement questions.",
+   "VLAN hopping: distinguish switch spoofing from double tagging in attack questions."
+  ],
+  "reading": [
+   "IEEE 802.1Q - VLAN tagging.",
+   "IEEE 802.1D - Spanning Tree Protocol; IEEE 802.1w - Rapid STP.",
+   "RFC 826 - Address Resolution Protocol (ARP) and its security implications.",
+   "CompTIA Security+ SY0-701 Exam Objectives - Domain 3 (Security Architecture)."
+  ]
+ },
+ "3": {
+  "concepts": [
+   [
+    "3A - DNS",
+    "DNS hierarchy: root, TLD, authoritative, recursive resolver. Record types: A, AAAA, CNAME, MX, NS, TXT, PTR. Attacks: cache poisoning (forged answers redirect users), tunnelling (data inside queries), amplification (spoofed small queries, huge responses). DNSSEC signs responses so forgery fails. Recursive resolvers should be restricted to internal clients - an open resolver is a public amplification tool that widens the attack surface. Distinguish spoofing (forging one reply) from poisoning (planting it in the cache for all users)."
+   ],
+   [
+    "3B - DHCP",
+    "DORA: Discover, Offer, Request, Ack. T1 at 50% of lease triggers unicast renewal; T2 at 87.5% triggers broadcast rebind. Attacks: rogue servers assign malicious gateways/DNS (a man-in-the-middle chain); starvation exhausts the pool. Defence: DHCP snooping builds a MAC-to-IP-to-port binding table on the switch, and segmentation contains a rogue server to one segment."
+   ],
+   [
+    "3C - NTP",
+    "Stratum 0 atomic/GPS sources, stratum 1 servers, stratum 2 onward. UDP 123. Attacks: amplification via monlist (up to 100× response), spoofing to shift time. Mitigations: authenticated NTP (NTS), restricted access. Forensic rule: verify clock offset before acquiring evidence - minutes of offset corrupt timelines. Wrong clocks also break Kerberos ticket validation, so accurate time is infrastructure, not a convenience."
+   ],
+   [
+    "3D - SSH",
+    "TCP 22. Key exchange derives a shared session key without transmission. Key-based auth beats passwords - keys are never sent and resist brute force. Hardening: PermitRootLogin no, PasswordAuthentication no, LogLevel VERBOSE, AllowUsers, ClientAliveInterval. Verification: ss -tnp, journalctl -u ssh, grep sshd /var/log/auth.log. Hardening shrinks the attack surface: disabling password auth removes brute force as a threat class, and restricting users denies everyone else."
+   ]
+  ],
+  "cautions": [
+   "Do not run an open recursive DNS resolver - it is a public amplification tool.",
+   "Do not leave the native VLAN or DHCP ports unguarded - both are entry points.",
+   "Do not trust a forensic timeline from a system whose clock was never verified.",
+   "Do not use password authentication for SSH when keys are available.",
+   "Do not ignore unexpected listening ports in ss -tuln - that is how compromise shows.",
+   "Do not let unnecessary services run - each one widens the attack surface."
+  ],
+  "selfcheck": [
+   "What is the purpose of the T1 timer in DHCP?",
+   "What is the difference between an authoritative DNS server and a recursive resolver?",
+   "How does DNS cache poisoning work, and what stops it?",
+   "How does NTP amplification work?",
+   "Why is key-based SSH authentication more secure than passwords?",
+   "What command shows all listening TCP and UDP services on Linux?",
+   "How does closing unused services reduce the attack surface?"
+  ],
+  "examtips": [
+   "DNSSEC stops poisoning; DHCP snooping stops rogue servers - match the control to the attack.",
+   "NTP amplification and DNS amplification are both DDoS scenarios - know the mechanism.",
+   "SSH hardening settings appear in scenario questions - remember PermitRootLogin no.",
+   "The service-port table (22 SSH, 53 DNS, 67/68 DHCP, 123 NTP) is core knowledge.",
+   "Spoofing forges one reply; poisoning plants it in a cache - an exam-favourite distinction.",
+   "Reducing the attack surface is a stated security principle - closing unused services is an example."
+  ],
+  "reading": [
+   "RFC 1034/1035 - DNS concepts and implementation.",
+   "RFC 2131 - DHCP.",
+   "RFC 5905 - NTPv4.",
+   "RFC 4251 - SSH protocol architecture.",
+   "UK National Cyber Security Centre - network security guidance."
+  ]
+ },
+ "4": {
+  "concepts": [
+   [
+    "1A - Security concepts",
+    "The CIA triad is the foundation: confidentiality (read only by authorised persons), integrity (data stored and transferred as intended), availability (accessible when needed). Each pillar has distinct threats and controls: confidentiality is threatened by interception and data theft, protected by encryption and access controls; integrity by unauthorised tampering, protected by hashing and digital signatures; availability by denial of service and hardware failure, protected by redundancy, backups and failover. Non-repudiation adds proof of origin and action via digital signatures and audit logs. The AAA framework sequences access: identify, authenticate, authorise, account - authentication rests on three factors (something you know, have, or are). The NIST CSF functions - identify, protect, detect, respond, recover - structure a whole programme, and gap analysis scores maturity against it."
+   ],
+   [
+    "1B - Security controls",
+    "Controls are classified on two axes. Category: managerial (policies and risk assessments), operational (guard patrols, incident response), technical (firewalls, ACLs, IDS, encryption), physical (locks, fences, cameras, mantraps). Functional type: preventive (blocks before - firewalls, access controls), detective (finds during - IDS, log monitoring), corrective (fixes after - patching, restore), directive (guides behaviour - acceptable use policies), deterrent (discourages - warning banners, visible cameras), compensating (substitutes when a primary control is not feasible - enhanced logging in place of encryption)."
+   ],
+   [
+    "1C - Roles & principles",
+    "CISO/CSO owns strategy; ISSO manages day-to-day; data owner is accountable; custodian implements; analyst monitors and responds; auditor verifies independently. Principles: defence in depth (layered controls so no single point of failure), least privilege (only the access needed), separation of duties (no one person controls a critical process alone), zero trust (never trust, always verify; microsegmentation and continuous verification; a design principle, not a product)."
+   ],
+   [
+    "Memory aids",
+    "CIA - Read, Unchanged, Accessible: confidentiality is the read side, integrity the change side, availability the access side.AAA - I A A A: the user is identified, then authenticated, then authorised, then accounted.Controls on two axes: category asks who or what (managerial, operational, technical, physical); type asks when and how it acts (preventive to compensating).Non-repudiation means deniable, no: signatures and logs make denial fail.Zero trust - never trust, always verify: a design principle, not a product."
+   ]
+  ],
+  "cautions": [
+   "Do not confuse integrity (unchanged) with correctness (true).",
+   "Do not confuse preventive (blocks) with deterrent (discourages).",
+   "Do not confuse the data owner (accountable) with the custodian (implementer).",
+   "Do not treat a vulnerability scan as a gap analysis - they measure different things.",
+   "Do not expect zero trust to be a product - it is a design principle."
+  ],
+  "selfcheck": [
+   "Define the three pillars of the CIA triad and give one control for each.",
+   "What does non-repudiation provide, and how?",
+   "Name the four steps of the AAA framework and the three authentication factors.",
+   "Give an example control for each of the four categories.",
+   "Which functional type operates during an attack? Which after?",
+   "What are the five NIST CSF functions?",
+   "Explain the difference between a vulnerability scan and a gap analysis.",
+   "Who is accountable for a data set, and who implements the controls that protect it?",
+   "What does microsegmentation do in a zero-trust model?"
+  ],
+  "examtips": [
+   "Know the two-axis control model cold - category and functional type, with one concrete example for each.",
+   "Non-repudiation is a favourite exam term - link it to signatures and logs, not logging alone.",
+   "Learn the classic paired distinctions: preventive versus deterrent, integrity versus correctness, owner versus custodian, scan versus gap analysis.",
+   "Zero trust is described as a design principle - reject any option that sells it as a product.",
+   "The exam is vendor-neutral - no product-specific questions.",
+   "Learn the exam facts: 90 questions, 90 minutes, pass mark 750."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - Domain 1.",
+   "NIST Cybersecurity Framework (CSF 2.0) documentation.",
+   "NIST SP 800-53 - security and privacy controls catalogue.",
+   "NIST SP 800-207 - Zero Trust Architecture."
+  ]
+ },
+ "5": {
+  "concepts": [
+   [
+    "2A - Threat actors",
+    "Risk = threat × vulnerability: a threat that exploits a vulnerability creates risk. Actors are compared by behaviour (targeted or opportunistic), source (internal or external), sophistication, resources and funding, and motivation with intent. Types: lone hackers, script kiddies, hacker teams and hacktivists, nation-state actors and APTs, organised crime, competitors, and insiders (malicious and unintentional). Motivations: financial, political or ideological, strategic, and personal."
+   ],
+   [
+    "2B - Attack surface & vectors",
+    "The attack surface spans hardware, software, networks, processes and human factors, and grows as cloud, mobile and IoT devices are added. Vectors: direct access (USB, console), remote access (VPN, RDP, SSH), wireless and cloud, open ports, lure-based (Trojan, malicious documents, phishing, spear phishing, whaling, smishing, vishing, watering holes), vulnerable software (unpatched systems, misconfigurations, zero-days, unsupported systems, default credentials), and the supply chain (compromised updates, vendor credentials). The attack chain: recon, vector, exploit, act."
+   ]
+  ],
+  "cautions": [
+   "Do not call all hackers criminals; white hats are ethical.",
+   "Do not forget unintentional insiders; most insider incidents are accidents.",
+   "Do not use 'APT' for every advanced attack; persistence and strategy are the point.",
+   "Do not ignore the human vectors; phishing is the most common entry point.",
+   "Do not assume patching fixes everything; unsupported systems and zero-days have no patch.",
+   "Do not treat vulnerability and risk as the same thing; risk needs a threat behind the weakness."
+  ],
+  "selfcheck": [
+   "Define vulnerability, threat and risk in one sentence each.",
+   "Name the five attributes used to compare threat actors.",
+   "List five threat actor types and one motivation for each.",
+   "What makes an APT different from a single advanced attack?",
+   "Name six threat vectors and give one example of each.",
+   "What are the four steps of the attack chain?",
+   "Contrast an unpatched-software vector with a supply chain vector, using one real example for each.",
+   "Explain why most insider incidents are not malicious, and name two defences."
+  ],
+  "examtips": [
+   "Scenario questions reward classification; label the actor, the vector and the motivation.",
+   "APT = persistence and strategy, not just sophistication.",
+   "Insider threat includes accidents, not just malice.",
+   "Supply chain is an increasingly tested vector; know the NotPetya update example.",
+   "Know the difference between a vulnerability and a risk; the exam tests the distinction directly.",
+   "Lure-based vectors cover phishing in all its forms, from broad to spear phishing and whaling."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives, objectives 2.1, 2.2 and 2.4.",
+   "NCSC threat reports, real-world actor profiles and motivations.",
+   "MITRE ATT&CK, techniques mapped to actor groups.",
+   "Case write-ups of WannaCry and NotPetya for concrete vector examples."
+  ]
+ },
+ "6": {
+  "concepts": [
+   [
+    "3A - Cryptographic algorithms",
+    "Symmetric: one key, fast, bulk data, distribution problem. AES is the standard, with 128, 192 or 256-bit keys. Asymmetric: key pairs, solves distribution, slower, small payloads. RSA rests on factoring difficulty; ECC reaches similar strength with smaller keys, ideal for mobile and IoT. Key length: longer keys, larger keyspace, stronger against brute force. Hashing: one-way, fixed length, anti-collision and avalanche - integrity, not secrecy; SHA-256 or better, as MD5 and SHA-1 are broken. Digital signatures: hash + private key, verified with public key - integrity, authentication, non-repudiation."
+   ],
+   [
+    "3B - Public key infrastructure",
+    "CAs issue X.509 certificates binding public keys to identities; RAs verify identities before issuance. Trust flows from self-signed roots through intermediate CAs to leaf certificates, and trusting the root vouches for the whole chain. CSRs carry the public key (never the private key). CN is legacy; SAN is modern. Revocation: CRL lists vs OCSP real-time queries, part of the lifecycle of issuance, renewal, revocation and expiration. Key management: lifecycle, TPM/HSM cryptoprocessors, escrow with M-of-N control."
+   ],
+   [
+    "3C - Cryptographic solutions",
+    "Data at rest: full disk, file and database encryption. Data in transit: transport encryption (TLS, VPN) with perfect forward secrecy - an asymmetric handshake exchanges a symmetric session key, and ephemeral keys protect past traffic. Data in use: processed in memory. Passwords: salt + key stretching. Blockchain: blocks chained by hashes, tamper-evident. Obfuscation: steganography (least significant bits of images), tokenisation, data masking, code obfuscation."
+   ]
+  ],
+  "cautions": [
+   "Do not use asymmetric for bulk data - symmetric is the bulk tool.",
+   "Do not rely on encryption for integrity - hashing does that job.",
+   "Do not treat a certificate as a safety rating - it proves key-to-identity binding.",
+   "Do not use MD5 or SHA-1 for anything modern - SHA-256 or better.",
+   "Do not store passwords without salt and stretching.",
+   "Do not confuse CRL with OCSP - one is a list, the other a real-time query."
+  ],
+  "selfcheck": [
+   "Why is symmetric encryption preferred for bulk data?",
+   "What problem does asymmetric encryption solve?",
+   "What is the difference between AES, RSA and ECC?",
+   "What three properties does a digital signature provide?",
+   "What is the difference between CN and SAN?",
+   "Explain CRL versus OCSP.",
+   "Why is ECC attractive for mobile and IoT devices?",
+   "Name one control for each data state: at rest, in transit, in use."
+  ],
+  "examtips": [
+   "Job-fit is the exam skill: which algorithm, for which purpose.",
+   "Sign with private, verify with public - memorise the direction.",
+   "Data-state questions: at rest → disk/file; in transit → TLS/PFS.",
+   "Know CN vs SAN, CRL vs OCSP, TPM vs HSM - the exam loves pairs.",
+   "Recognise algorithms by role: AES symmetric, RSA and ECC asymmetric.",
+   "Remember salting defeats pre-computed tables; stretching raises guess cost."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - cryptography objectives.",
+   "NIST cryptographic standards and guidance (SP 800-series).",
+   "The course reference chapter on public key infrastructure, encryption, hashing and blockchain.",
+   "Your browser's certificate viewer - inspect SANs and chains in the wild."
+  ]
+ },
+ "7": {
+  "concepts": [
+   [
+    "4A - Authentication",
+    "Factors: know, have, are/do, somewhere. MFA requires different categories - password+PIN is one factor. Passwords: length over complexity, no hints, managers for uniqueness. Biometrics: FAR and FRR trade off. Hard tokens (smart card, OTP, FIDO) resist phishing; soft tokens (SMS, push, apps) are convenient but some are interceptable. Passwordless uses authenticator-held keys."
+   ],
+   [
+    "4B - Account policies & authorisation",
+    "Account types: user, privileged, service, shared, guest. Provisioning manages the user lifecycle - onboard, modify on role change, offboard promptly. Policies: lockout, time-of-day, auditing. Authorisation: permissions, least privilege, RBAC (roles), ABAC (attributes). Privileged accounts need PAM: just-in-time access, password vaulting and session recording. Identity governance reviews access, enforces policy and audits."
+   ],
+   [
+    "4C - SSO & federation",
+    "SSO: one authentication, many apps - removes password fatigue but concentrates risk, mitigated by MFA and monitoring. Directory services (Active Directory, LDAP) are the source of truth for identities. Federation: IdP authenticates and issues a token, SP trusts the assertion. Protocols: SAML (assertions), OAuth 2.0 (authorisation), OIDC (identity on OAuth), LDAP (directory), Kerberos (tickets)."
+   ]
+  ],
+  "cautions": [
+   "Do not count two knowledge factors as MFA.",
+   "Do not rely on SMS as a strong second factor - it is interceptable.",
+   "Do not force password expiry without reason - NIST favours length.",
+   "Do not give service accounts more privilege than the service needs.",
+   "Do not leave departed staff accounts active - offboard promptly.",
+   "Do not expose privileged accounts without PAM - use JIT and vaulting.",
+   "Do not deploy SSO without MFA and compromise-recovery plans."
+  ],
+  "selfcheck": [
+   "Name the four authentication factor categories.",
+   "Why is password plus PIN not MFA?",
+   "What are FAR and FRR, and how do they trade off?",
+   "Give one example each of a hard and a soft token.",
+   "What is the difference between RBAC and ABAC?",
+   "What is provisioning, and why is prompt offboarding important?",
+   "Why does SSO concentrate risk, and what mitigates it?"
+  ],
+  "examtips": [
+   "Factor categories are the most tested IAM concept - classify before answering.",
+   "The exam pairs: RBAC/ABAC, FAR/FRR, hard/soft tokens, IdP/SP.",
+   "NIST password guidance: length, no forced periodic expiry, no common passwords.",
+   "Know the user lifecycle: provisioning, role changes and offboarding.",
+   "PAM concepts - JIT access, password vaulting, session recording - are examinable.",
+   "SAML, OAuth and OIDC roles are recognition items - know which does what."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - IAM objectives.",
+   "NIST SP 800-63B - digital identity guidelines (password and MFA guidance).",
+   "NCSC password guidance for organisations."
+  ]
+ },
+ "8": {
+  "concepts": [
+   [
+    "8A - Architecture",
+    "Tiered (core/distribution/access), spine-leaf (data-centre fabric) and SMB (flat) models. Segmentation is containment: VLANs, the DMZ with twin firewalls, and microsegmentation confine a compromise. Least connectivity limits connections to what is necessary. The distribution layer enforces policy; the core only transports; redundancy removes single points of failure."
+   ],
+   [
+    "8B - Security appliances",
+    "Firewalls: stateless (per-packet), stateful (state table, connection-aware), NGFW (application-aware with deep packet inspection), UTM (all-in-one). IDS detects and alerts; IPS blocks inline; signature detection catches known attacks while anomaly detection finds deviations from a baseline. Proxy forwards/filters/caches and hides topology; WAF protects web apps; load balancers distribute with health checks; NAC enforces posture - allow, quarantine, deny - based on antivirus status, patches and credentials."
+   ],
+   [
+    "8C - Secure remote access",
+    "VPN types: site-to-site (often IPsec tunnel mode), remote access, client-based (often IPsec), SSL VPN (browser/TLS), split tunnel. RDP is high-risk - MFA, allowlists, patching, monitoring. Jump servers and bastion hosts give hardened administrative entry. ZTNA verifies per request; SASE delivers ZTNA + SD-WAN as a service."
+   ],
+   [
+    "8D - Secure protocols",
+    "TLS 1.2/1.3 current - SSL and TLS 1.0/1.1 deprecated; cipher suites; PFS. HTTPS = HTTP over TLS; validate chain, hostname, expiry, revocation against a trusted CA to defeat man-in-the-middle; HSTS. Toolkit: TLS/HTTPS for web, SSH/SFTP for admin and transfer, IPsec for VPNs, S/MIME for email, DNSSEC for DNS integrity, FTPS for secure file transfer."
+   ]
+  ],
+  "cautions": [
+   "Do not confuse IDS (detects) with IPS (blocks inline).",
+   "Do not expect signature detection to find new attacks - anomaly detection covers the unknown.",
+   "Do not call TLS 1.0 acceptable - it is deprecated.",
+   "Do not assume a split tunnel protects all user traffic - it only covers the tunnel.",
+   "Do not put public services inside the internal segment - that is the DMZ's job.",
+   "Do not forget MFA on remote access - it is the non-negotiable control.",
+   "Do not treat a firewall's state tracking as encryption - filtering and encryption are separate."
+  ],
+  "selfcheck": [
+   "What is the difference between IDS and IPS?",
+   "Where does policy enforcement happen in the tiered model?",
+   "Name the four firewall types and their differences.",
+   "Why can signature detection miss a novel attack?",
+   "Which VPN type suits a contractor with browser-only access?",
+   "What does perfect forward secrecy protect?",
+   "What does certificate validation defeat, and which checks make it up?",
+   "Match: web traffic, remote admin, VPN, email, DNS integrity."
+  ],
+  "examtips": [
+   "Scenario questions ask 'which appliance' - classify by what the control does.",
+   "IDS vs IPS and stateful vs stateless are the highest-frequency distinctions.",
+   "Know the VPN flavours and when each is used - including IPsec tunnel mode.",
+   "The secure protocol toolkit (TLS/SSH/IPsec/S-MIME/DNSSEC) is direct exam material.",
+   "Remember the DMZ's twin-firewall layout and why least connectivity shrinks the attack surface.",
+   "Read every quiz explanation - the distractors teach as much as the answers."
+  ],
+  "reading": [
+   "CompTIA Security+ SY0-701 Exam Objectives - Domain 3 (Security Architecture).",
+   "NIST SP 800-41 - guidelines on firewalls and firewall policy.",
+   "RFC 8446 - TLS 1.3.",
+   "RFC 6071 - IPsec and IKE documentation roadmap."
+  ]
+ },
+ "9": {
+  "concepts": [
+   [
+    "9A - Endpoint security",
+    "The endpoint stack: AV/EDR (signature plus behaviour), hardening (baseline from CIS benchmarks or vendor guides, patching, disable unused services, ports and default accounts), application control (allowlisting over blocklisting, backed by code signing), MDM (enrol, configure, enforce, wipe) with application vetting and containers for BYOD, and OS controls, least privilege, secure boot, full disk encryption and firmware updates."
+   ],
+   [
+    "9B - Application lifecycle",
+    "Shift left: threat modelling before code, code review at every change, SAST for source and DAST for running apps. Secure coding keeps the code at least privilege, hides errors, and validates all input by whitelisting, sanitisation and boundary checks. DevSecOps puts security in the CI/CD pipeline and scans infrastructure as code, so secure code ships as fast as insecure code."
+   ],
+   [
+    "9C - Application attacks",
+    "SQL injection: input treated as code, fix with parameterised queries and input validation. XSS: script in another user's browser, fix with output encoding; a Web Application Firewall filters web traffic. CSRF: forged action on a session, fix with tokens and same-site cookies. Also buffer overflow, directory traversal and race conditions, mitigated by input validation, least privilege and sandboxing."
+   ],
+   [
+    "9D - Cloud & virtualisation",
+    "Service models: IaaS (you secure everything above the hypervisor), PaaS (you secure the app and its data), SaaS (the vendor secures nearly everything). Deployment models, public, private, hybrid and community, shift the line. Shared responsibility: vendor secures the cloud, you secure what is in it. Misconfiguration is the top cloud risk, managed with CASB and posture management. Virtualisation: the hypervisor is the crown jewel, Type 1 beats Type 2, VM escape is the nightmare, containers share the kernel and need namespaces and seccomp."
+   ]
+  ],
+  "cautions": [
+   "Do not rely on antivirus alone, signatures miss unknown threats.",
+   "Do not choose blocklisting over allowlisting for unknown threats.",
+   "Do not skip input validation, every field is a potential injection point.",
+   "Do not confuse XSS (hijacks the browser) with CSRF (hijacks the action).",
+   "Do not assume the cloud vendor secures your data and configuration.",
+   "Do not assume private cloud has no shared responsibility, duties are still divided.",
+   "Do not treat all hypervisors as equal, a Type 1 bare-metal hypervisor is safer than Type 2.",
+   "Do not treat containers as perfectly isolated, they share the kernel."
+  ],
+  "selfcheck": [
+   "Name the five layers of the endpoint protection stack.",
+   "Why does allowlisting beat blocklisting, and what does code signing add?",
+   "What is the difference between XSS and CSRF?",
+   "Which fix stops SQL injection, and what is the role of input validation?",
+   "Where does the shared responsibility line fall for IaaS versus SaaS?",
+   "Name the four cloud deployment models and how they shift responsibility.",
+   "What is VM escape, and why is a Type 1 hypervisor safer than Type 2?",
+   "Name the three data states and the control that protects each."
+  ],
+  "examtips": [
+   "Match the attack to the fix: injection to parameterised queries; XSS to output encoding; CSRF to tokens.",
+   "The shared responsibility line is a favourite scenario, so know IaaS, PaaS, SaaS and the deployment models.",
+   "Allowlisting versus blocklisting is a direct distinction; code signing verifies origin.",
+   "Misconfiguration, not exotic attacks, is the number one cloud risk.",
+   "Know the three data states, at rest, in transit and in use, and the control for each.",
+   "Type 1 versus Type 2 hypervisor security is a recurring exam point."
+  ],
+  "reading": [
+   "OWASP Top 10, the application security risks catalogue.",
+   "NIST SP 800-218, Secure Software Development Framework (SSDF).",
+   "NIST SP 800-190, application container security guide.",
+   "CIS Benchmarks, consensus security configuration guidance.",
+   "CompTIA Security+ SY0-701 Exam Objectives, Domain 3 (Security Architecture)."
+  ]
+ },
+ "10": {
+  "concepts": [
+   [
+    "10A–10D · The vulnerability loop",
+    "Identify: network scanners see the attack surface, host agents see installed truth, and credentialed scans use valid credentials to reveal missing patches and misconfiguration. Feeds such as CVE and the NVD keep tooling current. Assess: CVSS gives a severity score from base, temporal and environmental metrics, but severity is not risk. Risk adds exploitability, exposure and asset criticality, and false positives must be validated before acting. Remediate: patch first, change configuration to reduce the surface, compensate second, and accept the risk with a documented owner and date last. Report and disclose: SLAs by severity, metrics and trends in the report, responsible disclosure to the vendor, and a pentest only under written rules of engagement. Validate by rescanning."
+   ],
+   [
+    "10E · Resiliency",
+    "Redundancy removes single points of failure: RAID storage, NIC teaming, dual power supplies, load balancing and automatic failover. Availability is measured as uptime and mean time between failures. Backup types: full (simplest restore), incremental (fast backup, slow chain), differential (faster restore than incremental). The 3-2-1 rule survives site loss. Recovery sites range from hot, through warm, to cold. RTO is time to recover, RPO is acceptable data loss; tighter targets cost more."
+   ],
+   [
+    "10F · Site security",
+    "Physical: perimeter, doors, mantraps and biometric access, with defence in depth for buildings. Environmental: gas-based fire suppression, cooling and humidity control, UPS and generators. Data destruction: overwrite, degauss, shred or cryptoshred, then verify recovery is impossible and keep chain of custody records. Asset lifecycle: acquire, assign, track, retire, destroy. A discarded drive is a breach waiting to happen."
+   ]
+  ],
+  "cautions": [
+   "Do not treat CVSS score as risk; context decides priority.",
+   "Do not remediate false positives without validation.",
+   "Do not rely on non-credentialed scans alone; credentialed scans see missing patches.",
+   "Do not assume incremental backups restore fast; the chain is slow.",
+   "Do not confuse RTO (time) with RPO (data loss).",
+   "Do not assume all recovery sites are equal; hot, warm and cold differ in cost and downtime.",
+   "Do not run a penetration test without written rules of engagement.",
+   "Do not leave untested backups; they are hopes, not plans.",
+   "Do not discard a drive without verified data destruction and chain of custody records."
+  ],
+  "selfcheck": [
+   "What is the difference between a vulnerability scan and a gap analysis?",
+   "What is the difference between a credentialed and a non-credentialed scan?",
+   "Which three factors turn a severity score into a priority?",
+   "What are the four options for addressing a vulnerability?",
+   "What is responsible disclosure?",
+   "What is the difference between RTO and RPO?",
+   "Which backup type restores fastest, and why?",
+   "What distinguishes a hot site from a cold site?",
+   "Name four data destruction methods and why verification matters."
+  ],
+  "examtips": [
+   "The loop order, scan, assess, remediate, verify, is directly examinable.",
+   "RTO is time, RPO is data; the pair appears in scenario questions.",
+   "Full, incremental and differential restore trade-offs are classic.",
+   "Credentialed versus non-credentialed scanning is a frequent comparison.",
+   "Rules of engagement separate legal pentests from crime.",
+   "Hot, warm and cold sites and the 3-2-1 rule answer recovery questions."
+  ],
+  "reading": [
+   "FIRST: CVSS v3.1 specification.",
+   "MITRE: CVE list; NIST: National Vulnerability Database.",
+   "NIST SP 800-115: technical security testing and assessment.",
+   "NIST SP 800-34: contingency planning guide (RTO/RPO)."
+  ]
+ },
+ "11": {
+  "concepts": [
+   [
+    "11A - Monitoring",
+    "Sources: logs (security, system, application, network device, firewall), flow (NetFlow/sFlow), packet capture, sensors, and the SIEM that aggregates and correlates them. Baselines define normal; thresholds alert on deviation; alert fatigue buries real incidents. Pair real-time alerting with trend analysis and tune alerts to cut false positives."
+   ],
+   [
+    "11B - Incident response",
+    "Six phases: preparation (before!), detection and analysis (confirm, scope, classify, grade severity), containment (evidence trade-off), eradication, recovery (validated restores, intensified monitoring), lessons learned. Classify each incident and set severity low to critical to drive urgency. Close with an after-action review and root cause analysis so the incident cannot recur."
+   ],
+   [
+    "11C - Forensics",
+    "Evidence must be admissible and lawful to collect (warrant or consent). Chain of custody: every handover documented. Order of volatility: registers, RAM, then disk - memory forensics often reveals what logs miss. Preservation: use write blockers, image and hash before analysis, apply legal hold, retain logs. Techniques: carving, timeline analysis, hash analysis, metadata analysis."
+   ],
+   [
+    "11D - Indicators",
+    "Malware: viruses, worms, Trojans, ransomware, spyware, rootkits, botnets. Network: port scanning, unusual traffic, data exfiltration, C2 beacons. Application: web log probes, phishing email, privilege escalation, privilege usage at odd hours. Behavioural: repeated failed logins, unusual times, impossible travel, data spikes."
+   ]
+  ],
+  "cautions": [
+   "Do not start response at containment - preparation comes first.",
+   "Do not treat every incident alike - classify it and grade its severity.",
+   "Do not skip the after-action review - lessons learned prevent recurrence.",
+   "Do not analyse the original drive - image and hash first.",
+   "Do not collect evidence without authorisation - warrant or consent first.",
+   "Do not ignore the order of volatility - RAM will not wait.",
+   "Do not celebrate 'service restored' - verify and monitor.",
+   "Do not let alert volume hide the real incident."
+  ],
+  "selfcheck": [
+   "Name the six IR lifecycle phases in order.",
+   "What is the evidence trade-off in containment?",
+   "How does incident classification and severity drive the response?",
+   "What does a chain of custody record?",
+   "Put these in capture order: RAM, disk, registers, network connections.",
+   "Why does forensic collection need authorisation, and how do write blockers help?",
+   "Name four malware indicators and four network indicators.",
+   "What is impossible travel, and what does it suggest?",
+   "How does root cause analysis differ from treating the symptom?"
+  ],
+  "examtips": [
+   "Sequencing is the exam skill - phases and volatility order.",
+   "Chain of custody and order of volatility are guaranteed items.",
+   "Know SIEM aggregation and correlation - monitoring is scenario material.",
+   "Classify incidents and assign severity; the exam rewards this.",
+   "IoCs are scenario-based: read the pattern, name the indicator.",
+   "Alert fatigue and baseline questions are common monitoring items.",
+   "Authorisation (warrant or consent) and write blockers appear in forensic scenarios."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - Domain 4.",
+   "NIST SP 800-61 - incident handling guide.",
+   "NIST SP 800-86 - forensic techniques and guidelines."
+  ]
+ },
+ "12": {
+  "concepts": [
+   [
+    "12A - Governance",
+    "Policy states intent; standards set mandatory requirements; procedures give steps; guidelines advise. Documents form a hierarchy and run a lifecycle of develop, approve, distribute, review. Compliance: regulatory (law) vs industry (sector practice). Which apply depends on industry, geography and data types. Compliance sets a baseline - security must go beyond it for emerging threats."
+   ],
+   [
+    "12B - Risk management",
+    "Process: identify, assess, respond, monitor. Identification uses asset inventories, threat modelling and vulnerability assessments. Qualitative = ratings; quantitative = money (SLE = AV × EF; ALE = SLE × ARO). Responses: avoid, transfer, mitigate, accept - acceptance is documented, management-level. The risk register records risks, owners, ratings and treatment status, and is reviewed regularly. Vendor risk: assess before contract, monitor during, exit cleanly."
+   ],
+   [
+    "12C - Data protection",
+    "Classification: public, internal, confidential, restricted. States: at rest, in transit, in use. Roles: owner (accountable), steward (governance), custodian (implementation). Lifecycle with retention and secure destruction. GDPR/UK GDPR: principles, consent, rights, 72-hour breach duty. Sovereignty: jurisdiction follows the data and the data subject's location."
+   ]
+  ],
+  "cautions": [
+   "Do not confuse policy (intent) with standard (requirements).",
+   "Do not treat guidelines as mandatory.",
+   "Do not accept risk without management sign-off and documentation.",
+   "Do not keep data beyond retention - destroy it securely.",
+   "Do not ignore which jurisdiction your cloud data lives in.",
+   "Do not swap the data owner (accountable) with the custodian (implementer).",
+   "Do not treat compliance as the whole of security - go beyond the baseline."
+  ],
+  "selfcheck": [
+   "Define policy, standard, procedure and guideline.",
+   "What is the difference between qualitative and quantitative risk assessment, and how is ALE calculated?",
+   "Name the four risk responses and one example of each.",
+   "What is the difference between the data owner and the data custodian?",
+   "Name four GDPR principles, two data rights, and the breach notification window.",
+   "What does data sovereignty mean for cloud region choice?",
+   "Name three methods used to identify risks during the risk process."
+  ],
+  "examtips": [
+   "The exam pairs: policy/standard, qualitative/quantitative, avoid/accept, owner/custodian.",
+   "Risk response questions are scenario-based - match the response to the situation.",
+   "Expect quantitative items that supply AV, EF and ARO and ask for SLE or ALE.",
+   "GDPR items: principles, consent, rights, 72-hour notification, penalties.",
+   "Data roles: owner accountable, custodian implements - never reversed.",
+   "Vendor items test the lifecycle: assess before contract, monitor, exit cleanly."
+  ],
+  "reading": [
+   "Network Fundamentals + CompTIA Security+ SY0-701 Exam Objectives - Domain 5.",
+   "ICO guidance on UK GDPR principles and breach notification.",
+   "NIST SP 800-30 - risk assessment guidance."
+  ]
+ }
+}
