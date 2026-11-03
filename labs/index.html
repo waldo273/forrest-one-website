@@ -8,7 +8,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Labs — Training.Forrest.One</title>
+  <title>Labs, Training.Forrest.One</title>
   <style>
     /* ─── CPIA Dark Red Theme ─── */
     :root {
@@ -113,21 +113,32 @@
     .theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
     .theme-toggle:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
 
-    /* ─── Page Hero ─── */
-    .page-hero {
-      min-height: 60vh;
+    /* ─── Hero (same treatment as the Guides page) ─── */
+    .hero {
+      min-height: 80vh;
       display: flex; align-items: center; justify-content: center;
       text-align: center;
-      padding: 9rem 2rem 4rem;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(168, 28, 28, 0.08) 0%, transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(180deg, var(--bg) 0%, #1b1e24 50%, var(--bg) 100%);
     }
-    .page-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
-    .page-hero h1 .highlight { color: var(--accent-text); }
-    .page-hero .subtitle { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 0.5rem; }
-    .page-hero .tagline { font-size: 1rem; color: var(--text-muted); max-width: 640px; margin: 1rem auto 2.5rem; }
-    .page-hero .ruled-line { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 1.5rem auto; }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+    .hero h1 .highlight { color: var(--accent-text); }
+    .hero .subtitle { font-size: 1.3rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .hero .tagline { font-size: 1rem; color: var(--text-muted); max-width: 640px; margin: 1rem auto 2rem; }
+    .hero .bear-img { width: 360px; height: 360px; object-fit: contain; margin-bottom: 2rem; }
+    /* The hero container is a flex item, so it must be allowed to shrink below its
+       widest child (the console address), otherwise long hostnames push the page wide. */
+    .hero > .container { min-width: 0; width: 100%; }
+
+    /* ─── Breadcrumb / return control ─── */
+    .crumbs {
+      font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.75rem;
+      display: flex; justify-content: center; gap: 0.5rem;
+    }
+    .crumbs a { color: var(--text-dim); text-decoration: none; font-weight: 600; }
+    .crumbs a:hover { color: var(--accent-text); text-decoration: underline; }
+    .crumbs .sep { color: var(--border-hover); }
+    .crumbs [aria-current="page"] { color: var(--text-muted); }
 
     /* ─── Buttons ─── */
     .btn {
@@ -154,7 +165,7 @@
 
     /* ─── Sections ─── */
     section { padding: 5rem 0; }
-    section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 2rem; text-align: center; color: var(--text); }
+    section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 2.5rem; text-align: center; color: var(--text); }
     section h2 .highlight { color: var(--accent-text); }
     section.bg-alt { background: var(--bg-alt); }
 
@@ -166,13 +177,13 @@
       transition: all 0.2s;
     }
     .lab-card:hover {
-      border-color: var(--border-hover);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      border-color: var(--accent-text);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       transform: translateY(-2px);
     }
     .lab-card:focus-within { border-color: var(--accent-text); box-shadow: 0 0 0 3px rgba(168, 28, 28, 0.25); }
-    .lab-card .icon { font-size: 2.6rem; margin-bottom: 1rem; display: block; }
-    .lab-card h3 { color: var(--accent-text); font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .lab-card .icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .lab-card h3 { color: var(--accent-text); font-size: 1.3rem; margin-bottom: 0.8rem; }
     .lab-card p { color: var(--text-dim); font-size: 0.95rem; }
     .lab-card .pillar-tag {
       display: inline-block; font-size: 0.75rem; font-weight: 600;
@@ -194,6 +205,7 @@
       color: var(--text); background: var(--bg-alt);
       border: 1px solid var(--border); border-radius: 8px;
       padding: 0.8rem 1.2rem; display: inline-block; margin: 0.5rem 0 1rem;
+      max-width: 100%; overflow-wrap: anywhere;
     }
     .status-pill {
       display: inline-flex; align-items: center; gap: 8px;
@@ -268,8 +280,11 @@
       nav ul li { text-align: center; }
       nav ul li a { display: block; padding: 1rem 2rem; font-size: 1rem; }
 
-      .page-hero { padding: 7rem 1rem 3rem; min-height: 55vh; }
-      .page-hero h1 { font-size: clamp(1.9rem, 7vw, 2.7rem); }
+      .hero { padding: 6rem 1rem 3rem; min-height: 70vh; }
+      .hero .bear-img { width: 240px; height: 240px; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero .subtitle { font-size: 1.1rem; }
+      .hero .tagline { font-size: 0.9rem; }
       .btn { padding: 0.8rem 1.8rem; font-size: 0.85rem; }
       .btn-secondary { margin-left: 0; margin-top: 0.8rem; }
 
@@ -312,21 +327,25 @@
   </div>
 </nav>
 
-<section class="page-hero" id="main-content">
+<section class="hero" id="main-content">
   <div class="container">
-    <img src="/mascots/fozzie-09-pentest-cpsa.png" alt="Fozzie the Cyber Bear CREST lab mascot" style="width:200px; height:auto; object-fit:contain; margin:0 auto 1.5rem; display:block;">
+    <div class="crumbs" role="navigation" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <span aria-current="page">Labs</span>
+    </div>
+    <img class="bear-img" src="/mascots/fozzie-09-pentest-cpsa.png" alt="Fozzie the Cyber Bear CREST lab mascot">
     <h1><span class="highlight">CREST</span> Practice Labs</h1>
-    <div class="ruled-line"></div>
     <p class="subtitle">Hands-on labs for the CREST Practitioner certifications</p>
     <p class="tagline">A self-contained Docker environment for the CREST Practitioner Intrusion Analyst (CPIA) and CREST Practitioner Security Analyst (CPSA) certification domains, plus a full Kali Linux desktop in the browser. Bring up the console on your own machine and work the exercises.</p>
 
     <div class="access-note" style="margin-top:2.5rem;">
       <span class="status-pill" id="labStatus"><span class="dot"></span>Checking lab console…</span>
       <p>The CREST lab is a self-contained Docker environment that runs locally. When it is running, the multi-page console is available at:</p>
-      <span class="lab-url">http://10.10.0.6:8020</span>
-      <p>The console has three tabs — <strong>/cpia</strong> for intrusion analysis, <strong>/cpsa</strong> for security assessment, and <strong>/kali</strong> for a full Kali desktop — each with in-browser terminals and a doc pack.</p>
-      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website — the button opens the console on your network.</p>
-      <p><a href="http://10.10.0.6:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open the Lab Console</a></p>
+      <span class="lab-url">http://defiant.tail57a85e.ts.net:8020</span>
+      <p>The console has three tabs: <strong>/cpia</strong> for intrusion analysis, <strong>/cpsa</strong> for security assessment, and <strong>/kali</strong> for a full Kali desktop, each with in-browser terminals and a doc pack.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted);">The lab must be running on the host for this link to respond. It is not hosted on this website: the button opens the console on your network.</p>
+      <p><a href="http://defiant.tail57a85e.ts.net:8020/" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:0.5rem;">Open the Lab Console</a></p>
     </div>
   </div>
 </section>
@@ -338,27 +357,27 @@
       <div class="lab-card">
         <span class="pillar-tag">Intrusion Analysis</span>
         <span class="icon">&#x1F50E;</span>
-        <h3>CPIA — Practitioner Intrusion Analyst</h3>
+        <h3>CPIA, Practitioner Intrusion Analyst</h3>
         <p>Forensic analysis and incident response. Packet capture triage, Windows Event Log timelines, memory forensics with Volatility 3, live incident reconstruction, and static malware triage.</p>
       </div>
       <div class="lab-card">
         <span class="pillar-tag">Security Assessment</span>
         <span class="icon">&#x1F6E1;&#xFE0F;</span>
-        <h3>CPSA — Practitioner Security Analyst</h3>
+        <h3>CPSA, Practitioner Security Analyst</h3>
         <p>Security assessment of a deliberately weak network-services host. Host discovery, service enumeration, credential testing, NFS &amp; RPC enumeration, SMTP user enumeration, and web application testing.</p>
       </div>
       <div class="lab-card">
         <span class="pillar-tag">Full Kali Desktop</span>
         <span class="icon">&#x1F5A5;&#xFE0F;</span>
-        <h3>Kali — Browser Desktop Sandbox</h3>
-        <p>A complete Kali Linux rolling desktop you open in any browser (HTTPS, self-signed cert — accept the warning). No login needed — the desktop opens straight away. The full security toolset is installed, and a shared workspace folder moves files in and out of the desktop.</p>
+        <h3>Kali, Browser Desktop Sandbox</h3>
+        <p>A complete Kali Linux rolling desktop you open in any browser (HTTPS, self-signed cert, so accept the warning). No login needed: the desktop opens straight away. The full security toolset is installed, and a shared workspace folder moves files in and out of the desktop.</p>
       </div>
       <div class="lab-card">
         <span class="pillar-tag">Vulnerability Scanning</span>
         <span class="icon">&#x1F50D;</span>
-        <h3>Nessus — Vulnerability Scanner</h3>
+        <h3>Nessus, Vulnerability Scanner</h3>
         <p>Tenable Nessus (Docker, online) for credentialed and unauthenticated scanning of the lab range. Reachable over HTTPS at its own address on the network.</p>
-        <p style="margin-top:1rem;"><a href="https://10.10.0.6:8834/" class="btn btn-primary" target="_blank" rel="noopener">Open Nessus</a></p>
+        <p style="margin-top:1rem;"><a href="https://defiant.tail57a85e.ts.net:8834/" class="btn btn-primary" target="_blank" rel="noopener">Open Nessus</a></p>
       </div>
       <div class="lab-card">
         <span class="pillar-tag">Evidence-Based</span>
@@ -374,7 +393,7 @@
   <div class="container">
     <h2>One Desktop, <span class="highlight">Every Lab Inside It</span></h2>
     <p style="text-align:center; color:var(--text-dim); max-width:800px; margin:0 auto 2.5rem;">
-      The labs run <strong>inside the Kali desktop</strong>, not on separate machines. Open the desktop and every target is already there — reachable by name, with the practice evidence mounted and the toolset installed. Nothing to configure, no addresses to remember.
+      The labs run <strong>inside the Kali desktop</strong>, not on separate machines. Open the desktop and every target is already there, reachable by name, with the practice evidence mounted and the toolset installed. Nothing to configure, no addresses to remember.
     </p>
     <div class="addr-wrap">
       <table class="addr">
@@ -388,26 +407,26 @@
         <tbody>
           <tr>
             <td class="role"><strong>Kali lab desktop</strong>kali-desktop</td>
-            <td><a href="https://10.10.0.4:6901/" target="_blank" rel="noopener">https://10.10.0.4:6901</a><br><span class="mono" style="display:inline-block;margin-top:0.4rem;">https://10.10.0.6:8040</span></td>
+            <td><a href="https://defiant.tail57a85e.ts.net:8040/" target="_blank" rel="noopener">https://defiant.tail57a85e.ts.net:8040</a></td>
             <td>A full Kali rolling desktop over HTTPS (self-signed certificate, no login). It lands on the <strong>Lab Navigator</strong> page, and the whole lab is inside it:
               <span class="port-list">target <span class="mono">cpsa-target</span> (FTP 21 · SSH 22 · Telnet 23 · SMTP 25 · HTTP 80 · rpcbind 111 · NFS 2049 · portal 8081) · victim <span class="mono">cpia-victim</span> (SSH 22 · HTTP 8080) · eight vulnerable apps by name (<span class="mono">dvwa</span>, <span class="mono">juice-shop</span>, <span class="mono">webgoat</span>, <span class="mono">sqli-labs</span>, <span class="mono">nodegoat</span>, <span class="mono">bwapp</span>, <span class="mono">vampi</span>) · practice evidence in <span class="mono">~/artifacts</span> and report space in <span class="mono">~/work</span></span></td>
           </tr>
           <tr>
             <td class="role"><strong>Moodle course site</strong>aif-moodle</td>
-            <td><a href="http://10.10.0.5/" target="_blank" rel="noopener">http://10.10.0.5</a></td>
+            <td><a href="http://defiant.tail57a85e.ts.net:8081/" target="_blank" rel="noopener">http://defiant.tail57a85e.ts.net:8081</a></td>
             <td>Moodle, hosting the AI Foundation course for learners on the lab network.
-              <span class="port-list">ports: 80, 8080</span></td>
+              <span class="port-list">published port 8081</span></td>
           </tr>
           <tr>
             <td class="role"><strong>Lab console</strong>host</td>
-            <td><a href="http://10.10.0.6:8020/" target="_blank" rel="noopener">http://10.10.0.6:8020</a><br><a href="http://10.10.0.6:8001/" target="_blank" rel="noopener">http://10.10.0.6:8001</a></td>
+            <td><a href="http://defiant.tail57a85e.ts.net:8020/" target="_blank" rel="noopener">http://defiant.tail57a85e.ts.net:8020</a><br><a href="http://defiant.tail57a85e.ts.net:8001/" target="_blank" rel="noopener">http://defiant.tail57a85e.ts.net:8001</a></td>
             <td>Guides, doc pack, exercise sheets, browser terminals and the incident reset button, plus the eight-app pack on ports 8001–8009 for anyone working from the host rather than the desktop.
               <span class="port-list">evidence servers: 8010 (CPIA) · 8030 (CPSA) · Nessus: 8834</span></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="addr-note">Everything above needs the lab running on the host — the labs are not hosted on this website. The Kali desktop is the intended way in: it is attached to the lab's Docker networks, so its targets and apps answer by name (<span class="mono">cpsa-target</span>, <span class="mono">cpia-victim</span>, <span class="mono">dvwa</span> …) and the evidence folders are mounted read-only.</p>
+    <p class="addr-note">Everything above needs the lab running on the host, as the labs are not hosted on this website. The Kali desktop is the intended way in: it is attached to the lab's Docker networks, so its targets and apps answer by name (<span class="mono">cpsa-target</span>, <span class="mono">cpia-victim</span>, <span class="mono">dvwa</span> …) and the evidence folders are mounted read-only.</p>
   </div>
 </section>
 
@@ -420,7 +439,7 @@
       <a href="https://github.com/waldo273" target="_blank" rel="noopener" title="GitHub">&#x1F4BB;</a>
       <a href="mailto:training@forrest.one" title="Email">&#x2709;&#xFE0F;</a>
     </div>
-    <p>&copy; 2026 Billy Forrest — Training.Forrest.One. All rights reserved.</p>
+    <p>&copy; 2026 Billy Forrest, Training.Forrest.One. All rights reserved.</p>
   </div>
 </footer>
 
@@ -485,7 +504,7 @@
       pill.innerHTML = '<span class="dot"></span> Lab console offline (start the lab)';
     };
     // A lightweight reachability probe to the console host (no cross-origin read).
-    img.src = 'http://10.10.0.6:8020/favicon.ico?' + Date.now();
+    img.src = 'http://defiant.tail57a85e.ts.net:8020/favicon.ico?' + Date.now();
   })();
 </script>
 
